@@ -1,0 +1,25 @@
+# Templates Readme
+
+* index.html 首页
+* login.html 用户登录界面
+* /admin 后台管理员管理系统
+    * /login 管理员登录界面
+    * /post 全部动态管理
+        * /delete 删除动态
+        * /verify 批准动态发布
+        * /deny 否定动态发布
+    * /club 社团管理
+        * /delete 删除社团
+        * /add 添加社团
+        * /profile 修改社团信息
+* /club 社团系统
+    * /club/admin 社团社长管理系统
+        * /login 登录界面
+        * /members 社员管理
+        * /post 发表动态
+        * /file 文件上传
+        * /profile 社团信息设置
+    * /clubid 各社团主页
+        * /index 社团主页
+        * /post 社团动态页
+        * /achievements 社团成就页
