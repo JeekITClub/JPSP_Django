@@ -12,7 +12,7 @@ def index(request):
 
 def admin(request):
     template=loader.get_template('admin/index.html')
-    content={}
+    content={"username":"hello"}
     return HttpResponse(template.render(content,request))
 
 def admin_login(request):
@@ -49,6 +49,11 @@ def club_admin_file_upload(request):
         template = loader.get_template('login.html')
         content = {}
         return HttpResponse("sorry")
-
+        # from django.core.files.base import ContentFile
+        # from django.core.files.storage import get_storage_class
+        #
+        # storageSystem = get_storage_class()('/Absolute/path/to/save/file')
+        # the_file = ContentFile(content="#Hello world!"，name = "Hello.md")
+        # storageSystem.save(content=the_file
 
 # TODO: Finish the club_admin_file_upload

@@ -4,14 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>建平学生社团系统</title>
-
+    {% load static %}
     <!-- Bootstrap core CSS -->
-    <link href="../statics/css/bootstrap.css" rel="stylesheet">
+    <link href="{%  static "template/css/bootstrap.css" %}" rel="stylesheet">
     <!--external css-->
     <link href="../statics/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="../statics/css/zabuto_calendar.css">
-    <link rel="stylesheet" type="text/css" href="../statics/js/gritter/css/jquery.gritter.css" />
-    <link rel="stylesheet" type="text/css" href="../statics/lineicons/style.css">    
+    <link rel="stylesheet" type="text/css" href="{% static "css/zabuto_calendar.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "js/gritter/css/jquery.gritter.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "lineicons/style.css" %}">
     
     <!-- Custom styles for this template -->
     <link href="../statics/css/style.css" rel="stylesheet">
@@ -198,7 +198,7 @@
               <ul class="sidebar-menu" id="nav-accordion">
               
               	  <p class="centered"><a href="profile.html"><img src="../statics/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
-              	  <h5 class="centered">{username}</h5>
+              	  <h5 class="centered">{{username}}</h5>
               	  	
                   <li class="mt">
                       <a class="active" href="index.html">
@@ -206,72 +206,45 @@
                           <span>仪表盘</span>
                       </a>
                   </li>
-
-                  <li class="sub-menu">
+				  <li class="sub-menu">
                       <a href="javascript:;" >
-                          <i class="fa fa-desktop"></i>
-                          <span>UI Elements</span>
+                          <i class="fa fa-tasks"></i>
+                          <span>社团动态</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="general.html">General</a></li>
-                          <li><a  href="buttons.html">Buttons</a></li>
-                          <li><a  href="panels.html">Panels</a></li>
-                      </ul>
-                  </li>
-
-                  <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class="fa fa-cogs"></i>
-                          <span>Components</span>
-                      </a>
-                      <ul class="sub">
-                          <li><a  href="calendar.html">Calendar</a></li>
-                          <li><a  href="gallery.html">Gallery</a></li>
-                          <li><a  href="todo_list.html">Todo List</a></li>
+                          <li><a  href="">概览</a></li>
+                          <li><a  href="">审核</a></li>
+                          <li><a  href="">已审核</a></li>
+                          <li><a href="">未通过</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-book"></i>
-                          <span>Extra Pages</span>
+                          <span>社团管理</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="blank.html">Blank Page</a></li>
-                          <li><a  href="login.html">Login</a></li>
-                          <li><a  href="lock_screen.html">Lock Screen</a></li>
-                      </ul>
-                  </li>
-                  <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class="fa fa-tasks"></i>
-                          <span>Forms</span>
-                      </a>
-                      <ul class="sub">
-                          <li><a  href="form_component.html">Form Components</a></li>
-                      </ul>
-                  </li>
-                  <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class="fa fa-th"></i>
-                          <span>Data Tables</span>
-                      </a>
-                      <ul class="sub">
-                          <li><a  href="basic_table.html">Basic Table</a></li>
-                          <li><a  href="responsive_table.html">Responsive Table</a></li>
-                      </ul>
-                  </li>
-                  <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class=" fa fa-bar-chart-o"></i>
-                          <span>Charts</span>
-                      </a>
-                      <ul class="sub">
-                          <li><a  href="morris.html">Morris</a></li>
-                          <li><a  href="chartjs.html">Chartjs</a></li>
+                          <li><a  href="">概览</a></li>
+                          <li><a  href="">社团评优</a></li>
+                          <li><a  href="">发布表格</a></li>
+                          <li><a href="">收取表格</a></li>
+                          <li><a href="">社团成绩录入</a></li>
                       </ul>
                   </li>
 
-              </ul>
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>数据分析</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="general.html">概览</a></li>
+                          <li><a  href="buttons.html">社团动态分析</a></li>
+                          <li><a  href="panels.html">社团成就分析</a></li>
+                      </ul>
+                  </li>
+
+			  </ul> 
               <!-- sidebar menu end-->
           </div>
       </aside>
@@ -360,11 +333,11 @@
                       	<div class="col-md-4 col-sm-4 mb">
                       		<div class="white-panel pn">
                       			<div class="white-header">
-						  			<h5>TOP PRODUCT</h5>
+						  			<h5>最热门动态</h5>
                       			</div>
 								<div class="row">
 									<div class="col-sm-6 col-xs-6 goleft">
-										<p><i class="fa fa-heart"></i> 122</p>
+										<p><i class="fa fa-heart"></i>{heart_number}</p>
 									</div>
 									<div class="col-sm-6 col-xs-6"></div>
 	                      		</div>
@@ -378,18 +351,18 @@
 							<!-- WHITE PANEL - TOP USER -->
 							<div class="white-panel pn">
 								<div class="white-header">
-									<h5>TOP USER</h5>
+								  <h5>最佳社团</h5>
 								</div>
 								<p><img src="../statics/img/ui-zac.jpg" class="img-circle" width="80"></p>
-								<p><b>Zac Snider</b></p>
+								<p><strong>{club_name}</strong></p>
 								<div class="row">
 									<div class="col-md-6">
-										<p class="small mt">MEMBER SINCE</p>
-										<p>2012</p>
+									  <p class="small mt">维持记录</p>
+									  <p>{datetime}</p>
 									</div>
 									<div class="col-md-6">
-										<p class="small mt">TOTAL SPEND</p>
-										<p>$ 47,60</p>
+									  <p class="small mt">HEART NUMBER</p>
+									  <p>{club_most_heart_number}</p>
 									</div>
 								</div>
 							</div>
@@ -404,7 +377,7 @@
 						<div class="col-md-4 mb">
                       		<div class="darkblue-panel pn">
                       			<div class="darkblue-header">
-						  			<h5>DROPBOX STATICS</h5>
+                      			  <h5>硬盘数据量</h5>
                       			</div>
 								<canvas id="serverstatus02" height="120" width="120"></canvas>
 								<script>
@@ -448,12 +421,12 @@
 							<!-- REVENUE PANEL -->
 							<div class="darkblue-panel pn">
 								<div class="darkblue-header">
-									<h5>REVENUE</h5>
+								  <h5>访问量</h5>
 								</div>
 								<div class="chart mt">
 									<div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" data-data="[200,135,667,333,526,996,564,123,890,464,655]"></div>
 								</div>
-								<p class="mt"><b>$ 17,980</b><br/>Month Income</p>
+								<p class="mt"><strong>{visitors_number}</strong></p>
 							</div>
 						</div><!-- /col-md-4 -->
 						
