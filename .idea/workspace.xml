@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7ba93832-139c-45ca-8740-70ab727f7daf" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jpsp/db.sqlite3" afterPath="$PROJECT_DIR$/jpsp/db.sqlite3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jpsp_python.iml" afterPath="$PROJECT_DIR$/.idea/jpsp_python.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jpsp/jpsp/settings.py" afterPath="$PROJECT_DIR$/jpsp/jpsp/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jpsp/templates/admin/index.html" afterPath="$PROJECT_DIR$/jpsp/templates/admin/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jpsp/templates/index.html" afterPath="$PROJECT_DIR$/jpsp/templates/index.html" />
-    </list>
+    <list default="true" id="7ba93832-139c-45ca-8740-70ab727f7daf" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -441,7 +433,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-11" y="-11" width="1942" height="1102" extended-state="7" />
+    <frame x="-11" y="-11" width="1942" height="1102" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
