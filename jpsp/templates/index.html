@@ -4,7 +4,7 @@
 <meta charset="utf-8">
     {% load static %}
     <!-- Bootstrap core CSS -->
-    <link href="{%  static "/css/bootstrap.css" %}" rel="stylesheet">
+    <link href="{%  static "css/bootstrap.css" %}" rel="stylesheet">
 
 <title>建平学生社团系统</title>
 </head>
@@ -27,7 +27,8 @@
             <li><a href="" target="_blank" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'less'])">活动报名</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right hidden-sm">
-            <li><a href="/about/" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'about'])">关于</a></li>
+            <li><a href="#">登录</a></li>
+            <li><a href="https://about.me/nichujie" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'about'])">关于</a></li>
           </ul>
         </div>
       </div>
@@ -110,5 +111,7 @@
             021-38821698　邮编：200135　邮箱：jpzxxzyx2016@163.com 版权所有：上海市建平中学 <a href="#">Privacy</a> · <a href="#">Terms</a></p>
 <!-- TODO:EDIT THE FOOTER -->
     </footer></div>
+<script src="{% static "js/jquery.js" %}"></script>
+<script src="{% static "js/bootstrap.min.js" %}"></script>
 </body>
 </html>
