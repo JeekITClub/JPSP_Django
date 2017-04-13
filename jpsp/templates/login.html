@@ -2,37 +2,58 @@
 <html>
 <head>
 <meta charset="utf-8">
-<link type="text/css" href="statics/css/bootstrap.css" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>登陆界面</title>
-<link rel="stylesheet" href="statics/css/bootstrap.css">
+{% load static %}
+    <!-- Bootstrap core CSS -->
+<link href="{%  static "css/bootstrap.css" %}" rel="stylesheet">
+<link href="{%  static "css/login.css" %}" rel="stylesheet">
 </head>
 
 
 <body>
-<div>
-	<form class="form-horizontal">
-	<div class="form-group">
-		<h2  class="">登陆</h2>
-	</div>
-  <div class="form-group">
-    <label for="inputUsername" class="col-sm-5 control-label">用户名：</label>
-    <div class="col-sm-3">
-      <input type="text" class="form-control" id="inputUsername" placeholder="用户名">
+<div class="navbar navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand hidden-sm" href="http://www.bootcss.com" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'navbar-首页'])">建平学生社团系统</a>
+        </div>
+        <div class="navbar-collapse collapse" role="navigation">
+          <ul class="nav navbar-nav">
+            <li><a href="" target="_blank" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v3doc'])">社团动态</a></li>
+            <li><a href="" target="_blank" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v4doc'])">社团介绍</a></li>
+            <li><a href="" target="_blank" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'less'])">活动报名</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right hidden-sm">
+            <li><a href="#">登录</a></li>
+            <li><a href="https://about.me/nichujie" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'about'])">关于</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="inputPassword" class="col-sm-5 control-label">密码：</label>
-    <div class="col-sm-3">
-      <input type="password" class="form-control" id="inputPassword" placeholder="密码">
+
+<div class="container">
+      <form class="form-signin">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
     </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-offset-6 col-sm-10">
-      <button type="submit" class="btn btn-default">登陆</button>
-    </div>
-  </div>
-</form>
-</div>
+
+<script src="{% static "js/jquery.js" %}"></script>
+<script src="{% static "js/bootstrap.min.js" %}"></script>
 </body>
 </html>
