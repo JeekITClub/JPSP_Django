@@ -12,10 +12,10 @@ class user(models.Model):
     #club
     #lftlip ->last_five_loginin_time
 
+
 class club(models.Model):
     name=models.CharField(max_length=30)
-    proprieter=models.CharField(max_length=10)
-    #proprieter=models.IntegerField()
+    proprieter=models.IntegerField()
     if_enroll=models.BooleanField()
     enroll_group_qq=models.IntegerField()
     email=models.EmailField()
@@ -25,20 +25,23 @@ class club(models.Model):
     stars=models.IntegerField()
     introduction=models.TextField()
 
-class post(models.Model):
-    author=models.ForeignKey(club)
-    title=models.CharField(max_length=30)
-    post_time=models.DateField()
-    add_time=models.DateField(auto_now_add=True)
-    edit_time=models.DateField(auto_now=True)
-    status=models.BooleanField()
-    comment=models.ForeignKey(comment)
-    category=models.CharField()
-    content=models.TextField()
 
 class comment(models.Model):
-    # comment_post_id
-    # comment datetime
-    # content
-    # author
-    # author_ip
+    pass
+# comment_post_id
+# comment datetime
+# content
+# author
+# author_ip
+
+
+class post(models.Model):
+    author = models.ForeignKey(club)
+    title = models.CharField(max_length=30)
+    post_time = models.DateField()
+    add_time = models.DateField(auto_now_add=True)
+    edit_time = models.DateField(auto_now=True)
+    status = models.BooleanField()
+    comment = models.ForeignKey(comment)
+    category = models.CharField(max_length=30)
+    content = models.TextField()
