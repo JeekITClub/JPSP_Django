@@ -63,6 +63,6 @@ def club_admin_file_upload(request):
 # TODO: Finish the club_admin_file_upload
 
 def test(request):
-    template = loader.get_template('club_page.html')
+    template = loader.get_template('')
     content = {}
     return HttpResponse(template.render(content,request))
