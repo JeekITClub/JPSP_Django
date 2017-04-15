@@ -20,6 +20,10 @@ def admin_login(request):
     content = {}
     return HttpResponse(template.render(content, request))
 
+def register(request):
+    template = loader.get_template('register.html')
+    content = {}
+    return HttpResponse(template.render(content,request))
 
 def login(request):
     template = loader.get_template('login.html')
@@ -57,3 +61,8 @@ def club_admin_file_upload(request):
         # storageSystem.save(content=the_file
 
 # TODO: Finish the club_admin_file_upload
+
+def test(request):
+    template = loader.get_template('')
+    content = {}
+    return HttpResponse(template.render(content,request))
