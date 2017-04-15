@@ -10,6 +10,7 @@ urlpatterns=[
     url(r'^club/admin/file/success',views.club_admin_file_upload,name="club_admin_file_upload"),
     url(r'^club/admin/file',views.club_admin_file,name="club_admin_file"),
     url(r'^test/',views.test,name='test'),
+    url(r'^wto_test',views.wto_test,name="wto_test"),
     url(r'^allclub/',views.club_all,name='club_all'),
     url(r'^club/clubid',views.clubid,name='clubid'),
     #clubid的url匹配社团id
