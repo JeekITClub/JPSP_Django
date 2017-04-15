@@ -12,7 +12,7 @@ def index(request):
 
 def admin(request):
     template=loader.get_template('admin/index.html')
-    content={"username":"hello"}
+    content={}
     return HttpResponse(template.render(content,request))
 
 def admin_login(request):
@@ -100,7 +100,7 @@ def clubid(request):
 def wto_test(request):
     template=loader.get_template('admin/base.html')
     content={}
-    return HttpResponse(template.render(content,requesta))
+    return HttpResponse(template.render(content,request))
 
 def test(request):
     template = loader.get_template('')
