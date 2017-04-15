@@ -2,3 +2,5 @@
 /jpsp/.idea/
 
 *.pyc
+
+\.idea/
