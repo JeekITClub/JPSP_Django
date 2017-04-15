@@ -7,8 +7,7 @@ import os
 def index(request):
     template = loader.get_template('index.html')
     content = {}
-    return HttpResponse(template.render(content, request))
-
+    return HttpResponse(template.render(content,request))
 
 def admin(request):
     template=loader.get_template('admin/index.html')
@@ -18,7 +17,27 @@ def admin(request):
 def admin_login(request):
     template = loader.get_template('admin/login.html')
     content = {}
-    return HttpResponse(template.render(content, request))
+    return HttpResponse(template.render(content,request))
+
+def admin_news_overview(request):
+    template=loader.get_template('admin/news/overview.html')
+    content={}
+    return HttpResponse(template.render(content,request))
+
+def admin_news_check(request):
+    template=loader.get_template('admin/news/check.html')
+    content={}
+    return HttpResponse(template.render(content,request))
+
+def admin_news_passed(request):
+    template=loader.get_template('admin/news/passed.html')
+    content={}
+    return HttpResponse(template.render(content,request))
+
+def admin_news_notpassed(request):
+    template=loader.get_template('admin/news/notpassed.html')
+    content={}
+    return HttpResponse(template.render(content,request))
 
 def register(request):
     template = loader.get_template('register.html')
@@ -34,7 +53,6 @@ def club_admin_file(request):
     template = loader.get_template('club/admin/file.html')
     content = {}
     return HttpResponse(template.render(content, request))
-
 
 def club_admin_file_upload(request):
     if request.method == 'POST':
