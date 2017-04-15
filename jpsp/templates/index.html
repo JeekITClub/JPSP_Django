@@ -19,22 +19,22 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand hidden-sm" href="http://www.bootcss.com" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'navbar-首页'])">建平学生社团系统</a>
+          <a class="navbar-brand hidden-sm" href="{% url "index" %}" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'navbar-首页'])">建平学生社团系统</a>
         </div>
         <div class="navbar-collapse collapse" role="navigation">
           <ul class="nav navbar-nav">
-            <li><a href="" target="_blank" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v3doc'])">社团动态</a></li>
-            <li><a href="" target="_blank" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v4doc'])">社团介绍</a></li>
-            <li><a href="" target="_blank" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'less'])">活动报名</a></li>
+            <li><a href="{% url "login" %}" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v3doc'])">社团动态</a></li>
+            <li><a href="{% url "club_all" %}" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v4doc'])">社团介绍</a></li>
+            <li><a href="{% url "login" %}" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'less'])">活动报名</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right hidden-sm">
-            <li><a href="#">登录</a></li>
+            <li><a href="{% url "login" %}">登录</a></li>
             <li><a href="https://about.me/nichujie" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'about'])">关于</a></li>
           </ul>
         </div>
       </div>
     </div>
-<div class="container marketing">
+<div class="container">
 
       <!-- Three columns of text below the carousel -->
       <div class="row">
@@ -109,7 +109,8 @@
 
         <p class="pull-right"><a href="#">Back to top</a></p>
         <p class="pull-left">地址：浦东崮山路517号 、385号(北校区)　电话 / 传真：021-58851542 /
-            021-38821698　邮编：200135　邮箱：jpzxxzyx2016@163.com 版权所有：上海市建平中学 <a href="#">Privacy</a> · <a href="#">Terms</a></p>
+            021-38821698　邮编：200135　邮箱：jpzxxzyx2016@163.com 版权所有：上海市建平中学 <br>
+            <a href="#">Privacy</a> · <a href="#">Terms</a></p>
 <!-- TODO:EDIT THE FOOTER -->
     </footer></div>
 <script src="{% static "js/jquery.js" %}"></script>

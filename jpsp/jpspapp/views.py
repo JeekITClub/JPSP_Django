@@ -62,6 +62,16 @@ def club_admin_file_upload(request):
 
 # TODO: Finish the club_admin_file_upload
 
+def club_all(request):
+    template = loader.get_template('club/club_all.html')
+    content = {}
+    return HttpResponse(template.render(content,request))
+
+def clubid(request):
+    template = loader.get_template('club/clubid/index.html')
+    content = {}
+    return HttpResponse(template.render(content,request))
+
 def test(request):
     template = loader.get_template('')
     content = {}
