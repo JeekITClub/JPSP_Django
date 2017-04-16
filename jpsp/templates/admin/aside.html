@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    {% load static %}
 </head>
 <body>
 <aside>
@@ -9,7 +10,7 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
 
-              	  <p class="centered"><a href="profile.html"><img src="../statics/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
+              	  <p class="centered"><a href=""><img src="{% static "img/ui-sam.jpg" %}" class="img-circle" width="60"></a></p>
               	  <h5 class="centered">{{ username }}</h5>
 
                   <li class="mt">
@@ -34,14 +35,13 @@
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-book"></i>
-                          <span>社团管理</span>
+                          <span>社团打分</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="">概览</a></li>
-                          <li><a  href="">社团评优</a></li>
-                          <li><a  href="">发布表格</a></li>
-                          <li><a href="">收取表格</a></li>
-                          <li><a href="">社团成绩录入</a></li>
+                          <li><a  href="{% url 'admin_stars_overview' %}">概览</a></li>
+                          <li><a  href="{% url 'admin_stars_mark' %}">未打分</a></li>
+                          <li><a  href="{% url 'admin_stars_marked' %}">已打分</a></li>
+                          <li><a href="{% url 'admin_stars_history' %}">历史打分</a></li>
                       </ul>
                   </li>
 
