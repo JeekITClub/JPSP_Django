@@ -17,7 +17,7 @@ class user(models.Model):
 
 class club(models.Model):
     name=models.CharField(max_length=30)
-    uid=models.IntegerField()
+    clubid=models.CharField(max_length=4)
     #社团id
     proprieter=models.IntegerField()
     #社长的QQ
@@ -49,8 +49,9 @@ class post(models.Model):
     post_time = models.DateField()
     #post_time为文章批准发布在网站上的时间
     add_time = models.DateField(auto_now_add=True)
-    #add_time为文章提交申请审批的时间
+    #add_time字段在实例第一次保存的时候会保存当前时间
     edit_time = models.DateField(auto_now=True)
+    #字段保存时会自动保存当前时间
     status = models.BooleanField()
     #文章是草稿/还未批准/被禁止发布状态是status的值为False ，已经发布了则为True
     #comment = models.ForeignKey(comment)
@@ -63,3 +64,23 @@ class post(models.Model):
     #文章的分类
     # TODO: 确定文章有哪些分类
     content = models.TextField()
+
+
+class message(models.Model):
+    from_user=models.CharField(max_length=30)
+    send_time=models.DateField(auto_now=True)
+    to_user=models.CharField(max_length=30)
+    message_type=(
+        ('nuf','需要上传文件'),
+        ('np','需要发布动态'),
+        ('pd','动态不符合标准，无法发布'),
+        ('ps','动态发布成功'),
+    )
+    type=models.CharField(max_length=3,choices=message_type)
+
+class stars(models.Model):
+    clubid=models.CharField(max_length=4)
+    stars=models.FloatField()
+    star_time=models.DateField(auto_now=True)
+    # 字段保存时会自动保存当前时间
+    times=models.CharField(max_length=3)
