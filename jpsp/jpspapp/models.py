@@ -14,7 +14,6 @@ class user(models.Model):
     #club
     #lftlip ->last_five_loginin_time
 
-
 class club(models.Model):
     name=models.CharField(max_length=30)
     clubid=models.CharField(max_length=4)
@@ -39,9 +38,8 @@ class comment(models.Model):
     content=models.TextField()
     ip=models.CharField(max_length=15)
     comment_datetime=models.DateField(auto_now_add=True)
-# comment_post_id
-# comment datetime
-
+    # comment_post_id
+    # comment datetime
 
 class post(models.Model):
     author = models.ForeignKey(club)
@@ -65,22 +63,26 @@ class post(models.Model):
     # TODO: 确定文章有哪些分类
     content = models.TextField()
 
-
 class message(models.Model):
     from_user=models.CharField(max_length=30)
     send_time=models.DateField(auto_now=True)
     to_user=models.CharField(max_length=30)
+    read_time=models.DateField(auto_now_add=True)
     message_type=(
-        ('nuf','需要上传文件'),
-        ('np','需要发布动态'),
-        ('pd','动态不符合标准，无法发布'),
-        ('ps','动态发布成功'),
+        ('nm','需要进行社团打分'),
     )
     type=models.CharField(max_length=3,choices=message_type)
+    content=models.TextField()
 
 class stars(models.Model):
-    clubid=models.CharField(max_length=4)
+
     stars=models.FloatField()
     star_time=models.DateField(auto_now=True)
     # 字段保存时会自动保存当前时间
     times=models.CharField(max_length=3)
+
+class post_request(models.Model):
+    from_user=models.CharField(max_length=30)
+    open_time=models.DateField(auto_now=True)
+    request_content=models.TextField()
+    close_time=models.DateField()
