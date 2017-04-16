@@ -5,9 +5,19 @@
     <title>社团列表</title>
 </head>
 <body>
+{% include "nav.html" %}
+
+<div class="container">
     <h1>社团列表</h1>
+    <hr/>
+<a href="{% url "clubid" %}">Jeek</a>
+{% if club %}
     {% for c in club %}
-        <a href="{% url "clubid"  c.id %}"></a>
+        <a href="{% url "clubid"  c.id %}">{{ c.name }}</a>
     {% endfor %}
+{% else %}
+    <p>404 not found</p>
+{% endif %}
+</div>
 </body>
 </html>
