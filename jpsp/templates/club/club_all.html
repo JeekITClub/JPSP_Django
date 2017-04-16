@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>社团列表</title>
+</head>
+<body>
+    <h1>社团列表</h1>
+    {% for c in club %}
+        <a href="{% url "clubid"  c.id %}"></a>
+    {% endfor %}
+</body>
+</html>

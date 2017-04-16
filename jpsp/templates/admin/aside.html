@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<aside>
+          <div id="sidebar"  class="nav-collapse">
+              <!-- sidebar menu start-->
+              <ul class="sidebar-menu" id="nav-accordion">
+
+              	  <p class="centered"><a href="profile.html"><img src="../statics/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
+              	  <h5 class="centered">{{ username }}</h5>
+
+                  <li class="mt">
+                      <a class="active" href="index.html">
+                          <i class="fa fa-dashboard"></i>
+                          <span>仪表盘</span>
+                      </a>
+                  </li>
+				  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-tasks"></i>
+                          <span>社团动态</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a href="{% url "jpsp/admin/post/overview" %}">概览</a></li>
+                          <li><a href="{% url "admin/post/edit" %}">已发布动态</a></li>
+                          <li><a href="{% url "admin/post/verify" %}">需审核动态</a></li>
+                          <li><a href="{% url "admin/post/denied" %}">未通过动态</a></li>
+                          <li><a href="{% url "admin/post/analysis" %}">动态数据分析</a></li>
+                      </ul>
+                  </li>
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-book"></i>
+                          <span>社团管理</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="">概览</a></li>
+                          <li><a  href="">社团评优</a></li>
+                          <li><a  href="">发布表格</a></li>
+                          <li><a href="">收取表格</a></li>
+                          <li><a href="">社团成绩录入</a></li>
+                      </ul>
+                  </li>
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>数据分析</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="general.html">概览</a></li>
+                          <li><a  href="buttons.html">社团动态分析</a></li>
+                          <li><a  href="panels.html">社团成就分析</a></li>
+                      </ul>
+                  </li>
+
+			  </ul>
+              <!-- sidebar menu end-->
+          </div>
+      </aside>
+</body>
+</html>

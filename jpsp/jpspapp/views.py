@@ -1,3 +1,4 @@
+#coding=utf-8
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
@@ -7,18 +8,43 @@ import os
 def index(request):
     template = loader.get_template('index.html')
     content = {}
-    return HttpResponse(template.render(content, request))
-
+    return HttpResponse(template.render(content,request))
 
 def admin(request):
     template=loader.get_template('admin/index.html')
-    content={"username":"hello"}
+    content={}
     return HttpResponse(template.render(content,request))
 
 def admin_login(request):
     template = loader.get_template('admin/login.html')
     content = {}
-    return HttpResponse(template.render(content, request))
+    return HttpResponse(template.render(content,request))
+
+def admin_post_overview(request):
+    template=loader.get_template('admin/post/overview.html')
+    content={}
+    return HttpResponse(template.render(content,request))
+
+def admin_post_verify(request):
+    #用来进行对提出申请发布的动态的批准页1
+    template=loader.get_template('admin/post/verify.html')
+    content={}
+    return HttpResponse(template.render(content,request))
+
+def admin_post_edit(request):
+    template=loader.get_template('admin/post/edit.html')
+    content={}
+    return HttpResponse(template.render(content,request))
+
+def admin_post_denied(request):
+    template=loader.get_template('admin/post/denied.html')
+    content={}
+    return HttpResponse(template.render(content,request))
+
+def admin_post_analysis(request):
+    template=loader.get_template('admin/post/analysis.html')
+    content={}
+    return HttpResponse(template.render(content,request))
 
 def register(request):
     template = loader.get_template('register.html')
@@ -34,7 +60,6 @@ def club_admin_file(request):
     template = loader.get_template('club/admin/file.html')
     content = {}
     return HttpResponse(template.render(content, request))
-
 
 def club_admin_file_upload(request):
     if request.method == 'POST':
@@ -60,9 +85,24 @@ def club_admin_file_upload(request):
         # the_file = ContentFile(content="#Hello world!"，name = "Hello.md")
         # storageSystem.save(content=the_file
 
-# TODO: Finish the club_admin_file_upload
+        # TODO: Finish the club_admin_file_upload
+
+def club_all(request):
+    template = loader.get_template('club/club_all.html')
+    content = {}
+    return HttpResponse(template.render(content,request))
+
+def clubid(request):
+    template = loader.get_template('club/clubid/index.html')
+    content = {}
+    return HttpResponse(template.render(content,request))
+
+def wto_test(request):
+    template=loader.get_template('admin/base.html')
+    content={}
+    return HttpResponse(template.render(content,request))
 
 def test(request):
-    template = loader.get_template('club_page.html')
+    template = loader.get_template('')
     content = {}
     return HttpResponse(template.render(content,request))

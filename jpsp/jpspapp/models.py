@@ -1,12 +1,14 @@
+#coding=utf-8
 from __future__ import unicode_literals
 from django.db import models
 
 # Create your models here.
 
 class user(models.Model):
+
     name=models.CharField(max_length=30)
-    #password=
-    #grade
+    password=models.TextField()
+    grade=models.IntegerField()
     classroom=models.IntegerField()
     #attend_year ->attend_school_year
     #club
@@ -15,33 +17,49 @@ class user(models.Model):
 
 class club(models.Model):
     name=models.CharField(max_length=30)
+    uid=models.IntegerField()
+    #社团id
     proprieter=models.IntegerField()
+    #社长的QQ
     if_enroll=models.BooleanField()
+    #是否进行招新
     enroll_group_qq=models.IntegerField()
+    # 招新QQ群号
     email=models.EmailField()
     label=models.TextField()
     # TODO:  make 'label' ->tuple
     state=models.BooleanField()
+    #该社团是否已成立
     stars=models.IntegerField()
     introduction=models.TextField()
-
+    #社团介绍
 
 class comment(models.Model):
-    pass
+    author=models.ForeignKey(user)
+    content=models.TextField()
+    ip=models.CharField(max_length=15)
+    comment_datetime=models.DateField(auto_now_add=True)
 # comment_post_id
 # comment datetime
-# content
-# author
-# author_ip
 
 
 class post(models.Model):
     author = models.ForeignKey(club)
     title = models.CharField(max_length=30)
     post_time = models.DateField()
+    #post_time为文章批准发布在网站上的时间
     add_time = models.DateField(auto_now_add=True)
+    #add_time为文章提交申请审批的时间
     edit_time = models.DateField(auto_now=True)
     status = models.BooleanField()
-    comment = models.ForeignKey(comment)
-    category = models.CharField(max_length=30)
+    #文章是草稿/还未批准/被禁止发布状态是status的值为False ，已经发布了则为True
+    #comment = models.ForeignKey(comment)
+    #comment 为该文章的评论，暂时不开启评论功能
+    # category_choice=(
+    #     (),
+    # )
+    # category = models.CharField(max_length=1,choices=category_choice)
+    category = models.CharField(max_length=1)
+    #文章的分类
+    # TODO: 确定文章有哪些分类
     content = models.TextField()

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}管理界面{%  endblock %}</title>
+</head>
+<body>
+<section id="container" >
+{% include 'admin/nav.html' %}
+{% include 'admin/aside.html' %}
+{% block content %}
+<div>默认内容</div>
+{% endblock %}\
+{% include 'admin/footer.html' %}
+</section>
+</body>
+</html>
