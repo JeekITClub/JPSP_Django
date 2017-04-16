@@ -4,8 +4,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 import os
 from .forms import UploadFileForm
+from jpspapp import function
 
 # Create your views here.
+
+
 def index(request):
     template = loader.get_template('index.html')
     content = {}
@@ -13,7 +16,8 @@ def index(request):
 
 def admin(request):
     template=loader.get_template('admin/index.html')
-    content={}
+    get=function.admin_content()
+    content=get.get_base_content()
     return HttpResponse(template.render(content,request))
 
 def admin_login(request):
@@ -29,28 +33,66 @@ def admin_post_overview(request):
 def admin_post_verify(request):
     #用来进行对提出申请发布的动态的批准页1
     template=loader.get_template('admin/post/verify.html')
-    content={}
+    content={'username':'社团部'}
     return HttpResponse(template.render(content,request))
 
 def admin_post_edit(request):
     template=loader.get_template('admin/post/edit.html')
-    content={}
+    content={'username':'社团部'}
     return HttpResponse(template.render(content,request))
 
 def admin_post_denied(request):
     template=loader.get_template('admin/post/denied.html')
-    content={}
+    content={'username':'社团部'}
     return HttpResponse(template.render(content,request))
 
 def admin_post_analysis(request):
     template=loader.get_template('admin/post/analysis.html')
-    content={}
+    content={'username':'社团部'}
     return HttpResponse(template.render(content,request))
 
 def admin_stars_overview(request):
     template=loader.get_template('admin/stars/overview.html')
-    content={}
+    content={'username':'社团部'}
     return HttpResponse(template.render(content,request))
+
+def admin_stars_mark(request):
+    template=loader.get_template('admin/stars/mark.html')
+    content={'username':'社团部'}
+    return HttpResponse(template.render(content,request))
+
+def admin_stars_marked(request):
+    template=loader.get_template('admin/stars/marked.html')
+    content={'username':'社团部'}
+    return HttpResponse(template.render(content,request))
+
+def admin_stars_history(request):
+    template=loader.get_template('admin/stars/history.html')
+    content={'username':'社团部'}
+    return HttpResponse(template.render(content,request))
+
+def admin_message_overview(request):
+    template=loader.get_template('admin/message/overview.html')
+    content={'username':'社团部'}
+    return HttpResponse(template.render(content,request))
+
+def admin_message_read(request):
+    # 已读信息
+    template=loader.get_template('admin/message/read.html')
+    content={'username':'社团部'}
+    return HttpResponse(template.render(content,request))
+
+def admin_message_unread(request):
+    template=loader.get_template('admin/message/unread.html')
+    content={'username':'社团部'}
+    return HttpResponse(template.render(content,request))
+
+def admin_message_history(request):
+    template=loader.get_template('admin/message/history/html')
+    message_history=message.objects.all()
+    content={'username':'社团部'}
+    return HttpResponse(template.render(content, request))
+
 
 def register(request):
     template = loader.get_template('register.html')

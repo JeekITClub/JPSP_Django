@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    {% load static %}
 </head>
 <body>
 <!-- **********************************************************************************************************************************************************
@@ -27,60 +28,28 @@
                         <ul class="dropdown-menu extended tasks-bar">
                             <div class="notify-arrow notify-arrow-green"></div>
                             <li>
-                                <p class="green">待处理的请求</p>
+                                <p class="green">有{{ post_request_num }}待处理的动态</p>
                             </li>
+                            {% for post_request in post_request_list%}
                             <li>
                                 <a href="../index.html#">
                                     <div class="task-info">
-                                        <div class="desc">DashGum Admin Panel</div>
-                                        <div class="percent">40%</div>
+                                        <div class="desc">{{ post_request.name }}</div>
                                     </div>
-                                    <div class="progress progress-striped">
-                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                            <span class="sr-only">40% Complete (success)</span>
-                                        </div>
+                                    <div class="task-list">
+                                        <div class="desc">{{ post_request.content }}</div>
                                     </div>
                                 </a>
                             </li>
-                            <li>
-                                <a href="../index.html#">
+                            {% empty %}
+                                <li>
+                                <a href="">
                                     <div class="task-info">
-                                        <div class="desc">Database Update</div>
-                                        <div class="percent">60%</div>
-                                    </div>
-                                    <div class="progress progress-striped">
-                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                            <span class="sr-only">60% Complete (warning)</span>
-                                        </div>
+                                        <div class="desc">没有待处理的动态</div>
                                     </div>
                                 </a>
-                            </li>
-                            <li>
-                                <a href="../index.html#">
-                                    <div class="task-info">
-                                        <div class="desc">Product Development</div>
-                                        <div class="percent">80%</div>
-                                    </div>
-                                    <div class="progress progress-striped">
-                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                                            <span class="sr-only">80% Complete</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="../index.html#">
-                                    <div class="task-info">
-                                        <div class="desc">Payments Sent</div>
-                                        <div class="percent">70%</div>
-                                    </div>
-                                    <div class="progress progress-striped">
-                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
-                                            <span class="sr-only">70% Complete (Important)</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
+                                </li>
+                            {% endfor %}
                             <li class="external">
                                 <a href="#">See All Tasks</a>
                             </li>
@@ -96,58 +65,33 @@
                         <ul class="dropdown-menu extended inbox">
                             <div class="notify-arrow notify-arrow-green"></div>
                             <li>
-                                <p class="green">5条未读消息</p>
+                                <p class="green">{{ message_unread_num }}条未读消息</p>
                             </li>
+                            {% for message in messgae_list %}
                             <li>
-                                <a href="../index.html#">
-                                    <span class="photo"><img alt="avatar" src="../statics/img/ui-zac.jpg"></span>
+                                <a href="">
+                                    <span class="photo">
+                                        <img alt="avatar" src="{% static "img/ui-zac.jpg" %}">
+                                    </span>
                                     <span class="subject">
-                                    <span class="from">Zac Snider</span>
-                                    <span class="time">Just now</span>
+                                        <!-- TODO: add class type to css!! -->
+                                        <span class="from">{{ message.from_user }}</span>
+                                        <span class="time">{{ message.send_time }}</span>
+                                        <span class="type">{{ message.type }}</span>
                                     </span>
                                     <span class="message">
-                                        Hi mate, how is everything?
+                                        {{ message.content }}
                                     </span>
                                 </a>
                             </li>
+                            {% empty %}
                             <li>
-                                <a href="../index.html#">
-                                    <span class="photo"><img alt="avatar" src="../statics/img/ui-divya.jpg"></span>
-                                    <span class="subject">
-                                    <span class="from">Divya Manian</span>
-                                    <span class="time">40 mins.</span>
-                                    </span>
-                                    <span class="message">
-                                     Hi, I need your help with this.
-                                    </span>
-                                </a>
+                                <a class="no-message">暂时没有未读的消息！</a>
+                                <!-- TODO: add class no-message to css!! -->
                             </li>
+                            {% endfor %}
                             <li>
-                                <a href="../index.html#">
-                                    <span class="photo"><img alt="avatar" src="../statics/img/ui-danro.jpg"></span>
-                                    <span class="subject">
-                                    <span class="from">Dan Rogers</span>
-                                    <span class="time">2 hrs.</span>
-                                    </span>
-                                    <span class="message">
-                                        Love your new Dashboard.
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="../index.html#">
-                                    <span class="photo"><img alt="avatar" src="../statics/img/ui-sherman.jpg"></span>
-                                    <span class="subject">
-                                    <span class="from">Dj Sherman</span>
-                                    <span class="time">4 hrs.</span>
-                                    </span>
-                                    <span class="message">
-                                        Please, answer asap.
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="../index.html#">See all messages</a>
+                                <a href="{% url 'admin_message_unread' %}">查看所有未读消息</a>
                             </li>
                         </ul>
                     </li>
