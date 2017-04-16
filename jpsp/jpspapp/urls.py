@@ -25,6 +25,9 @@ urlpatterns=[
     url(r'^test/',views.test,name='test'),
     url(r'^wto_test',views.wto_test,name="wto_test"),
     url(r'^allclub/',views.club_all,name='club_all'),
-    url(r'^club/clubid',views.clubid,name='clubid'),
-    #clubid的url匹配社团id
+    url(r'^club/clubs', views.club_clubs, name='club_clubs'),
+    url(r'^club/clubid/(?P<club_id>[0-9]+)/index$', views.club_clubid_index, name='club_clubid_index'),
+    url(r'^club/clubid/(?P<club_id>[0-9]+)/posts$', views.club_clubid_posts, name='club_clubid_posts'),
+    url(r'^club/clubid/post/(?P<club_id>[0-9]+)$', views.club_clubid_post, name='club_clubid_post'),
+    url(r'^club/admin/login', views.club_admin_login, name='club_admin_login'),
 ]
