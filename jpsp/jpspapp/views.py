@@ -31,6 +31,7 @@ def admin(request):
     template=loader.get_template('admin/index.html')
     get=function.admin_content()
     content=get.get_base_content()
+    return HttpResponse(template.render())
 
 
 def admin_login(request):
@@ -153,7 +154,7 @@ def club_clubid_post(request, post_id):
 
 
 def club_admin_login(request):
-    template = loader.get_template('club/admin/login.html')
+    template = loader.get_template('')
     content = {}
     return HttpResponse(template.render(content, request))
 
