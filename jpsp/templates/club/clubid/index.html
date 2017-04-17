@@ -1,14 +1,14 @@
+{% extends 'base.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     {% load static %}
-    <title>社团主页</title>
+    <title>{% block title %}社团主页-{{ club.name }}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="{% static "css/clubid.css" %}" rel="stylesheet">
 </head>
 <body>
-{% include "nav.html" %}
+{% block content %}
 
 {% if not club %}
     <h1>404 Not Found</h1>
@@ -48,7 +48,6 @@
     </div>
 
 {% endif %}
-<script src="{% static "js/jquery.js" %}"></script>
-<script src="{% static "js/bootstrap.min.js" %}"></script>
+{% endblock %}
 </body>
 </html>

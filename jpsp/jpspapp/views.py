@@ -118,32 +118,6 @@ def register(request):
     content = {}
     return HttpResponse(template.render(content, request))
 
-
-def admin_post_edit(request):
-    template = loader.get_template('admin/post/edit.html')
-    content = {}
-    return HttpResponse(template.render(content, request))
-
-
-def admin_post_denied(request):
-    template = loader.get_template('admin/post/denied.html')
-    content = {}
-    return HttpResponse(template.render(content, request))
-
-
-def admin_post_analysis(request):
-    template = loader.get_template('admin/post/analysis.html')
-
-    content = {}
-    return HttpResponse(template.render(content, request))
-
-
-def admin_stars_overview(request):
-    template = loader.get_template('admin/stars/overview.html')
-    content = {}
-    return HttpResponse(template.render(content, request))
-
-
 # club
 
 def club_clubs(request):
