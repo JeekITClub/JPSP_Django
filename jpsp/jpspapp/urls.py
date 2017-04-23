@@ -4,7 +4,6 @@ from . import views
 
 urlpatterns=[
     url(r'^$',views.index,name='index'),
-    url(r'^login/',views.login,name='login'),
     url(r'^admin/stars/overview',views.admin_stars_overview,name='admin_stars_overview'),
     url(r'^admin/message/overview',views.admin_message_overview,name='admin_message_overview'),
     url(r'^admin/message/read', views.admin_message_read, name='admin_message_read'),
@@ -22,9 +21,11 @@ urlpatterns=[
     url(r'^admin/',views.admin,name='admin'),
     url(r'^test/',views.test,name='test'),
     url(r'^wto_test',views.wto_test,name="wto_test"),
+    url(r'^club/all',views.club_clubs,name='club_all'),
+    url(r'^club/login/',views.login,name='login'),
     url(r'^club/clubs', views.club_clubs, name='club_clubs'),
     url(r'^club/clubid/(?P<club_id>[0-9]+)/index$', views.club_clubid_index, name='club_clubid_index'),
     url(r'^club/clubid/(?P<club_id>[0-9]+)/posts$', views.club_clubid_posts, name='club_clubid_posts'),
-    url(r'^club/clubid/post/(?P<club_id>[0-9]+)$', views.club_clubid_post, name='club_clubid_post'),
+    url(r'^club/clubid/post/(?P<post_id>[0-9]+)$', views.club_clubid_post, name='club_clubid_post'),
     url(r'^club/admin/login', views.club_admin_login, name='club_admin_login'),
 ]
