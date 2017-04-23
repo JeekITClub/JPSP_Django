@@ -31,6 +31,7 @@ def admin(request):
     template=loader.get_template('admin/index.html')
     get=function.admin_content()
     content=get.get_base_content()
+    return HttpResponse(template.render())
 
 
 def admin_login(request):
@@ -118,32 +119,6 @@ def register(request):
     content = {}
     return HttpResponse(template.render(content, request))
 
-
-def admin_post_edit(request):
-    template = loader.get_template('admin/post/edit.html')
-    content = {}
-    return HttpResponse(template.render(content, request))
-
-
-def admin_post_denied(request):
-    template = loader.get_template('admin/post/denied.html')
-    content = {}
-    return HttpResponse(template.render(content, request))
-
-
-def admin_post_analysis(request):
-    template = loader.get_template('admin/post/analysis.html')
-
-    content = {}
-    return HttpResponse(template.render(content, request))
-
-
-def admin_stars_overview(request):
-    template = loader.get_template('admin/stars/overview.html')
-    content = {}
-    return HttpResponse(template.render(content, request))
-
-
 # club
 
 def club_clubs(request):
@@ -179,7 +154,7 @@ def club_clubid_post(request, post_id):
 
 
 def club_admin_login(request):
-    template = loader.get_template('club/admin/login.html')
+    template = loader.get_template('')
     content = {}
     return HttpResponse(template.render(content, request))
 
