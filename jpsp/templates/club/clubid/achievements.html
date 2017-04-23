@@ -1,16 +1,15 @@
+{% extends 'base.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>社团成就-{{ club.name }}</title>
+    <title>{% block title %}社团成就-{{ club.name }}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% load static %}
-        <!-- Bootstrap core CSS -->
-    <link href="{%  static "css/bootstrap.css" %}" rel="stylesheet">
 </head>
 <body>
-
-<script src="{% static "js/jquery.js" %}"></script>
-<script src="{% static "js/bootstrap.min.js" %}"></script>
+{% block content %}
+    <h1>Hello World</h1>
+{% endblock %}
 </body>
 </html>

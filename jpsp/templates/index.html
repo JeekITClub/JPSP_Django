@@ -1,17 +1,14 @@
+{% extends 'base.html' %}
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-{% load static %}
-    <!-- Bootstrap core CSS -->
-<link href="{%  static "css/bootstrap.css" %}" rel="stylesheet">
-
-<title>建平学生社团系统</title>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}建平学生社团系统{% endblock %}</title>
 </head>
 <body>
-
-{% include "nav.html" %}
+{% block content %}
 
 <div class="container">
 	<div class="row clearfix">
@@ -131,16 +128,7 @@
           <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
-
-      <!-- FOOTER -->
-    <hr class="featurette-divider">
-      <footer>
-        <p class="pull-right"><a href="#">Back to top</a></p><br>
-          <p class="pull-right">地址：浦东崮山路517号 、385号(北校区)<br>电话 / 传真：021-58851542 / 021-38821698<br>邮箱：jpzxxzyx2016@163.com<br>版权所有：上海市建平中学<br><a href="#" class="pull-right">Privacy</a> · <a href="#" class="pull-right">Terms</a></p>
-
-<!-- TODO:EDIT THE FOOTER -->
-    </footer></div>
-<script src="{% static "js/jquery.js" %}"></script>
-<script src="{% static "js/bootstrap.min.js" %}"></script>
+</div>
+{% endblock %}
 </body>
 </html>

@@ -15,13 +15,14 @@
         * /add 添加社团
         * /profile 修改社团信息
 * /club 社团系统
-    * /club/admin 社团社长管理系统
+    * /admin 社团社长管理系统
         * /login 登录界面
         * /members 社员管理
         * /post 发表动态
-        * /file 文件上传
         * /profile 社团信息设置
     * /clubid 各社团主页
         * /index 社团主页
         * /post 社团动态页
+        * /posts 社团动态列表
         * /achievements 社团成就页
+    * /clubs 社团列表

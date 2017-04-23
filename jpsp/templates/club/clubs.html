@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}社团列表{% endblock %}</title>
+</head>
+<body>
+{% block content %}
+<div class="container">
+    <h1>社团列表</h1>
+    <hr/>
+    {% if clubs %}
+        {% for c in clubs %}x
+            <a href="{% url "club_clubid_index"  c.id %}">{{ c.name }}</a>
+        {% endfor %}
+    {% else %}
+        <p>404 not found</p>
+    {% endif %}
+</div>
+{% endblock %}
+</body>
+</html>

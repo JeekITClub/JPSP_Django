@@ -1,52 +1,53 @@
+{% extends 'base.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     {% load static %}
-    <title>社团主页-{{ club.name }}</title>
+    <title>{% block title %}社团主页-{{ club.name }}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="{% static "css/clubid.css" %}" rel="stylesheet">
 </head>
 <body>
-{% include "nav.html" %}
+{% block content %}
 
-<div class="jumbotron">
-				<h1>
-                    JEEK信息社
-					{{ club.name }}
-				</h1>
-				<p>
-                    我们的征途是星辰大海
-					{{ club.introduction }}
-				</p>
-				<p>
-					 <a class="btn btn-primary btn-large" href="#">社团动态</a>
-				</p>
-			</div>
-<div class="container">
-	<div class="row clearfix">
-		<div class="col-md-12 column">
-			<div class="row clearfix">
-				<div class="col-md-12 column">
-					<h2>
-						社长
-					</h2>
-					<p>
-                        是个秃子
-					</p>
-					<h2>
-                        加入我们
-					</h2>
-					<p>
-                        招新广告
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+{% if not club %}
+    <h1>404 Not Found</h1>
+{% else %}
+    <div class="jumbotron">
+        <h1>
+            {{ club.name }}
+        </h1>
+        <p>
+            {{ club.introduction }}
+        </p>
+        <p>
+            <a class="btn btn-primary btn-large" href="#">社团动态</a>
+        </p>
+    </div>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <h2>
+                            社长
+                        </h2>
+                        <p>
+                            是个秃子
+                        </p>
+                        <h2>
+                            加入我们
+                        </h2>
+                        <p>
+                            招新广告
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<script src="{% static "js/jquery.js" %}"></script>
-<script src="{% static "js/bootstrap.min.js" %}"></script>
+{% endif %}
+{% endblock %}
 </body>
 </html>
