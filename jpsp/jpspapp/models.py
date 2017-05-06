@@ -10,8 +10,10 @@ class user(models.Model):
     password = models.TextField()
     grade = models.IntegerField()
     classroom = models.IntegerField()
+    attend_year=models.IntegerField()
     # attend_year ->attend_school_year
-    # club
+    club=models.TextField()
+    lftlip=models.TextField()
     # lftlip ->last_five_loginin_time
 
 
@@ -27,7 +29,6 @@ class club(models.Model):
     # 招新QQ群号
     email = models.EmailField()
     label = models.TextField()
-    # TODO:  make 'label' ->tuple
     state = models.BooleanField()
     # 该社团是否已成立
     stars = models.IntegerField()

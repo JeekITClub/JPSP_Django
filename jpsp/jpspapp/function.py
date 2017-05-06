@@ -12,3 +12,4 @@ class admin_content:
             'message_unread_num': '0',
             'post_request_num': '0',
         }
+        return base_content
