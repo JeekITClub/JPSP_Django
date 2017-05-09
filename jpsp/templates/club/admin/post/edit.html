@@ -1,10 +1,31 @@
+{% extends 'club/admin/base.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    {% load static %}
+    <title>{% block title %}编辑文章{% endblock %}</title>
 </head>
 <body>
-{% extends 'admin/base.html' %}
+{% block content %}
+    <script src="{% static "ckeditor/ckeditor.js" %}"></script>
+    <section id="main-content">
+        <section class="wrapper">
+            <form style="padding:20px;">
+                <h3>文章标题</h3>
+                <label for="post_title" class="sr-only"></label>
+                <input type="text" name="post_title" id="post_title" class="form-control">
+                <h3>文章内容</h3>
+                <label for="editor" class="sr-only"></label>
+                <textarea name="editor" id="editor" rows="10" cols="80">
+            Hello World!
+          </textarea>
+                <script>
+                    CKEDITOR.replace('editor');
+                </script>
+            </form>
+        </section>
+    </section>
+{% endblock %}
 </body>
 </html>
