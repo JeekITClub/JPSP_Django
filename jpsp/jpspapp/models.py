@@ -69,7 +69,7 @@ class post(models.Model):
 
 
 class message(models.Model):
-    from_user = models.CharField(max_length=30)
+    from_user = models.ForeignKey(user)
     send_time = models.DateField(auto_now=True)
     to_user = models.CharField(max_length=30)
     read_time = models.DateField(auto_now_add=True)
@@ -77,7 +77,7 @@ class message(models.Model):
         ('nm', '需要进行社团打分'),
     )
     type = models.CharField(max_length=3, choices=message_type)
-    content = models.TextField()
+    content = models.TextField(default='')
 
 
 class stars(models.Model):
