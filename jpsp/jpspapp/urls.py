@@ -28,4 +28,6 @@ urlpatterns=[
     url(r'^club/clubid/(?P<club_id>[0-9]+)/posts$', views.club_clubid_posts, name='club_clubid_posts'),
     url(r'^club/clubid/post/(?P<post_id>[0-9]+)$', views.club_clubid_post, name='club_clubid_post'),
     url(r'^club/admin/login', views.club_admin_login, name='club_admin_login'),
+    url(r'^club/admin/post/edit', views.club_admin_post_edit, name='club_admin_post_edit'),
+    url(r'^club/admin/index', views.club_admin_index, name='club_admin_index'),
 ]
