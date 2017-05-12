@@ -31,79 +31,79 @@ export default new Router({
     },
     {
       path:'/post/verify',
-      name:'log',
-      component: login
+      name:'post_verify',
+      component: post_verify
     },
     {
-      path:'/login',
-      name:'login',
-      component: login
+      path:'/post/denied',
+      name:'post_denied',
+      component: post_denied
     },
     {
-      path:'/login',
-      name:'login',
-      component: login
+      path:'/post/analysis',
+      name:'post_analysis',
+      component: post_analysis
     },
     {
-      path:'/login',
-      name:'login',
-      component: login
+      path:'/club/',
+      name:'club',
+      component: club_list
     },
     {
-      path:'/login',
-      name:'login',
-      component: login
+      path:'/club/delete',
+      name:'club_delete',
+      component: club_delete
     },
     {
-      path:'/login',
-      name:'login',
-      component: login
+      path:'/club/verify',
+      name:'club_verify',
+      component: club_verify
     },
     {
-      path:'/login',
-      name:'login',
-      component: login
+      path:'/club/profile',
+      name:'club_profile',
+      component: club_profile
     },
-    {
-      path:'/login',
-      name:'login',
-      component: login
-    },
-    {
-      path:'/login',
-      name:'login',
-      component: login
-    },
-    {
-      path:'/login',
-      name:'login',
-      component: login
-    },
-    {
-      path:'/login',
-      name:'login',
-      component: login
-    },
-    {
-      path:'/login',
-      name:'login',
-      component: login
-    },
-    {
-      path:'/login',
-      name:'login',
-      component: login
-    },
-    {
-      path:'/login',
-      name:'login',
-      component: login
-    },
-    {
-      path:'/login',
-      name:'login',
-      component: login
-    },
+    // {
+    //   path:'/login',
+    //   name:'login',
+    //   component: login
+    // },
+    // {
+    //   path:'/login',
+    //   name:'login',
+    //   component: login
+    // },
+    // {
+    //   path:'/login',
+    //   name:'login',
+    //   component: login
+    // },
+    // {
+    //   path:'/login',
+    //   name:'login',
+    //   component: login
+    // },
+    // {
+    //   path:'/login',
+    //   name:'login',
+    //   component: login
+    // },
+    // {
+    //   path:'/login',
+    //   name:'login',
+    //   component: login
+    // },
+    // {
+    //   path:'/login',
+    //   name:'login',
+    //   component: login
+    // },
+    // {
+    //   path:'/login',
+    //   name:'login',
+    //   component: login
+    // },
 
 
   ]
