@@ -176,10 +176,19 @@ def club_clubid_post(request, post_id):
 
 
 def club_admin_login(request):
-    template = loader.get_template('')
+    template = loader.get_template('club/admin/login.html')
     content = {}
     return HttpResponse(template.render(content, request))
 
+def club_admin_post_edit(request):
+    template = loader.get_template('club/admin/post/edit.html')
+    content = {}
+    return HttpResponse(template.render(content, request))
+
+def club_admin_index(request):
+    template = loader.get_template('club/admin/index.html')
+    content = {}
+    return HttpResponse(template.render(content, request))
 
 # test
 def wto_test(request):
