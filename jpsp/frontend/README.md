@@ -1,6 +1,6 @@
-# jpsp
+# jpsp_frontend
 
-> The frontend for JPSP
+> The Vue.js Project For JPSP
 
 ## Build Setup
 
