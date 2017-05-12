@@ -10,8 +10,10 @@ class user(models.Model):
     password = models.TextField()
     grade = models.IntegerField()
     classroom = models.IntegerField()
+    attend_year=models.IntegerField()
     # attend_year ->attend_school_year
-    # club
+    club=models.TextField()
+    lftlip=models.TextField()
     # lftlip ->last_five_loginin_time
 
 
@@ -27,7 +29,6 @@ class club(models.Model):
     # 招新QQ群号
     email = models.EmailField()
     label = models.TextField()
-    # TODO:  make 'label' ->tuple
     state = models.BooleanField()
     # 该社团是否已成立
     stars = models.IntegerField()
@@ -68,7 +69,7 @@ class post(models.Model):
 
 
 class message(models.Model):
-    from_user = models.CharField(max_length=30)
+    from_user = models.ForeignKey(user)
     send_time = models.DateField(auto_now=True)
     to_user = models.CharField(max_length=30)
     read_time = models.DateField(auto_now_add=True)
@@ -76,7 +77,7 @@ class message(models.Model):
         ('nm', '需要进行社团打分'),
     )
     type = models.CharField(max_length=3, choices=message_type)
-    content = models.TextField()
+    content = models.TextField(default='')
 
 
 class stars(models.Model):

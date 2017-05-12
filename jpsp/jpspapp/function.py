@@ -7,8 +7,9 @@ class admin_content:
         post_request_list = post_request.objects.all()
         base_content = {
             'username': '社团部',
-            'message_list': message_list,
+            'message_list_all': message_list,
             'post_request_list': post_request_list,
             'message_unread_num': '0',
             'post_request_num': '0',
         }
+        return base_content

@@ -1,13 +1,11 @@
 # coding=utf-8
-from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
-import os
-from .forms import UploadFileForm
 from jpspapp import function
-
+import json
 
 # Create your views here.
+
 
 
 # index
@@ -18,6 +16,8 @@ def index(request):
     return HttpResponse(template.render(content, request))
 
 
+# login
+
 def login(request):
     template = loader.get_template('login.html')
     content = {}
@@ -27,12 +27,11 @@ def login(request):
 # admin
 
 def admin(request):
-
-
-    template=loader.get_template('admin/index.html')
-    get=function.admin_content()
-    content=get.get_base_content()
-    return HttpResponse(template.render(content,request))
+    template = loader.get_template('admin/index.html')
+    get = function.admin_content()
+    # content=get.get_base_content()
+    content = {}
+    return HttpResponse(template.render(content, request))
 
 
 def admin_login(request):
@@ -141,33 +140,6 @@ def register(request):
     content = {}
     return HttpResponse(template.render(content, request))
 
-
-
-def admin_post_edit(request):
-    template = loader.get_template('admin/post/edit.html')
-    get = function.admin_content()
-    content = get.get_base_content()
-    return HttpResponse(template.render(content, request))
-
-
-def admin_post_denied(request):
-    template = loader.get_template('admin/post/denied.html')
-    get = function.admin_content()
-    content = get.get_base_content()
-    return HttpResponse(template.render(content, request))
-
-
-def admin_post_analysis(request):
-    template = loader.get_template('admin/post/analysis.html')
-
-    content = {}
-    return HttpResponse(template.render(content, request))
-
-
-def admin_stars_overview(request):
-    template = loader.get_template('admin/stars/overview.html')
-    content = {}
-    return HttpResponse(template.render(content, request))
 
 # club
 
