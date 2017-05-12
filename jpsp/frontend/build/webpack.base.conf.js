@@ -9,9 +9,9 @@ function resolve (dir) {
 
 module.exports = {
   entry: {
-    index: './src/main.js',
-    admin_cd:'./src/admin_cd.cs', //社团部管理 club department
-    admin_club:'./src/admin_club.cs', //社长管理
+    admin_cd:'./src/admin_cd.js', //社团部管理 club department
+    index: './src/index.js',
+    admin_club:'./src/admin_club.js' //社长管理
   },
   output: {
     path: config.build.assetsRoot,
