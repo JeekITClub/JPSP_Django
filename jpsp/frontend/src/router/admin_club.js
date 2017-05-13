@@ -4,7 +4,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import index from '@/pages/admin_club/index.vue'
-import dashboard from '@/pages/admin_club/dashboard.vue'
+import PostEdit from '@/pages/admin_club/PostEdit.vue'
 
 Vue.use(Router)
 
@@ -16,9 +16,9 @@ export default new Router({
       component: index
     },
     {
-      path: '/dashboard',
-      name: 'dashboard',
-      component: dashboard
+      path: '/post',
+      name: 'PostEdit',
+      component: PostEdit
     }
   ]
 })
