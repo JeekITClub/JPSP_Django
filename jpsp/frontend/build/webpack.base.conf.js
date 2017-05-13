@@ -29,8 +29,8 @@ module.exports = {
           'vendor',
           'manifest',
           'index',
-        ]
-
+        ],
+        template:'index.html'
       }
     ),
     new HtmlWebpackPlugin(
@@ -38,13 +38,11 @@ module.exports = {
         title: '建平中学学生社团系统--社团部管理',
         filename: 'admin_cd.html',
         chunks: [
-          'index',
           'vendor',
           'manifest',
           'admin_cd',
         ],
-        template:'template.html',
-        inject:'body',
+        template: 'app_cd.html',
       }
     ),
     new HtmlWebpackPlugin(
@@ -53,12 +51,11 @@ module.exports = {
         filename: 'admin_club.html',
         chunks: [
           'index',
-            'manifest',
-            'vendor',
-            'admin_club'
-          ],
-        template:'template.html',
-        inject:'body',
+          'manifest',
+          'vendor',
+          'admin_club'
+        ],
+        template: 'app_club.html',
       }
     )
 
