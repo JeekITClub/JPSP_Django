@@ -1,13 +1,12 @@
+<!---component dashboard aside-->
 <template>
   <el-row class="tac">
     <el-col :span="4">
-      <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
-        <el-menu-item index="1" disabled="">
-          <template slot="title"><i class="el-icon-menu"></i>仪表盘</template>
-        </el-menu-item>
+      <el-menu class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
+        <el-menu-item index="7" disabled="" route=""><i class="el-icon-menu"></i>仪表盘</el-menu-item>
         <el-submenu index="2">
           <template slot="title">
-          <i class="el-icon-document"></i>社团动态
+            <i class="el-icon-document"></i>社团动态
           </template>
           <el-menu-item-group>
             <el-menu-item index="2-1" route="" disabled="">概览</el-menu-item>
@@ -60,7 +59,7 @@
             <el-menu-item index="6-4" route="" disabled="">C</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
-        <el-menu-item index="7" disabled=""><i class="el-icon-setting"></i>导航三</el-menu-item>
+        <el-menu-item index="7" disabled="" route=""><i class="el-icon-setting"></i>导航三</el-menu-item>
       </el-menu>
     </el-col>
   </el-row>
