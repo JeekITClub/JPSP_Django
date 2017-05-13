@@ -1,7 +1,7 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import admin_club from './admin_club'
+import AdminClub from './AdminClub.vue'
 import router from './router/admin_club.js'
 import ElementUI from 'element-ui'
 Vue.config.productionTip = false
@@ -11,9 +11,9 @@ Vue.use(ElementUI)
 /* eslint-disable no-new */
 
 new Vue({
-  el: '#app_admin_club',
+  el: '#app_club',
   router,
-  template: '<admin_club/>',
-  components: { admin_club },
-  render: h => h(admin_club)
+  template: '<App/>',
+  components: { AdminClub },
+  render: h => h(AdminClub)
 })
