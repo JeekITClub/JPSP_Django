@@ -1,23 +1,21 @@
 # coding=utf-8
 from __future__ import unicode_literals
 from django.db import models
-
+from django.contrib.auth.models import User
 
 # Create your models here.
 
-class user(models.Model):
-    name = models.CharField(max_length=30)
-    password = models.TextField()
+class UserProfile(models.Model):
+    user=models.ForeignKey(User)
     grade = models.IntegerField()
     classroom = models.IntegerField()
-    attend_year=models.IntegerField()
-    # attend_year ->attend_school_year
+    attend_year=models.CharField(max_length=4)
     club=models.TextField()
     lftlip=models.TextField()
     # lftlip ->last_five_loginin_time
 
 
-class club(models.Model):
+class Club(models.Model):
     name = models.CharField(max_length=30)
     clubid = models.CharField(max_length=4)
     # 社团id
@@ -37,7 +35,7 @@ class club(models.Model):
 
 
 class comment(models.Model):
-    author = models.ForeignKey(user)
+    author = models.ForeignKey(User)
     content = models.TextField()
     ip = models.CharField(max_length=15)
     comment_datetime = models.DateField(auto_now_add=True)
@@ -46,7 +44,7 @@ class comment(models.Model):
 
 
 class post(models.Model):
-    author = models.ForeignKey(club)
+    author = models.ForeignKey(Club)
     title = models.CharField(max_length=30)
     post_time = models.DateField()
     # post_time为文章批准发布在网站上的时间
@@ -69,7 +67,7 @@ class post(models.Model):
 
 
 class message(models.Model):
-    from_user = models.ForeignKey(user)
+    from_user = models.ForeignKey(User)
     send_time = models.DateField(auto_now=True)
     to_user = models.CharField(max_length=30)
     read_time = models.DateField(auto_now_add=True)

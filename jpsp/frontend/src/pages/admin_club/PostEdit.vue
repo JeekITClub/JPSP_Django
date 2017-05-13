@@ -1,5 +1,6 @@
 <template>
   <club_aside></club_aside>
+
 </template>
 <script>
   import Aside from '../../components/admin_club/Aside.vue'
