@@ -2,16 +2,16 @@ var path = require('path')
 var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
-
-function resolve (dir) {
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
 
 module.exports = {
   entry: {
-    admin_cd:'./src/admin_cd.js', //社团部管理 club department
+    admin_cd: './src/admin_cd.js', //社团部管理 club department
     index: './src/index.js',
-    admin_club:'./src/admin_club.js' //社长管理
+    admin_club: './src/admin_club.js' //社长管理
   },
   output: {
     path: config.build.assetsRoot,
@@ -20,6 +20,49 @@ module.exports = {
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
   },
+  plugins: [
+    new HtmlWebpackPlugin(
+      {
+        title: '建平中学学生社团系统',
+        filename: 'index.html',
+        chunks: [
+          'vendor',
+          'manifest',
+          'index',
+        ]
+
+      }
+    ),
+    new HtmlWebpackPlugin(
+      {
+        title: '建平中学学生社团系统--社团部管理',
+        filename: 'admin_cd.html',
+        chunks: [
+          'index',
+          'vendor',
+          'manifest',
+          'admin_cd',
+        ],
+        template:'template.html',
+        inject:'body',
+      }
+    ),
+    new HtmlWebpackPlugin(
+      {
+        title: '建平中学学生社团系统--社长管理',
+        filename: 'admin_club.html',
+        chunks: [
+          'index',
+            'manifest',
+            'vendor',
+            'admin_club'
+          ],
+        template:'template.html',
+        inject:'body',
+      }
+    )
+
+  ],
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
