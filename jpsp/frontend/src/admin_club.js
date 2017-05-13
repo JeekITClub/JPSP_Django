@@ -4,10 +4,12 @@ import Vue from 'vue'
 import AdminClub from './AdminClub.vue'
 import router from './router/admin_club.js'
 import ElementUI from 'element-ui'
+import axios from 'axios'
+Vue.prototype.$ajax = axios
 Vue.config.productionTip = false
 
 Vue.use(ElementUI)
-
+Vue.use(axios)
 /* eslint-disable no-new */
 
 new Vue({
