@@ -5,7 +5,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import index from '@/pages/admin_club/index.vue'
 import PostEdit from '@/pages/admin_club/PostEdit.vue'
-import ClubList from '@/pages/admin_club/ClubList.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -18,12 +17,14 @@ export default new Router({
     {
       path: '/post',
       name: 'PostEdit',
-      component: PostEdit
-    },
-    {
-      path: '/club',
-      name: 'ClubList',
-      component: ClubList
+      component: PostEdit,
+      children: [
+        {
+          path: 'edit',
+          name: 'PostEdit',
+          component: PostEdit
+        }
+      ]
     }
   ]
 })

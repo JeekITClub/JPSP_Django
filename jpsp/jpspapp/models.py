@@ -3,15 +3,16 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 
 class UserProfile(models.Model):
-    user=models.ForeignKey(User)
+    user = models.ForeignKey(User)
     grade = models.IntegerField()
     classroom = models.IntegerField()
-    attend_year=models.CharField(max_length=4)
-    club=models.TextField()
-    lftlip=models.TextField()
+    attend_year = models.CharField(max_length=4)
+    club = models.TextField()
+    lftlip = models.TextField()
     # lftlip ->last_five_loginin_time
 
 
@@ -32,38 +33,11 @@ class Club(models.Model):
     stars = models.IntegerField()
     introduction = models.TextField()
     # 社团介绍
-
-
-class comment(models.Model):
-    author = models.ForeignKey(User)
-    content = models.TextField()
-    ip = models.CharField(max_length=15)
-    comment_datetime = models.DateField(auto_now_add=True)
-    # comment_post_id
-    # comment datetime
+    achievements = models.TextField()
 
 
 class post(models.Model):
     author = models.ForeignKey(Club)
-    title = models.CharField(max_length=30)
-    post_time = models.DateField()
-    # post_time为文章批准发布在网站上的时间
-    add_time = models.DateField(auto_now_add=True)
-    # add_time字段在实例第一次保存的时候会保存当前时间
-    edit_time = models.DateField(auto_now=True)
-    # 字段保存时会自动保存当前时间
-    status = models.BooleanField()
-    # 文章是草稿/还未批准/被禁止发布状态是status的值为False ，已经发布了则为True
-    # comment = models.ForeignKey(comment)
-    # comment 为该文章的评论，暂时不开启评论功能
-    # category_choice=(
-    #     (),
-    # )
-    # category = models.CharField(max_length=1,choices=category_choice)
-    category = models.CharField(max_length=1)
-    # 文章的分类
-    # TODO: 确定文章有哪些分类
-    content = models.TextField()
 
 
 class message(models.Model):
@@ -79,6 +53,13 @@ class message(models.Model):
 
 
 class stars(models.Model):
+    club = models.ForeignKey(Club)
+    week = models.CharField(max_length=2)
+    # 第几周
+    time = models.CharField(max_length=2)
+    # 第几次社团活动
+    year = models.CharField(max_length=6)
+    # year 第几学年 格式为 2016-2
     stars = models.FloatField()
     star_time = models.DateField(auto_now=True)
     # 字段保存时会自动保存当前时间
