@@ -4,6 +4,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import index from '@/pages/admin_club/index.vue'
+import dashboard from '@/pages/admin_club/dashboard.vue'
 
 Vue.use(Router)
 
@@ -13,6 +14,11 @@ export default new Router({
       path: '/',
       name: 'index',
       component: index
+    },
+    {
+      path: '/',
+      name: 'dashboard',
+      component: dashboard
     }
   ]
 })
