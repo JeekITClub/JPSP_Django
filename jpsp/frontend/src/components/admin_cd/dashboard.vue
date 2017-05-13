@@ -1,7 +1,6 @@
 <template>
   <el-row class="tac">
-    <el-col :span="8">
-      <h5>带 icon</h5>
+    <el-col :span="4">
       <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
         <el-menu-item index="1" disabled="">
           <template slot="title"><i class="el-icon-menu"></i>仪表盘</template>
