@@ -36,9 +36,22 @@ class Club(models.Model):
     achievements = models.TextField()
 
 
-class post(models.Model):
-    author = models.ForeignKey(Club)
-
+class Post(models.Model):
+    ClubName = models.ForeignKey(Club)
+    LinkmanGrade = models.CharField(max_length=1)
+    LinkmanClass = models.CharField(max_length=2)
+    LinkmanName = models.CharField(max_length=8)
+    LinkmanPhoneNumber = models.CharField(max_length=11)
+    LinkmanQq = models.CharField(max_length=20)
+    Region = models.CharField(max_length=30)
+    Date1 = models.DateField()
+    Date2 = models.TimeField()
+    Process = models.TextField()
+    Content = models.TextField()
+    Assessment=models.TextField()
+    Feeling=models.TextField()
+    Stars=models.FloatField()
+    StarTime=models.DateTimeField()
 
 class message(models.Model):
     from_user = models.ForeignKey(User)
@@ -50,9 +63,3 @@ class message(models.Model):
     )
     type = models.CharField(max_length=3, choices=message_type)
     content = models.TextField(default='')
-
-class post_request(models.Model):
-    from_user = models.CharField(max_length=30)
-    open_time = models.DateField(auto_now=True)
-    request_content = models.TextField()
-    close_time = models.DateField()
