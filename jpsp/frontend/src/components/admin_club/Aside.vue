@@ -1,8 +1,6 @@
 <!---component dashboard aside-->
 <template>
-  <el-row class="tac">
-    <el-col :span="4">
-      <el-menu class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
+      <el-menu @open="handleOpen" @close="handleClose">
         <el-menu-item index="7" disabled="" route=""><i class="el-icon-menu"></i>仪表盘</el-menu-item>
         <el-submenu index="2">
           <template slot="title">
@@ -61,10 +59,18 @@
         </el-submenu>
         <el-menu-item index="7" disabled="" route=""><i class="el-icon-setting"></i>导航三</el-menu-item>
       </el-menu>
-    </el-col>
-  </el-row>
 </template>
 <script>
+    export default {
+      methods: {
+        handleOpen (key, keyPath) {
+          console.log(key, keyPath)
+        },
+        handleClose (key, keyPath) {
+          console.log(key, keyPath)
+        }
+      }
+    }
 </script>
 <style>
   @import url("//unpkg.com/element-ui@1.3.2/lib/theme-default/index.css");

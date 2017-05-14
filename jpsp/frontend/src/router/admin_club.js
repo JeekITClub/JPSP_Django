@@ -16,15 +16,8 @@ export default new Router({
     },
     {
       path: '/post',
-      name: 'PostEdit',
-      component: PostEdit,
-      children: [
-        {
-          path: 'edit',
-          name: 'PostEdit',
-          component: PostEdit
-        }
-      ]
+      name: 'post',
+      component: PostEdit
     }
   ]
 })
