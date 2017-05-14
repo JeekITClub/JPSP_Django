@@ -2,9 +2,9 @@
   <div id="app_club">
     <router-view></router-view>
     <footer>
-      <a>
+      <div>
         作者：倪楚劼 邱世贸
-      </a>
+      </div>
     </footer>
   </div>
 </template>
