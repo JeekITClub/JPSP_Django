@@ -51,21 +51,6 @@ class message(models.Model):
     type = models.CharField(max_length=3, choices=message_type)
     content = models.TextField(default='')
 
-
-class stars(models.Model):
-    club = models.ForeignKey(Club)
-    week = models.CharField(max_length=2)
-    # 第几周
-    time = models.CharField(max_length=2)
-    # 第几次社团活动
-    year = models.CharField(max_length=6)
-    # year 第几学年 格式为 2016-2
-    stars = models.FloatField()
-    star_time = models.DateField(auto_now=True)
-    # 字段保存时会自动保存当前时间
-    times = models.CharField(max_length=3)
-
-
 class post_request(models.Model):
     from_user = models.CharField(max_length=30)
     open_time = models.DateField(auto_now=True)
