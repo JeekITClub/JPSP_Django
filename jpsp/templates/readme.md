@@ -12,7 +12,7 @@
         * /analysis 已经发布的动态进行数据分析、统计、打分
     * /club 社团管理
         * /delete 删除社团
-        * /add 添加社团
+        * /verify 批准社团建立并添加社团
         * /profile 修改社团信息
 * /club 社团系统
     * /admin 社团社长管理系统
