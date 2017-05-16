@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 // import index from '@/pages/index/index'
 import PostEdit from '@/pages/admin_club/PostEdit.vue'
+import ProfileEdit from '@/pages/admin_club/ProfileEdit.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -9,7 +10,7 @@ export default new Router({
     {
       path: '/',
       name: 'index',
-      component: PostEdit
+      component: ProfileEdit
     },
     {
       path: '/post',
