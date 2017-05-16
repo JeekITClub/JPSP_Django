@@ -34,6 +34,6 @@
   @import url("//unpkg.com/element-ui@1.3.2/lib/theme-default/index.css");
 
   body{
-    margin: 0px;
+  margin: 0px;
   }
 </style>

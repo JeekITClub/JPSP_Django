@@ -1,6 +1,6 @@
 <!---component jfooter-->
 <template>
-<div class="container">
+<div class="footer-container">
 <el-row>
   <el-col :span='24' align="right"><a href="#">Back to top</a></el-col>
 </el-row>
@@ -41,14 +41,14 @@
 <style>
   @import url("//unpkg.com/element-ui@1.3.2/lib/theme-default/index.css");
 
-  .container{
+  .footer-container{
     background-color: #324057;
     color: #a4aebd;
     height: 100%;
     padding: 10px 40px 20px 100px;
   }
 
-  .container a{
+  .footer-container a{
     display: inline-block;
     color: #768193;
     margin: 12px 18px 0 0;
