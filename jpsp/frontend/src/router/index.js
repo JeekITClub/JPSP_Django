@@ -8,8 +8,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'index',
-      component: index
+      name: 'Index',
+      component: ProfileEdit
+    },
+    {
+      path: '/post',
+      name: 'Post',
+      component: PostEdit
     }
   ]
 })
