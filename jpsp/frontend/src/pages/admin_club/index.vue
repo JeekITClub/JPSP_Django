@@ -1,4 +1,5 @@
 <template>
+<div>
   <el-row class="tac">
   <el-col :span="8" offset="8">
   <el-form ref="form" :model="form">
@@ -15,6 +16,7 @@
   </el-form>
   </el-col>
   </el-row>
+  </div>
 </template>
 <script>
   import Axios from 'axios'

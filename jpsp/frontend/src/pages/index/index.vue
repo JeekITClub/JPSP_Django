@@ -1,65 +1,56 @@
 <template>
-<el-row class="tac">
-  <el-col :span="8">
-    <h5>带 icon</h5>
-    <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
-      <el-submenu index="1">
-        <template slot="title"><i class="el-icon-message"></i>导航一</template>
-        <el-menu-item-group>
-          <template slot="title">分组一</template>
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="分组2">
-          <el-menu-item index="1-3">选项3</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="1-4">
-          <template slot="title">选项4</template>
-          <el-menu-item index="1-4-1">选项1</el-menu-item>
-        </el-submenu>
-      </el-submenu>
-      <el-menu-item index="2"><i class="el-icon-menu"></i>导航二</el-menu-item>
-      <el-menu-item index="3"><i class="el-icon-setting"></i>导航三</el-menu-item>
-    </el-menu>
-  </el-col>
-  <el-col :span="8">
-    <h5>不带 icon</h5>
-    <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" theme="dark">
-      <el-submenu index="1">
-        <template slot="title">导航一</template>
-        <el-menu-item-group title="分组一">
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="分组2">
-          <el-menu-item index="1-3">选项3</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="1-4">
-          <template slot="title">选项4</template>
-          <el-menu-item index="1-4-1">选项1</el-menu-item>
-        </el-submenu>
-      </el-submenu>
-      <el-menu-item index="2">导航二</el-menu-item>
-      <el-menu-item index="3">导航三</el-menu-item>
-    </el-menu>
-  </el-col>
-  <el-col :span="8">
-    <h5>分组</h5>
-    <el-menu mode="vertical" default-active="1" class="el-menu-vertical-demo">
-      <el-menu-item-group title="分组一">
-        <el-menu-item index="1"><i class="el-icon-message"></i>导航一</el-menu-item>
-        <el-menu-item index="2"><i class="el-icon-message"></i>导航二</el-menu-item>
-      </el-menu-item-group>
-      <el-menu-item-group title="分组二">
-        <el-menu-item index="3"><i class="el-icon-message"></i>导航三</el-menu-item>
-        <el-menu-item index="4"><i class="el-icon-message"></i>导航四</el-menu-item>
-      </el-menu-item-group>
-    </el-menu>
-  </el-col>
+<div>
+<el-row class="carousel">
+<el-col :span="24">
+  <el-carousel :interval="5000" arrow="always" height="90vh">
+    <el-carousel-item v-for="item in 4" :key="item">
+      <h3>{{ item }}</h3>
+    </el-carousel-item>
+  </el-carousel>
+</el-col>
 </el-row>
+<div class="main-content">
+<div class="content-container">
+<el-row>
+<el-col :span="12" class="intro">
+Write Better Code.
+</el-col>
+<el-col :span="12" class="image" align="right">
+Image</el-col>
+</el-row>
+</div>
+
+<div class="content-container">
+<el-row>
+<el-col :span="12" class="image" align="right">
+Image
+</el-col>
+<el-col :span="12" class="intro">
+Write Better Code.
+</el-col>
+</el-row>
+</div>
+
+<div class="content-container">
+<el-row>
+<el-col :span="12" class="intro">
+Write Better Code.
+</el-col>
+<el-col :span="12" class="image" align="right">
+Image
+</el-col>
+</el-row>
+</div>
+
+</div>
+</div>
 </template>
 <script>
   export default {
+    data: {
+      items: [
+      ]
+    },
     methods: {
       handleOpen (key, keyPath) {
         console.log(key, keyPath)
@@ -72,4 +63,43 @@
 </script>
 <style>
   @import url("//unpkg.com/element-ui@1.3.2/lib/theme-default/index.css");
+
+  .content-container{
+    height: 100vh;
+  }
+
+  .main-content{
+  }
+
+  .content{
+    padding: 20px;
+  }
+
+  .el-carousel__item h3 {
+    color: #475669;
+    font-size: 18px;
+    opacity: 0.75;
+    line-height: 300px;
+    margin: 0;
+  }
+  
+  .el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+  }
+  
+  .el-carousel__item:nth-child(2n+1) {
+    background-color: #d3dce6;
+  }
+
+  .intro{
+    padding-left: 40vh;
+    line-height: 100vh;
+    font-size: 3em;
+  }
+
+  .image{
+    padding-right: 40vh;
+    line-height: 100vh;
+    font-size: 3em;
+  }
 </style>

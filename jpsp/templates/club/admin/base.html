@@ -28,12 +28,12 @@
 </head>
 <body>
 <section id="container" >
-{% include 'admin/nav.html' %}
-{% include 'admin/aside.html' %}
+{% include 'club/admin/nav.html' %}
+{% include 'club/admin/aside.html' %}
 {% block content %}
 <div>默认内容</div>
 {% endblock %}\
-{% include 'admin/footer.html' %}
+{% include 'club/admin/footer.html' %}
 </section>
 <!-- js placed at the end of the document so the pages load faster -->
     <script src="{% static "js/jquery.js" %}"></script>
@@ -54,27 +54,6 @@
     <!--script for this page-->
     <script src="{% static "js/sparkline-chart.js" %}"></script>
 	<script src="{% static "js/zabuto_calendar.js" %}"></script>
-
-	<script type="text/javascript">
-        $(document).ready(function () {
-        var unique_id = $.gritter.add({
-            // (string | mandatory) the heading of the notification
-            title: 'Welcome to Dashgum!',
-            // (string | mandatory) the text inside the notification
-            text: 'Hover me to enable the Close Button. You can hide the left sidebar clicking on the button next to the logo. Free version for <a href="http://blacktie.co" target="_blank" style="color:#ffd777">BlackTie.co</a>.',
-            // (string | optional) the image to display on the left
-            image: 'assets/img/ui-sam.jpg',
-            // (bool | optional) if you want it to fade out on its own or just sit there
-            sticky: true,
-            // (int | optional) the time you want it to be alive for before fading out
-            time: '',
-            // (string | optional) the class name you want to apply to that specific message
-            class_name: 'my-sticky-class'
-        });
-
-        return false;
-        });
-	</script>
 
 	<script type="application/javascript">
         $(document).ready(function () {
