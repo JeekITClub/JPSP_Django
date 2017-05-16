@@ -9,7 +9,7 @@ import datetime
 
 
 # Create your views here.
-
+@require_http_methods(["GET"])
 def club_list(request):
     data = serializers.serialize("json", Club.objects.all())
     response = JsonResponse(json.dumps(data), safe=False)
@@ -18,7 +18,7 @@ def club_list(request):
 
 
 @require_http_methods(["POST"])
-def PostEditSubmit(request):
+def club_post_edit_submit(request):
     try:
         body = json.loads(request.body)
         clubname = body['ClubName']
@@ -64,3 +64,162 @@ def PostEditSubmit(request):
                 'Access-Control-Allow-Origin': '*'
             }
         )
+
+
+@require_http_methods(["POST"])
+def club_profile_edit_submit(request):
+    try:
+        body=json.loads(request.body)
+    except:
+        return JsonResponse(
+            {
+                'message':''
+            }
+        )
+
+
+@require_http_methods(['GET'])
+def club_enroll_classroom_apply_submit(request):
+    try:
+        body = json.loads(request.body)
+        clubname = body['ClubName']
+
+    except:
+        return JsonResponse(
+            {
+                'message': ''
+            }
+        )
+
+
+@require_http_methods(['POST'])
+def cd_post_star_submit(request):
+    try:
+        body=json.loads(request.body)
+    except:
+        return JsonResponse(
+            {
+                'message':''
+            }
+        )
+
+
+@require_http_methods(['POST'])
+def cd_enroll_classroom_apply_submit(request):
+    try:
+        body=json.loads(request.body)
+    except:
+        return JsonResponse(
+            {
+                'message':''
+            }
+        )
+
+
+@require_http_methods(['POST'])
+def user_profile_edit_submit(request):
+    try:
+        body=json.loads(request.body)
+    except:
+        return JsonResponse(
+            {
+                'message':''
+            }
+        )
+
+
+@require_http_methods(['POST'])
+def club_member_add_submit(request):
+    try:
+        body=json.loads(request.body)
+    except:
+        return JsonResponse(
+            {
+                'message':''
+            }
+        )
+
+
+@require_http_methods(['POST'])
+def club_member_remove_submit(request):
+    try:
+        body=json.loads(request.body)
+    except:
+        return JsonResponse(
+            {
+                'message':''
+            }
+        )
+
+
+@require_http_methods(['POST'])
+def cd_message_list(request):
+    try:
+        body=json.loads(request.body)
+    except:
+        return JsonResponse(
+            {
+                'message':''
+            }
+        )
+
+
+@require_http_methods(['POST'])
+def cd_message_remove_submit(request):
+    try:
+        body=json.loads(request.body)
+    except:
+        return JsonResponse(
+            {
+                'message':''
+            }
+        )
+
+
+@require_http_methods(['POST'])
+def club_activity_apply_submit(request):
+    try:
+        body=json.loads(request.body)
+    except:
+        return JsonResponse(
+            {
+                'message':''
+            }
+        )
+
+
+@require_http_methods(['POST'])
+def cd_activity_agree_submit(request):
+    try:
+        body=json.loads(request.body)
+    except:
+        return JsonResponse(
+            {
+                'message':''
+            }
+        )
+
+
+@require_http_methods(['POST'])
+def cd_activity_disagree_submit(request):
+    try:
+        body=json.loads(request.body)
+    except:
+        return JsonResponse(
+            {
+                'message':''
+            }
+        )
+
+@require_http_methods(['POST'])
+def cd_post_delete_submit(request):
+    try:
+        body=json.loads(request.body)
+    except:
+        return JsonResponse(
+            {
+                'message':''
+            }
+        )
+
+

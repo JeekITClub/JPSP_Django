@@ -1,12 +1,23 @@
 <template>
-  <club_aside></club_aside>
+  <div>
+  <el-row class="tac">
+  <el-col :span="4>
+    <club_aside></club_aside>
+    </el-col>
+    <el-col :span:"20">
+    <club_profile_edit></club_profile_edit>
+    </el-col>
+    </el-row>
+  </div>
 </template>
 <script>
-  import Aside from '../../components/admin_club/Aside.vue'
+  import JAside from '../../components/admin_club/JAside.vue'
+  import ProfileEdit from '../../components/admin_club/ProfileEdit.vue'
   export default {
-    name: 'PorfileEdit',
+    name: 'ProfileEdit',
     components: {
-      'club_aside': Aside
+      'club_aside': JAside,
+      'club_profile_edit': ProfileEdit
     }
   }
 </script>

@@ -16,6 +16,10 @@ class UserProfile(models.Model):
     # lftlip ->last_five_loginin_time
 
 
+class CDUser(models.Model):
+    user=models.ForeignKey(User)
+
+
 class Club(models.Model):
     name = models.CharField(max_length=30)
     clubid = models.CharField(max_length=4)
@@ -63,3 +67,10 @@ class message(models.Model):
     )
     type = models.CharField(max_length=3, choices=message_type)
     content = models.TextField(default='')
+
+
+class Token(models.Model):
+    token=models.TextField()
+    user=models.ForeignKey(User)
+    start_time=models.DateTimeField()
+    end_time=models.DateTimeField()
