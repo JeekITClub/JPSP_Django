@@ -1,12 +1,12 @@
 <template>
   <div>
-  <el-row class="tac">
-  <el-col :span="4>
-    <club_aside></club_aside>
-    </el-col>
-    <el-col :span:"20">
-    <club_profile_edit></club_profile_edit>
-    </el-col>
+    <el-row>
+      <el-col :span="4">
+        <club_aside></club_aside>
+      </el-col>
+      <el-col :span="20">
+        <club_profile_edit></club_profile_edit>
+      </el-col>
     </el-row>
   </div>
 </template>

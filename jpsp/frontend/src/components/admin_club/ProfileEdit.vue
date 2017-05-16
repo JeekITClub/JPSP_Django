@@ -1,56 +1,109 @@
-<el-form ref="form" :model="PostForm" label-width="80px">
+<template>
+<el-form ref="form" :model="PostForm" label-width="100%">
   <el-form-item label="社团名称">
     <el-input v-model="PostForm.ClubName"></el-input>
   </el-form-item>
-  <el-form-item label="">
-  <el-input v-model="PostForm.ActivityName" placeholder="请输入活动名称"></el-input>
+  <el-form-item label="社长">
+    <el-input v-model="PostForm.Shezhang.Name"></el-input>
   </el-form-item>
-  <el-form-item label="活动地点">
-    <el-input v-model="PostForm.region" placeholder="请输入活动地点" value=""></el-input>
+  <el-form-item label="社长QQ">
+    <el-input v-model="PostForm.Shezhang.QQ"></el-input>
   </el-form-item>
-  <el-form-item label="活动时间">
-    Mel
+  <el-form-item prop="PostForm.Shezhang.Grade" label="社长年级">
+    <el-select v-model="PostForm.Shezhang.Grade" >
+        <el-option label="高一" value="1"></el-option>
+        <el-option label="高二" value="2"></el-option>
+        <el-option label="高三" value="3"></el-option>
+    </el-select>
+  </el-form-item>
+  <el-form-item prop="PostForm.Shezhang.Class" label="社长班级">
+        <el-select v-model="PostForm.Shezhang.Class" >
+          <el-option label="1" value="1"></el-option>
+          <el-option label="2" value="2"></el-option>
+          <el-option label="3" value="3"></el-option>
+          <el-option label="4" value="4"></el-option>
+          <el-option label="5" value="5"></el-option>
+          <el-option label="6" value="6"></el-option>
+          <el-option label="7" value="7"></el-option>
+          <el-option label="8" value="8"></el-option>
+          <el-option label="9" value="9"></el-option>
+          <el-option label="10" value="10"></el-option>
+          <el-option label="11" value="11"></el-option>
+          <el-option label="12" value="12"></el-option>
+          <el-option label="13" value="13"></el-option>
+        </el-select>
+  </el-form-item>
+  <el-form-item label="是否进行招新">
+    <el-radio-group v-model="PostForm.IfRecruit">
+      <el-radio :label=true>招新</el-radio>
+      <el-radio :label=false>不招新</el-radio>
+    </el-radio-group>
+  </el-form-item>
+  <el-form-item label="招新QQ群">
+    <el-input v-if="PostForm.IfRecruit" v-model="PostForm.QQGroup"></el-input>
+  </el-form-item>
+  <el-form-item label="社长邮箱">
+    <el-input v-model="PostForm.Email"></el-input>
+  </el-form-item>
+  <el-form-item label="社团介绍">
+    <el-input type="textarea" v-model="PostForm.introduction"></el-input>
+  </el-form-item>
+  <el-form-item label="社团类型">
+    <el-checkbox-group v-model="PostForm.Type">
+      <el-checkbox label="人文"></el-checkbox>
+      <el-checkbox label="科技"></el-checkbox>
+      <el-checkbox label="计算机"></el-checkbox>
+      <el-checkbox label="摄影"></el-checkbox>
+      <el-checkbox label="体育"></el-checkbox>
+      <el-checkbox label="艺术"></el-checkbox>
+      <el-checkbox label="学科类"></el-checkbox>
+    </el-checkbox-group>
   </el-form-item>
   <el-form-item
+    label="社团成就"
     v-for="(achievement, index) in PostForm.achievements"
     :label="'成就' + index"
-    :key="achievement.key"
+    :key="achievements.key"
     :prop="'achievement.' + index + '.value'"
     :rules="{
       required: true, message: '不能为空', trigger: 'blur'
     }"
   >
-    <el-input v-model="achievement.value"></el-input><el-button @click.prevent="removeAchievement(achievement)">删除</el-button>
+    <el-input v-model="achievements.value"></el-input><el-button @click.prevent="removeAchievement(achievement)">删除</el-button>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="submitForm('PostForm')">提交</el-button>
     <el-button @click="addAchievement">新增成就</el-button>
-    <el-button @click="resetForm('PostForm')">重置</el-button>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="onSubmit">立即创建</el-button>
+    <el-button type="primary" @click="onSubmit">提交修改</el-button>
     <el-button>取消</el-button>
   </el-form-item>
 </el-form>
+</template>
 <script>
-  import ElInput from '../../../node_modules/element-ui/packages/input/src/input'
   export default {
-    components: {ElInput},
     data () {
       return {
         PostForm: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          date3: '',
-          type: [],
-          resource: '',
-          desc: '',
+          ClubName: '',
+          Date1: '',
+          Date2: '',
+          Date3: '',
+          Type: [],
           introduction: '',
+          IfRecruit: true,
           achievements: [
             {
               value: ''
+            }
+          ],
+          Email: '',
+          Shezhang: [
+            {
+              Name: '',
+              QQ: '',
+              Grade: '',
+              Class: ''
             }
           ]
         }
@@ -58,7 +111,7 @@
     },
     methods: {
       onSubmit () {
-        console.log('submit!')
+        console.log('submit!');
       },
       submitForm (formName) {
         this.$refs[formName].validate((valid) => {
@@ -70,17 +123,14 @@
           }
         })
       },
-      resetForm (formName) {
-        this.$refs[formName].resetFields()
-      },
       removeAchievement (item) {
-        var index = this.dynamicValidateForm.achievements.indexOf(item)
+        var index = this.PostForm.achievements.indexOf(item)
         if (index !== -1) {
-          this.dynamicValidateForm.achievements.splice(index, 1)
+          this.PostForm.achievements.splice(index, 1)
         }
       },
       addAchievement () {
-        this.dynamicValidateForm.achievements.push({
+        this.PostForm.ahievements.push({
           value: '',
           key: Date.now()
         })

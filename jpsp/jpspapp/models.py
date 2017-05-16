@@ -24,7 +24,8 @@ class Club(models.Model):
     name = models.CharField(max_length=30)
     clubid = models.CharField(max_length=4)
     # 社团id
-    proprieter = models.IntegerField()
+    shezhang_name = models.CharField(max_length=8)
+    shezhang_qq = models.CharField(max_length=20)
     # 社长的QQ
     if_enroll = models.BooleanField()
     # 是否进行招新
@@ -52,12 +53,13 @@ class Post(models.Model):
     Date2 = models.TimeField()
     Process = models.TextField()
     Content = models.TextField()
-    Assessment=models.TextField()
-    Feeling=models.TextField()
-    Stars=models.FloatField()
-    StarTime=models.DateTimeField()
+    Assessment = models.TextField()
+    Feeling = models.TextField()
+    Stars = models.FloatField()
+    StarTime = models.DateTimeField()
 
-class message(models.Model):
+
+class Message(models.Model):
     from_user = models.ForeignKey(User)
     send_time = models.DateField(auto_now=True)
     to_user = models.CharField(max_length=30)
@@ -67,10 +69,11 @@ class message(models.Model):
     )
     type = models.CharField(max_length=3, choices=message_type)
     content = models.TextField(default='')
+# TODO: edit the message model
 
 
 class Token(models.Model):
-    token=models.TextField()
-    user=models.ForeignKey(User)
-    start_time=models.DateTimeField()
-    end_time=models.DateTimeField()
+    token = models.TextField()
+    user = models.ForeignKey(User)
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
