@@ -2,7 +2,7 @@
   <div>
     <el-row :gutter="20">
       <el-col :span="4">
-        <JAside></JAside>
+        <club_aside></club_aside>
       </el-col>
       <el-col :span="20">
         <el-form :model="PostForm" :rules="rules" class="" labelPosition="right">
@@ -98,7 +98,7 @@
   export default {
     name: 'PostEdit',
     components: {
-      'Aside': JAside
+      'club_side': JAside
     },
     data () {
       return {

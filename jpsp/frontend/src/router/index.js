@@ -9,12 +9,12 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'index',
+      name: 'Index',
       component: ProfileEdit
     },
     {
       path: '/post',
-      name: 'post',
+      name: 'Post',
       component: PostEdit
     }
   ]

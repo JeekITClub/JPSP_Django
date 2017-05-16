@@ -1,22 +1,22 @@
 <template>
-<el-form ref="form" :model="PostForm" label-width="100%">
-  <el-form-item label="社团名称">
+<el-form ref="PostForm" :model="PostForm" label-width="100%">
+  <el-form-item label="社团名称" required>
     <el-input v-model="PostForm.ClubName"></el-input>
   </el-form-item>
-  <el-form-item label="社长">
+  <el-form-item label="社长姓名" required>
     <el-input v-model="PostForm.Shezhang.Name"></el-input>
   </el-form-item>
-  <el-form-item label="社长QQ">
+  <el-form-item label="社长QQ" required>
     <el-input v-model="PostForm.Shezhang.QQ"></el-input>
   </el-form-item>
-  <el-form-item prop="PostForm.Shezhang.Grade" label="社长年级">
+  <el-form-item prop="PostForm.Shezhang.Grade" label="社长年级" required>
     <el-select v-model="PostForm.Shezhang.Grade" >
         <el-option label="高一" value="1"></el-option>
         <el-option label="高二" value="2"></el-option>
         <el-option label="高三" value="3"></el-option>
     </el-select>
   </el-form-item>
-  <el-form-item prop="PostForm.Shezhang.Class" label="社长班级">
+  <el-form-item prop="PostForm.Shezhang.Class" label="社长班级" required>
         <el-select v-model="PostForm.Shezhang.Class" >
           <el-option label="1" value="1"></el-option>
           <el-option label="2" value="2"></el-option>
@@ -33,7 +33,7 @@
           <el-option label="13" value="13"></el-option>
         </el-select>
   </el-form-item>
-  <el-form-item label="是否进行招新">
+  <el-form-item label="是否进行招新" required>
     <el-radio-group v-model="PostForm.IfRecruit">
       <el-radio :label=true>招新</el-radio>
       <el-radio :label=false>不招新</el-radio>
@@ -42,13 +42,13 @@
   <el-form-item label="招新QQ群">
     <el-input v-if="PostForm.IfRecruit" v-model="PostForm.QQGroup"></el-input>
   </el-form-item>
-  <el-form-item label="社长邮箱">
+  <el-form-item label="社团邮箱">
     <el-input v-model="PostForm.Email"></el-input>
   </el-form-item>
-  <el-form-item label="社团介绍">
+  <el-form-item label="社团介绍" required>
     <el-input type="textarea" v-model="PostForm.introduction"></el-input>
   </el-form-item>
-  <el-form-item label="社团类型">
+  <el-form-item label="社团类型" required>
     <el-checkbox-group v-model="PostForm.Type">
       <el-checkbox label="人文"></el-checkbox>
       <el-checkbox label="科技"></el-checkbox>
@@ -111,7 +111,7 @@
     },
     methods: {
       onSubmit () {
-        console.log('submit!');
+        console.log('submit!')
       },
       submitForm (formName) {
         this.$refs[formName].validate((valid) => {

@@ -35,6 +35,7 @@
 <script>
   export default {
     data() {
+      name: 'ActivityApply'
       return {
         PostForm: {
           ClubName: '',

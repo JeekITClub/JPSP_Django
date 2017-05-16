@@ -3,7 +3,7 @@
     :data="tableData"
     stripe
     style="width: 100%">
-    <el-table-column>
+    <el-table-column
       prop="date"
       label="日期"
       width="180">
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-  import axios from 'axios'
+  import Axios from 'axios'
   export default {
     data () {
       return {
@@ -45,7 +45,7 @@
       }
     },
     created: function () {
-      axios.get('/api/club_list')
+      Axios.get('/api/club_list')
         .then(function (response) {
           console.log(response)
         })

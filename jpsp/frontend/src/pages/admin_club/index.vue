@@ -17,6 +17,7 @@
   </el-row>
 </template>
 <script>
+  import Axios from 'axios'
   export default {
     data () {
       return {
@@ -29,6 +30,16 @@
     methods: {
       onSubmit () {
         console.log('submit!')
+        Axios.post('/api/club/login', {
+          name: this.form.name,
+          password: this.form.password
+        })
+          .then(function (response) {
+            console.log(response)
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
       }
     }
   }

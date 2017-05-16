@@ -79,7 +79,7 @@ def club_profile_edit_submit(request):
 
 
 @require_http_methods(['GET'])
-def club_enroll_classroom_apply_submit(request):
+def club_recruit_classroom_apply_submit(request):
     try:
         body = json.loads(request.body)
         clubname = body['ClubName']
@@ -105,7 +105,7 @@ def cd_post_star_submit(request):
 
 
 @require_http_methods(['POST'])
-def cd_enroll_classroom_apply_submit(request):
+def cd_recruit_classroom_apply_verify_submit(request):
     try:
         body=json.loads(request.body)
     except:
@@ -191,14 +191,26 @@ def club_activity_apply_submit(request):
 @require_http_methods(['POST'])
 def cd_activity_agree_submit(request):
     try:
-        body=json.loads(request.body)
+        body = json.loads(request.body)
     except:
         return JsonResponse(
             {
-                'message':''
+                'message': ''
             }
         )
+    finally:
+        pass
 
+@require_http_methods(['POST'])
+def cd_activity_list(request):
+    try:
+        body = json.loads(request.body)
+    except:
+        return JsonResponse(
+            {
+                'message': ''
+            }
+        )
 
 @require_http_methods(['POST'])
 def cd_activity_disagree_submit(request):
