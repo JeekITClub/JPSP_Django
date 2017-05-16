@@ -5,6 +5,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import index from '@/pages/admin_club/index.vue'
 import PostEdit from '@/pages/admin_club/PostEdit.vue'
+import ProfileEdit from '@/pages/admin_club/ProfileEdit.vue'
+
 Vue.use(Router)
 
 export default new Router({
@@ -18,6 +20,11 @@ export default new Router({
       path: '/post',
       name: 'post',
       component: PostEdit
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: ProfileEdit
     }
   ]
 })
