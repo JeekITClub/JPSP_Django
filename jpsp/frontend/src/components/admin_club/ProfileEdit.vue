@@ -2,15 +2,14 @@
   <el-form-item label="社团名称">
     <el-input v-model="PostForm.ClubName"></el-input>
   </el-form-item>
-  <el-form-item label="活动名称">
+  <el-form-item label="">
   <el-input v-model="PostForm.ActivityName" placeholder="请输入活动名称"></el-input>
   </el-form-item>
   <el-form-item label="活动地点">
-    <el-input v-model="PostForm.region" placeholder="请输入活动地点" value="">
-    </el-input>
+    <el-input v-model="PostForm.region" placeholder="请输入活动地点" value=""></el-input>
   </el-form-item>
-  <el-form-item label="社团介绍">
-    <el-input type="textarea" v-model="PostForm.introduction"></el-input>
+  <el-form-item label="活动时间">
+    Mel
   </el-form-item>
   <el-form-item
     v-for="(achievement, index) in PostForm.achievements"
@@ -24,9 +23,9 @@
     <el-input v-model="achievement.value"></el-input><el-button @click.prevent="removeAchievement(achievement)">删除</el-button>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="submitForm('dynamicValidateForm')">提交</el-button>
+    <el-button type="primary" @click="submitForm('PostForm')">提交</el-button>
     <el-button @click="addAchievement">新增成就</el-button>
-    <el-button @click="resetForm('dynamicValidateForm')">重置</el-button>
+    <el-button @click="resetForm('PostForm')">重置</el-button>
   </el-form-item>
   <el-form-item>
     <el-button type="primary" @click="onSubmit">立即创建</el-button>
@@ -75,13 +74,13 @@
         this.$refs[formName].resetFields()
       },
       removeAchievement (item) {
-        var index = this.dynamicValidateForm.ahievements.indexOf(item)
+        var index = this.dynamicValidateForm.achievements.indexOf(item)
         if (index !== -1) {
           this.dynamicValidateForm.achievements.splice(index, 1)
         }
       },
       addAchievement () {
-        this.dynamicValidateForm.ahievements.push({
+        this.dynamicValidateForm.achievements.push({
           value: '',
           key: Date.now()
         })
