@@ -111,7 +111,7 @@
     },
     methods: {
       onSubmit () {
-        console.log('submit!');
+        console.log('submit!')
       },
       submitForm (formName) {
         this.$refs[formName].validate((valid) => {

@@ -1,19 +1,17 @@
 <!---component nav-top-->
 <template>
+<div>
 <el-row>
 <el-col :span="24">
-  <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-  <el-menu-item index="1">建平学生社团系统</el-menu-item>
-  <el-submenu index="2">
-    <template slot="title">我的工作台</template>
-    <el-menu-item index="2-1">选项1</el-menu-item>
-    <el-menu-item index="2-2">选项2</el-menu-item>
-    <el-menu-item index="2-3">选项3</el-menu-item>
-  </el-submenu>
-  <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
+  <el-menu class="el-menu-demo" mode="horizontal" unique-opened="true" @select="handleSelect">
+  <el-menu-item index="1" style="font-size: 1.5em;">建平学生社团平台</el-menu-item>
+  <el-menu-item index="2">社团动态</el-menu-item>
+  <el-menu-item index="3">社团介绍</el-menu-item>
+  <el-menu-item index="4">活动报名</el-menu-item>
 </el-menu>
 </el-col>
 </el-row>
+</div>
 </template>
 <script>
   export default {
@@ -33,7 +31,7 @@
 <style>
   @import url("//unpkg.com/element-ui@1.3.2/lib/theme-default/index.css");
 
-  body{
-  margin: 0px;
+  .el-menu{
+    background-color: rgb(32, 160, 255);
   }
 </style>
