@@ -7,21 +7,23 @@
 </el-col>
 <el-col :span="10" class="login-form">
 <div class="form">
-<el-row><h2>进入社团的奇妙世界</h2 ></el-row>
-<el-row><p>用户名</p></el-row>
-  <el-row>
-  <el-input v-model="username" placeholder="用户名"></el-input>
-  </el-row>
-  <el-row><p>密码</p></el-row>
-  <el-row>
-  <el-input v-model="password" placeholder="密码"></el-input>
-  </el-row>
-  <br>
-  <el-row><el-radio class="radio" v-model="remember" label="remember">记住我</el-radio></el-row>
-  <br>
-  <el-row><el-button type="primary" size="large"  class="login-button">登录</el-button></el-row>
-  <p>{{ remember }}</p>
-  </div>
+<h2>进入社团的奇妙世界</h2>
+<br>
+<el-form label-position="top" ref="form" :model="form" label-width="80px">
+  <el-form-item label="用户名">
+    <el-input v-model="form.username"></el-input>
+  </el-form-item>
+  <el-form-item label="密码">
+    <el-input v-model="form.password"></el-input>
+  </el-form-item>
+  <el-form-item label="">
+    <el-radio v-model="form.remember" :label="true">记住我</el-radio>
+  </el-form-item>
+  <el-form-item>
+    <el-button type="primary" @click="onSubmit" class="login-button">登录</el-button>
+  </el-form-item>
+</el-form>
+</div>
 </el-col>
 </el-row>
 
@@ -65,9 +67,16 @@ Image
   export default {
     data () {
       return {
-        username: '',
-        password: '',
-        remember: false
+        form: {
+          username: '',
+          password: '',
+          remember: false
+        }
+      }
+    },
+    methods: {
+      onSubmit () {
+        console.log('submit!')
       }
     }
   }
