@@ -98,7 +98,7 @@
   export default {
     name: 'PostEdit',
     components: {
-      'club_side': JAside
+      'club_aside': JAside
     },
     data () {
       return {
@@ -124,7 +124,7 @@
             {required: true, message: '请输入社团名称', trigger: 'blur'}
           ],
           Region: [
-            {max: 30, required: true, message: '请输入活动区域', trigger: 'change'}
+            {required: true, message: '请输入活动区域', trigger: 'blur'}
           ],
           Date1: [
             {type: 'date', required: true, message: '请选择日期', trigger: 'change'}
@@ -147,24 +147,41 @@
       }
     },
     methods: {
-      submitForm (formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            axios.post('/api/PostEditSubmit', {
-              ClubName: this.ClubName,
-              Linkman: this.Linkman,
-              Region: this.Region,
-              Date1: this.Date1,
-              Date2: this.Date2,
-              Content: this.Content,
-              Process: this.Process,
-              Assessment: this.Assessment,
-              Feeling: this.Feeling
-            })
-          } else {
-            console.log('error submit!!')
-            return false
-          }
+//      submitForm () {
+//        axios.post('/api/post/EditSubmit', {
+//          ClubName: this.ClubName,
+//          Linkman: this.Linkman,
+//          Region: this.Region,
+//          Date1: this.Date1,
+//          Date2: this.Date2,
+//          Content: this.Content,
+//          Process: this.Process,
+//          Assessment: this.Assessment,
+//          Feeling: this.Feeling
+//        }).then(function (responese) {
+//          console.log(responese.data)
+//          alert('hello')
+//        })
+//      },
+      submitForm () {
+        axios({
+          method: 'POST',
+          url: '/api/club/post/EditSubmit',
+          data: JSON.stringify({
+            ClubName: this.PostForm.ClubName,
+            Linkman: this.PostForm.Linkman,
+            Region: this.PostForm.Region,
+            Date1: this.PostForm.Date1,
+            Date2: this.PostForm.Date2,
+            Content: this.PostForm.Content,
+            Process: this.PostForm.Process,
+            Assessment: this.PostForm.Assessment,
+            Feeling: this.PostForm.Feeling
+          })
+        }).then(function (response) {
+          alert(JSON.stringify(response.data))
+        }).catch(function () {
+          alert('error')
         })
       },
       resetForm (formName) {
@@ -174,5 +191,4 @@
   }
 </script>
 <style>
-  @import url("//unpkg.com/element-ui@1.3.2/lib/theme-default/index.css");
 </style>

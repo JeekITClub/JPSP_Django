@@ -5,6 +5,7 @@ import AdminClub from './AdminClub.vue'
 import router from './router/admin_club.js'
 import ElementUI from 'element-ui'
 import axios from 'axios'
+import 'element-ui/lib/theme-default/index.css'
 Vue.prototype.$ajax = axios
 Vue.config.productionTip = false
 

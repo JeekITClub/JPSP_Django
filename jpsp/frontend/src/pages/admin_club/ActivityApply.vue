@@ -17,7 +17,7 @@
       'club_aside': JAside,
       'club_activity_apply': ActivityApply
     }
+  }
 </script>
 <style>
-  @import url("//unpkg.com/element-ui@1.3.2/lib/theme-default/index.css")
 </style>
