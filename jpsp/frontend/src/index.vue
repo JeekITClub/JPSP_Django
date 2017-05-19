@@ -1,22 +1,23 @@
 <template>
   <div id="app">
+  <NavTop></NavTop>
     <router-view></router-view>
+  <JFooter></JFooter>
   </div>
 </template>
 
 <script>
+import NavTop from './components/public/NavTop.vue'
+import JFooter from './components/public/JFooter.vue'
+
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+    NavTop,
+    JFooter
+  }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>

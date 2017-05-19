@@ -2,7 +2,7 @@
   <div>
     <el-row :gutter="20">
       <el-col :span="4">
-        <Aside></Aside>
+        <club_aside></club_aside>
       </el-col>
       <el-col :span="20">
         <el-form :model="PostForm" :rules="rules" class="" labelPosition="right">
@@ -94,11 +94,11 @@
 </template>
 <script>
   import axios from 'axios'
-  import Aside from '../../components/admin_club/Aside.vue'
+  import JAside from '../../components/admin_club/JAside.vue'
   export default {
     name: 'PostEdit',
     components: {
-      'Aside': Aside
+      'club_side': JAside
     },
     data () {
       return {
