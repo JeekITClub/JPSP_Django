@@ -12,7 +12,7 @@
           <el-form-item label="活动联系人" required="">
             <el-col :span="4">
               <el-form-item prop="Linkman.Grade">
-                <el-select v-model="PostForm.Linkman.Grade" placeholder="请选择年级">
+                <el-select v-model="PostForm.Linkman.Grade" placeholder="请选择年级" value="">
                   <el-option label="高一" value="1"></el-option>
                   <el-option label="高二" value="2"></el-option>
                   <el-option label="高三" value="3"></el-option>
@@ -21,7 +21,7 @@
             </el-col>
             <el-col :span="4">
               <el-form-item prop="Linkman.Class">
-                <el-select v-model="PostForm.Linkman.Class" placeholder="请选择班级">
+                <el-select v-model="PostForm.Linkman.Class" placeholder="请选择班级" value="">
                   <el-option label="1" value="1"></el-option>
                   <el-option label="2" value="2"></el-option>
                   <el-option label="3" value="3"></el-option>
