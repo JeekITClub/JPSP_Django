@@ -1,11 +1,11 @@
 <template>
   <el-row class="tac">
-  <el-col :span="4">
-    <club_aside><club_aside>
-  </el-col>
-  <el-col :span="20">
+    <el-col :span="4">
+      <club_aside></club_aside>
+    </el-col>
+    <el-col :span="20">
      <club_activity_apply></club_activity_apply>
-  </el-col>
+    </el-col>
   </el-row>
 </template>
 <script>

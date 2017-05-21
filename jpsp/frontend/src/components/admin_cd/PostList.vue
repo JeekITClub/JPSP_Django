@@ -25,6 +25,9 @@
       </el-button>
     </el-table-column>
   </el-table>
+  <el-dialog title="收货地址" :visible.sync="dialogTableVisible">
+
+  </el-dialog>
 </template>
 
 <script>
@@ -35,35 +38,41 @@
       return {
         PostListTable: [
           {
-            id: '',
-            clubname: '',
-            linkman: '',
+            Id: '',
+            Clubname: '',
+            Linkman: '',
+            Region: '',
             Date1: '',
             Date2: '',
-            star: ''
+            Star: '',
+            Content: '',
+            Process: '',
+            Assessment: '',
+            Feeling: ''
           }
-        ]
+        ],
+        dialogTableVisible: false
       }
     },
     methods: {
       StarSubmit (index, row) {
-          console.log(index, row)
-          axios({
-            method: 'POST',
-            url: '/api/cd/star/Submit',
-            data: JSON.stringify({
-              StarTime: date.now(),
-              PostId: scope.$index.id,
-              Token: ''
-            })
+        console.log(index, row)
+        axios({
+          method: 'POST',
+          url: '/api/cd/star/Submit',
+          data: JSON.stringify({
+            StarTime: date.now(),
+            PostId: scope.$index.id,
+            Token: ''
           })
+        })
       },
       HandleDeleteSubmit (index, row) {
-        console.log (index, row);
+        console.log(index, row);
         axios({
           method: 'POST',
           url: '/api/cd/Post/DeleteSubmit',
-          data: JSON.stringify ({
+          data: JSON.stringify({
             HandleTime: date.now(),
             PostId: scope.$index.id,
             Token: ''
