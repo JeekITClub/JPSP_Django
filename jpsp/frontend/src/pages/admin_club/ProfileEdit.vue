@@ -11,7 +11,7 @@
   </div>
 </template>
 <script>
-  import JAside from '../../components/admin_club/JAside.vue'
+  import JAside from '../../components/admin_club/ClubAside.vue'
   import ProfileEdit from '../../components/admin_club/ProfileEdit.vue'
   export default {
     name: 'ProfileEdit',

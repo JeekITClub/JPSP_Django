@@ -2,7 +2,7 @@
 
 </template>
 <script>
-  import JAside from '../../components/admin_club/JAside.vue'
+  import JAside from '../../components/admin_club/ClubAside.vue'
   import MemberManagement from '../../components/admin_club/MemberManagement.vue'
   export default {
     name: 'MemberManagement',

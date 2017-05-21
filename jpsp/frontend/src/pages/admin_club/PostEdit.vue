@@ -94,7 +94,7 @@
 </template>
 <script>
   import axios from 'axios'
-  import JAside from '../../components/admin_club/JAside.vue'
+  import JAside from '../../components/admin_club/ClubAside.vue'
   export default {
     name: 'PostEdit',
     components: {

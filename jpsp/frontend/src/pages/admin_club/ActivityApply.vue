@@ -9,7 +9,7 @@
   </el-row>
 </template>
 <script>
-  import JAside from '../../components/admin_club/JAside.vue'
+  import JAside from '../../components/admin_club/ClubAside.vue'
   import ActivityApply from '../../components/admin_club/ActivityApply.vue'
   export default {
     name: 'ActivityApply',

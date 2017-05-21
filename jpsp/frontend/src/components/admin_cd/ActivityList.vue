@@ -1,43 +1,22 @@
 <template>
-  <el-table :data="PostListTable" border style="width: 100%">
-    <el-table-column type="expand">
-      <template scope="props">
-        <el-form label-position="left" inline class="demo-table-expand">
-          <el-form-item label="活动地点">
-            <span>{{ props.row.Region }}</span>
-          </el-form-item>
-          <el-form-item label="活动内容">
-            <span>{{ props.row.Content }}</span>
-          </el-form-item>
-          <el-form-item label="活动过程">
-            <span>{{ props.row.Process }}</span>
-          </el-form-item>
-          <el-form-item label="活动评价">
-            <span>{{ props.row.Assessment }}</span>
-          </el-form-item>
-          <el-form-item label="感悟分析">
-            <span>{{ props.row.Feeling }}</span>
-          </el-form-item>
-        </el-form>
-      </template>
-    </el-table-column>
+  <el-table :data="ActivityListTable" border style="width: 100%">
     <el-table-column label="PostID" width="100">
       <template scope="scope">
         <span style="margin-left: 10px">{{ scope.row.id }}</span>
       </template>
     </el-table-column>
     <el-table-column label="社团" width="100">
-      <span style="margin-left: 10px">{{ scope.row.ClubName }}</span>
+      <span style="margin-left: 10px">{{ scope.row.clubname }}</span>
     </el-table-column>
     <el-table-column label="联系人" width="100">
-      <span style="margin-left: 10px">{{ scope.row.Linkman }}</span>
+      <span style="margin-left: 10px">{{ scope.row.linkman }}</span>
     </el-table-column>
     <el-table-column label="社团活动时间">
-      <span style="margin-left: 10px">{{ scope.row.Date1 }}--{{ scope.row.Date2 }}</span>
+      <span style="margin-left: 10px">{{ scope.row.Date1 }}{{ scope.row.Date2 }}</span>
     </el-table-column>
     <el-table-column label="评价">
       <template scope="scope">
-        <el-rate v-model="scope.row.Star" v-on:change="StarSubmit"></el-rate>
+        <el-rate v-model="scope.row.star" v-on:change="StarSubmit"></el-rate>
       </template>
     </el-table-column>
     <el-table-column label="操作">
@@ -46,16 +25,20 @@
       </el-button>
     </el-table-column>
   </el-table>
+  <el-dialog title="收货地址" :visible.sync="dialogTableVisible">
+
+  </el-dialog>
 </template>
 
 <script>
   export default {
-    data () {
+
+    data() {
       return {
-        PostListTable: [
+        ActivityListTable: [
           {
             PostId: '',
-            ClubName: '',
+            Clubname: '',
             Linkman: '',
             Region: '',
             Date1: '',
@@ -66,18 +49,19 @@
             Assessment: '',
             Feeling: ''
           }
-        ]
+        ],
+        dialogTableVisible: false
       }
     },
     methods: {
       StarSubmit (index, row) {
-        console.log (index, row)
+        console.log(index, row)
         axios({
           method: 'POST',
-          url: '/api/cd/star/Submit',
-          data: JSON.stringify ({
-            StarTime: date.now(),
-            PostId: scope.$index.id,
+          url: '/api/cd/acivity/VerifySubmit',
+          data: JSON.stringify({
+            VerifyTime: date.now(),
+            ActivityId: scope.$index.id,
             Token: ''
           })
         })

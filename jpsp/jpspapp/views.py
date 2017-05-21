@@ -74,7 +74,13 @@ def club_profile_edit_submit(request):
 def club_recruit_classroom_apply_submit(request):
     try:
         body = json.loads(request.body)
-        clubname = body['ClubName']
+        Token = body['Token']
+        if Token:
+            clubname = body['ClubName']
+            classroom = body['Classroom']
+            date1 = body['Date1']
+            date2 = body['Date2']
+            date3 = body['Date3']
 
     except:
         return JsonResponse(
