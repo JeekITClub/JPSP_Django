@@ -88,9 +88,6 @@
       return {
         PostForm: {
           ClubName: '',
-          Date1: '',
-          Date2: '',
-          Date3: '',
           Label: [],
           Introduction: '',
           IfRecruit: true,
@@ -128,9 +125,9 @@
       },
       submitForm () {
         axios({
-          method: 'post',
+          method: 'POST',
           url: 'api/club/profile/EditSubmit',
-          params: {
+          data: {
             name: this.PostForm.ClubName,
             shezhang_name: this.PostForm.Shezhang.Name,
             shezhang_qq: this.PostForm.Shezhang.QQ,

@@ -4,22 +4,21 @@
       <el-col :span="4">
         <club_aside></club_aside>
       </el-col>
-      <el-col :span="4" offset="20">
-        <club_member_management></club_member_management>
+      <el-col :span="20" offset="4">
+        <club_page_settings></club_page_settings>
       </el-col>
     </el-row>
     <JFooter></JFooter>
   </div>
 </template>
 <script>
-  import ClubAide from '../../components/admin_club/ClubAside.vue'
+  import ClubPageSettings from '../../components/admin_club/ClubPageSettings.vue'
+  import ClubAside from '../../components/admin_club/ClubAside.vue'
   import JFooter from '../../components/public/JFooter.vue'
-  import MemberManagement from '../../components/admin_club/MemberManagement.vue'
   export default {
-    name: 'MemberManagement',
     components: {
       'club_aside': ClubAside,
-      'club_member_management': MemberManagement,
+      'club_page_settings': ClubPageSettings,
       'JFooter': JFooter
     }
   }
