@@ -4,19 +4,18 @@ import Vue from 'vue'
 import AdminClub from './AdminClub.vue'
 import router from './router/admin_club.js'
 import ElementUI from 'element-ui'
-import axios from 'axios'
 import 'element-ui/lib/theme-default/index.css'
-Vue.prototype.$ajax = axios
+import Vuex from 'vuex'
 Vue.config.productionTip = false
 
 Vue.use(ElementUI)
-Vue.use(axios)
+Vue.use(Vuex)
 /* eslint-disable no-new */
 
 new Vue({
   el: '#app_club',
   router,
   template: '<App/>',
-  components: { AdminClub },
+  components: {AdminClub},
   render: h => h(AdminClub)
 })

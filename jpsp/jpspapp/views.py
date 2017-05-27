@@ -1,8 +1,7 @@
 # coding=utf-8
 from django.http import JsonResponse, HttpResponse
-from jpspapp import function
 import json
-from .models import Club, Post
+from .models import Club, Post , Settings
 from django.core import serializers
 from django.views.decorators.http import require_http_methods
 import datetime
@@ -33,23 +32,23 @@ def club_post_edit_submit(request):
     process = body['Process']
     assessment = body['Assessment']
     feeling = body['Feeling']
-    # Post.objects.create(
-    #     #ClubName=Club.objects.filter(name=clubname),
-    #     LinkmanGrade=linkman_grade,
-    #     LinkmanClass=linkman_class,
-    #     LinkmanName=linkman_name,
-    #     LinkmanPhoneNumber=linkman_phonenumber,
-    #     LinkmanQq=linkMan_qq,
-    #     Region=region,
-    #     #Date1=date1,
-    #     #Date2=date2,
-    #     Content=content,
-    #     Process=process,
-    #     Assessment=assessment,
-    #     Feeling=feeling,
-    #     Stars=0,
-    #     StarTime=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    # )
+    Post.objects.create(
+        ClubName=Club.objects.filter(name=clubname),
+        LinkmanGrade=linkman_grade,
+        LinkmanClass=linkman_class,
+        LinkmanName=linkman_name,
+        LinkmanPhoneNumber=linkman_phonenumber,
+        LinkmanQq=linkMan_qq,
+        Region=region,
+        #Date1=date1,
+        #Date2=date2,
+        Content=content,
+        Process=process,
+        Assessment=assessment,
+        Feeling=feeling,
+        Stars=0,
+        StarTime=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    )
     return JsonResponse(
         {
             'message': 'success',
@@ -65,7 +64,8 @@ def club_profile_edit_submit(request):
     except:
         return JsonResponse(
             {
-                'message': ''
+                'message': '',
+                'Access-Control-Allow-Origin': '*'
             }
         )
 
@@ -232,5 +232,49 @@ def cd_post_delete_submit(request):
         return JsonResponse(
             {
                 'message': ''
+            }
+        )
+
+
+@require_http_methods(['POST'])
+def club_establish(request):
+    try:
+        body = json.loads(request.body)
+        clubname = body['Clubname']
+        shezhang_name = body['Shezhang_Name']
+        shezhang_qq = body['Shezhang-QQ']
+        shezhang_grade = body['Shezhang_Grade']
+        shezhang_classroom = body['Shezhang_Classroom']
+        introduction = body['Introduction']
+        if_recruit = body['IfRecruit']
+        qq_group = body['QQGroup']
+        email = body['Email']
+        Club.objects.create(
+            clubname=clubname,
+            clubid=Settings.objects.filter(name="settings").clubid,
+            shezhang_name=shezhang_name,
+            shezhang_qq=shezhang_qq,
+            shezhang_grade=shezhang_grade,
+            shezhang_classroom=shezhang_classroom,
+            if_recruit=if_recruit,
+            introduction=introduction,
+            email=email,
+            # label
+            state=False,
+            achievements="",
+            stars=0,
+            enroll_group_qq = qq_group,
+        )
+        return JsonResponse(
+            {
+                'message':'success',
+                'Access-Control-Allow-Origin': '*'
+            }
+        )
+    except:
+        return JsonResponse(
+            {
+                'message': '',
+                'Access-Control-Allow-Origin': '*'
             }
         )

@@ -8,9 +8,7 @@
   export default {
     data () {
       return {
-          SettingsForm: {
-
-          }
+        SettingsForm: {}
       }
     }
   }

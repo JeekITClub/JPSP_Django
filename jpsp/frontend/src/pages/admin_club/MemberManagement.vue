@@ -12,7 +12,7 @@
   </div>
 </template>
 <script>
-  import ClubAide from '../../components/admin_club/ClubAside.vue'
+  import ClubAside from '../../components/admin_club/ClubAside.vue'
   import JFooter from '../../components/public/JFooter.vue'
   import MemberManagement from '../../components/admin_club/MemberManagement.vue'
   export default {

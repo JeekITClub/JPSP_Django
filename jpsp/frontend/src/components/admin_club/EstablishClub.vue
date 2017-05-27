@@ -6,9 +6,9 @@
     <el-form-item label="社团姓名">
       <el-input v-model="EstablishClubForm.Shezhang.Name"></el-input>
     </el-form-item>
-    <el-form-item label="社长QQ">
-      <el-input v-model="EstablishClubForm.Shezhang.QQ"></el-input>
-    </el-form-item>
+    <!--<el-form-item label="社长QQ">-->
+      <!--<el-input v-model="EstablishClubForm.Shezhang.QQ"></el-input>-->
+    <!--</el-form-item>-->
     <el-form-item prop="EstablishClubForm.Shezhang.Grade" label="社长年级" required>
       <el-select v-model="EstablishClubForm.Shezhang.Grade" value="">
         <el-option label="高一" value="1"></el-option>
@@ -67,13 +67,12 @@
 <script>
   import axios from 'axios'
   export default {
-    components: {ElButton},
     data () {
       return {
         EstablishClubForm: {
           ClubName: '',
           Shezhang: {
-            name: '',
+            Name: '',
             QQ: '',
             Grade: '',
             Classroom: ''
@@ -82,7 +81,7 @@
           Introduction: '',
           IfRecruit: true,
           QQGroup: '',
-          Email: '',
+          Email: ''
         }
       }
     },
@@ -91,9 +90,19 @@
         axios({
           method: 'POST',
           url: 'api/club/establish',
-          data: JSON.stringify(){
-
-          }
+          data: JSON.stringify({
+            Clubname: this.EstablishClubForm.ClubName,
+            Shezhang_Name: this.EstablishClubForm.Shezhang.Name,
+            Shezhang_QQ: this.EstablishClubForm.Shezhang.QQ,
+            Shezhang_Grade: this.EstablishClubForm.Shezhang.Grade,
+            Shezhang_Classroom: this.EstablishClubForm.Shezhang.Classroom,
+            // Label:
+            // TODO: array(label) to string
+            Introduction: this.EstablishClubForm.Introduction,
+            IfRecruit: this.EstablishClubForm.IfRecruit,
+            QQGroup: this.EstablishClubForm.QQGroup,
+            Email: this.EstablishClubForm.Email
+          })
         })
       }
     }

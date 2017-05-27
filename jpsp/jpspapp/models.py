@@ -6,30 +6,37 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+class Settings(models.Model):
+    name=models.CharField(max_length='10',default="settings")
+    clubid=models.IntegerField()
+
+
 class UserProfile(models.Model):
     user = models.ForeignKey(User)
     grade = models.IntegerField()
     classroom = models.IntegerField()
-    attend_year = models.CharField(max_length=4,default="2016")
+    attend_year = models.CharField(max_length=4, default="2016")
     club = models.TextField()
     lftlip = models.TextField(default="")
     # lftlip ->last_five_loginin_time
 
 
 class CDUser(models.Model):
-    user=models.ForeignKey(User)
+    user = models.ForeignKey(User)
 
 
 class Club(models.Model):
-    name = models.CharField(max_length=30)
+    clubname = models.CharField(max_length=30)
     clubid = models.CharField(max_length=4)
     # 社团id
-    shezhang_name = models.CharField(max_length=8,default="")
-    shezhang_qq = models.CharField(max_length=20,default="")
+    shezhang_name = models.CharField(max_length=8, default="")
+    shezhang_qq = models.CharField(max_length=20, default="")
+    shezhang_grade = models.CharField(max_length=1, default="")
+    shezhang_classroom = models.CharField(max_length=2, default="")
     # 社长的QQ
     if_recruit = models.BooleanField()
     # 是否进行招新
-    enroll_group_qq = models.CharField(max_length=20,default="")
+    enroll_group_qq = models.CharField(max_length=20, default="")
     # 招新QQ群号
     email = models.EmailField()
     label = models.TextField(default="")
@@ -42,13 +49,13 @@ class Club(models.Model):
 
 
 class Post(models.Model):
-    #ClubName = models.ForeignKey(Club)
-    LinkmanGrade = models.CharField(max_length=1,default="1")
-    LinkmanClass = models.CharField(max_length=2,default="1")
-    LinkmanName = models.CharField(max_length=8,default="")
-    LinkmanPhoneNumber = models.CharField(max_length=11,default="00000000000")
-    LinkmanQq = models.CharField(max_length=20,default="00000000")
-    Region = models.CharField(max_length=30,default="00000")
+    # ClubName = models.ForeignKey(Club)
+    LinkmanGrade = models.CharField(max_length=1, default="1")
+    LinkmanClass = models.CharField(max_length=2, default="1")
+    LinkmanName = models.CharField(max_length=8, default="")
+    LinkmanPhoneNumber = models.CharField(max_length=11, default="00000000000")
+    LinkmanQq = models.CharField(max_length=20, default="00000000")
+    Region = models.CharField(max_length=30, default="00000")
     Date1 = models.DateField(default=None)
     Date2 = models.TimeField(default=None)
     Process = models.TextField(default="")
@@ -69,6 +76,8 @@ class Message(models.Model):
     )
     type = models.CharField(max_length=3, choices=message_type)
     content = models.TextField(default='')
+
+
 # TODO: edit the message model
 
 

@@ -8,8 +8,10 @@ import PostEdit from '@/pages/admin_club/PostEdit.vue'
 import ProfileEdit from '@/pages/admin_club/ProfileEdit.vue'
 import ActivityApply from '@/pages/admin_club/ActivityApply.vue'
 import ClubPageSettings from '@/pages/admin_club/ClubPageSettings.vue'
-import MemberManagement from '@/pages/admin_club/MemeberManagement.vue'
-import RecruitClassroomApply from '@/pages/admin_club/RecruitClassroomApply.vue'
+import MemberManagement from '@/pages/admin_club/MemberManagement.vue'
+import EstablishClub from '@/pages/admin_club/EstablishClub.vue'
+import RecruitClassroomEdit from '@/pages/admin_club/RecruitClassroomEdit.vue'
+import PostHistory from '@/pages/admin_club/PostHistory.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -20,6 +22,11 @@ export default new Router({
       component: index
     },
     {
+      path: '/establish',
+      name: 'EstablishClub',
+      component: EstablishClub
+    },
+    {
       path: '/post',
       name: 'Post',
       component: PostEdit,
@@ -28,6 +35,11 @@ export default new Router({
           path: '/edit',
           name: 'PostEdit',
           component: PostEdit
+        },
+        {
+          path: '/history',
+          name: 'PostHistory',
+          component: PostHistory
         }
       ]
     },
@@ -49,25 +61,25 @@ export default new Router({
       ]
     },
     {
-      path: 'page',
+      path: '/page',
       name: 'ClubPageSettings',
       component: ClubPageSettings
     },
     {
-      path: 'recruit',
-      name: 'recruit',
-      component: RecruitClassroomApply,
+      path: '/recruit',
+      name: 'Recruit',
+      component: RecruitClassroomEdit,
       children: [
         {
-          path: 'classroom',
+          path: '/classroom',
           name: 'RecruitClassroomApply',
-          component: RecruitClassroomApply
+          component: RecruitClassroomEdit
         }
       ]
     },
     {
-      path: 'member',
-      name: 'member',
+      path: '/member',
+      name: 'Member',
       component: MemberManagement
     }
   ]

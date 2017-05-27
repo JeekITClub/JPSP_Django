@@ -147,22 +147,6 @@
       }
     },
     methods: {
-//      submitForm () {
-//        axios.post('/api/post/EditSubmit', {
-//          ClubName: this.ClubName,
-//          Linkman: this.Linkman,
-//          Region: this.Region,
-//          Date1: this.Date1,
-//          Date2: this.Date2,
-//          Content: this.Content,
-//          Process: this.Process,
-//          Assessment: this.Assessment,
-//          Feeling: this.Feeling
-//        }).then(function (responese) {
-//          console.log(responese.data)
-//          alert('hello')
-//        })
-//      },
       submitForm () {
         axios({
           method: 'POST',

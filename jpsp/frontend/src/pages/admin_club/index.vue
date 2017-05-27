@@ -41,9 +41,9 @@
         axios({
           method: 'POST',
           url: 'api/club/login/',
-          data:{
-              name: this.form.name,
-              password: this.form.password
+          data: {
+            name: this.form.name,
+            password: this.form.password
           }
         })
           .then(function (response) {
