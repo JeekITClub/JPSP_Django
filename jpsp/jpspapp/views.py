@@ -1,13 +1,35 @@
 # coding=utf-8
 from django.http import JsonResponse, HttpResponse
 import json
-from .models import Club, Post , Settings
+from jpsp.shortcut import Token, JPSPTime
+from jpspapp.models import Club, Post, Settings, Token
 from django.core import serializers
 from django.views.decorators.http import require_http_methods
 import datetime
+from django.contrib.auth import authenticate, login
 
 
 # Create your views here.
+@require_http_methods(['POST'])
+def club_login(request):
+    body = json.loads(request)
+    clubid = body['Clubid']
+    password = body['Password']
+    user = authenticate(username=clubid, password=password)
+    if user is not None:
+        token=Token(username=clubid,usertype="club")
+        return JsonResponse({
+            "message": "User Authenticated",
+            "Token": token.generate()
+        })
+
+@require_http_methods(['POST'])
+def club_login_out(request):
+    body=json.loads(request)
+    clubid=body['Clubid']
+    token=body['Token']
+    
+
 @require_http_methods(["GET"])
 def club_list(request):
     data = serializers.serialize("json", Club.objects.all())
@@ -20,6 +42,7 @@ def club_list(request):
 def club_post_edit_submit(request):
     body = json.loads(request.body)
     clubname = body['ClubName']
+    clubid = body['ClubId']
     linkman_grade = body['Linkman']['Grade']
     linkman_class = body['Linkman']['Class']
     linkman_name = body['Linkman']['Name']
@@ -32,26 +55,30 @@ def club_post_edit_submit(request):
     process = body['Process']
     assessment = body['Assessment']
     feeling = body['Feeling']
-    Post.objects.create(
-        ClubName=Club.objects.filter(name=clubname),
-        LinkmanGrade=linkman_grade,
-        LinkmanClass=linkman_class,
-        LinkmanName=linkman_name,
-        LinkmanPhoneNumber=linkman_phonenumber,
-        LinkmanQq=linkMan_qq,
-        Region=region,
-        #Date1=date1,
-        #Date2=date2,
-        Content=content,
-        Process=process,
-        Assessment=assessment,
-        Feeling=feeling,
-        Stars=0,
-        StarTime=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    )
+    token = body['Token']
+    # TODO: how to authenticate
+    if Token.objects.filter(user=clubid, token=token):
+        Post.objects.create(
+            ClubName=Club.objects.filter(name=clubname),
+            ClubId=clubid,
+            LinkmanGrade=linkman_grade,
+            LinkmanClass=linkman_class,
+            LinkmanName=linkman_name,
+            LinkmanPhoneNumber=linkman_phonenumber,
+            LinkmanQq=linkMan_qq,
+            Region=region,
+            # Date1=date1,
+            # Date2=date2,
+            Content=content,
+            Process=process,
+            Assessment=assessment,
+            Feeling=feeling,
+            Stars=0,
+            StarTime=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        )
     return JsonResponse(
         {
-            'message': 'success',
+            'message': 'Success',
             'Access-Control-Allow-Origin': '*'
         }
     )
@@ -263,11 +290,11 @@ def club_establish(request):
             state=False,
             achievements="",
             stars=0,
-            enroll_group_qq = qq_group,
+            enroll_group_qq=qq_group,
         )
         return JsonResponse(
             {
-                'message':'success',
+                'message': 'success',
                 'Access-Control-Allow-Origin': '*'
             }
         )

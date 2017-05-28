@@ -3,11 +3,11 @@
     <el-row class="tac">
       <el-col :span="8" offset="8">
         <el-form ref="form" :model="form">
-          <el-form-item label="用户名" required="true">
-            <el-input v-model="form.username" placeholder="用户名" autofocus=""></el-input>
+          <el-form-item label="社团ID" required="true">
+            <el-input v-model="LoginForm.Clubid" placeholder="社团ID" autofocus=""></el-input>
           </el-form-item>
           <el-form-item label="密码" required="true">
-            <el-input v-model="form.password" placeholder="密码">
+            <el-input v-model="LoginForm.password" placeholder="密码">
             </el-input>
           </el-form-item>
           <el-form-item>
@@ -29,9 +29,9 @@
     },
     data () {
       return {
-        form: {
-          name: '',
-          password: ''
+        LoginForm: {
+          Clubid: '',
+          Password: ''
         }
       }
     },
@@ -42,8 +42,8 @@
           method: 'POST',
           url: 'api/club/login/',
           data: {
-            name: this.form.name,
-            password: this.form.password
+            name: this.LoginForm.Clubname,
+            password: this.LoginForm.Password
           }
         })
           .then(function (response) {

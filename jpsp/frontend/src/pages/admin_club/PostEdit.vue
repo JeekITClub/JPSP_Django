@@ -103,7 +103,7 @@
     data () {
       return {
         PostForm: {
-          ClubName: '',
+          ClubName: this.$store.state.ClubName,
           Linkman: {
             Grade: '',
             Class: '',
@@ -152,6 +152,7 @@
           method: 'POST',
           url: '/api/club/post/EditSubmit',
           data: JSON.stringify({
+            ClubId:this.$store.state.ClubId,
             ClubName: this.PostForm.ClubName,
             Linkman: this.PostForm.Linkman,
             Region: this.PostForm.Region,
@@ -160,7 +161,8 @@
             Content: this.PostForm.Content,
             Process: this.PostForm.Process,
             Assessment: this.PostForm.Assessment,
-            Feeling: this.PostForm.Feeling
+            Feeling: this.PostForm.Feeling,
+            Token: this.$store.state.Token
           })
         }).then(function (response) {
           alert(JSON.stringify(response.data))

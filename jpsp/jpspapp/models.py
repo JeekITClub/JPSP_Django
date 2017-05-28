@@ -49,7 +49,8 @@ class Club(models.Model):
 
 
 class Post(models.Model):
-    # ClubName = models.ForeignKey(Club)
+    ClubName = models.CharField(max_length=30)
+    CludId=models.ForeignKey(Club)
     LinkmanGrade = models.CharField(max_length=1, default="1")
     LinkmanClass = models.CharField(max_length=2, default="1")
     LinkmanName = models.CharField(max_length=8, default="")
@@ -82,7 +83,13 @@ class Message(models.Model):
 
 
 class Token(models.Model):
-    token = models.TextField()
-    user = models.ForeignKey(User)
+    token = models.CharField(max_length=30,default="")
+    username = models.ForeignKey(User)
+    usertype_choices=(
+        ('club','club'),
+        ('cd','club_department'),
+        ('s','student')
+    )
+    usertype=models.CharField(max_length=4,choices=usertype_choices)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
