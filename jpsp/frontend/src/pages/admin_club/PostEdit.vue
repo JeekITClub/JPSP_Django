@@ -152,7 +152,7 @@
           method: 'POST',
           url: '/api/club/post/EditSubmit',
           data: JSON.stringify({
-            ClubId:this.$store.state.ClubId,
+            ClubId: this.$store.state.ClubId,
             ClubName: this.PostForm.ClubName,
             Linkman: this.PostForm.Linkman,
             Region: this.PostForm.Region,

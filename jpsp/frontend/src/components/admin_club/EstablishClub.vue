@@ -6,9 +6,9 @@
     <el-form-item label="社团姓名">
       <el-input v-model="EstablishClubForm.Shezhang.Name"></el-input>
     </el-form-item>
-    <!--<el-form-item label="社长QQ">-->
-      <!--<el-input v-model="EstablishClubForm.Shezhang.QQ"></el-input>-->
-    <!--</el-form-item>-->
+    <el-form-item label="社长QQ">
+      <el-input v-model="EstablishClubForm.Shezhang.QQ"></el-input>
+    </el-form-item>
     <el-form-item prop="EstablishClubForm.Shezhang.Grade" label="社长年级" required>
       <el-select v-model="EstablishClubForm.Shezhang.Grade" value="">
         <el-option label="高一" value="1"></el-option>

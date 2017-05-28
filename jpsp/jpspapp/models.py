@@ -27,7 +27,7 @@ class CDUser(models.Model):
 
 class Club(models.Model):
     clubname = models.CharField(max_length=30)
-    clubid = models.CharField(max_length=4)
+    clubid = models.ForeignKey(User)
     # 社团id
     shezhang_name = models.CharField(max_length=8, default="")
     shezhang_qq = models.CharField(max_length=20, default="")

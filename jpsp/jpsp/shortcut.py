@@ -7,9 +7,13 @@ import datetime
 alphabet = "abcdefghijklmnopqrstuvwxyz0123456789"
 
 
-class Token:
-    def __init__(self, username, usertype):
+class JPSPToken:
+    def __init__(self, username, usertype, token=""):
         self.token = ""
+        if token != "":
+            self.token = token
+        else:
+            pass
         self.username = username
         self.usertype = usertype
 
@@ -26,10 +30,18 @@ class Token:
         )
         return self.token
 
-    def remove(self, username):
-        token = Token.objects.filter(user=username)
+    def remove(self):
+        token = Token.objects.filter(username=self.username)
         if token:
             token.delete()
+
+    def authenticate(self):
+        token = Token.objects.filter(username=self.username)
+        if token:
+            if self.token == token:
+                return True
+            else:
+                return False
 
 
 class JPSPTime:

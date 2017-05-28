@@ -1,7 +1,7 @@
 # coding=utf-8
 from django.http import JsonResponse, HttpResponse
 import json
-from jpsp.shortcut import Token, JPSPTime
+from jpsp.shortcut import JPSPToken, JPSPTime
 from jpspapp.models import Club, Post, Settings, Token
 from django.core import serializers
 from django.views.decorators.http import require_http_methods
@@ -11,24 +11,26 @@ from django.contrib.auth import authenticate, login
 
 # Create your views here.
 @require_http_methods(['POST'])
-def club_login(request):
+def login(request):
     body = json.loads(request)
-    clubid = body['Clubid']
+    username=body['UserName']
     password = body['Password']
-    user = authenticate(username=clubid, password=password)
+    user = authenticate(username=username, password=password)
     if user is not None:
-        token=Token(username=clubid,usertype="club")
         return JsonResponse({
             "message": "User Authenticated",
-            "Token": token.generate()
+            "Token": JPSPToken(username=username, usertype="club").generate()
         })
 
+
 @require_http_methods(['POST'])
-def club_login_out(request):
-    body=json.loads(request)
-    clubid=body['Clubid']
-    token=body['Token']
-    
+def login_out(request):
+    body = json.loads(request)
+    username = body['UserName']
+    usertype = body['UserType']
+    token_object = JPSPToken(username=username, usertype=usertype)
+    token_object.remove()
+
 
 @require_http_methods(["GET"])
 def club_list(request):
@@ -56,11 +58,12 @@ def club_post_edit_submit(request):
     assessment = body['Assessment']
     feeling = body['Feeling']
     token = body['Token']
+    token_object = JPSPToken(username=clubid, usertype="club", token=token)
     # TODO: how to authenticate
-    if Token.objects.filter(user=clubid, token=token):
+    if token_object.authenticate() == True:
         Post.objects.create(
-            ClubName=Club.objects.filter(name=clubname),
-            ClubId=clubid,
+            ClubName=clubname,
+            ClubId=Club.objects.filter(clubid=clubid),
             LinkmanGrade=linkman_grade,
             LinkmanClass=linkman_class,
             LinkmanName=linkman_name,
@@ -276,9 +279,10 @@ def club_establish(request):
         if_recruit = body['IfRecruit']
         qq_group = body['QQGroup']
         email = body['Email']
+        settings=Settings.objects.filter(name="settings")
         Club.objects.create(
             clubname=clubname,
-            clubid=Settings.objects.filter(name="settings").clubid,
+            clubid=settings.clubid,
             shezhang_name=shezhang_name,
             shezhang_qq=shezhang_qq,
             shezhang_grade=shezhang_grade,
@@ -292,6 +296,8 @@ def club_establish(request):
             stars=0,
             enroll_group_qq=qq_group,
         )
+        settings.cludid+=1
+        settings.save()
         return JsonResponse(
             {
                 'message': 'success',
