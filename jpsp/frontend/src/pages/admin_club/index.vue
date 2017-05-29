@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="LoginForm">
-      <el-row class="tac">
+      <el-row class="tac pic">
         <el-col :span="8" offset="8">
           <el-form ref="form" :model="form">
             <el-form-item label="社团ID" required="true">
