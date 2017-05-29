@@ -1,9 +1,9 @@
 <template>
   <div id="app_club">
     <div>
-        <JNavTop></JNavTop>
+      <JNavTop></JNavTop>
       <div class="container">
-        <router-view></router-view>
+        <router-view v-if="Authenticate===false"></router-view>
       </div>
     </div>
   </div>
@@ -15,14 +15,19 @@
     components: {
       'JNavTop': JNavTop
     },
-    name: 'app_club'
+    name: 'app_club',
+    computed: {
+      Authenticate () {
+        return this.$store.state.Authenticated
+      }
+    }
   }
 </script>
 
 <style>
-   #app_club .container {
-     margin-right: auto;
-     margin-left: auto;
-     width: 100%;
+  #app_club .container {
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
   }
 </style>

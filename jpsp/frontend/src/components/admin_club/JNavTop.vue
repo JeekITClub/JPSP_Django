@@ -6,18 +6,18 @@
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-          <li><a href="#">主页</a></li>
-          <li><a href="#">关于我们</a></li>
-          <li><a href="#">联系我们</a></li>
+          <li><router-link to="#">主页</router-link></li>
+          <li><router-link to="#">关于我们</router-link></li>
+          <li><router-link to="#">联系我们</router-link></li>
         </ul>
-        <ul class="nav navbar-nav navbar-right" v-if="LoginIn===true">
+        <ul class="nav navbar-nav navbar-right" v-if="Authenticate===true">
           <li><a href="../">{{ ClubName }}</a></li>
-          <li><a href="../">资料修改</a></li>
-          <li><a href="../">消息列表</a></li>
-          <li><a href="../">退出登录</a></li>
+          <li><router-link to="/profile"></router-link>资料修改</li>
+          <li><a href="/">消息列表</a></li>
+          <li><a href="/">退出登录</a></li>
         </ul>
-        <ul class="nav navbar-nav navbar-right" v-if="LoginIn===false">
-          <li><a href="">登入</a></li>
+        <ul class="nav navbar-nav navbar-right" v-if="Authenticate===false">
+          <li><router-link to="/#">登入</router-link></li>
         </ul>
       </div><!--/.nav-collapse -->
     </div><!--/.container-fluid -->
@@ -34,12 +34,25 @@
       }
     },
     computed: {
-      LoginIn () {
-        return this.$store.state.Login_in
+      /**
+       * @return {boolean}
+       */
+      Authenticate () {
+        return this.$store.state.Authenticated
       },
+      /**
+       *
+       * @returns {*|string}
+       * @constructor
+       */
       ClubName () {
-        return this.$store.state.ClubName
+        return this.$store.state.UserName
       },
+      /**
+       *
+       * @returns {computed.ClubId|string|*|ClubId}
+       * @constructor
+       */
       ClubId () {
         return this.$store.state.ClubId
       }

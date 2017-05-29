@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="LoginForm">
-      <el-row class="tac pic">
+      <el-row class="tac">
         <el-col :span="8" offset="8">
           <el-form ref="form" :model="form">
             <el-form-item label="社团ID" required="true">
@@ -54,7 +54,8 @@
           .then(function (response) {
             if (response.data.message === 'User Authenticated') {
               console.log('success!!!')
-              this.store.commit('Login_in')
+              this.store.commit('LoginIn')
+              this.store.commit('ApplyUserName', this.UserName)
             } else if (response.data.message === 'User Not Authenticated') {
               console.log('success!')
               this.error = true

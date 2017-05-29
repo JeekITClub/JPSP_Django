@@ -28,6 +28,7 @@ def login(request):
             "Access-Control-Allow-Origin": '*',
         })
 
+
 @require_http_methods(['POST'])
 def logout(request):
     body = json.loads(request)
@@ -47,49 +48,65 @@ def club_list(request):
 
 @require_http_methods(["POST"])
 def club_post_edit_submit(request):
-    body = json.loads(request.body)
-    clubname = body['ClubName']
-    clubid = body['ClubId']
-    linkman_grade = body['Linkman']['Grade']
-    linkman_class = body['Linkman']['Class']
-    linkman_name = body['Linkman']['Name']
-    linkman_phonenumber = body['Linkman']['PhoneNumber']
-    linkMan_qq = body['Linkman']['Qq']
-    region = body['Region']
-    date1 = body['Date1']
-    date2 = body['Date2']
-    content = body['Content']
-    process = body['Process']
-    assessment = body['Assessment']
-    feeling = body['Feeling']
-    token = body['Token']
-    token_object = JPSPToken(username=clubid, usertype="club", token=token)
-    # TODO: how to authenticate
-    if token_object.authenticate() == True:
-        Post.objects.create(
-            ClubName=clubname,
-            ClubId=Club.objects.filter(clubid=clubid),
-            LinkmanGrade=linkman_grade,
-            LinkmanClass=linkman_class,
-            LinkmanName=linkman_name,
-            LinkmanPhoneNumber=linkman_phonenumber,
-            LinkmanQq=linkMan_qq,
-            Region=region,
-            # Date1=date1,
-            # Date2=date2,
-            Content=content,
-            Process=process,
-            Assessment=assessment,
-            Feeling=feeling,
-            Stars=0,
-            StarTime=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    try:
+        body = json.loads(request.body)
+        clubname = body['ClubName']
+        clubid = body['ClubId']
+        linkman_grade = body['Linkman']['Grade']
+        linkman_class = body['Linkman']['Class']
+        linkman_name = body['Linkman']['Name']
+        linkman_phonenumber = body['Linkman']['PhoneNumber']
+        linkMan_qq = body['Linkman']['Qq']
+        region = body['Region']
+        date1 = body['Date1']
+        date2 = body['Date2']
+        content = body['Content']
+        process = body['Process']
+        assessment = body['Assessment']
+        feeling = body['Feeling']
+        token = body['Token']
+        try:
+            token_object = JPSPToken(username=clubid, usertype="club", token=token)
+            # TODO: how to authenticate
+            if token_object.authenticate() == True:
+                Post.objects.create(
+                    ClubName=clubname,
+                    ClubId=Club.objects.filter(clubid=clubid),
+                    LinkmanGrade=linkman_grade,
+                    LinkmanClass=linkman_class,
+                    LinkmanName=linkman_name,
+                    LinkmanPhoneNumber=linkman_phonenumber,
+                    LinkmanQq=linkMan_qq,
+                    Region=region,
+                    # Date1=date1,
+                    # Date2=date2,
+                    Content=content,
+                    Process=process,
+                    Assessment=assessment,
+                    Feeling=feeling,
+                    Stars=0,
+                    StarTime=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                )
+            return JsonResponse(
+                {
+                    'message': 'Success',
+                    'Access-Control-Allow-Origin': '*'
+                }
+            )
+        except:
+            return JsonResponse(
+                {
+                    'message': 'Error',
+                    'Access-Control-Allow-Origin': '*'
+                }
+            )
+    except:
+        return JsonResponse(
+            {
+                'message': 'Error',
+                'Access-Control-Allow-Origin': '*'
+            }
         )
-    return JsonResponse(
-        {
-            'message': 'Success',
-            'Access-Control-Allow-Origin': '*'
-        }
-    )
 
 
 @require_http_methods(["POST"])
