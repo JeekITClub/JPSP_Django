@@ -1,14 +1,32 @@
 <template>
 <div>
-<el-row class="carousel">
-<el-col :span="24">
-  <el-carousel :interval="5000" arrow="always" height="90vh">
-    <el-carousel-item v-for="item in 4" :key="item">
-      <h3>{{ item }}</h3>
-    </el-carousel-item>
-  </el-carousel>
+<el-row class="content-container welcome">
+<el-col :span="14" class="login-text">
+  <p>社团</p>
+  <p>从未如此简单</p>
+</el-col>
+<el-col :span="10" class="login-form">
+<div class="form">
+<h2>进入社团的奇妙世界</h2>
+<br>
+<el-form label-position="top" ref="form" :model="form" label-width="80px">
+  <el-form-item label="用户名">
+    <el-input v-model="form.username"></el-input>
+  </el-form-item>
+  <el-form-item label="密码">
+    <el-input v-model="form.password"></el-input>
+  </el-form-item>
+  <el-form-item label="">
+    <el-radio v-model="form.remember" :label="true">记住我</el-radio>
+  </el-form-item>
+  <el-form-item>
+    <el-button type="primary" @click="onSubmit" class="login-button">登录</el-button>
+  </el-form-item>
+</el-form>
+</div>
 </el-col>
 </el-row>
+
 <div class="main-content">
 <div class="content-container">
 <el-row>
@@ -47,16 +65,18 @@ Image
 </template>
 <script>
   export default {
-    data: {
-      items: [
-      ]
+    data () {
+      return {
+        form: {
+          username: '',
+          password: '',
+          remember: false
+        }
+      }
     },
     methods: {
-      handleOpen (key, keyPath) {
-        console.log(key, keyPath)
-      },
-      handleClose (key, keyPath) {
-        console.log(key, keyPath)
+      onSubmit () {
+        console.log('submit!')
       }
     }
   }
@@ -64,8 +84,46 @@ Image
 <style>
   @import url("//unpkg.com/element-ui@1.3.2/lib/theme-default/index.css");
 
+  body{
+    margin: 0px;
+  }
+
   .content-container{
     height: 100vh;
+  }
+
+  .welcome{
+    padding-top: 40px;
+    padding-bottom: 60px;
+    background-color: #20a0ff;
+    opacity: 0.75;
+  }
+
+  .login-text{
+    padding-top: 80px;
+    padding-left: 180px;
+    font-size: 4em;
+    height: 100%;
+  }
+
+  .login-form{
+    padding-top: 10px;
+    padding-bottom: 20px;
+    padding-right: 150px;
+    height: 100%;
+  }
+
+  .form{
+    height: 100%;
+    background-color: #ffffff;
+    border-radius: 3px;
+    padding: 36px;
+    border: 1px solid #d1d5da;
+    box-sizing: border-box;
+  }
+
+  .login-button{
+    width: 100%;
   }
 
   .main-content{
