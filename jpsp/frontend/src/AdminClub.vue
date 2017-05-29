@@ -1,20 +1,33 @@
 <template>
   <div id="app_club">
-    <router-view></router-view>
-    <footer>
-      <div>
-        作者：倪楚劼 邱世贸
+    <div>
+      <JNavTop></JNavTop>
+      <div class="container">
+        <router-view v-if="Authenticate===false"></router-view>
       </div>
-    </footer>
+    </div>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'app_club'
-}
+  import JNavTop from '../src/components/admin_club/JNavTop.vue'
+  export default {
+    components: {
+      'JNavTop': JNavTop
+    },
+    name: 'app_club',
+    computed: {
+      Authenticate () {
+        return this.$store.state.Authenticated
+      }
+    }
+  }
 </script>
 
 <style>
-
+  #app_club .container {
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+  }
 </style>

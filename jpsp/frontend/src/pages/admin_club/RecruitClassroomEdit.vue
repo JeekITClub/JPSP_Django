@@ -11,7 +11,7 @@
   </div>
 </template>
 <script>
-  import JAside from '../../components/admin_club/JAside.vue'
+  import JAside from '../../components/admin_club/ClubAside.vue'
   import RecruitClassroomApply from '../../components/admin_club/RecruitClassroomEdit.vue'
   export default {
     name: 'RecruitClassroomApply',

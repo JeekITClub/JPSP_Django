@@ -40,9 +40,12 @@
           ClubName: '',
           Date1: '',
           Date2: '',
-          Date3: '',
+          Date3: ''
         }
       }
+    },
+    methods: {
+
     }
   }
 </script>

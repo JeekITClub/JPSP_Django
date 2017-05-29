@@ -20,7 +20,7 @@
             Member: {
               Name: '',
               Grade: '',
-              Class: '',
+              Class: ''
             }
           }
         ]
