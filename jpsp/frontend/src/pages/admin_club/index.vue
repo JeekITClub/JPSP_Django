@@ -1,32 +1,36 @@
 <template>
   <div>
-    <el-row class="tac">
-      <el-col :span="8" offset="8">
-        <el-form ref="form" :model="form">
-          <el-form-item label="社团ID" required="true">
-            <el-input v-model="LoginForm.Clubid" placeholder="社团ID" autofocus=""></el-input>
-          </el-form-item>
-          <el-form-item label="密码" required="true">
-            <el-input v-model="LoginForm.password" placeholder="密码">
-            </el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="onSubmit">登陆</el-button>
-          </el-form-item>
-        </el-form>
-      </el-col>
-    </el-row>
-    <router-link to="EstablishClub">创建社团</router-link>
-    <JFooter></JFooter>
+    <div class="LoginForm">
+      <el-row class="tac">
+        <el-col :span="8" offset="8">
+          <el-form ref="form" :model="form">
+            <el-form-item label="社团ID" required="true">
+              <el-input v-model="LoginForm.Clubid" placeholder="社团ID" autofocus=""></el-input>
+            </el-form-item>
+            <el-form-item label="密码" required="true">
+              <el-input v-model="LoginForm.Password" placeholder="密码">
+              </el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" @click="onSubmit">登陆</el-button>
+            </el-form-item>
+            <el-form-item>
+              <a v-if="error===false">登陆失败</a>
+            </el-form-item>
+          </el-form>
+        </el-col>
+      </el-row>
+      <!--<el-row class="tac">-->
+      <!--<el-col :span="8" offset="8">-->
+      <!--<router-link to="EstablishClub">创建社团</router-link>-->
+      <!--</el-col>-->
+      <!--</el-row>-->
+    </div>
   </div>
 </template>
 <script>
   import axios from 'axios'
-  import JFooter from '../../components/public/JFooter.vue'
   export default {
-    components: {
-      'JFooter': JFooter
-    },
     data () {
       return {
         LoginForm: {
@@ -40,14 +44,21 @@
         console.log('submit!')
         axios({
           method: 'POST',
-          url: 'api/club/login/',
+          url: '../api/login/',
           data: {
-            name: this.LoginForm.Clubname,
-            password: this.LoginForm.Password
+            UserName: this.LoginForm.Clubid,
+            Password: this.LoginForm.Password,
+            error: false
           }
         })
           .then(function (response) {
-            console.log(response)
+            if (response.data.message === 'User Authenticated') {
+              console.log('success!!!')
+              this.store.commit('Login_in')
+            } else if (response.data.message === 'User Not Authenticated') {
+              console.log('success!')
+              this.error = true
+            }
           })
           .catch(function (error) {
             console.log(error)
@@ -57,5 +68,7 @@
   }
 </script>
 <style>
-  @import url("//unpkg.com/element-ui@1.3.2/lib/theme-default/index.css");
+  .LoginForm {
+    margin-top: 13%;
+  }
 </style>

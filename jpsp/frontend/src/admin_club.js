@@ -5,21 +5,24 @@ import AdminClub from './AdminClub.vue'
 import router from './router/admin_club.js'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
+import 'bootstrap/dist/css/bootstrap.css'
 import Vuex from 'vuex'
 Vue.config.productionTip = false
 
 Vue.use(ElementUI)
 Vue.use(Vuex)
 /* eslint-disable no-new */
+
 const AdminClubVuexStore = new Vuex.Store({
   state: {
     ClubId: '',
     CludName: '',
-    Token: ''
+    Token: '',
+    Login_in: false
   },
   mutations: {
-    login (state) {
-      alert(state.user_name)
+    Login_in (state) {
+      state.Login_in = true
     }
   }
 })

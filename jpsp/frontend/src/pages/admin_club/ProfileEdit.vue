@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <el-row>
+    <el-row gutter="20">
       <el-col :span="4">
         <club_aside></club_aside>
       </el-col>
@@ -8,7 +7,6 @@
         <club_profile_edit></club_profile_edit>
       </el-col>
     </el-row>
-  </div>
 </template>
 <script>
   import JAside from '../../components/admin_club/ClubAside.vue'

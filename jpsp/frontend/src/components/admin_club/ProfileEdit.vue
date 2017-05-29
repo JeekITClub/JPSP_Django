@@ -1,5 +1,6 @@
 <template>
-  <el-form ref="PostForm" :model="PostForm" label-width="100%">
+  <div class="container">
+  <el-form ref="PostForm" :model="PostForm" >
     <el-form-item label="社团名称" required>
       <el-input v-model="PostForm.ClubName"></el-input>
     </el-form-item>
@@ -39,7 +40,7 @@
         <el-radio :label=false>不招新</el-radio>
       </el-radio-group>
     </el-form-item>
-    <el-form-item label="招新QQ群">
+    <el-form-item label="招新QQ群" v-if="PostForm.IfRecruit">
       <el-input v-if="PostForm.IfRecruit" v-model="PostForm.QQGroup"></el-input>
     </el-form-item>
     <el-form-item label="社团邮箱">
@@ -80,6 +81,7 @@
       <el-button>取消</el-button>
     </el-form-item>
   </el-form>
+    </div>
 </template>
 <script>
   import axios from 'axios'

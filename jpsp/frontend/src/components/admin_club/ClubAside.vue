@@ -7,31 +7,27 @@
             <i class="el-icon-document"></i>社团动态
           </template>
           <el-menu-item-group>
-            <el-menu-item index="2-1" route="" disabled="">概览</el-menu-item>
-            <el-menu-item index="2-2" route="" disabled="">A</el-menu-item>
-            <el-menu-item index="2-3" route="" disabled="">B</el-menu-item>
-            <el-menu-item index="2-4" route="" disabled="">C</el-menu-item>
+            <el-menu-item index="2-1" route="" disabled=""><router-link to="/post/history">历史</router-link></el-menu-item>
+            <el-menu-item index="2-2" route="" disabled="">添加</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
         <el-submenu index="3">
           <template slot="title">
-            <i class="el-icon-document"></i>XXXX
+            <i class="el-icon-document"></i>成员
           </template>
           <el-menu-item-group>
             <el-menu-item index="3-1" route="" disabled="">概览</el-menu-item>
-            <el-menu-item index="3-2" route="" disabled="">A</el-menu-item>
-            <el-menu-item index="3-3" route="" disabled="">B</el-menu-item>
-            <el-menu-item index="3-4" route="" disabled="">C</el-menu-item>
+            <el-menu-item index="3-2" route="" disabled="">XXX</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
         <el-submenu index="4">
           <template slot="title">
-            <i class="el-icon-document"></i>XXXX
+            <i class="el-icon-document"></i>招新
           </template>
           <el-menu-item-group>
-            <el-menu-item index="4-1" route="" disabled="">概览</el-menu-item>
-            <el-menu-item index="4-2" route="" disabled="">A</el-menu-item>
-            <el-menu-item index="4-3" route="" disabled="">B</el-menu-item>
+            <el-menu-item index="4-1" route="" disabled="">XXX</el-menu-item>
+            <el-menu-item index="4-2" route="" disabled="">公共教室申请</el-menu-item>
+            <el-menu-item index="4-3" route="" disabled="">审核</el-menu-item>
             <el-menu-item index="4-4" route="" disabled="">C</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
@@ -73,5 +69,4 @@
     }
 </script>
 <style>
-  @import url("//unpkg.com/element-ui@1.3.2/lib/theme-default/index.css");
 </style>

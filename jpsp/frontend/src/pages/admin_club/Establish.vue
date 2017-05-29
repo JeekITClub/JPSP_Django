@@ -8,7 +8,7 @@
   </div>
 </template>
 <script>
-  import EstablishClub from '../../components/admin_club/EstablishClub.vue'
+  import EstablishClub from '../../components/admin_club/Establish.vue'
   export default {
     components: {
       'club_establish': EstablishClub

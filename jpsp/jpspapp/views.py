@@ -12,19 +12,24 @@ from django.contrib.auth import authenticate, login
 # Create your views here.
 @require_http_methods(['POST'])
 def login(request):
-    body = json.loads(request)
-    username=body['UserName']
+    body = json.loads(request.body)
+    username = body['UserName']
     password = body['Password']
     user = authenticate(username=username, password=password)
     if user is not None:
         return JsonResponse({
             "message": "User Authenticated",
-            "Token": JPSPToken(username=username, usertype="club").generate()
+            "Token": JPSPToken(username=username, usertype="club").generate(),
+            "Access-Control-Allow-Origin": '*'
+        })
+    else:
+        return JsonResponse({
+            "message": "User Not Authenticated",
+            "Access-Control-Allow-Origin": '*',
         })
 
-
 @require_http_methods(['POST'])
-def login_out(request):
+def logout(request):
     body = json.loads(request)
     username = body['UserName']
     usertype = body['UserType']
@@ -279,7 +284,7 @@ def club_establish(request):
         if_recruit = body['IfRecruit']
         qq_group = body['QQGroup']
         email = body['Email']
-        settings=Settings.objects.filter(name="settings")
+        settings = Settings.objects.filter(name="settings")
         Club.objects.create(
             clubname=clubname,
             clubid=settings.clubid,
@@ -296,7 +301,7 @@ def club_establish(request):
             stars=0,
             enroll_group_qq=qq_group,
         )
-        settings.cludid+=1
+        settings.cludid += 1
         settings.save()
         return JsonResponse(
             {

@@ -24,7 +24,7 @@ class JPSPToken:
             token=self.token,
             user=self.username,
             usertype=self.usertype,
-            start_time=datetime.datetime.now(),
+            # start_time=datetime.datetime.now(),
             # TODO: end time problem
             # end_time =datetime.datetime.now(),
         )

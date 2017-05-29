@@ -2,14 +2,20 @@ import Vue from 'vue'
 import Router from 'vue-router'
 // import index from '@/pages/index/index'
 Vue.use(Router)
-import NavTop from '@/components/admin_club/NavTop.vue'
 
+import index from '../pages/index/index.vue'
+import PostEdit from '../pages/admin_club/PostEdit.vue'
 export default new Router({
   routes: [
     {
       path: '/',
       name: 'Index',
-      component: NavTop
+      component: index
+    },
+    {
+      path: '/post',
+      name: 'Post',
+      component: PostEdit
     }
   ]
 })
