@@ -30,6 +30,16 @@ module.exports = merge(baseWebpackConfig, {
       template: 'index.html',
       inject: true
     }),
+    new HtmlWebpackPlugin({
+      filename: 'admin_club.html',
+      template: 'admin_club.html',
+      inject: true
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'admin_cd.html',
+      template: 'admin_cd.html',
+      inject: true
+    }),
     new FriendlyErrorsPlugin()
   ]
 })

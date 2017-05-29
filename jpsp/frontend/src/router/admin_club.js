@@ -7,6 +7,10 @@ import index from '@/pages/admin_club/index.vue'
 import PostEdit from '@/pages/admin_club/PostEdit.vue'
 import ProfileEdit from '@/pages/admin_club/ProfileEdit.vue'
 import ActivityApply from '@/pages/admin_club/ActivityApply.vue'
+import ClubPageSettings from '@/pages/admin_club/ClubPageSettings.vue'
+import MemberManagement from '@/pages/admin_club/MemberManagement.vue'
+import RecruitClassroomEdit from '@/pages/admin_club/RecruitClassroomEdit.vue'
+import PostHistory from '@/pages/admin_club/PostHistory.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -19,14 +23,7 @@ export default new Router({
     {
       path: '/post',
       name: 'Post',
-      component: PostEdit,
-      children: [
-        {
-          path: '/edit',
-          name: 'PostEdit',
-          component: PostEdit
-        }
-      ]
+      component: PostEdit
     },
     {
       path: '/profile',
@@ -39,11 +36,33 @@ export default new Router({
       component: ActivityApply,
       children: [
         {
-          path: '/apply',
+          path: 'apply',
           name: 'ActivityApply',
           component: ActivityApply
         }
       ]
+    },
+    {
+      path: '/page',
+      name: 'ClubPageSettings',
+      component: ClubPageSettings
+    },
+    {
+      path: '/recruit',
+      name: 'Recruit',
+      component: RecruitClassroomEdit,
+      children: [
+        {
+          path: 'classroom',
+          name: 'RecruitClassroomApply',
+          component: RecruitClassroomEdit
+        }
+      ]
+    },
+    {
+      path: '/member',
+      name: 'Member',
+      component: MemberManagement
     }
   ]
 })

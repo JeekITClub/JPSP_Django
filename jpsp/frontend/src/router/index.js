@@ -1,15 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import index from '@/pages/index/index'
-
+// import index from '@/pages/index/index'
 Vue.use(Router)
 
+import index from '../pages/index/index.vue'
+import PostEdit from '../pages/admin_club/PostEdit.vue'
 export default new Router({
   routes: [
     {
       path: '/',
       name: 'Index',
-      component: ProfileEdit
+      component: index
     },
     {
       path: '/post',

@@ -33,9 +33,9 @@
 
 </el-form>
 <script>
+  import axios from 'axios'
   export default {
-    data() {
-      name: 'ActivityApply'
+    data () {
       return {
         PostForm: {
           ClubName: '',
@@ -43,28 +43,30 @@
           Region: '',
           Date1: '',
           Date2: '',
-          Date3:'',
-          Type: [],
+          Date3: '',
+          Type: []
         }
       }
     },
     methods: {
-      onSubmit() {
-        console.log('submit!');
+      onSubmit () {
+        console.log('submit!')
       },
-      submitForm(formName) {
+      submitForm (formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            alert('submit!');
+            alert('submit!')
+            axios.post('api/ClubActivityApplySubmit', {
+
+            })
           } else {
-            console.log('error submit!!');
-            return false;
+            console.log('error submit!!')
+            return false
           }
-        });
+        })
       }
     }
   }
 </script>
 <style>
-  @import url("//unpkg.com/element-ui@1.3.2/lib/theme-default/index.css");
 </style>
