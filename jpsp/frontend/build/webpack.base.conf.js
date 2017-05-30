@@ -50,7 +50,6 @@ module.exports = {
         title: '建平中学学生社团系统--社长管理',
         filename: 'admin_club.html',
         chunks: [
-          'index',
           'manifest',
           'vendor',
           'admin_club'
