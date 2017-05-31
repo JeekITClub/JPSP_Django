@@ -1,69 +1,215 @@
 <template>
 <div>
-<el-row class="content-container welcome">
-<el-col :span="14" class="login-text">
-  <p>社团</p>
-  <p>从未如此简单</p>
-</el-col>
-<el-col :span="10" class="login-form">
-<div class="form">
-<h2>进入社团的奇妙世界</h2>
-<br>
-<el-form label-position="top" ref="form" :model="form" label-width="80px">
-  <el-form-item label="用户名">
-    <el-input v-model="form.username"></el-input>
-  </el-form-item>
-  <el-form-item label="密码">
-    <el-input v-model="form.password"></el-input>
-  </el-form-item>
-  <el-form-item label="">
-    <el-radio v-model="form.remember" :label="true">记住我</el-radio>
-  </el-form-item>
-  <el-form-item>
-    <el-button type="primary" @click="onSubmit" class="login-button">登录</el-button>
-  </el-form-item>
-</el-form>
-</div>
-</el-col>
-</el-row>
-
-<div class="main-content">
-<div class="content-container">
-<el-row>
-<el-col :span="12" class="intro">
-Write Better Code.
-</el-col>
-<el-col :span="12" class="image" align="right">
-Image</el-col>
-</el-row>
+<div id="page">
+<div>
+  <div class="block">
+    <el-carousel height="500px">
+      <el-carousel-item v-for="item in 4" :key="item">
+        <h3>{{ item }}</h3>
+      </el-carousel-item>
+    </el-carousel>
+  </div>
 </div>
 
-<div class="content-container">
-<el-row>
-<el-col :span="12" class="image" align="right">
-Image
-</el-col>
-<el-col :span="12" class="intro">
-Write Better Code.
-</el-col>
-</el-row>
-</div>
+  <div id="fh5co-content">
+    <div class="video fh5co-video img1">
+    </div>
+    <div class="choose animate-box">
+      <div class="fh5co-heading">
+        <h2>Why Choose Us?</h2>
+        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+      </div>
+      <ul class="list-nav">
+        <li><i class="icon-check2"></i>Far far away, behind the word mountains, far from the countries Vokalia</li>
+        <li><i class="icon-check2"></i>There live the blind texts far from the countries Vokalia and Consonantia, there live the blind texts.</li>
+        <li><i class="icon-check2"></i>Separated they live in bookmarksgrove there live the blind texts far from the countries</li>
+      </ul>
+    </div>
+  </div>
 
-<div class="content-container">
-<el-row>
-<el-col :span="12" class="intro">
-Write Better Code.
-</el-col>
-<el-col :span="12" class="image" align="right">
-Image
-</el-col>
-</el-row>
-</div>
+  <div id="fh5co-mission">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3 text-center animate-box">
+          <h2>Mission</h2>
+          <blockquote>
+            <p>Quos quia provident consequuntur culpa facere ratione maxime commodi voluptates id repellat velit eaque aspernatur expedita. Possimus itaque adipisci rem dolorem nesciunt perferendis quae amet deserunt eum labore quidem minima.</p>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="copyrights">Collect from <a href="#"  title="网站模板">网站模板</a></div>
 
-</div>
+  <div id="fh5co-services">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 text-center animate-box">
+          <div class="services">
+            <span class="icon">
+              <i class="icon-command"></i>
+            </span>
+            <div class="desc">
+              <h3><a href="#">Brand Identity</a></h3>
+              <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 text-center animate-box">
+          <div class="services">
+            <span class="icon">
+              <i class="icon-drop2"></i>
+            </span>
+            <div class="desc">
+              <h3><a href="#">Web Design &amp; UI</a></h3>
+              <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 text-center animate-box">
+          <div class="services">
+            <span class="icon">
+              <i class="icon-anchor"></i>
+            </span>
+            <div class="desc">
+              <h3><a href="#">Web Development</a></h3>
+              <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="fh5co-about">
+    <div class="container">
+      <div class="row animate-box">
+        <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+          <h2>Our Co-League</h2>
+          <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="member">
+          <div class="col-md-6 nopadding animate-box">
+            <div class="author" style="background-image: url(images/user-1.jpg);"></div>
+          </div>
+          <div class="col-md-6 nopadding animate-box">
+            <div class="desc">
+              <h3>John Doe</h3>
+              <span>CEO, Founder</span>
+              <p>Quos quia provident consequuntur culpa facere ratione maxime commodi voluptates id repellat velit eaque aspernatur expedita. Possimus itaque adipisci.</p>
+              <p>
+                <ul class="fh5co-social-icons">
+                  <li><a href="#"><i class="icon-twitter-with-circle"></i></a></li>
+                  <li><a href="#"><i class="icon-facebook-with-circle"></i></a></li>
+                  <li><a href="#"><i class="icon-linkedin-with-circle"></i></a></li>
+                  <li><a href="#"><i class="icon-dribbble-with-circle"></i></a></li>
+                </ul>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="member">
+          <div class="col-md-6 nopadding col-md-push-6 animate-box">
+            <div class="author" style="background-image: url(images/user-2.jpg);"></div>
+          </div>
+          <div class="col-md-6 nopadding col-md-pull-6 animate-box">
+            <div class="desc">
+              <h3>John Doe</h3>
+              <span>CEO, Founder</span>
+              <p>Quos quia provident consequuntur culpa facere ratione maxime commodi voluptates id repellat velit eaque aspernatur expedita. Possimus itaque adipisci.</p>
+              <p>
+                <ul class="fh5co-social-icons">
+                  <li><a href="#"><i class="icon-twitter-with-circle"></i></a></li>
+                  <li><a href="#"><i class="icon-facebook-with-circle"></i></a></li>
+                  <li><a href="#"><i class="icon-linkedin-with-circle"></i></a></li>
+                  <li><a href="#"><i class="icon-dribbble-with-circle"></i></a></li>
+                </ul>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="member">
+          <div class="col-md-6 nopadding animate-box">
+            <div class="author" style="background-image: url(images/user-3.jpg);"></div>
+          </div>
+          <div class="col-md-6 nopadding animate-box">
+            <div class="desc">
+              <h3>John Doe</h3>
+              <span>CEO, Founder</span>
+              <p>Quos quia provident consequuntur culpa facere ratione maxime commodi voluptates id repellat velit eaque aspernatur expedita. Possimus itaque adipisci.</p>
+              <p>
+                <ul class="fh5co-social-icons">
+                  <li><a href="#"><i class="icon-twitter-with-circle"></i></a></li>
+                  <li><a href="#"><i class="icon-facebook-with-circle"></i></a></li>
+                  <li><a href="#"><i class="icon-linkedin-with-circle"></i></a></li>
+                  <li><a href="#"><i class="icon-dribbble-with-circle"></i></a></li>
+                </ul>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="fh5co-blog">
+    <div class="container">
+      <div class="row animate-box">
+        <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+          <h2>Recent Post</h2>
+          <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 col-md-6">
+          <div class="fh5co-blog animate-box">
+            <a href="#"><img class="img-responsive" src="images/blog-1.jpg" alt=""></a>
+            <div class="blog-text">
+              <span class="posted_on">Nov. 15th</span>
+              <span class="comment"><a href="">21<i class="icon-speech-bubble"></i></a></span>
+              <h3><a href="#">We've grown from a regional</a></h3>
+              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+              <a href="#" class="btn btn-primary">Read More</a>
+            </div> 
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6">
+          <div class="fh5co-blog animate-box">
+            <a href="#"><img class="img-responsive" src="images/blog-2.jpg" alt=""></a>
+            <div class="blog-text">
+              <span class="posted_on">Nov. 15th</span>
+              <span class="comment"><a href="">21<i class="icon-speech-bubble"></i></a></span>
+              <h3><a href="#">We've grown from a regional</a></h3>
+              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+              <a href="#" class="btn btn-primary">Read More</a>
+            </div> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="fh5co-started" style="background-image:url(images/img_bg_2.jpg);">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row animate-box">
+        <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+          <h2>Want To Write About Us!</h2>
+          <p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos cumque dicta adipisci architecto culpa amet.</p>
+          <p><a href="#" class="btn btn-default btn-lg">Contact Us</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
 </div>
 </template>
 <script>
+  // import 'bootstrap'
   export default {
     data () {
       return {
@@ -81,83 +227,31 @@ Image
     }
   }
 </script>
-<style>
+<style scoped>
   @import url("//unpkg.com/element-ui@1.3.2/lib/theme-default/index.css");
-
-  body{
-    margin: 0px;
-  }
-
-  .content-container{
-    height: 100vh;
-  }
-
-  .welcome{
-    padding-top: 40px;
-    padding-bottom: 60px;
-    background-color: #20a0ff;
-    opacity: 0.75;
-  }
-
-  .login-text{
-    padding-top: 80px;
-    padding-left: 180px;
-    font-size: 4em;
-    height: 100%;
-  }
-
-  .login-form{
-    padding-top: 10px;
-    padding-bottom: 20px;
-    padding-right: 150px;
-    height: 100%;
-  }
-
-  .form{
-    height: 100%;
-    background-color: #ffffff;
-    border-radius: 3px;
-    padding: 36px;
-    border: 1px solid #d1d5da;
-    box-sizing: border-box;
-  }
-
-  .login-button{
-    width: 100%;
-  }
-
-  .main-content{
-  }
-
-  .content{
-    padding: 20px;
+  @import '../../assets/index/css/animate.css';
+  @import '../../assets/index/css/icomoon.css';
+  @import '../../assets/index/css/bootstrap.css';
+  @import '../../assets/index/css/magnific-popup.css';
+  @import '../../assets/index/css/flexslider.css';
+  @import '../../assets/index/css/style.css';
+  .img1{
+    background-image: url(../../assets/index/images/img_bg_1.jpg);
   }
 
   .el-carousel__item h3 {
     color: #475669;
-    font-size: 18px;
+    font-size: 14px;
     opacity: 0.75;
-    line-height: 300px;
+    line-height: 150px;
     margin: 0;
   }
-  
+
   .el-carousel__item:nth-child(2n) {
-    background-color: #99a9bf;
+     background-color: #99a9bf;
   }
   
   .el-carousel__item:nth-child(2n+1) {
-    background-color: #d3dce6;
-  }
-
-  .intro{
-    padding-left: 40vh;
-    line-height: 100vh;
-    font-size: 3em;
-  }
-
-  .image{
-    padding-right: 40vh;
-    line-height: 100vh;
-    font-size: 3em;
+     background-color: #d3dce6;
   }
 </style>

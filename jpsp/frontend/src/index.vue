@@ -1,19 +1,19 @@
 <template>
   <div id="app">
-  <NavTop></NavTop>
+  <JNavTop></JNavTop>
     <router-view></router-view>
   <JFooter></JFooter>
   </div>
 </template>
 
 <script>
-import NavTop from './components/public/NavTop.vue'
+import JNavTop from './components/public/JNavTop.vue'
 import JFooter from './components/public/JFooter.vue'
 
 export default {
   name: 'app',
   components: {
-    NavTop,
+    JNavTop,
     JFooter
   }
 }
