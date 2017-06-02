@@ -13,9 +13,26 @@ Vue.use(ElementUI)
 Vue.use(Vuex)
 /* eslint-disable no-new */
 
+const UserVuexStore = new Vuex.Store({
+  state: {
+    UserName: '用户名',
+    Token: '',
+    Authenticated: false
+  },
+  mutations: {
+    Authenticate (state) {
+      state.Authenticated = true
+    },
+    ApplyUserName (state, UserName) {
+      state.UserName = UserName
+    }
+  }
+})
+
 new Vue({
   el: '#app',
   router,
+  store: UserVuexStore,
   template: '<App/>',
   components: {index},
   render: h => h(index)

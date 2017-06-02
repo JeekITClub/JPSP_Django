@@ -3,7 +3,7 @@
 <div id="page">
 <div>
   <div class="block">
-    <el-carousel height="500px">
+    <el-carousel height="600px">
       <el-carousel-item v-for="item in 4" :key="item">
         <h3>{{ item }}</h3>
       </el-carousel-item>
@@ -209,21 +209,13 @@
 </div>
 </template>
 <script>
-  // import 'bootstrap'
   export default {
     data () {
       return {
-        form: {
-          username: '',
-          password: '',
-          remember: false
-        }
       }
     },
     methods: {
-      onSubmit () {
-        console.log('submit!')
-      }
+
     }
   }
 </script>

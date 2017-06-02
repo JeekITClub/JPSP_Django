@@ -3,20 +3,40 @@
 </div>
 </template>
 <script>
-  // import 'bootstrap'
   export default {
     data () {
       return {
-        form: {
-          username: '',
-          password: '',
-          remember: false
+        LoginForm: {
+          UserName: '',
+          Password: ''
         }
       }
     },
     methods: {
       onSubmit () {
         console.log('submit!')
+        axios({
+          method: 'POST',
+          url: '../api/login/',
+          data: {
+            UserName: this.LoginForm.UserName,
+            Password: this.LoginForm.Password,
+            error: false
+          }
+        })
+          .then(function (response) {
+            if (response.data.message === 'User Authenticated') {
+              console.log('success!!!')
+              this.store.commit('LoginIn')
+              this.store.commit('ApplyUserName', this.UserName)
+            } else if (response.data.message === 'User Not Authenticated') {
+              console.log('success!')
+              this.error = true
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
       }
     }
   }
