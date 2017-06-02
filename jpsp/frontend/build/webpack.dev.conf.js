@@ -31,13 +31,13 @@ module.exports = merge(baseWebpackConfig, {
       inject: true
     }),
     new HtmlWebpackPlugin({
-      filename: 'admin_club.html',
-      template: 'admin_club.html',
+      filename: 'app_club.html',
+      template: 'app_club.html',
       inject: true
     }),
     new HtmlWebpackPlugin({
-      filename: 'admin_cd.html',
-      template: 'admin_cd.html',
+      filename: 'app_cd.html',
+      template: 'app_cd.html',
       inject: true
     }),
     new FriendlyErrorsPlugin()
