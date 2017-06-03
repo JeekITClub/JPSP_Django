@@ -54,7 +54,7 @@
           .then(function (response) {
             if (response.data.message === 'User Authenticated') {
               console.log('success!!!')
-              this.store.commit('LoginIn')
+              this.store.commit('Authenticate')
               this.store.commit('ApplyUserName', this.UserName)
             } else if (response.data.message === 'User Not Authenticated') {
               console.log('success!')

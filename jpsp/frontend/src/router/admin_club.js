@@ -10,7 +10,7 @@ import ActivityApply from '@/pages/admin_club/ActivityApply.vue'
 import ClubPageSettings from '@/pages/admin_club/ClubPageSettings.vue'
 import MemberManagement from '@/pages/admin_club/MemberManagement.vue'
 import RecruitClassroomEdit from '@/pages/admin_club/RecruitClassroomEdit.vue'
-import PostHistory from '@/pages/admin_club/PostHistory.vue'
+// import PostHistory from '@/pages/admin_club/PostHistory.vue'
 Vue.use(Router)
 
 export default new Router({
