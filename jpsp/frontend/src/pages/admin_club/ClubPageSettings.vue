@@ -14,7 +14,7 @@
 <script>
   import ClubPageSettings from '../../components/admin_club/ClubPageSettings.vue'
   import ClubAside from '../../components/admin_club/ClubAside.vue'
-  import JFooter from '../../components/public/JFooter.vue'
+  import JFooter from '../../components/admin_club/JFooter.vue'
   export default {
     components: {
       'club_aside': ClubAside,

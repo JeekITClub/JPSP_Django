@@ -4,7 +4,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 import index from '../pages/index/index.vue'
-import PostEdit from '../pages/admin_club/PostEdit.vue'
+import Login from '../pages/index/Login.vue'
 export default new Router({
   routes: [
     {
@@ -13,9 +13,9 @@ export default new Router({
       component: index
     },
     {
-      path: '/post',
-      name: 'Post',
-      component: PostEdit
+      path: '/test',
+      name: 'test',
+      component: Login
     }
   ]
 })
