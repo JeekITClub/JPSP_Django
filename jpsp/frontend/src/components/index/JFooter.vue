@@ -58,7 +58,7 @@
     }
   }
 </script>
-<style>
+<style scoped>
   @import '../../assets/index/css/animate.css';
   @import '../../assets/index/css/icomoon.css';
   @import '../../assets/index/css/bootstrap.css';

@@ -1,8 +1,31 @@
 <template>
-<div>
+<div class="main">
+<h1>学生登录</h1>
+<div class="login-form">
+	<div class="close"> </div>
+		<div class="head-info">
+			<label class="lbl-1"> </label>
+			<label class="lbl-2"> </label>
+			<label class="lbl-3"> </label>
+		</div>
+			<div class="clear"> </div>
+	<div class="avtar">
+		<img src="../../assets/index/images/avtar.png" />
+	</div>
+			<form>
+					<input type="text" value="Username" v-model="LoginForm.UserName">
+						<div class="key">
+					<input type="password" value="Password" v-model="LoginForm.Password">
+						</div>
+			</form>
+	<div class="signin">
+		<input type="submit" value="登录" >
+	</div>
+</div>
 </div>
 </template>
 <script>
+  import axios from 'axios'
   export default {
     data () {
       return {
@@ -27,7 +50,7 @@
           .then(function (response) {
             if (response.data.message === 'User Authenticated') {
               console.log('success!!!')
-              this.store.commit('LoginIn')
+              this.store.commit('Authenticate')
               this.store.commit('ApplyUserName', this.UserName)
             } else if (response.data.message === 'User Not Authenticated') {
               console.log('success!')
@@ -42,16 +65,8 @@
   }
 </script>
 <style scoped>
-  @import url("//unpkg.com/element-ui@1.3.2/lib/theme-default/index.css");
-  @import '../../assets/index/css/animate.css';
-  @import '../../assets/index/css/icomoon.css';
   @import '../../assets/index/css/bootstrap.css';
-  @import '../../assets/index/css/magnific-popup.css';
-  @import '../../assets/index/css/flexslider.css';
-  @import '../../assets/index/css/style.css';
-  .img1{
-    background-image: url(../../assets/index/images/img_bg_1.jpg);
-  }
+  @import '../../assets/index/css/login.css';
 
   .el-carousel__item h3 {
     color: #475669;
