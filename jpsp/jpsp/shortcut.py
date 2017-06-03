@@ -1,6 +1,7 @@
 # JPSP Shortcut
 # Created by WTO on 2017/5/28 19:25
 from jpspapp.models import Token
+from django.contrib.auth.models import User
 import random
 import datetime
 
@@ -22,21 +23,20 @@ class JPSPToken:
             self.token += alphabet[random.randint(0, len(alphabet) - 1)]
         Token.objects.create(
             token=self.token,
-            user=self.username,
+            user=User.objects.filter(username=self.username),
             usertype=self.usertype,
             # start_time=datetime.datetime.now(),
-            # TODO: end time problem
+            # TODO:  datetime in python and SQL ??
             # end_time =datetime.datetime.now(),
         )
-        return self.token
 
     def remove(self):
-        token = Token.objects.filter(username=self.username)
+        token = Token.objects.filter(username=self.username,usertype=self.usertype)
         if token:
             token.delete()
 
     def authenticate(self):
-        token = Token.objects.filter(username=self.username)
+        token = Token.objects.filter(username=self.username,usertype=self.usertype).token
         if token:
             if self.token == token:
                 return True

@@ -2,22 +2,23 @@
   <div>
     <div class="LoginForm">
       <el-row class="tac">
-        <el-col :span="8" offset="8">
-          <el-form ref="form" :model="form">
-            <el-form-item label="社团ID" required="true">
-              <el-input v-model="LoginForm.Clubid" placeholder="社团ID" autofocus=""></el-input>
+        <el-col :span="8" :offset="8">
+          <el-form ref="LoginForm" :model="LoginForm" v-if="Authenticate===false">
+            <el-form-item label="社团ID" :required=true>
+              <el-input v-model="LoginForm.ClubId" placeholder="社团ID" autofocus=""></el-input>
             </el-form-item>
-            <el-form-item label="密码" required="true">
-              <el-input v-model="LoginForm.Password" placeholder="密码">
+            <el-form-item label="密码" :required=true>
+              <el-input type="password" v-model="LoginForm.Password" placeholder="密码">
               </el-input>
             </el-form-item>
             <el-form-item>
               <el-button type="primary" @click="onSubmit">登陆</el-button>
             </el-form-item>
             <el-form-item>
-              <a v-if="error===false">登陆失败</a>
+              <p v-if="settings.NotAuthenticated===true">登陆失败</p>
             </el-form-item>
           </el-form>
+          <h1 v-if="Authenticate===true">已登录</h1>
         </el-col>
       </el-row>
       <!--<el-row class="tac">-->
@@ -34,36 +35,42 @@
     data () {
       return {
         LoginForm: {
-          Clubid: '',
+          ClubId: '',
           Password: ''
+        },
+        settings: {
+          NotAuthenticated: false
         }
       }
     },
     methods: {
       onSubmit () {
-        console.log('submit!')
         axios({
           method: 'POST',
-          url: '../api/login/',
+          url: 'http://localhost/api/login/',
           data: {
-            UserName: this.LoginForm.Clubid,
-            Password: this.LoginForm.Password,
-            error: false
+            UserName: this.LoginForm.ClubId,
+            Password: this.LoginForm.Password
           }
         })
           .then(function (response) {
             if (response.data.message === 'User Authenticated') {
-              console.log('success!!!')
-              this.store.commit('LoginIn')
-              this.store.commit('ApplyUserName', this.UserName)
+              this.$store.commit('Authenticate')
             } else if (response.data.message === 'User Not Authenticated') {
-              console.log('success!')
-              this.error = true
+              this.data.settings.NotAuthenticated = true
             }
           })
           .catch(function (error) {
             console.log(error)
           })
+      }
+//      onSubmit () {
+//        this.$store.commit('Authenticate')
+//      }
+    },
+    computed: {
+      Authenticate () {
+        return this.$store.state.Authenticated
       }
     }
   }

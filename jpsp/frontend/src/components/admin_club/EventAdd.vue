@@ -1,4 +1,4 @@
-<el-form ref="form" :model="form" label-width="80px">
+<el-form ref="form" :model="form" :label-width="100%" v-if="Authenticate===true">
   <el-form-item label="活动名称">
     <el-input v-model="form.name"></el-input>
   </el-form-item>
@@ -112,6 +112,11 @@
           value: '',
           key: Date.now()
         });
+      }
+    },
+    computed: {
+      Authenticate () {
+        return this.$store.state.Authenticated
       }
     }
   }

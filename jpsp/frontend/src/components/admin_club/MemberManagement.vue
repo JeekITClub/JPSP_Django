@@ -1,5 +1,5 @@
 <template>
-  <el-table :data="tableData" stripe style="width: 100%">
+  <el-table :data="tableData" stripe style="width: 100%" v-if="Authenticate===true">
     <el-table-column prop="MemberName" label="社员姓名" width="">
     </el-table-column>
     <el-table-column prop="MemberGrade" label="社员年级" width="">
@@ -29,6 +29,11 @@
     method: {
       deleteMember (member) {
         console.log('success')
+      }
+    },
+    computed: {
+      Authenticate () {
+        return this.$store.state.Authenticated
       }
     }
   }
