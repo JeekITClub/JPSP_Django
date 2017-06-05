@@ -1,3 +1,4 @@
+<template>
 <el-form ref="form" :model="PostForm" label-width="80px">
   <el-form-item label="社团名称">
     <el-input v-model="PostForm.ClubName"></el-input>
@@ -32,6 +33,7 @@
   </el-form-item>
 
 </el-form>
+</template>
 <script>
   import axios from 'axios'
   export default {
@@ -64,6 +66,17 @@
             return false
           }
         })
+      }
+    },
+    computed: {
+      GetClubName () {
+        return this.$store.state.UserName
+      },
+      GetClubId () {
+        return this.$store.state.ClubId
+      },
+      GetToken () {
+        return this.$store.state.Token
       }
     }
   }
