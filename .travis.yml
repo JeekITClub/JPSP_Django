@@ -19,6 +19,7 @@ services:
 #  - docker run 
 install:
   - pip install -q Django==$DJANGO_VERSION
+  - pip install django-cors-headers
 # command to run tests
 script: 
   - cd jpsp
