@@ -26,4 +26,6 @@ services:
 install:
   - pip install -q Django==$DJANGO_VERSION
 # command to run tests
-script: python manage.py run
+script: 
+  - cd jpsp
+  - python manage.py run
