@@ -19,11 +19,11 @@ services:
   - docker
 # command to install dependencies
 # install: "pip install -r requirements.txt"
-before_install:
-  - docker build -t 
-  - docker run -d -p 
-  - docker ps -a
-  - docker run 
+#before_install:
+#  - docker build -t 
+#  - docker run -d -p 
+#  - docker ps -a
+#  - docker run 
 install:
   - pip install -q Django==$DJANGO_VERSION
   - python setup.py -q install
