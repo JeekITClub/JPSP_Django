@@ -26,9 +26,20 @@
         ]
       }
     },
-    method: {
+    methods: {
       deleteMember (member) {
         console.log('success')
+      }
+    },
+    computed: {
+      GetClubName () {
+        return this.$store.state.UserName
+      },
+      GetClubId () {
+        return this.$store.state.ClubId
+      },
+      GetToken () {
+        return this.$store.state.Token
       }
     }
   }
