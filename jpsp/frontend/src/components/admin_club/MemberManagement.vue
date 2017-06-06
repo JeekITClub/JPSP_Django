@@ -40,6 +40,7 @@
       },
       GetToken () {
         return this.$store.state.Token
+      },
       Authenticate () {
         return this.$store.state.Authenticated
       }

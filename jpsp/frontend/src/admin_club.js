@@ -26,6 +26,9 @@ const AdminClubVuexStore = new Vuex.Store({
     },
     ApplyUserName (state, UserName) {
       state.UserName = UserName
+    },
+    ApplyToken (state, Token) {
+      state.Token = Token
     }
   }
 })

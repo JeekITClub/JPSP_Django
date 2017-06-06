@@ -26,7 +26,7 @@ def login(request):
     if user is not None:
         return JsonResponse({
             "message": "User Authenticated",
-            # "Token": JPSPToken(username=username, usertype="club").generate(),
+            "Token": JPSPToken(username=username, usertype="club").generate(),
             "Access-Control-Allow-Origin": '*'
         })
     else:

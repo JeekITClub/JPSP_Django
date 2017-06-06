@@ -3,9 +3,9 @@
  */
 import Vue from 'vue'
 import Router from 'vue-router'
-import index from '@/pages/admin_cd/index'
-import PostList from '@pages/admin_cd/PostList'
-import ActivityList from '@pages/admin_cd/ActivityList'
+import index from '../pages/admin_cd/index.vue'
+import PostList from '../pages/admin_cd/PostList.vue'
+import ActivityList from '../pages/admin_cd/ActivityList.vue'
 Vue.use(Router)
 
 export default new Router({
