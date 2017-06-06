@@ -9,6 +9,13 @@ import datetime
 from django.contrib.auth import authenticate, login
 
 
+def returnError():
+    return JsonResponse({
+        'message': 'Error',
+        'Access-Control-Allow-Origin': '*'
+    })
+
+
 # Create your views here.
 @require_http_methods(['POST'])
 def login(request):
@@ -19,7 +26,7 @@ def login(request):
     if user is not None:
         return JsonResponse({
             "message": "User Authenticated",
-            #"Token": JPSPToken(username=username, usertype="club").generate(),
+            # "Token": JPSPToken(username=username, usertype="club").generate(),
             "Access-Control-Allow-Origin": '*'
         })
     else:
@@ -31,19 +38,24 @@ def login(request):
 
 @require_http_methods(['POST'])
 def logout(request):
-    body = json.loads(request)
-    username = body['UserName']
-    usertype = body['UserType']
-    token_object = JPSPToken(username=username, usertype=usertype)
-    token_object.remove()
-
+    try:
+        body = json.loads(request)
+        username = body['UserName']
+        usertype = body['UserType']
+        token_object = JPSPToken(username=username, usertype=usertype)
+        token_object.remove()
+    except:
+        returnError()
 
 @require_http_methods(["GET"])
 def club_list(request):
-    data = serializers.serialize("json", Club.objects.all())
-    response = JsonResponse(json.dumps(data), safe=False)
-    response['Access-Control-Allow-Origin'] = '*'
-    return response
+    try:
+        data = serializers.serialize("json", Club.objects.all())
+        response = JsonResponse(json.dumps(data), safe=False)
+        response['Access-Control-Allow-Origin'] = '*'
+        return response
+    except:
+        returnError()
 
 
 @require_http_methods(["POST"])
@@ -99,12 +111,7 @@ def club_post_edit_submit(request):
                 }
             )
     except:
-        return JsonResponse(
-            {
-                'message': 'Error',
-                'Access-Control-Allow-Origin': '*'
-            }
-        )
+        returnError()
 
 
 @require_http_methods(["POST"])
@@ -112,12 +119,7 @@ def club_profile_edit_submit(request):
     try:
         body = json.loads(request.body)
     except:
-        return JsonResponse(
-            {
-                'message': '',
-                'Access-Control-Allow-Origin': '*'
-            }
-        )
+        returnError()
 
 
 @require_http_methods(['GET'])
@@ -133,11 +135,7 @@ def club_recruit_classroom_apply_submit(request):
             date3 = body['Date3']
 
     except:
-        return JsonResponse(
-            {
-                'message': ''
-            }
-        )
+        returnError()
 
 
 @require_http_methods(['POST'])
@@ -145,11 +143,7 @@ def cd_post_star_submit(request):
     try:
         body = json.loads(request.body)
     except:
-        return JsonResponse(
-            {
-                'message': ''
-            }
-        )
+        returnError()
 
 
 @require_http_methods(['POST'])
@@ -157,11 +151,7 @@ def cd_recruit_classroom_apply_verify_submit(request):
     try:
         body = json.loads(request.body)
     except:
-        return JsonResponse(
-            {
-                'message': ''
-            }
-        )
+        returnError()
 
 
 @require_http_methods(['POST'])
@@ -169,11 +159,7 @@ def user_profile_edit_submit(request):
     try:
         body = json.loads(request.body)
     except:
-        return JsonResponse(
-            {
-                'message': ''
-            }
-        )
+        returnError()
 
 
 @require_http_methods(['POST'])
@@ -181,11 +167,7 @@ def club_member_add_submit(request):
     try:
         body = json.loads(request.body)
     except:
-        return JsonResponse(
-            {
-                'message': ''
-            }
-        )
+        returnError()
 
 
 @require_http_methods(['POST'])
@@ -193,11 +175,7 @@ def club_member_remove_submit(request):
     try:
         body = json.loads(request.body)
     except:
-        return JsonResponse(
-            {
-                'message': ''
-            }
-        )
+        returnError()
 
 
 @require_http_methods(['POST'])
@@ -205,11 +183,7 @@ def cd_message_list(request):
     try:
         body = json.loads(request.body)
     except:
-        return JsonResponse(
-            {
-                'message': ''
-            }
-        )
+        returnError()
 
 
 @require_http_methods(['POST'])
@@ -217,11 +191,7 @@ def cd_message_remove_submit(request):
     try:
         body = json.loads(request.body)
     except:
-        return JsonResponse(
-            {
-                'message': ''
-            }
-        )
+        returnError()
 
 
 @require_http_methods(['POST'])
@@ -229,11 +199,7 @@ def club_activity_apply_submit(request):
     try:
         body = json.loads(request.body)
     except:
-        return JsonResponse(
-            {
-                'message': ''
-            }
-        )
+        returnError()
 
 
 @require_http_methods(['POST'])
@@ -241,13 +207,7 @@ def cd_activity_agree_submit(request):
     try:
         body = json.loads(request.body)
     except:
-        return JsonResponse(
-            {
-                'message': ''
-            }
-        )
-    finally:
-        pass
+        returnError()
 
 
 @require_http_methods(['POST'])
@@ -255,11 +215,7 @@ def cd_activity_list(request):
     try:
         body = json.loads(request.body)
     except:
-        return JsonResponse(
-            {
-                'message': ''
-            }
-        )
+        returnError()
 
 
 @require_http_methods(['POST'])
@@ -267,11 +223,7 @@ def cd_activity_disagree_submit(request):
     try:
         body = json.loads(request.body)
     except:
-        return JsonResponse(
-            {
-                'message': ''
-            }
-        )
+        returnError()
 
 
 @require_http_methods(['POST'])
@@ -279,11 +231,7 @@ def cd_post_delete_submit(request):
     try:
         body = json.loads(request.body)
     except:
-        return JsonResponse(
-            {
-                'message': ''
-            }
-        )
+        returnError()
 
 
 @require_http_methods(['POST'])
@@ -325,9 +273,4 @@ def club_establish(request):
             }
         )
     except:
-        return JsonResponse(
-            {
-                'message': '',
-                'Access-Control-Allow-Origin': '*'
-            }
-        )
+        returnError()
