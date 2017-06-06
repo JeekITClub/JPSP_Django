@@ -1,35 +1,36 @@
 <template>
-<el-form :model="AchievementForm" ref="AchievementForm" label-width="100px">
-  <el-form-item
-    v-for="(achievement, index) in AchievementForm.achievements"
-    :label="'成就' + index"
-    :key="achievement.key"
-    :prop="'achievement.' + index + '.value'"
-    :rules="{
+  <el-form :model="AchievementForm" ref="AchievementForm" label-width="100px">
+    <el-form-item
+      v-for="(achievement, index) in AchievementForm.achievements"
+      :label="'成就' + index"
+      :key="achievement.key"
+      :prop="'achievement.' + index + '.value'"
+      :rules="{
       required: true, message: '不能为空', trigger: 'blur'
     }"
-  >
-    <el-input v-model="achievement.value"></el-input><el-button @click.prevent="removeAchievement(achievement)">删除</el-button>
-  </el-form-item>
-  <el-form-item>
-    <el-button type="primary" @click="submitForm">提交</el-button>
-    <el-button @click="addAchievement">新增成就</el-button>
-    <el-button @click="resetForm('AchievementForm')">重置</el-button>
-  </el-form-item>
-</el-form>
+    >
+      <el-input v-model="achievement.value"></el-input>
+      <el-button @click.prevent="removeAchievement(achievement)">删除</el-button>
+    </el-form-item>
+    <el-form-item>
+      <el-button type="primary" @click="submitForm">提交</el-button>
+      <el-button @click="addAchievement">新增成就</el-button>
+      <el-button @click="resetForm('AchievementForm')">重置</el-button>
+    </el-form-item>
+  </el-form>
 </template>
 <script>
-  import axios from 'axios' 
+  import axios from 'axios'
   export default {
-    data() {
+    data () {
       return {
-        AchievementForm:{
-            achievements:[
-              {
-                  value:''
-              }
-            ],
-          email:''
+        AchievementForm: {
+          achievements: [
+            {
+              value: ''
+            }
+          ],
+          email: ''
         },
         error: false
       }
@@ -43,7 +44,7 @@
             ClubId: this.GetClubId,
             ClubName: this.GetClubName,
             Achievements: this.AchievementForm.achievements,
-            //TODO: Notice Array transfer to String
+            // TODO: Notice Array transfer to String
             Email: this.AchievementForm.email,
             Token: this.GetToken
           })
@@ -59,13 +60,13 @@
         this.$refs[formName].resetFields()
       },
 
-      removeAchievement(item) {
+      removeAchievement (item) {
         var index = this.AchievementForm.ahievements.indexOf(item)
         if (index !== -1) {
           this.AchievementForm.achievements.splice(index, 1)
         }
       },
-      addAchievement() {
+      addAchievement () {
         this.AchievementForm.ahievements.push({
           value: '',
           key: Date.now()
