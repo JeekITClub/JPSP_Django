@@ -1,5 +1,5 @@
 <template>
-  <el-table :data="tableData" stripe style="width: 100%" v-if="Authenticate===true">
+  <el-table :data="members" stripe style="width: 100%">
     <el-table-column prop="MemberName" label="社员姓名" width="">
     </el-table-column>
     <el-table-column prop="MemberGrade" label="社员年级" width="">
@@ -15,7 +15,7 @@
   export default {
     data () {
       return {
-        tableData: [
+        members: [
           {
             Member: {
               Name: '',
@@ -27,6 +27,9 @@
       }
     },
     methods: {
+      addMember () {
+        // TODO: addMember method
+      },
       deleteMember (member) {
         console.log('success')
       }
