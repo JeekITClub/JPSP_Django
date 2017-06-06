@@ -1,5 +1,5 @@
 <template>
-  <el-form ref="SettingsForm" :model="SettingsForm" label-width="100%">
+  <el-form ref="SettingsForm" :model="SettingsForm" v-if="Authenticate===true">
     <el-form-item></el-form-item>
   </el-form>
 </template>
@@ -9,6 +9,11 @@
     data () {
       return {
         SettingsForm: {}
+      }
+    },
+    computed: {
+      Authenticate () {
+        return this.$store.state.Authenticated
       }
     }
   }

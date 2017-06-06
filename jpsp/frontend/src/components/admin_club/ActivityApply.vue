@@ -28,10 +28,10 @@
   </el-form-item>
   <el-form-item label="活动类型">
   </el-form-item>
-
-</el-form>
+  </el-form>
 </template>
 <script>
+  // 活动申请组件
   import axios from 'axios'
   export default {
     data () {
@@ -85,6 +85,9 @@
       },
       GetToken () {
         return this.$store.state.Token
+      },
+      Authenticate () {
+        return this.$store.state.Authenticated
       }
     }
   }

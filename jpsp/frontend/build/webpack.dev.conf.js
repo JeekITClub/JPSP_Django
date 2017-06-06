@@ -33,6 +33,11 @@ module.exports = merge(baseWebpackConfig, {
     new HtmlWebpackPlugin({
       filename: 'app_club.html',
       template: 'app_club.html',
+      chunks: [
+          'manifest',
+          'vendor',
+          'admin_club'
+        ],
       inject: true
     }),
     new HtmlWebpackPlugin({

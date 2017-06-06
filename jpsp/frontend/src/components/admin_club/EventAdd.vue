@@ -1,5 +1,5 @@
 <template>
-<el-form :model="AchievementForm" ref="AchievementForm" label-width="100px" class="demo-dynamic">
+<el-form :model="AchievementForm" ref="AchievementForm" label-width="100px">
   <el-form-item
     v-for="(achievement, index) in AchievementForm.achievements"
     :label="'成就' + index"
@@ -55,9 +55,10 @@
           alert('error: EventAdd')
         })
       },
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
+      resetForm (formName) {
+        this.$refs[formName].resetFields()
       },
+
       removeAchievement(item) {
         var index = this.AchievementForm.ahievements.indexOf(item)
         if (index !== -1) {
@@ -68,7 +69,7 @@
         this.AchievementForm.ahievements.push({
           value: '',
           key: Date.now()
-        });
+        })
       }
     },
     computed: {
@@ -80,6 +81,9 @@
       },
       GetToken () {
         return this.$store.state.Token
+      },
+      Authenticate () {
+        return this.$store.state.Authenticated
       }
     }
   }

@@ -5,19 +5,18 @@
         <club_aside></club_aside>
       </el-col>
       <el-col :span="20">
-        <club_activity_apply></club_activity_apply>
+        <club_recruit_member></club_recruit_member>
       </el-col>
     </el-row>
   </div>
 </template>
 <script>
   import JAside from '../../components/admin_club/ClubAside.vue'
-  import ActivityApply from '../../components/admin_club/ActivityApply.vue'
+  import RecruitMember from '../../components/admin_club/RecruitMember.vue'
   export default {
-    name: 'ActivityApply',
     components: {
       'club_aside': JAside,
-      'club_activity_apply': ActivityApply
+      'club_recruit_member': RecruitMember
     },
     computed: {
       Authenticate () {

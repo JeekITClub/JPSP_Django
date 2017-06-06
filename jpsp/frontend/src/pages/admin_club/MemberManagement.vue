@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="Authenticate===true">
     <el-row class="tac">
       <el-col :span="4">
         <club_aside></club_aside>
@@ -21,6 +21,11 @@
       'club_aside': ClubAside,
       'club_member_management': MemberManagement,
       'JFooter': JFooter
+    },
+    computed: {
+      Authenticate () {
+        return this.$store.state.Authenticated
+      }
     }
   }
 </script>

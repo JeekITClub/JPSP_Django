@@ -1,16 +1,13 @@
-/**
- * Created by wto on 2017/5/12 0012.
- */
 import Vue from 'vue'
 import Router from 'vue-router'
-import index from '@/pages/admin_club/index.vue'
-import PostEdit from '@/pages/admin_club/PostEdit.vue'
-import ProfileEdit from '@/pages/admin_club/ProfileEdit.vue'
-import ActivityApply from '@/pages/admin_club/ActivityApply.vue'
-import ClubPageSettings from '@/pages/admin_club/ClubPageSettings.vue'
-import MemberManagement from '@/pages/admin_club/MemberManagement.vue'
-import RecruitClassroomEdit from '@/pages/admin_club/RecruitClassroomEdit.vue'
-// import PostHistory from '@/pages/admin_club/PostHistory.vue'
+import index from '@/pages/admin_club/index'
+import PostEdit from '@/pages/admin_club/PostEdit'
+import ProfileEdit from '@/pages/admin_club/ProfileEdit'
+import ActivityApply from '@/pages/admin_club/ActivityApply'
+import ClubPageSettings from '@/pages/admin_club/ClubPageSettings'
+import MemberManagement from '@/pages/admin_club/MemberManagement'
+import RecruitClassroomEdit from '@/pages/admin_club/RecruitClassroomEdit'
+import RecruitMember from '@/pages/admin_club/RecruitMember.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -56,6 +53,11 @@ export default new Router({
           path: 'classroom',
           name: 'RecruitClassroomApply',
           component: RecruitClassroomEdit
+        },
+        {
+          path: 'member',
+          name: 'RecruitMember',
+          component: RecruitMember
         }
       ]
     },

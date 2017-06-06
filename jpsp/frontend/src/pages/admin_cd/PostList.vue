@@ -19,7 +19,7 @@
       'cd_post_list': PostList
     },
     data () {
-        return {}
+      return {}
     }
   }
 </script>

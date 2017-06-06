@@ -3,7 +3,7 @@
     <div>
       <JNavTop></JNavTop>
       <div class="container">
-        <router-view v-if="Authenticate===false"></router-view>
+        <router-view></router-view>
       </div>
     </div>
   </div>
@@ -15,12 +15,7 @@
     components: {
       'JNavTop': JNavTop
     },
-    name: 'app_club',
-    computed: {
-      Authenticate () {
-        return this.$store.state.Authenticated
-      }
-    }
+    name: 'app_club'
   }
 </script>
 

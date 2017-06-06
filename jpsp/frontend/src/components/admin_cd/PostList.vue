@@ -49,6 +49,7 @@
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
     data () {
       return {
@@ -71,13 +72,14 @@
     },
     methods: {
       StarSubmit (index, row) {
-        console.log (index, row)
         axios({
           method: 'POST',
           url: '/api/cd/star/Submit',
-          data: JSON.stringify ({
-            StarTime: date.now(),
-            PostId: scope.$index.id,
+          data: JSON.stringify({
+            StarTime: '',
+            // TODO: startime
+            PostId: '',
+            // TODO: PostId
             Token: ''
           })
         })
@@ -88,8 +90,10 @@
           method: 'POST',
           url: '/api/cd/Post/DeleteSubmit',
           data: JSON.stringify({
-            HandleTime: date.now(),
-            PostId: scope.$index.id,
+            HandleTime: '',
+            // TODO: HandleTime
+            PostId: '',
+            // TODO: PostId
             Token: ''
           })
         })
