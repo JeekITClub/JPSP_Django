@@ -56,6 +56,18 @@
         ]
       }
     },
+    methods: {
+
+    },
+    computed: {
+      GetClubName () {
+        return this.$store.state.UserName
+      },
+      GetClubId () {
+        return this.$store.state.ClubId
+      },
+      GetToken () {
+        return this.$store.state.Token
     computed: {
       Authenticate () {
         return this.$store.state.Authenticated

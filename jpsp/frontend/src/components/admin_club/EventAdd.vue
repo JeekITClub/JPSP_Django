@@ -1,3 +1,5 @@
+<template>
+<el-form ref="form" :model="form" label-width="80px">
 <el-form ref="form" :model="form" :label-width="100%" v-if="Authenticate===true">
   <el-form-item label="活动名称">
     <el-input v-model="form.name"></el-input>
@@ -58,6 +60,7 @@
     <el-button @click="resetForm('dynamicValidateForm')">重置</el-button>
   </el-form-item>
 </el-form>
+</template>
 <script>
   import ElInput from "../../../node_modules/element-ui/packages/input/src/input";
   export default {
@@ -115,6 +118,14 @@
       }
     },
     computed: {
+      GetClubName () {
+        return this.$store.state.UserName
+      },
+      GetClubId () {
+        return this.$store.state.ClubId
+      },
+      GetToken () {
+        return this.$store.state.Token
       Authenticate () {
         return this.$store.state.Authenticated
       }

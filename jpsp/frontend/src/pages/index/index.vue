@@ -223,7 +223,7 @@
   @import url("//unpkg.com/element-ui@1.3.2/lib/theme-default/index.css");
   @import '../../assets/index/css/animate.css';
   @import '../../assets/index/css/icomoon.css';
-  @import '../../assets/index/css/bootstrap.css';
+  @import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
   @import '../../assets/index/css/magnific-popup.css';
   @import '../../assets/index/css/flexslider.css';
   @import '../../assets/index/css/style.css';
