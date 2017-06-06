@@ -1,9 +1,5 @@
 <template>
   <el-form ref="PostForm" :model="PostForm" label-width="100%">
-    <el-form-item label="社团名称" required prop="ClubName">
-      <el-input v-bind="PostForm.ClubName">
-      </el-input>
-    </el-form-item>
     <el-form-item label="公共教室需要时间" required>
             <el-col :span="4">
               <el-form-item prop="Date1" required>
@@ -27,25 +23,46 @@
             </el-col>
     </el-form-item>
     <el-form-item>
-      <el-button type=""
+      <el-button type="primary" @click="submitForm">提交</el-button>
     </el-form-item>
   </el-form>
 </template>
 <script>
+  import axios from 'axios'
   export default {
     name: 'RecruitClassroomApply',
     data () {
       return {
         PostForm: {
-          ClubName: '',
+          ClubName: this.GetClubName,
           Date1: '',
           Date2: '',
           Date3: ''
-        }
+        },
+        error: false
       }
     },
     methods: {
-
+      submitForm () {
+        axios({
+          method: 'POST',
+          url: '',
+          data: JSON.stringify({
+            ClubId: this.GetClubId,
+            ClubName: this.GetClubName,
+            Date1: this.PostForm.Date1,
+            Date2: this.PostForm.Date2,
+            Date3: this.PostForm.Date3,
+            Token: this.GetToken
+          })
+        }).then(function (response) {
+          if (response.data.message === 'Error') {
+            this.data.error = true
+          }
+        }).catch(function () {
+          alert('error: PostEdit')
+        })
+      }
     },
     computed: {
       GetClubName () {

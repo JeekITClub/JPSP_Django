@@ -84,7 +84,8 @@
           IfRecruit: true,
           QQGroup: '',
           Email: ''
-        }
+        },
+        error: false
       }
     },
     methods: {
@@ -98,22 +99,26 @@
             Shezhang_QQ: this.EstablishClubForm.Shezhang.QQ,
             Shezhang_Grade: this.EstablishClubForm.Shezhang.Grade,
             Shezhang_Classroom: this.EstablishClubForm.Shezhang.Classroom,
-            // Label:
-            // TODO: array(label) to string
+            Label: this.Label,
+            // TODO: Label is stringified to a string not an array
             Introduction: this.EstablishClubForm.Introduction,
             IfRecruit: this.EstablishClubForm.IfRecruit,
             QQGroup: this.EstablishClubForm.QQGroup,
-            Email: this.EstablishClubForm.Email
+            Email: this.EstablishClubForm.Email,
+            Token: this.GetToken
           })
+        }).then(function (response) {
+          if (response.data.message === 'Error') {
+            this.data.error = true
+          }
+        }).catch(function () {
+          alert('error: Establish')
         })
       }
     },
     computed: {
       GetClubName () {
         return this.$store.state.UserName
-      },
-      GetClubId () {
-        return this.$store.state.ClubId
       },
       GetToken () {
         return this.$store.state.Token

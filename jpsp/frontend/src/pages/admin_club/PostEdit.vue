@@ -6,9 +6,6 @@
       </el-col>
       <el-col :span="20">
         <el-form :model="PostForm" :rules="rules" class="" labelPosition="right">
-          <el-form-item label="社团名称" prop="ClubName">
-            <el-input v-model="PostForm.ClubName" autofocus=""></el-input>
-          </el-form-item>
           <el-form-item label="活动联系人" required="">
             <el-col :span="4">
               <el-form-item prop="Linkman.Grade">
@@ -79,7 +76,7 @@
             <el-input type="textarea" v-model="PostForm.Feeling"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="submitForm('PostForm')">立即提交</el-button>
+            <el-button type="primary" @click="submitForm">立即提交</el-button>
           </el-form-item>
         </el-form>
         <el-row>
@@ -165,7 +162,7 @@
             this.data.error = true
           }
         }).catch(function () {
-          alert('error')
+          alert('error: PostEdit')
         })
       },
       resetForm (formName) {

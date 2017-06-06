@@ -77,7 +77,7 @@
       <el-button @click="addAchievement">新增成就</el-button>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="onSubmit">提交修改</el-button>
+      <el-button type="primary" @click="submitForm">提交修改</el-button>
       <el-button>取消</el-button>
     </el-form-item>
   </el-form>
@@ -106,13 +106,11 @@
             Grade: '',
             Class: ''
           }
-        }
+        },
+        error: false
       }
     },
     methods: {
-      onSubmit () {
-        console.log('submit!')
-      },
       removeAchievement (item) {
         var index = this.PostForm.achievements.indexOf(item)
         if (index !== -1) {
@@ -139,13 +137,17 @@
             label: this.PostForm.Label,
             state: true,
             introduction: this.PostForm.Introduction,
-            achievements: this.PostForm.Achievements
-            // TODO: CHANGE THE ARRAY ACHIEVEMENTS INTO TEXT
+            achievements: this.PostForm.Achievements,
+            // Notice Array to String
+            Token: this.GetToken
           }
-        }).then(function (responese) {
-          alert(JSON.stringify(responese.data))
+        }).then(function (response) {
+          if (response.data.message === 'Error') {
+            this.data.error = true
+          }
+          alert(JSON.stringify(response.data))
         }).catch(function () {
-          alert('error')
+          alert('error: ProfileEdit')
         })
       }
     },
