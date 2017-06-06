@@ -17,7 +17,7 @@
       <a href="" target="_blank">WebPack</a>、
       <a href="" target="_blank">NPM</a>
     </p>
-    <p>特别感谢<a href="" target="_blank">Github</a>以及<a href="" target="_blank">JetBrains</a> </p>
+    <p>特别感谢<a href="" target="_blank">Github</a>以及<a href="" target="_blank">JetBrains</a></p>
   </div>
 </template>
 <script>

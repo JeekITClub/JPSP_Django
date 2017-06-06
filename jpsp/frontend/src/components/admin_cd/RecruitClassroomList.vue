@@ -44,7 +44,7 @@
             Linkman: '',
             Date1: '',
             Date2: '',
-            Date3: '',
+            Date3: ''
           }
         ]
       }
@@ -60,21 +60,21 @@
             Date1: '',
             Date2: '',
             Date3: '',
-            Token: '',
+            Token: ''
           })
         })
       },
       HandleDeleteSubmit (index) {
-          // TODO: Problems here!
-          axios({
-            method: 'POST',
-            url: 'api/cd/',
-            data: JSON.stringify({
-              RecruitClassroomID: '',
-              Classroom : '',
-              Token: ''
-            })
+        // TODO: Problems here!
+        axios({
+          method: 'POST',
+          url: 'api/cd/',
+          data: JSON.stringify({
+            RecruitClassroomID: '',
+            Classroom: '',
+            Token: ''
           })
+        })
       }
     }
   }

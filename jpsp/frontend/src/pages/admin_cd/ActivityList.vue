@@ -14,13 +14,13 @@
   import CDAside from '../../components/admin_cd/CDAside.vue'
   import ActivityList from '../../components/admin_cd/ActivityList.vue'
   export default {
-      components: {
-        'cd_aside': CDAside,
-        'cd_activity_list': ActivityList
-      },
-      data () {
-        return {}
-      }
+    components: {
+      'cd_aside': CDAside,
+      'cd_activity_list': ActivityList
+    },
+    data () {
+      return {}
+    }
   }
 </script>
 <style>

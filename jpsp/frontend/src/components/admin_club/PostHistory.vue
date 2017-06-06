@@ -68,7 +68,7 @@
       },
       GetToken () {
         return this.$store.state.Token
-    computed: {
+      },
       Authenticate () {
         return this.$store.state.Authenticated
       }
