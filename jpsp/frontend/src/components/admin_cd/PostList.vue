@@ -85,7 +85,7 @@
         })
       },
       HandleDeleteSubmit (index, row) {
-        console.log(index, row);
+        console.log(index, row)
         axios({
           method: 'POST',
           url: '/api/cd/Post/DeleteSubmit',
