@@ -84,12 +84,13 @@ class Message(models.Model):
 
 class Token(models.Model):
     token = models.CharField(max_length=30,default="")
-    # username = models.ForeignKey(User)
-    # usertype_choices=(
-    #     ('club','club'),
-    #     ('cd','club_department'),
-    #     ('s','student')
-    # )
-    # usertype=models.CharField(max_length=4,choices=usertype_choices)
+    username = models.ForeignKey(User)
+    usertype_choices=(
+        ('club','club'),
+        ('cd','club_department'),
+        ('s','student'),
+        ('t','teacher')
+    )
+    usertype=models.CharField(max_length=4,choices=usertype_choices)
     # start_time = models.DateTimeField()
     # end_time = models.DateTimeField()

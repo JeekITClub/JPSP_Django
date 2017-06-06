@@ -19,7 +19,7 @@ def login(request):
     if user is not None:
         return JsonResponse({
             "message": "User Authenticated",
-            "Token": JPSPToken(username=username, usertype="club").generate(),
+            #"Token": JPSPToken(username=username, usertype="club").generate(),
             "Access-Control-Allow-Origin": '*'
         })
     else:
@@ -59,7 +59,6 @@ def club_post_edit_submit(request):
         linkMan_qq = body['Linkman']['Qq']
         region = body['Region']
         date1 = body['Date1']
-        date2 = body['Date2']
         content = body['Content']
         process = body['Process']
         assessment = body['Assessment']
@@ -68,7 +67,7 @@ def club_post_edit_submit(request):
         try:
             token_object = JPSPToken(username=clubid, usertype="club", token=token)
             # TODO: how to authenticate
-            if token_object.authenticate() == True:
+            if token_object.authenticate():
                 Post.objects.create(
                     ClubName=clubname,
                     ClubId=Club.objects.filter(clubid=clubid),
@@ -78,8 +77,7 @@ def club_post_edit_submit(request):
                     LinkmanPhoneNumber=linkman_phonenumber,
                     LinkmanQq=linkMan_qq,
                     Region=region,
-                    # Date1=date1,
-                    # Date2=date2,
+                    Date1=date1,
                     Content=content,
                     Process=process,
                     Assessment=assessment,

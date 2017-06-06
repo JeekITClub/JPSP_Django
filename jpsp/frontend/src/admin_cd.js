@@ -6,10 +6,12 @@ import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import Vuex from 'vuex'
+import 'bootstrap/dist/css/bootstrap.css'
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.use(Vuex)
 /* eslint-disable no-new */
+
 new Vue({
   el: '#app_cd',
   router,

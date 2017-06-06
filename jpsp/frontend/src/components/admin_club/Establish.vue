@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-form ref="EstablishClubForm" :model="EstablishClubForm" :rule="">
+    <el-form ref="EstablishClubForm" :model="EstablishClubForm" :rule="" v-if="Authenticate===true">
       <el-form-item label="社团名称">
         <el-input v-model="EstablishClubForm.ClubName"></el-input>
       </el-form-item>

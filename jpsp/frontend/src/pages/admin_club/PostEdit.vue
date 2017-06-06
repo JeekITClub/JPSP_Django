@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="Authenticate===true">
     <el-row :gutter="20">
       <el-col :span="4">
         <club_aside></club_aside>
@@ -58,13 +58,13 @@
             <el-input v-model="PostForm.region"></el-input>
           </el-form-item>
           <el-form-item label="活动时间" required>
-              <el-form-item prop="Date1">
-                <el-date-picker
-                  v-model="PostForm.Date1"
-                  type="datetime"
-                  placeholder="选择日期时间">
-                </el-date-picker>
-              </el-form-item>
+            <el-form-item prop="Date1">
+              <el-date-picker
+                v-model="PostForm.Date1"
+                type="datetime"
+                placeholder="选择日期时间">
+              </el-date-picker>
+            </el-form-item>
           </el-form-item>
           <el-form-item label="活动内容" prop="Content">
             <el-input type="textarea" v-model="PostForm.Content"></el-input>
@@ -84,7 +84,8 @@
         </el-form>
         <el-row>
           <el-col span="6" offset="18">
-            <a v-if="error===true">提交失败！请重新填写或联系管理员</a>
+            <a v-if="Settings.message==='Error'">提交失败！请重新填写或联系管理员</a>
+            <a v-if="Settings.message==='Success'">提交成功</a>
           </el-col>
         </el-row>
       </el-col>
@@ -117,7 +118,9 @@
           Assessment: '',
           Feeling: ''
         },
-        error: false,
+        Settings: {
+          message: ''
+        },
         rules: {
           ClubName: [
             {required: true, message: '请输入社团名称', trigger: 'blur'}
@@ -153,7 +156,6 @@
             Linkman: this.PostForm.Linkman,
             Region: this.PostForm.Region,
             Date1: this.PostForm.Date1,
-            Date2: this.PostForm.Date2,
             Content: this.PostForm.Content,
             Process: this.PostForm.Process,
             Assessment: this.PostForm.Assessment,
@@ -162,7 +164,10 @@
           })
         }).then(function (response) {
           if (response.data.message === 'Error') {
-            this.data.error = true
+            this.Settings.message = 'Error'
+          } else if (response.data.message === 'Success') {
+            this.Settings.message = 'Success'
+            this.resetForm('PostForm')
           }
         }).catch(function () {
           alert('error')
@@ -173,6 +178,9 @@
       }
     },
     computed: {
+      Authenticate () {
+        return this.$store.state.Authenticated
+      },
       GetClubName () {
         return this.$store.state.UserName
       },

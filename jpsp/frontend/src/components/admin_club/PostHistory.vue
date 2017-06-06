@@ -1,5 +1,5 @@
 <template>
-  <el-table :data="PostHitoryTable" border style="width: 100%">
+  <el-table :data="PostHitoryTable" border style="width: 100%" v-if="Authenticate===true">
     <el-table-column type="expand">
       <template scope="props">
         <el-form label-position="left" inline class="demo-table-expand">
@@ -68,6 +68,9 @@
       },
       GetToken () {
         return this.$store.state.Token
+    computed: {
+      Authenticate () {
+        return this.$store.state.Authenticated
       }
     }
   }
