@@ -27,7 +27,6 @@ RUN apt-get update && \
 	python3-setuptools \
 	python3-pip \
 	nginx \
-	openssl \
 	curl \
 	supervisor \
 	sqlite3 && \
