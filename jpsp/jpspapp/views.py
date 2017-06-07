@@ -25,10 +25,10 @@ def login(request):
     password = body['Password']
     user = authenticate(username=username, password=password)
     if user is not None:
-        print("hello")
+        token_object=JPSPToken(username=username, usertype="club")
         return JsonResponse({
             "message": "User Authenticated",
-            "Token": JPSPToken(username=username, usertype="club").generate(),
+            "Token": token_object.generate(),
             "Access-Control-Allow-Origin": '*'
         })
     else:
