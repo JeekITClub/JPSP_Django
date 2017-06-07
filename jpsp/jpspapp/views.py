@@ -24,24 +24,18 @@ def login(request):
     username = body['Username']
     password = body['Password']
     user = authenticate(username=username, password=password)
-    # if user is not None:
-    #     print("hello")
-    #     login(request, username)
-    #     return JsonResponse({
-    #         "message": "User Authenticated",
-    #         "Token": JPSPToken(username=username, usertype="club").generate(),
-    #         "Access-Control-Allow-Origin": '*'
-    #     })
-    # else:
-    #     return JsonResponse({
-    #         "message": "User Not Authenticated",
-    #         "Access-Control-Allow-Origin": '*',
-    #     })
-    return JsonResponse({
-        "message": "User Authenticated",
-        "Token": JPSPToken(username=username, usertype="club").generate(),
-        "Access-Control-Allow-Origin": '*'
-    })
+    if user is not None:
+        print("hello")
+        return JsonResponse({
+            "message": "User Authenticated",
+            "Token": JPSPToken(username=username, usertype="club").generate(),
+            "Access-Control-Allow-Origin": '*'
+        })
+    else:
+        return JsonResponse({
+            "message": "User Not Authenticated",
+            "Access-Control-Allow-Origin": '*',
+        })
 
 
 @require_http_methods(['POST'])
