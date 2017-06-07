@@ -27,6 +27,8 @@ RUN apt-get update && \
 	python3-setuptools \
 	python3-pip \
 	nginx \
+	openssl \
+	curl \
 	supervisor \
 	sqlite3 && \
 	pip3 install -U pip setuptools && \
@@ -42,7 +44,7 @@ RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 COPY nginx-app.conf /etc/nginx/sites-available/default
 COPY supervisor-app.conf /etc/supervisor/conf.d/
 COPY . /home/docker/jpsp/
-RUN curl http://npmjs.org/install.sh | sudo sh
+RUN curl http://npmjs.org/install.sh | sh
 RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
 RUN cd /home/docker/jpsp/jpsp/frontend
 RUN cnpm install
