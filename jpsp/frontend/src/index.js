@@ -6,6 +6,7 @@ import router from './router/index.js'
 import ElementUI from 'element-ui'
 import Vuex from 'vuex'
 import 'element-ui/lib/theme-default/index.css'
+import 'bootstrap'
 
 Vue.config.productionTip = false
 
