@@ -6,9 +6,9 @@
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-          <li><router-link to="#">主页</router-link></li>
+          <li><router-link to="/">主页</router-link></li>
           <li><router-link to="about">关于</router-link></li>
-          <li><router-link to="#">联系我们</router-link></li>
+          <li><router-link to="contact">联系我们</router-link></li>
         </ul>
         <ul class="nav navbar-nav navbar-right" v-if="Authenticate===true">
           <li><a href="../">{{ ClubName }}</a></li>

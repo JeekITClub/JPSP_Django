@@ -9,6 +9,7 @@ import MemberManagement from '@/pages/admin_club/MemberManagement'
 import RecruitClassroomEdit from '@/pages/admin_club/RecruitClassroomEdit'
 import RecruitMember from '@/pages/admin_club/RecruitMember.vue'
 import About from '@/pages/public/About.vue'
+import Contact from '@/pages/public/Contact.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -71,6 +72,11 @@ export default new Router({
       path: '/about',
       name: 'About',
       component: About
+    },
+    {
+      path: '/contact',
+      name: 'Contact',
+      component: Contact
     }
   ]
 })
