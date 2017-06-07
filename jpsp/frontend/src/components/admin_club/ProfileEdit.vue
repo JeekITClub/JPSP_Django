@@ -69,19 +69,19 @@
         :rules="{
       required: true, message: '不能为空', trigger: 'blur'
     }"
-    >
-      <el-input v-model="achievements.value"></el-input>
-      <el-button @click.prevent="removeAchievement(achievement)">删除</el-button>
-    </el-form-item>
-    <el-form-item>
-      <el-button @click="addAchievement">新增成就</el-button>
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary" @click="submitForm">提交修改</el-button>
-      <el-button>取消</el-button>
-    </el-form-item>
-  </el-form>
-    </div>
+      >
+        <el-input v-model="achievements.value"></el-input>
+        <el-button @click.prevent="removeAchievement(achievement)">删除</el-button>
+      </el-form-item>
+      <el-form-item>
+        <el-button @click="addAchievement">新增成就</el-button>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="submitForm">提交修改</el-button>
+        <el-button>取消</el-button>
+      </el-form-item>
+    </el-form>
+  </div>
 </template>
 <script>
   import axios from 'axios'
@@ -128,14 +128,16 @@
           method: 'POST',
           url: 'api/club/profile/EditSubmit',
           data: {
-            name: this.PostForm.ClubName,
+            clubname: this.PostForm.ClubName,
+            clubid: this.GetClubId,
             shezhang_name: this.PostForm.Shezhang.Name,
             shezhang_qq: this.PostForm.Shezhang.QQ,
+            shezhang_grade: this.PostForm.Shezhang.Grade,
+            shezhang_class: this.PostForm.Shezhang.Class,
             if_recruit: this.PostForm.IfRecruit,
             enroll_group_qq: this.PostForm.QQGroup,
             email: this.PostForm.Email,
             label: this.PostForm.Label,
-            state: true,
             introduction: this.PostForm.Introduction,
             achievements: this.PostForm.Achievements,
             // Notice Array to String

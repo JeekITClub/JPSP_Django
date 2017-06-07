@@ -32,6 +32,7 @@ class JPSPToken:
                 # end_time =datetime.datetime.now(),
             )
             self.message = 'Message'
+            return self.token
         except:
             self.message = 'Error'
 
