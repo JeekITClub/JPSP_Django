@@ -26,7 +26,7 @@
     </div>
     <div>
       <h1>Contributors</h1>
-      <p><a href="https://github.com/nichujie">2018届（13）班倪楚劼</a>
+      <p><a href="https://about.me/nichujie">2018届（13）班倪楚劼</a>
         <span>、</span>
         <a href="https://alienmao.github.io/">2018届（3）班邱世贸</a>
         <!--<span>、</span>-->
