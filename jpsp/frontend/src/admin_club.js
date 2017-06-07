@@ -7,8 +7,9 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import Vuex from 'vuex'
+import axios from 'axios'
 Vue.config.productionTip = false
-
+Vue.prototype.$ajax = axios
 Vue.use(ElementUI)
 Vue.use(Vuex)
 /* eslint-disable no-new */

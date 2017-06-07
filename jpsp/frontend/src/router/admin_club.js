@@ -8,6 +8,7 @@ import ClubPageSettings from '@/pages/admin_club/ClubPageSettings'
 import MemberManagement from '@/pages/admin_club/MemberManagement'
 import RecruitClassroomEdit from '@/pages/admin_club/RecruitClassroomEdit'
 import RecruitMember from '@/pages/admin_club/RecruitMember.vue'
+import About from '@/pages/public/About.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -65,6 +66,11 @@ export default new Router({
       path: '/member',
       name: 'Member',
       component: MemberManagement
+    },
+    {
+      path: '/about',
+      name: 'About',
+      component: About
     }
   ]
 })

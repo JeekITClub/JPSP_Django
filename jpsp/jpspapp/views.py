@@ -1,8 +1,9 @@
 # coding=utf-8
 from django.http import JsonResponse, HttpResponse
 import json
+from django.contrib.auth.models import User
 from jpsp.shortcut import JPSPToken, JPSPTime
-from jpspapp.models import Club, Post, Settings, Token
+from jpspapp.models import Club, Post, Settings, Token, Activity, Message, Classroom
 from django.core import serializers
 from django.views.decorators.http import require_http_methods
 import datetime
@@ -23,19 +24,24 @@ def login(request):
     username = body['Username']
     password = body['Password']
     user = authenticate(username=username, password=password)
-    if user is not None:
-        print("hello")
-        login(request, username)
-        return JsonResponse({
-            "message": "User Authenticated",
-            "Token": JPSPToken(username=username, usertype="club").generate(),
-            "Access-Control-Allow-Origin": '*'
-        })
-    else:
-        return JsonResponse({
-            "message": "User Not Authenticated",
-            "Access-Control-Allow-Origin": '*',
-        })
+    # if user is not None:
+    #     print("hello")
+    #     login(request, username)
+    #     return JsonResponse({
+    #         "message": "User Authenticated",
+    #         "Token": JPSPToken(username=username, usertype="club").generate(),
+    #         "Access-Control-Allow-Origin": '*'
+    #     })
+    # else:
+    #     return JsonResponse({
+    #         "message": "User Not Authenticated",
+    #         "Access-Control-Allow-Origin": '*',
+    #     })
+    return JsonResponse({
+        "message": "User Authenticated",
+        "Token": JPSPToken(username=username, usertype="club").generate(),
+        "Access-Control-Allow-Origin": '*'
+    })
 
 
 @require_http_methods(['POST'])
@@ -208,9 +214,19 @@ def club_activity_apply_submit(request):
         region = body['Region']
         date1 = body['Date1']
         date2 = body['Date2']
-        date3 = body['Date3']
         content = body['Content']
         type = body['Type']
+        Activity.objects.create(
+            ActivityName=activity_name,
+            Region=region,
+            Clubid=Club.objects.get(clubid=User.objects.get(username=club_id)),
+            ClubName=club_name,
+            Content=content,
+            Date1=date1,
+            Date2=date2,
+            state='0',
+            Type=type
+        )
     except:
         returnMessage('error')
 
@@ -227,7 +243,6 @@ def cd_activity_agree_submit(request):
 def cd_activity_list(request):
     try:
         body = json.loads(request.body)
-        activity_list=Activity.object
     except:
         returnMessage('error')
 

@@ -69,11 +69,13 @@ class Post(models.Model):
 
 class Message(models.Model):
     from_user = models.ForeignKey(User)
-    send_time = models.DateField(auto_now=True)
+    send_time = models.DateTimeField(auto_now=True)
     to_user = models.CharField(max_length=30)
-    read_time = models.DateField(default=None)
+    read_time = models.DateTimeField(default=None)
     message_type = (
-        ('nm', '需要进行社团打分'),
+        ('cps', '需要进行社团活动进行打分'),
+        ('ca', '需要审核社团活动'),
+        ('ce', '需要审核社团建立')
     )
     type = models.CharField(max_length=3, choices=message_type)
     content = models.TextField(default='')
@@ -97,18 +99,36 @@ class Token(models.Model):
 
 
 class Activity(models.Model):
-    clubid = models.ForeignKey(Club)
+    ActivityName=models.CharField(max_length=30,default="活动名称")
+    Region=models.CharField(max_length=30,default="活动地点")
+    Clubid = models.ForeignKey(Club)
     ClubName = models.CharField(max_length=30, default="社团")
     Content = models.TextField(default="活动内容")
     Date1 = models.DateTimeField()
     # Date1 is start datetime
     Date2 = models.DateTimeField()
     # Date2 is end datetime
+    state_choices = (
+        ('0', 'Draft'),
+        ('1', 'Accepted'),
+        ('2', 'Denied'),
+        ('3', 'Happening')
+    )
+    state = models.CharField(max_length=1, choices=state_choices, default='0')
+    type_choices = (
+        ('0','普通'),
+        ('1','义卖'),
+        ('2','销售'),
+    )
+    Type=models.TextField(default='0',choices=type_choices)
 
 class Classroom(models.Model):
-    ClassroomId=models.IntegerField()
-    ClubId=models.ForeignKey(Club)
-    ClubName=models.CharField(max_length=30,default="社团")
-    Date1=models.DateTimeField()
-    Date2=models.DateTimeField()
+    ClassroomId = models.IntegerField()
+    ClubId = models.ForeignKey(Club)
+    ClubName = models.CharField(max_length=30, default="社团")
+    Date1 = models.DateTimeField()
+    Date2 = models.DateTimeField()
 
+
+class ActivityParticipant(models.Model):
+    pass

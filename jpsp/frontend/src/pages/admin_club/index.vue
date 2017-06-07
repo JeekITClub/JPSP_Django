@@ -3,7 +3,7 @@
     <div class="LoginForm">
       <el-row class="tac">
         <el-col :span="8" :offset="8">
-          <el-form ref="LoginForm" :model="LoginForm" v-if="Authenticate===null" v-else-if="Authenticate===false">
+          <el-form ref="LoginForm" :model="LoginForm" v-if="Authenticate===null || Authenticate===false">
             <el-form-item label="社团ID" :required=true>
               <el-input v-model="LoginForm.ClubId" placeholder="社团ID" autofocus=""></el-input>
             </el-form-item>
@@ -52,20 +52,17 @@
         })
           .then(function (response) {
             if (response.data.message === 'User Authenticated') {
-              this.$store.commit('Authenticated', false)
+              this.$store.commit('Authenticated', true)
               this.$store.commit('ApplyUserName', this.UserName)
               this.$store.commit('ApplyToken', response.data.Token)
             } else if (response.data.message === 'User Not Authenticated') {
               this.$store.commit('Authenticated', false)
             }
-          })
+          }.bind(this))
           .catch(function (error) {
             console.log(error)
           })
       }
-//      onSubmit () {
-//        this.$store.commit('Authenticate')
-//      }
     },
     computed: {
       Authenticate () {
