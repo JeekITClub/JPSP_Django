@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'jpspapp',
-    #'corsheaders'
+    'corsheaders'
 ]
 
 CORS_ALLOW_HEADERS = (
@@ -154,3 +154,4 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "frontend/dist/static"),
 ]
+STATIC_ROOT = '/jpsp/static/'
