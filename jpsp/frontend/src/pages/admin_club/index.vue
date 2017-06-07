@@ -44,21 +44,19 @@
       onSubmit () {
         axios({
           method: 'POST',
-          url: 'http://127.0.0.1:8000/api/login/',
-          data: {
-            Username: this.LoginForm.ClubId,
+          url: '',
+          data: JSON.stringify({
+            UserName: this.LoginForm.ClubId,
             Password: this.LoginForm.Password
+          })
+        }).then(function (response) {
+          if (response.data.message === 'User Authenticated') {
+            this.$store.commit('Authenticate')
+            this.$store.commit('ApplyUserName', this.UserName)
+          } else if (response.data.message === 'User Not Authenticated') {
+            this.data.settings.NotAuthenticated = true
           }
         })
-          .then(function (response) {
-            if (response.data.message === 'User Authenticated') {
-              this.$store.commit('Authenticated', true)
-              this.$store.commit('ApplyUserName', this.UserName)
-              this.$store.commit('ApplyToken', response.data.Token)
-            } else if (response.data.message === 'User Not Authenticated') {
-              this.$store.commit('Authenticated', false)
-            }
-          }.bind(this))
           .catch(function (error) {
             console.log(error)
           })
