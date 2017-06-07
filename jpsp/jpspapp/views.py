@@ -127,6 +127,38 @@ def club_post_edit_submit(request):
 def club_profile_edit_submit(request):
     try:
         body = json.loads(request.body)
+        token = body['Token']
+        clubid = body['clubid']
+        clubname = body['clubname']
+        shezhang_name = body['shezhang_name']
+        shezhang_qq = body['shezhang_qq']
+        shezhang_grade=body['shezhang_grade']
+        shezhang_class=body['shezhang_class']
+        if_recruit = body['if_recruit']
+        enroll_group_qq = body['enroll_group_qq']
+        email = body['email']
+        label = body['label']
+        state = body['state']
+        introduction = body['introduction']
+        achievements = body['achievements']
+        try:
+            club_object=Club.objects.get(clubid=clubid)
+            club_object.clubname=clubname
+            club_object.shezhang_name=shezhang_name
+            club_object.shezhang_grade=shezhang_grade
+            club_object.shezhang_classroom=shezhang_class
+            club_object.shezhang_qq=shezhang_qq
+            club_object.if_recruit=if_recruit
+            club_object.enroll_group_qq=enroll_group_qq
+            club_object.email=email
+            club_object.label=label
+            club_object.state=state
+            club_object.introduction=introduction
+            club_object.achievements=achievements
+            club_object.save()
+            returnMessage(message='success')
+        except:
+            returnMessage(message='error')
     except:
         returnMessage(message='error')
 
