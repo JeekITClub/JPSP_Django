@@ -7,8 +7,8 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Settings(models.Model):
-    name=models.CharField(max_length=10,default="settings")
-    clubid=models.IntegerField()
+    name = models.CharField(max_length=10, default="settings")
+    clubid = models.IntegerField()
 
 
 class UserProfile(models.Model):
@@ -26,7 +26,7 @@ class CDUser(models.Model):
 
 
 class Club(models.Model):
-    clubname = models.CharField(max_length=30,default="社团")
+    clubname = models.CharField(max_length=30, default="社团")
     clubid = models.ForeignKey(User)
     # 社团id
     shezhang_name = models.CharField(max_length=8, default="")
@@ -49,8 +49,8 @@ class Club(models.Model):
 
 
 class Post(models.Model):
-    ClubName = models.CharField(max_length=30,default="社团")
-    CludId=models.ForeignKey(Club)
+    ClubName = models.CharField(max_length=30, default="社团")
+    CludId = models.ForeignKey(Club)
     LinkmanGrade = models.CharField(max_length=1, default="1")
     LinkmanClass = models.CharField(max_length=2, default="1")
     LinkmanName = models.CharField(max_length=8, default="")
@@ -83,14 +83,32 @@ class Message(models.Model):
 
 
 class Token(models.Model):
-    token = models.CharField(max_length=30,default="")
+    token = models.CharField(max_length=30, default="")
     username = models.ForeignKey(User)
-    usertype_choices=(
-        ('club','club'),
-        ('cd','club_department'),
-        ('s','student'),
-        ('t','teacher')
+    usertype_choices = (
+        ('club', 'club'),
+        ('cd', 'club_department'),
+        ('s', 'student'),
+        ('t', 'teacher')
     )
-    usertype=models.CharField(max_length=4,choices=usertype_choices)
+    usertype = models.CharField(max_length=4, choices=usertype_choices)
     # start_time = models.DateTimeField()
     # end_time = models.DateTimeField()
+
+
+class Activity(models.Model):
+    clubid = models.ForeignKey(Club)
+    ClubName = models.CharField(max_length=30, default="社团")
+    Content = models.TextField(default="活动内容")
+    Date1 = models.DateTimeField()
+    # Date1 is start datetime
+    Date2 = models.DateTimeField()
+    # Date2 is end datetime
+
+class Classroom(models.Model):
+    ClassroomId=models.IntegerField()
+    ClubId=models.ForeignKey(Club)
+    ClubName=models.CharField(max_length=30,default="社团")
+    Date1=models.DateTimeField()
+    Date2=models.DateTimeField()
+

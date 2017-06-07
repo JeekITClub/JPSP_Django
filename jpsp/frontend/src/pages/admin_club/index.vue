@@ -3,7 +3,7 @@
     <div class="LoginForm">
       <el-row class="tac">
         <el-col :span="8" :offset="8">
-          <el-form ref="LoginForm" :model="LoginForm" v-if="Authenticate===false">
+          <el-form ref="LoginForm" :model="LoginForm" v-if="Authenticate===null" v-else-if="Authenticate===false">
             <el-form-item label="社团ID" :required=true>
               <el-input v-model="LoginForm.ClubId" placeholder="社团ID" autofocus=""></el-input>
             </el-form-item>
@@ -15,7 +15,7 @@
               <el-button type="primary" @click="onSubmit">登陆</el-button>
             </el-form-item>
             <el-form-item>
-              <p v-if="settings.NotAuthenticated===true">登陆失败</p>
+              <p v-if="Authenticate===false">登陆失败</p>
             </el-form-item>
           </el-form>
           <h1 v-if="Authenticate===true">已登录</h1>
@@ -37,9 +37,6 @@
         LoginForm: {
           ClubId: '',
           Password: ''
-        },
-        settings: {
-          NotAuthenticated: false
         }
       }
     },
@@ -47,18 +44,19 @@
       onSubmit () {
         axios({
           method: 'POST',
-          url: 'http://localhost/api/login/',
+          url: 'http://127.0.0.1:8000/api/login/',
           data: {
-            UserName: this.LoginForm.ClubId,
+            Username: this.LoginForm.ClubId,
             Password: this.LoginForm.Password
           }
         })
           .then(function (response) {
             if (response.data.message === 'User Authenticated') {
-              this.$store.commit('Authenticate')
+              this.$store.commit('Authenticated', false)
               this.$store.commit('ApplyUserName', this.UserName)
+              this.$store.commit('ApplyToken', response.data.Token)
             } else if (response.data.message === 'User Not Authenticated') {
-              this.data.settings.NotAuthenticated = true
+              this.$store.commit('Authenticated', false)
             }
           })
           .catch(function (error) {
