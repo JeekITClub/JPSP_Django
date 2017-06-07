@@ -47,13 +47,12 @@
       onSubmit () {
         axios({
           method: 'POST',
-          url: 'http://localhost/api/login/',
-          data: {
+          url: '',
+          data: JSON.stringify({
             UserName: this.LoginForm.ClubId,
             Password: this.LoginForm.Password
-          }
-        })
-          .then(function (response) {
+          })
+        }).then(function (response) {
             if (response.data.message === 'User Authenticated') {
               this.$store.commit('Authenticate')
               this.$store.commit('ApplyUserName', this.UserName)

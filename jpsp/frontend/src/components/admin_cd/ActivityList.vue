@@ -83,6 +83,17 @@
           })
         })
       }
+    },
+    computed: {
+      Authenticate () {
+        return this.$store.state.Authenticated
+      },
+      GetClubName () {
+        return this.$store.state.UserName
+      },
+      GetToken () {
+        return this.$store.state.Token
+      }
     }
   }
 </script>
