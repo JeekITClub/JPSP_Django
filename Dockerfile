@@ -42,11 +42,11 @@ RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 COPY nginx-app.conf /etc/nginx/sites-available/default
 COPY supervisor-app.conf /etc/supervisor/conf.d/
 COPY . /home/docker/jpsp/
-RUN sudo curl http://npmjs.org/install.sh | sudo sh
-RUN sudo npm install -g cnpm --registry=https://registry.npm.taobao.org
+RUN curl http://npmjs.org/install.sh | sudo sh
+RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
 RUN cd /home/docker/jpsp/jpsp/frontend
-RUN sudo cnpm install
-RUN sudo npm build
+RUN cnpm install
+RUN npm build
 RUN python3 /home/docker/jpsp/jpsp/manage.py collectstatic
 # COPY requirements.txt and RUN pip install BEFORE adding the rest of your code, this will cause Docker's caching mechanism
 # to prevent re-installing (all your) dependencies when you made a change a line or two in your app.
