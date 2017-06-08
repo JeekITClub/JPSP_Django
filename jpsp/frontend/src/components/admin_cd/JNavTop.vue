@@ -11,8 +11,7 @@
           <li><router-link to="contact">联系我们</router-link></li>
         </ul>
         <ul class="nav navbar-nav navbar-right" v-if="Authenticate===true">
-          <li><a href="../">{{ ClubName }}</a></li>
-          <li><router-link to="profile">资料修改</router-link></li>
+          <li><a href="../">{{ UserName }}</a></li>
           <li><a href="/">消息列表</a></li>
           <li><a href="/">注销</a></li>
         </ul>
@@ -45,16 +44,8 @@
        * @returns {*|string}
        * @constructor
        */
-      ClubName () {
+      UserName () {
         return this.$store.state.UserName
-      },
-      /**
-       *
-       * @returns {computed.ClubId|string|*|ClubId}
-       * @constructor
-       */
-      ClubId () {
-        return this.$store.state.ClubId
       }
     }
   }

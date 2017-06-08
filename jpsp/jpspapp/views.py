@@ -1,17 +1,18 @@
 # coding=utf-8
 from django.http import JsonResponse, HttpResponse
 import json
+from django.contrib.auth.models import User
 from jpsp.shortcut import JPSPToken, JPSPTime
-from jpspapp.models import Club, Post, Settings, Token
+from jpspapp.models import Club, Post, Settings, Token, Activity, Message, Classroom
 from django.core import serializers
 from django.views.decorators.http import require_http_methods
 import datetime
 from django.contrib.auth import authenticate, login
 
 
-def returnError():
+def returnMessage(message):
     return JsonResponse({
-        'message': 'Error',
+        'message': message,
         'Access-Control-Allow-Origin': '*'
     })
 
@@ -20,13 +21,14 @@ def returnError():
 @require_http_methods(['POST'])
 def login(request):
     body = json.loads(request.body)
-    username = body['UserName']
+    username = body['Username']
     password = body['Password']
     user = authenticate(username=username, password=password)
     if user is not None:
+        token_object = JPSPToken(username=username, usertype="club")
         return JsonResponse({
             "message": "User Authenticated",
-            "Token": JPSPToken(username=username, usertype="club").generate(),
+            "Token": token_object.generate(),
             "Access-Control-Allow-Origin": '*'
         })
     else:
@@ -45,7 +47,8 @@ def logout(request):
         token_object = JPSPToken(username=username, usertype=usertype)
         token_object.remove()
     except:
-        returnError()
+        returnMessage(message='error')
+
 
 @require_http_methods(["GET"])
 def club_list(request):
@@ -55,7 +58,7 @@ def club_list(request):
         response['Access-Control-Allow-Origin'] = '*'
         return response
     except:
-        returnError()
+        returnMessage(message='error')
 
 
 @require_http_methods(["POST"])
@@ -111,31 +114,63 @@ def club_post_edit_submit(request):
                 }
             )
     except:
-        returnError()
+        returnMessage(message='error')
 
 
 @require_http_methods(["POST"])
 def club_profile_edit_submit(request):
     try:
         body = json.loads(request.body)
+        token = body['Token']
+        clubid = body['clubid']
+        clubname = body['clubname']
+        shezhang_name = body['shezhang_name']
+        shezhang_qq = body['shezhang_qq']
+        shezhang_grade = body['shezhang_grade']
+        shezhang_class = body['shezhang_class']
+        if_recruit = body['if_recruit']
+        enroll_group_qq = body['enroll_group_qq']
+        email = body['email']
+        label = body['label']
+        state = body['state']
+        introduction = body['introduction']
+        achievements = body['achievements']
+        try:
+            club_object = Club.objects.get(clubid=clubid)
+            club_object.clubname = clubname
+            club_object.shezhang_name = shezhang_name
+            club_object.shezhang_grade = shezhang_grade
+            club_object.shezhang_classroom = shezhang_class
+            club_object.shezhang_qq = shezhang_qq
+            club_object.if_recruit = if_recruit
+            club_object.enroll_group_qq = enroll_group_qq
+            club_object.email = email
+            club_object.label = label
+            club_object.state = state
+            club_object.introduction = introduction
+            club_object.achievements = achievements
+            club_object.save()
+            returnMessage(message='success')
+        except:
+            returnMessage(message='error')
     except:
-        returnError()
+        returnMessage(message='error')
 
 
 @require_http_methods(['GET'])
 def club_recruit_classroom_apply_submit(request):
     try:
         body = json.loads(request.body)
-        Token = body['Token']
-        if Token:
-            clubname = body['ClubName']
-            classroom = body['Classroom']
-            date1 = body['Date1']
-            date2 = body['Date2']
-            date3 = body['Date3']
-
+        token = body['Token']
+        club_id = body['ClubId']
+        club_name = body['ClubName']
+        classroom = body['Classroom']
+        date1 = body['Date1']
+        date2 = body['Date2']
+        date3 = body['Date3']
+        returnMessage('success')
     except:
-        returnError()
+        returnMessage('error')
 
 
 @require_http_methods(['POST'])
@@ -143,7 +178,7 @@ def cd_post_star_submit(request):
     try:
         body = json.loads(request.body)
     except:
-        returnError()
+        returnMessage('error')
 
 
 @require_http_methods(['POST'])
@@ -151,7 +186,7 @@ def cd_recruit_classroom_apply_verify_submit(request):
     try:
         body = json.loads(request.body)
     except:
-        returnError()
+        returnMessage('error')
 
 
 @require_http_methods(['POST'])
@@ -159,7 +194,7 @@ def user_profile_edit_submit(request):
     try:
         body = json.loads(request.body)
     except:
-        returnError()
+        returnMessage('error')
 
 
 @require_http_methods(['POST'])
@@ -167,7 +202,7 @@ def club_member_add_submit(request):
     try:
         body = json.loads(request.body)
     except:
-        returnError()
+        returnMessage('error')
 
 
 @require_http_methods(['POST'])
@@ -175,7 +210,7 @@ def club_member_remove_submit(request):
     try:
         body = json.loads(request.body)
     except:
-        returnError()
+        returnMessage('error')
 
 
 @require_http_methods(['POST'])
@@ -183,7 +218,7 @@ def cd_message_list(request):
     try:
         body = json.loads(request.body)
     except:
-        returnError()
+        returnMessage('error')
 
 
 @require_http_methods(['POST'])
@@ -191,15 +226,35 @@ def cd_message_remove_submit(request):
     try:
         body = json.loads(request.body)
     except:
-        returnError()
+        returnMessage('error')
 
 
 @require_http_methods(['POST'])
 def club_activity_apply_submit(request):
     try:
         body = json.loads(request.body)
+        token = body['Token']
+        club_id = body['ClubId']
+        club_name = body['ClubName']
+        activity_name = body['ActivityName']
+        region = body['Region']
+        date1 = body['Date1']
+        date2 = body['Date2']
+        content = body['Content']
+        type = body['Type']
+        Activity.objects.create(
+            ActivityName=activity_name,
+            Region=region,
+            Clubid=Club.objects.get(clubid=User.objects.get(username=club_id)),
+            ClubName=club_name,
+            Content=content,
+            Date1=date1,
+            Date2=date2,
+            state='0',
+            Type=type
+        )
     except:
-        returnError()
+        returnMessage('error')
 
 
 @require_http_methods(['POST'])
@@ -207,7 +262,7 @@ def cd_activity_agree_submit(request):
     try:
         body = json.loads(request.body)
     except:
-        returnError()
+        returnMessage('error')
 
 
 @require_http_methods(['POST'])
@@ -215,7 +270,7 @@ def cd_activity_list(request):
     try:
         body = json.loads(request.body)
     except:
-        returnError()
+        returnMessage('error')
 
 
 @require_http_methods(['POST'])
@@ -223,7 +278,7 @@ def cd_activity_disagree_submit(request):
     try:
         body = json.loads(request.body)
     except:
-        returnError()
+        returnMessage('error')
 
 
 @require_http_methods(['POST'])
@@ -231,7 +286,7 @@ def cd_post_delete_submit(request):
     try:
         body = json.loads(request.body)
     except:
-        returnError()
+        returnMessage('error')
 
 
 @require_http_methods(['POST'])
@@ -273,4 +328,4 @@ def club_establish(request):
             }
         )
     except:
-        returnError()
+        returnMessage('error')

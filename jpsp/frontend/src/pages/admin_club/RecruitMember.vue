@@ -9,6 +9,7 @@
       </el-col>
     </el-row>
   </div>
+
 </template>
 <script>
   import JAside from '../../components/admin_club/ClubAside.vue'

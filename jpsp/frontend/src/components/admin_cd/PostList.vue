@@ -1,8 +1,8 @@
 <template>
   <el-table :data="PostListTable" border style="width: 100%">
     <el-table-column type="expand">
-      <template scope="props">
-        <el-form label-position="left" inline class="demo-table-expand">
+      <template :scope="props">
+        <el-form :label-position="left" inline>
           <el-form-item label="活动地点">
             <span>{{ props.row.Region }}</span>
           </el-form-item>
@@ -36,7 +36,7 @@
       <span style="margin-left: 10px">{{ scope.row.Date1 }}--{{ scope.row.Date2 }}</span>
     </el-table-column>
     <el-table-column label="评价">
-      <template scope="scope">
+      <template :scope=scope>
         <el-rate v-model="scope.row.Star" v-on:change="StarSubmit"></el-rate>
       </template>
     </el-table-column>
@@ -55,17 +55,17 @@
       return {
         PostListTable: [
           {
-            PostId: '',
-            ClubName: '',
-            Linkman: '',
-            Region: '',
+            PostId: 'A',
+            ClubName: 'A',
+            Linkman: 'AA',
+            Region: 'A',
             Date1: '',
             Date2: '',
-            Star: '',
-            Content: '',
-            Process: '',
-            Assessment: '',
-            Feeling: ''
+            Star: 'A',
+            Content: 'A',
+            Process: 'A',
+            Assessment: 'A',
+            Feeling: 'A'
           }
         ]
       }
@@ -97,6 +97,17 @@
             Token: ''
           })
         })
+      }
+    },
+    computed: {
+      Authenticate () {
+        return this.$store.state.Authenticated
+      },
+      GetUserName () {
+        return this.$store.state.UserName
+      },
+      GetToken () {
+        return this.$store.state.Token
       }
     }
   }

@@ -76,6 +76,17 @@
           })
         })
       }
+    },
+    computed: {
+      Authenticate () {
+        return this.$store.state.Authenticated
+      },
+      GetUserName () {
+        return this.$store.state.UserName
+      },
+      GetToken () {
+        return this.$store.state.Token
+      }
     }
   }
 </script>

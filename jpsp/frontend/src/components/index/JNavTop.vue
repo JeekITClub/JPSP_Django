@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-xs-4">
-            <div id="fh5co-logo"><a href="index.html">建平学生社团系统</a></div>
+            <div id="fh5co-logo"><a href="index.html">建平中学学生平台</a></div>
           </div>
           <div class="col-xs-8 text-right menu-1">
             <ul>

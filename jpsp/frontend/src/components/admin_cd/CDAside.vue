@@ -60,7 +60,7 @@
             <el-menu-item index="6-4" route="" disabled="">C</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
-        <el-menu-item index="7" disabled=""><i class="el-icon-setting"></i>导航三</el-menu-item>
+        <el-menu-item index="7" disabled="" route="">导航三</el-menu-item>
       </el-menu>
     </el-col>
   </el-row>

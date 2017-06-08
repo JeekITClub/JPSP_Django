@@ -13,7 +13,7 @@ Object.keys(baseWebpackConfig.entry).forEach(function (name) {
 
 module.exports = merge(baseWebpackConfig, {
   module: {
-    rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap })
+    rules: utils.styleLoaders({sourceMap: config.dev.cssSourceMap})
   },
   // cheap-module-eval-source-map is faster for development
   devtool: '#cheap-module-eval-source-map',
@@ -28,21 +28,31 @@ module.exports = merge(baseWebpackConfig, {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'index.html',
+      chunks: [
+        'manifest',
+        'vendor',
+        'index'
+      ],
       inject: true
     }),
     new HtmlWebpackPlugin({
       filename: 'app_club.html',
       template: 'app_club.html',
       chunks: [
-          'manifest',
-          'vendor',
-          'admin_club'
-        ],
+        'manifest',
+        'vendor',
+        'admin_club'
+      ],
       inject: true
     }),
     new HtmlWebpackPlugin({
       filename: 'app_cd.html',
       template: 'app_cd.html',
+      chunks: [
+        'manifest',
+        'vendor',
+        'admin_cd'
+      ],
       inject: true
     }),
     new FriendlyErrorsPlugin()
