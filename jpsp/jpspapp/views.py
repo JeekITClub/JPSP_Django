@@ -21,7 +21,7 @@ def returnMessage(message):
 @require_http_methods(['POST'])
 def login(request):
     body = json.loads(request.body)
-    username = body['Username']
+    username = body['UserName']
     password = body['Password']
     user = authenticate(username=username, password=password)
     if user is not None:
@@ -67,11 +67,11 @@ def club_post_edit_submit(request):
         body = json.loads(request.body)
         clubname = body['ClubName']
         clubid = body['ClubId']
-        linkman_grade = body['Linkman']['Grade']
-        linkman_class = body['Linkman']['Class']
-        linkman_name = body['Linkman']['Name']
-        linkman_phonenumber = body['Linkman']['PhoneNumber']
-        linkMan_qq = body['Linkman']['Qq']
+        linkman_grade = body['LinkmanGrade']
+        linkman_class = body['LinkmanClass']
+        linkman_name = body['LinkmanName']
+        linkman_phonenumber = body['LinkmanPhoneNumber']
+        linkMan_qq = body['LinkmanQq']
         region = body['Region']
         date1 = body['Date1']
         content = body['Content']
@@ -353,5 +353,33 @@ def lost_and_found_submit(request):
     try:
         body=json.loads(request.body)
         token=body['token']
+    except:
+        returnMessage(message='error')
+
+@require_http_methods(["POST"])
+def cd_post_list(request):
+    try:
+        # body=json.loads(request.body)
+        # token=body['Token']
+        querySet=Post.objects.all()
+        response=[]
+        for num in range(0,querySet.count()):
+            for data in querySet:
+                response[num]['PostId']=data.pk
+                response[num]['ClubName']=data.ClubName
+                response[num]['ClubId']=data.ClubId.clubid.username
+                response[num]['LinkmanGrade']=data.LinkmanGrade
+                response[num]['LinkmanName']=data.LinkmanName
+                response[num]['LinkmanPhoneNumber'] = data.LinkmanPhoneNumber
+                response[num]['LinkmanQq'] = data.LinkmanQq
+                response[num]['Region']=data.Region
+                response[num]['Date1'] = data.Date1
+                response[num]['Date2'] = data.Date2
+                response[num]['Process'] = data.Process
+                response[num]['Content'] = data.Content
+                response[num]['Assessment'] = data.Assessment
+                response[num]['Feeling'] = data.Feeling
+                response[num]['Stars'] = data.Stars
+                response[num]['StarTime'] = data.StarTime
     except:
         returnMessage(message='error')

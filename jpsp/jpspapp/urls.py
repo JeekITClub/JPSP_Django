@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^club/activity/ApplySubmit', views.club_activity_apply_submit),
     url(r'^cd/activity/AgreeSubmit', views.cd_activity_agree_submit),
     url(r'^cd/activity/DisagreeSubmit', views.cd_activity_disagree_submit),
+    url(r'^cd/post/list',views.cd_post_list)
 ]

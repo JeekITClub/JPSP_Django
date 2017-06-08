@@ -1,7 +1,7 @@
 <!---component dashboard aside-->
 <template>
   <el-menu @open="handleOpen" @close="handleClose">
-    <el-menu-item index="1" disabled="" route="/">>仪表盘</el-menu-item>
+    <el-menu-item index="1" disabled="" route="/">仪表盘</el-menu-item>
     <el-submenu index="2">
       <template slot="title">
         社团活动记录

@@ -55,17 +55,17 @@
       return {
         PostListTable: [
           {
-            PostId: 'A',
-            ClubName: 'A',
-            Linkman: 'AA',
-            Region: 'A',
+            PostId: '',
+            ClubName: '',
+            Linkman: '',
+            Region: '',
             Date1: '',
             Date2: '',
-            Star: 'A',
-            Content: 'A',
-            Process: 'A',
-            Assessment: 'A',
-            Feeling: 'A'
+            Star: '',
+            Content: '',
+            Process: '',
+            Assessment: '',
+            Feeling: ''
           }
         ]
       }
@@ -108,6 +108,21 @@
       },
       GetToken () {
         return this.$store.state.Token
+      },
+      PostList() {
+        axios({
+          method: 'POST',
+          url: '/api/cd/post/list',
+          data: JSON.stringify({
+            Token: ''
+          }).then(function (response) {
+            if(response.data.message === 'success') {
+                console.log(response)
+            }
+          }.bind(this)).catch(function (error) {
+              console.log(error)
+          })
+        })
       }
     }
   }
