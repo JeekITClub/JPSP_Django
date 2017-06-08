@@ -19,7 +19,7 @@ export default new Router({
       component: Login
     },
     {
-      path: '/LostAndFound',
+      path: '/lost',
       name: 'LostAndFound',
       component: LostAndFound
     }
