@@ -47,9 +47,9 @@
           })
         }).then(function (response) {
           if (response.data.message === 'User Authenticated') {
-            this.$store.commit('Authenticate',true)
+            this.$store.commit('Authenticate', true)
             this.$store.commit('ApplyUserName', this.UserName)
-            this.$store.commit('ApplyToken',response.data.Token)
+            this.$store.commit('ApplyToken', response.data.Token)
           } else if (response.data.message === 'User Not Authenticated') {
             this.data.settings.NotAuthenticated = true
           }

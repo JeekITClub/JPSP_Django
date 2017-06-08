@@ -2,7 +2,7 @@
   <div>
     <el-table :data="ActivityListTable" border style="width: 100%">
       <el-table-column label="PostID" width="100">
-        <template scope="scope">
+        <template :scope=scope>
           <span style="margin-left: 10px">{{ scope.row.id }}</span>
         </template>
       </el-table-column>
@@ -16,7 +16,7 @@
         <span style="margin-left: 10px">{{ scope.row.Date1 }}{{ scope.row.Date2 }}</span>
       </el-table-column>
       <el-table-column label="评价">
-        <template scope="scope">
+        <template :scope=scope>
           <el-rate v-model="scope.row.star" v-on:change="StarSubmit"></el-rate>
         </template>
       </el-table-column>
@@ -39,17 +39,17 @@
       return {
         ActivityListTable: [
           {
-            PostId: '',
-            Clubname: '',
-            Linkman: '',
-            Region: '',
+            PostId: '1',
+            Clubname: '1',
+            Linkman: '1',
+            Region: '1',
             Date1: '',
             Date2: '',
-            Star: '',
-            Content: '',
-            Process: '',
-            Assessment: '',
-            Feeling: ''
+            Star: '1',
+            Content: '1',
+            Process: '1',
+            Assessment: '1',
+            Feeling: '1'
           }
         ],
         dialogTableVisible: false

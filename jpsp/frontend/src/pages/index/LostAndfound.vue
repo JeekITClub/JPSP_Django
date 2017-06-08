@@ -1,5 +1,7 @@
 <template>
-  <LostAndFound></LostAndFound>
+  <div>
+    <LostAndFound></LostAndFound>
+  </div>
 </template>
 <script>
   import LostAndFound from '../../components/index/LostAndFound.vue'
