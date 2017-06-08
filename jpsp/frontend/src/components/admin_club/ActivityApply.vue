@@ -70,7 +70,8 @@
             Token: this.GetToken
           })
         }).then(function (response) {
-          if (response.data.message === 'Error') {}
+          if (response.data.message === 'Error') {
+          }
         }).catch(function () {
           alert('error: ActivityApply')
         })

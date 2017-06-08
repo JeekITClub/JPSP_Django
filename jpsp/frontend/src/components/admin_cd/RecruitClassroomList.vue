@@ -81,7 +81,7 @@
       Authenticate () {
         return this.$store.state.Authenticated
       },
-      GetClubName () {
+      GetUserName () {
         return this.$store.state.UserName
       },
       GetToken () {

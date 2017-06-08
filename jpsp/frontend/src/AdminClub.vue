@@ -10,7 +10,7 @@
 </template>
 
 <script>
-  import JNavTop from '../src/components/admin_club/JNavTop.vue'
+  import JNavTop from '@/components/admin_club/JNavTop.vue'
   export default {
     components: {
       'JNavTop': JNavTop

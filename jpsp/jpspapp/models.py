@@ -66,7 +66,6 @@ class Post(models.Model):
     Stars = models.FloatField(default=0.0)
     StarTime = models.DateTimeField(default=None)
 
-
 class Message(models.Model):
     from_user = models.ForeignKey(User)
     send_time = models.DateTimeField(auto_now=True)
