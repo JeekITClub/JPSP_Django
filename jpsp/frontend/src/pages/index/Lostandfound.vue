@@ -1,12 +1,12 @@
 <template>
+  <LostAndFound></LostAndFound>
 </template>
 <script>
-  import Lostandfound from '../../components/index/Lostandfound.vue'
+  import LostAndFound from '../../components/index/LostAndFound.vue'
   export default {
-    name: 'ActivityApply',
+    name: 'LostAndFound',
     components: {
-      'club_aside': JAside,
-      'club_activity_apply': ActivityApply
+      'LostAndFound': LostAndFound
     },
     data () {
       return {}

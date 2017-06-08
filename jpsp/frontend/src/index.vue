@@ -9,14 +9,13 @@
 <script>
 import JNavTop from './components/index/JNavTop.vue'
 import JFooter from './components/index/JFooter.vue'
-import Lostandfound from './components/index/Lostandfound.vue'
-
+import LostAndFound from './components/index/LostAndFound.vue'
 export default {
   name: 'app',
   components: {
     JNavTop,
     JFooter,
-    Lostandfound
+    LostAndFound
   }
 }
 </script>
