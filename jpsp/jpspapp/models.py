@@ -128,6 +128,14 @@ class Classroom(models.Model):
     Date1 = models.DateTimeField()
     Date2 = models.DateTimeField()
 
-
 class ActivityParticipant(models.Model):
     pass
+
+class LostAndFound(models.Model):
+    Linkman_name=models.CharField(max_length=30,default="匿名")
+    linkman_grade=models.CharField(max_length=1,default="0")
+    linkman_classroom=models.CharField(max_length=2,default="0")
+    linkman_phonenumber=models.CharField(max_length=11,default="0000000000")
+    linkman_qq=models.CharField(max_length=20,default="0")
+    LostObjectName=models.CharField(max_length=100,default="")
+    LostPlace=models.CharField(max_length=30,default="")

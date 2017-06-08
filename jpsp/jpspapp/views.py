@@ -177,6 +177,7 @@ def club_recruit_classroom_apply_submit(request):
 def cd_post_star_submit(request):
     try:
         body = json.loads(request.body)
+        token = body['token']
     except:
         returnMessage('error')
 
@@ -185,6 +186,7 @@ def cd_post_star_submit(request):
 def cd_recruit_classroom_apply_verify_submit(request):
     try:
         body = json.loads(request.body)
+        token = body['token']
     except:
         returnMessage('error')
 
@@ -193,6 +195,7 @@ def cd_recruit_classroom_apply_verify_submit(request):
 def user_profile_edit_submit(request):
     try:
         body = json.loads(request.body)
+        token = body['token']
     except:
         returnMessage('error')
 
@@ -201,6 +204,7 @@ def user_profile_edit_submit(request):
 def club_member_add_submit(request):
     try:
         body = json.loads(request.body)
+        token = body['token']
     except:
         returnMessage('error')
 
@@ -209,6 +213,7 @@ def club_member_add_submit(request):
 def club_member_remove_submit(request):
     try:
         body = json.loads(request.body)
+        token = body['token']
     except:
         returnMessage('error')
 
@@ -217,6 +222,7 @@ def club_member_remove_submit(request):
 def cd_message_list(request):
     try:
         body = json.loads(request.body)
+        token = body['token']
     except:
         returnMessage('error')
 
@@ -225,6 +231,7 @@ def cd_message_list(request):
 def cd_message_remove_submit(request):
     try:
         body = json.loads(request.body)
+        token = body['token']
     except:
         returnMessage('error')
 
@@ -261,6 +268,7 @@ def club_activity_apply_submit(request):
 def cd_activity_agree_submit(request):
     try:
         body = json.loads(request.body)
+        token = body['token']
     except:
         returnMessage('error')
 
@@ -269,6 +277,13 @@ def cd_activity_agree_submit(request):
 def cd_activity_list(request):
     try:
         body = json.loads(request.body)
+        token= body['token']
+        # TODO : token authenticate
+        data=serializers.serialize("json",Activity.objects.filter(state='0'))
+        response= JsonResponse(json.dumps(data),safe=False)
+        response['Access-Control-Allow-Origin'] = '*'
+        response['message']='success'
+        return response
     except:
         returnMessage('error')
 
@@ -277,6 +292,7 @@ def cd_activity_list(request):
 def cd_activity_disagree_submit(request):
     try:
         body = json.loads(request.body)
+        token=body['token']
     except:
         returnMessage('error')
 
@@ -285,6 +301,7 @@ def cd_activity_disagree_submit(request):
 def cd_post_delete_submit(request):
     try:
         body = json.loads(request.body)
+        token = body['token']
     except:
         returnMessage('error')
 
@@ -329,3 +346,12 @@ def club_establish(request):
         )
     except:
         returnMessage('error')
+
+
+@require_http_methods(["POST"])
+def lost_and_found_submit(request):
+    try:
+        body=json.loads(request.body)
+        token=body['token']
+    except:
+        returnMessage(message='error')
