@@ -66,6 +66,7 @@ class Post(models.Model):
     Stars = models.FloatField(default=0.0)
     StarTime = models.DateTimeField(default=None)
 
+
 class Message(models.Model):
     from_user = models.ForeignKey(User)
     send_time = models.DateTimeField(auto_now=True)
@@ -78,9 +79,6 @@ class Message(models.Model):
     )
     type = models.CharField(max_length=3, choices=message_type)
     content = models.TextField(default='')
-
-
-# TODO: edit the message model
 
 
 class Token(models.Model):
@@ -98,8 +96,8 @@ class Token(models.Model):
 
 
 class Activity(models.Model):
-    ActivityName=models.CharField(max_length=30,default="活动名称")
-    Region=models.CharField(max_length=30,default="活动地点")
+    ActivityName = models.CharField(max_length=30, default="活动名称")
+    Region = models.CharField(max_length=30, default="活动地点")
     Clubid = models.ForeignKey(Club)
     ClubName = models.CharField(max_length=30, default="社团")
     Content = models.TextField(default="活动内容")
@@ -115,11 +113,12 @@ class Activity(models.Model):
     )
     state = models.CharField(max_length=1, choices=state_choices, default='0')
     type_choices = (
-        ('0','普通'),
-        ('1','义卖'),
-        ('2','销售'),
+        ('0', '普通'),
+        ('1', '义卖'),
+        ('2', '销售'),
     )
-    Type=models.TextField(default='0',choices=type_choices)
+    Type = models.TextField(default='0', choices=type_choices)
+
 
 class Classroom(models.Model):
     ClassroomId = models.IntegerField()
@@ -131,3 +130,13 @@ class Classroom(models.Model):
 
 class ActivityParticipant(models.Model):
     pass
+
+
+class LostAndFound(models.Model):
+    Linkman_name = models.CharField(max_length=30, default="匿名")
+    linkman_grade = models.CharField(max_length=1, default="0")
+    linkman_classroom = models.CharField(max_length=2, default="0")
+    linkman_phonenumber = models.CharField(max_length=11, default="0000000000")
+    linkman_qq = models.CharField(max_length=20, default="0")
+    LostObjectName = models.CharField(max_length=100, default="")
+    LostPlace = models.CharField(max_length=30, default="")

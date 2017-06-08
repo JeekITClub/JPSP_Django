@@ -144,11 +144,11 @@
             Token: this.GetToken
           }
         }).then(function (response) {
-          if (response.data.message === 'Error') {
-            this.data.error = true
+          if (response.data.message === 'error') {
+            this.error = true
           }
           alert(JSON.stringify(response.data))
-        }).catch(function () {
+        }.bind(this)).catch(function () {
           alert('error: ProfileEdit')
         })
       }

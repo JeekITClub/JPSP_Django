@@ -19,7 +19,7 @@ const AdminClubVuexStore = new Vuex.Store({
     ClubId: '',
     UserName: '用户名',
     Token: '',
-    Authenticated: true
+    Authenticated: null
   },
   mutations: {
     Authenticated (state, If) {

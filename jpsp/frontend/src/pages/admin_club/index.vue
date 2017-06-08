@@ -51,16 +51,15 @@
           })
         }).then(function (response) {
           if (response.data.message === 'User Authenticated') {
-            this.$store.commit('Authenticate'.true)
+            this.$store.commit('Authenticated', true)
             this.$store.commit('ApplyUserName', this.UserName)
             this.$store.commit('ApplyToken', response.data.Token)
           } else if (response.data.message === 'User Not Authenticated') {
             this.$store.commit('Authenticated', false)
           }
-        }.bind(this))
-          .catch(function (error) {
-            console.log(error)
-          })
+        }.bind(this)).catch(function () {
+          console.log('1')
+        })
       }
     },
     computed: {
