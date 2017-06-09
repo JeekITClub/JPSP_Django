@@ -12,15 +12,15 @@
 	<div class="avtar">
 		<img src="../../assets/index/images/avtar.png" />
 	</div>
-			<form>
-					<input type="text" value="Username" v-model="LoginForm.UserName">
-						<div class="key">
-					<input type="password" value="Password" v-model="LoginForm.Password">
-						</div>
-			</form>
-	<div class="signin">
-		<input type="submit" value="登录" >
-	</div>
+			<el-form>
+				<el-form-item label="学号">
+					<el-input type="text" v-model="LoginForm.UserName"></el-input>
+						</el-form-item>
+						<el-form-item label="密码">
+						<el-input type="password" v-model="LoginForm.Password"></el-input>
+					</el-form-item>
+					<el-button type="primary" @click="onSubmit()">登陆</el-button>
+			</el-form>
 </div>
 </div>
 </template>
@@ -30,33 +30,33 @@
     data () {
       return {
         LoginForm: {
-          UserName: '',
+          UserId: '',
           Password: ''
         }
       }
     },
     methods: {
       onSubmit () {
-        console.log('submit!')
         axios({
           method: 'POST',
-          url: '../api/login/',
+          url: 'http://127.0.0.1/api/login',
           data: {
-            UserName: this.LoginForm.UserName,
+            UserName: this.LoginForm.UserId,
             Password: this.LoginForm.Password,
-            error: false
           }
         })
           .then(function (response) {
             if (response.data.message === 'User Authenticated') {
               console.log('success!!!')
-              this.store.commit('Authenticate')
-              this.store.commit('ApplyUserName', this.UserName)
+              this.$store.commit('Authenticate')
+              this.$store.commit('ApplyUserName', this.UserName)
+			  //  TODO: username shoud be from response
+			  this.$store.commit('ApplyId', this.UserId)
+			  this.$store.commit('ApplyToken', response.data.Token)
             } else if (response.data.message === 'User Not Authenticated') {
-              console.log('success!')
-              this.error = true
+
             }
-          })
+		}.bind(this))
           .catch(function (error) {
             console.log(error)
           })
@@ -79,7 +79,7 @@
   .el-carousel__item:nth-child(2n) {
      background-color: #99a9bf;
   }
-  
+
   .el-carousel__item:nth-child(2n+1) {
      background-color: #d3dce6;
   }
