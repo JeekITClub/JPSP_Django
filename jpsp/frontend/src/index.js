@@ -7,9 +7,9 @@ import ElementUI from 'element-ui'
 import Vuex from 'vuex'
 import 'element-ui/lib/theme-default/index.css'
 import 'bootstrap'
-
+import axios from 'axios'
 Vue.config.productionTip = false
-
+Vue.prototype.$ajax = axios
 Vue.use(ElementUI)
 Vue.use(Vuex)
 /* eslint-disable no-new */
@@ -17,15 +17,22 @@ Vue.use(Vuex)
 const UserVuexStore = new Vuex.Store({
   state: {
     UserName: '用户名',
+    UserId: '',
     Token: '',
-    Authenticated: false
+    Authenticated: null
   },
   mutations: {
-    Authenticate (state) {
-      state.Authenticated = true
+    Authenticated (state, If) {
+      state.Authenticated = If
     },
     ApplyUserName (state, UserName) {
       state.UserName = UserName
+    },
+    ApplyToken (state, Token) {
+      state.Token = Token
+    },
+    ApplyUserId (state, Id) {
+      state.UserId = Id
     }
   }
 })

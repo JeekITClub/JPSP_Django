@@ -3,11 +3,11 @@ from django.http import JsonResponse, HttpResponse
 import json
 from django.contrib.auth.models import User
 from jpsp.shortcut import JPSPToken, JPSPTime
-from jpspapp.models import Club, Post, Settings, Token, Activity, Message, Classroom
+from jpspapp.models import Club, Post, Settings, Token, Activity, Message, Classroom, LostAndFound
 from django.core import serializers
 from django.views.decorators.http import require_http_methods
 import datetime
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate
 
 
 def returnMessage(message):
@@ -352,7 +352,36 @@ def club_establish(request):
 def lost_and_found_submit(request):
     try:
         body=json.loads(request.body)
-        token=body['token']
+        token=body['Token']
+        lostOrFound=body['LostOrFound']
+        objectName=body['ObjectName']
+        linkmanName=body['LinkmanName']
+        linkmanGrade = body['LinkmanGrade']
+        linkmanPhoneNumber = body['LinkmanPhoneNumber']
+        linkmanClass = body['LinkmanClass']
+        linkmanQq = body['LinkmanQq']
+        region = body['Region']
+        date1= body['Date1']
+        date2 = body['Date2']
+        importance=body['Importance']
+        desc=body['Desc']
+        try:
+            LostAndFound.objects.create(
+                LostOrFound=lostOrFound,
+                LinkmanName=linkmanName,
+                LinkmanGrade=linkmanGrade,
+                LinkmanClassroom=linkmanClass,
+                LinkmanPhoneNumber=linkmanPhoneNumber,
+                LinkmanQq=linkmanQq,
+                LostObjectName=objectName,
+                LostPlace=region,
+                Importance=importance,
+                Desc=desc,
+                LostDateTime=date1
+            )
+            returnMessage(message='success')
+        except:
+            returnMessage(message='error')
     except:
         returnMessage(message='error')
 

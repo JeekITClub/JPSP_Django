@@ -23,14 +23,14 @@ class JPSPToken:
         for i in range(length):
             self.token += alphabet[random.randint(0, len(alphabet) - 1)]
         try:
-            Token.objects.create(
-                token=self.token,
-                user=User.objects.get(username=self.username),
-                usertype=self.usertype,
-                # start_time=datetime.datetime.now(),
-                # TODO:  datetime in python and SQL ??
-                # end_time =datetime.datetime.now(),
-            )
+            # Token.objects.create(
+            #     token=self.token,
+            #     user=User.objects.get(username=self.username),
+            #     usertype=self.usertype,
+            #     # start_time=datetime.datetime.now(),
+            #     # TODO:  datetime in python and SQL ??
+            #     # end_time =datetime.datetime.now(),
+            # )
             self.message = 'Message'
             return self.token
         except:
