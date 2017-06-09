@@ -79,12 +79,6 @@
       </el-form-item>
     </el-form>
   </div>
-  <el-form-item label="联系人QQ">
-    <el-input v-model="form.LinkmanQq" placeholder="请输入联系人QQ"></el-input>
-  </el-form-item>
-  <el-form-item label="联系人电话">
-    <el-input v-model="form.LinkmanPhoneNumber" placeholder="请输入联系人电话"></el-input>
-  </el-form-item>
 </template>
 <script>
   import axios from 'axios'
