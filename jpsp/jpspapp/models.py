@@ -12,12 +12,13 @@ class Settings(models.Model):
 
 
 class UserProfile(models.Model):
-    user = models.ForeignKey(User)
-    grade = models.IntegerField()
-    classroom = models.IntegerField()
-    attend_year = models.CharField(max_length=4, default="2016")
-    club = models.TextField()
-    lftlip = models.TextField(default="")
+    UserName = models.ForeignKey(User)
+    StudyID = models.CharField(max_length=8, default="")
+    Grade = models.IntegerField()
+    Classroom = models.IntegerField()
+    AttendYear = models.CharField(max_length=4, default="2016")
+    Club = models.TextField()
+    Lftlip = models.TextField(default="")
     # lftlip ->last_five_loginin_time
 
 
@@ -133,7 +134,7 @@ class ActivityParticipant(models.Model):
 
 
 class LostAndFound(models.Model):
-    LostOrFound=models.CharField(max_length="4",default="丢失")
+    LostOrFound = models.CharField(max_length="4", default="丢失")
     LinkmanName = models.CharField(max_length=30, default="匿名")
     LinkmanGrade = models.CharField(max_length=1, default="0")
     LinkmanClassroom = models.CharField(max_length=2, default="0")
@@ -141,7 +142,6 @@ class LostAndFound(models.Model):
     LinkmanQq = models.CharField(max_length=20, default="0")
     LostObjectName = models.CharField(max_length=100, default="")
     LostPlace = models.CharField(max_length=30, default="")
-    Importacne=models.BooleanField(default=False)
-    Desc=models.TextField(default="")
-    LostDateTime=models.DateTimeField()
-
+    Importacne = models.BooleanField(default=False)
+    Desc = models.TextField(default="")
+    LostDateTime = models.DateTimeField()
