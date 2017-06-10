@@ -30,7 +30,7 @@ module.exports = {
           'manifest',
           'index',
         ],
-        template:'index.html'
+        template: 'index.html'
       }
     ),
     new HtmlWebpackPlugin(
@@ -91,15 +91,20 @@ module.exports = {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
         options: {
-          limit: 50000,
-          name: utils.assetsPath('img/[name].[hash:7].[ext]')
+          limit: 100000,
+          name: utils.assetsPath('img/[name].[hash:7].[ext]'),
+          output: {
+            path: 'dist',
+            publicPath: '/assets/',
+            filename: 'bundle.js'
+          }
         }
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'url-loader',
         options: {
-          limit: 10000,
+          limit: 5000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       }

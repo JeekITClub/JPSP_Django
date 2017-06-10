@@ -1,7 +1,7 @@
 <!---component nav-top-->
 <template>
 <div>
-<nav class="fh5co-nav" role="navigation">
+<nav class="nav navbar-default">
     <div class="top-menu">
       <div class="container-fluid">
         <div class="row">
@@ -18,7 +18,7 @@
 								<li><a href="#">社团活动</a></li>
 							</ul>
               </li>
-              <li><a href="product.html">失物招领</a></li>
+              <li><router-link to="/lost">失物招领</router-link></li>
               <li><a href="about.html">关于</a></li>
               <li class="btn-cta" v-if="Authenticate===false || Authenticate===null"><a href="#"><span>登录</span></a></li>
               <li class="btn-cta" v-else><a href="#"><span>注销</span></a></li>
@@ -37,9 +37,7 @@
       }
     },
     methods: {
-      handleSelect (key, keyPath) {
-        console.log(key, keyPath)
-      }
+
     },
     computed: {
       Authenticate () {
