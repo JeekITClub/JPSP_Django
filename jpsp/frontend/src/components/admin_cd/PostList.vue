@@ -22,7 +22,7 @@
       </template>
     </el-table-column>
     <el-table-column label="PostID" width="100">
-      <template scope="scope">
+      <template :scope="scope">
         <span style="margin-left: 10px">{{ scope.row.id }}</span>
       </template>
     </el-table-column>
@@ -117,7 +117,7 @@
             Token: ''
           }).then(function (response) {
             if(response.data.message === 'success') {
-                console.log(response)
+                this.data.PostListTable = response.data.queryset
             }
           }.bind(this)).catch(function (error) {
               console.log(error)

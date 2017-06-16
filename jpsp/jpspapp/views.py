@@ -277,12 +277,12 @@ def cd_activity_agree_submit(request):
 def cd_activity_list(request):
     try:
         body = json.loads(request.body)
-        token= body['token']
+        token = body['token']
         # TODO : token authenticate
-        data=serializers.serialize("json",Activity.objects.filter(state='0'))
-        response= JsonResponse(json.dumps(data),safe=False)
+        data = serializers.serialize("json", Activity.objects.filter(state='0'))
+        response = JsonResponse(json.dumps(data), safe=False)
         response['Access-Control-Allow-Origin'] = '*'
-        response['message']='success'
+        response['message'] = 'success'
         return response
     except:
         returnMessage('error')
@@ -292,7 +292,7 @@ def cd_activity_list(request):
 def cd_activity_disagree_submit(request):
     try:
         body = json.loads(request.body)
-        token=body['token']
+        token = body['token']
     except:
         returnMessage('error')
 
@@ -351,20 +351,20 @@ def club_establish(request):
 @require_http_methods(["POST"])
 def lost_and_found_submit(request):
     try:
-        body=json.loads(request.body)
-        token=body['Token']
-        lostOrFound=body['LostOrFound']
-        objectName=body['ObjectName']
-        linkmanName=body['LinkmanName']
+        body = json.loads(request.body)
+        token = body['Token']
+        lostOrFound = body['LostOrFound']
+        objectName = body['ObjectName']
+        linkmanName = body['LinkmanName']
         linkmanGrade = body['LinkmanGrade']
         linkmanPhoneNumber = body['LinkmanPhoneNumber']
         linkmanClass = body['LinkmanClass']
         linkmanQq = body['LinkmanQq']
         region = body['Region']
-        date1= body['Date1']
+        date1 = body['Date1']
         date2 = body['Date2']
-        importance=body['Importance']
-        desc=body['Desc']
+        importance = body['Importance']
+        desc = body['Desc']
         try:
             LostAndFound.objects.create(
                 LostOrFound=lostOrFound,
@@ -385,30 +385,35 @@ def lost_and_found_submit(request):
     except:
         returnMessage(message='error')
 
+
 @require_http_methods(["POST"])
 def cd_post_list(request):
     try:
-        # body=json.loads(request.body)
-        # token=body['Token']
-        querySet=Post.objects.all()
-        response=[]
-        for num in range(0,querySet.count()):
+        body = json.loads(request.body)
+        token = body['Token']
+        querySet = Post.objects.all()
+        response = {}
+        for num in range(0, querySet.count()):
             for data in querySet:
-                response[num]['PostId']=data.pk
-                response[num]['ClubName']=data.ClubName
-                response[num]['ClubId']=data.ClubId.clubid.username
-                response[num]['LinkmanGrade']=data.LinkmanGrade
-                response[num]['LinkmanName']=data.LinkmanName
-                response[num]['LinkmanPhoneNumber'] = data.LinkmanPhoneNumber
-                response[num]['LinkmanQq'] = data.LinkmanQq
-                response[num]['Region']=data.Region
-                response[num]['Date1'] = data.Date1
-                response[num]['Date2'] = data.Date2
-                response[num]['Process'] = data.Process
-                response[num]['Content'] = data.Content
-                response[num]['Assessment'] = data.Assessment
-                response[num]['Feeling'] = data.Feeling
-                response[num]['Stars'] = data.Stars
-                response[num]['StarTime'] = data.StarTime
+                response[str(num)]['PostId'] = data.pk
+                response[str(num)]['ClubName'] = data.ClubName
+                response[str(num)]['ClubId'] = data.ClubId.clubid.username
+                response[str(num)]['LinkmanGrade'] = data.LinkmanGrade
+                response[str(num)]['LinkmanName'] = data.LinkmanName
+                response[str(num)]['LinkmanPhoneNumber'] = data.LinkmanPhoneNumber
+                response[str(num)]['LinkmanQq'] = data.LinkmanQq
+                response[str(num)]['Region'] = data.Region
+                response[str(num)]['Date1'] = data.Date1
+                response[str(num)]['Date2'] = data.Date2
+                response[str(num)]['Process'] = data.Process
+                response[str(num)]['Content'] = data.Content
+                response[str(num)]['Assessment'] = data.Assessment
+                response[str(num)]['Feeling'] = data.Feeling
+                response[str(num)]['Stars'] = data.Stars
+                response[str(num)]['StarTime'] = data.StarTime
+        return JsonResponse({
+            'quertset': json.dumps(response),
+            'message': 'success'
+        })
     except:
         returnMessage(message='error')
