@@ -1,7 +1,7 @@
 <!---component nav-top-->
 <template>
 <div>
-<nav class="nav navbar-default">
+<nav class="fh5co-nav" role="navigation">
     <div class="top-menu">
       <div class="container-fluid">
         <div class="row">

@@ -11,24 +11,22 @@
                   <div class="col-md-6 col-md-offset-3 col-md-pull-3 js-fullheight slider-text slider-text-bg">
                     <div class="slider-text-inner">
                       <h1>我们回来了</h1>
-                      <h2>More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a>
-                        - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></h2>
-                      <p class="ct"><a href="#">Learn More <i class="icon-arrow-right"></i></a></p>
+                      <h2></h2>
+                      <p class="ct"><a href="#">了解更多<i class="icon-arrow-right"></i></a></p>
                     </div>
                   </div>
                 </div>
               </div>
             </li>
-            <li class="bi2">
+            <li class="bi5">
               <div class="overlay-gradient"></div>
               <div class="container-fluid">
                 <div class="row">
                   <div class="col-md-6 col-md-offset-3 col-md-pull-3 js-fullheight slider-text slider-text-bg">
                     <div class="slider-text-inner">
-                      <h1>Minimal &amp; Clean Blog WordPress Theme For People Who Tell Stories</h1>
-                      <h2>More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a>
-                        - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></h2>
-                      <p class="ct"><a href="#">Learn More <i class="icon-arrow-right"></i></a></p>
+                      <h1>我们回来了</h1>
+                      <h2></h2>
+                      <p class="ct"><a href="#">了解更多<i class="icon-arrow-right"></i></a></p>
                     </div>
                   </div>
                 </div>
@@ -40,10 +38,9 @@
                 <div class="row">
                   <div class="col-md-6 col-md-offset-3 col-md-pull-3 js-fullheight slider-text slider-text-bg">
                     <div class="slider-text-inner">
-                      <h1>What Would You Like To Learn?</h1>
-                      <h2>More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a>
-                        - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></h2>
-                      <p class="ct"><a href="#">Learn More <i class="icon-arrow-right"></i></a></p>
+                      <h1>我们回来了</h1>
+                      <h2></h2>
+                      <p class="ct"><a href="#">了解更多<i class="icon-arrow-right"></i></a></p>
                     </div>
                   </div>
                 </div>
@@ -54,7 +51,7 @@
       </aside>
 
       <div id="fh5co-content">
-        <div class="video fh5co-video img1">
+        <div class="video fh5co-video bi2">
         </div>
         <div class="choose">
           <div class="fh5co-heading">
@@ -141,13 +138,13 @@
           <div class="row">
             <div class="member">
               <div class="col-md-6 nopadding">
-                <div class="ContributorsQiushimao" style=""></div>
+                <div class="author qsm"></div>
               </div>
               <div class="col-md-6 nopadding">
                 <div class="desc">
                   <h3>邱世贸 Harvey Qiu</h3>
                   <span>JEEK信息社 副社长</span>
-                  <p>曾经的2018届金苹果电视台台长。放弃视频后改行编程。JPSP前端、后端工程师、架构师</p>
+                  <p>JPSP前端、后端工程师、架构师<br>曾经的2018届金苹果电视台台长。放弃视频后改行编程。</p>
                 </div>
               </div>
             </div>
@@ -160,16 +157,7 @@
                   <h3>倪楚劼 Cheney Ni</h3>
                   <span>JEEK信息社 社长</span>
                   <p>
-                    Quos quia provident consequuntur culpa facere ratione maxime commodi voluptates id repellat velit
-                    eaque aspernatur expedita. Possimus itaque adipisci.</p>
-                  <p>
-                    <ul class="fh5co-social-icons">
-                        <li><a href="#"><i class="icon-twitter-with-circle"></i></a></li>
-                        <li><a href="#"><i class="icon-facebook-with-circle"></i></a></li>
-                        <li><a href="#"><i class="icon-linkedin-with-circle"></i></a></li>
-                        <li><a href="#"><i class="icon-dribbble-with-circle"></i></a></li>
-                    </ul>
-                  </p>
+                    JPSP前端、后端工程师、项目经理<br>编程爱好者，自学C++，JAVA，安卓，python，Web开发，略懂算法和数据结构。</p>
                 </div>
               </div>
             </div>
@@ -180,17 +168,8 @@
               <div class="col-md-6 nopadding">
                 <div class="desc">
                   <h3>邱龙田</h3>
-                  <span>CEO, Founder</span>
-                  <p>
-                    Quos quia provident consequuntur culpa facere ratione maxime commodi voluptates id repellat velit eaque aspernatur expedita. Possimus itaque adipisci.</p>
-                  <p>
-                  <ul class="fh5co-social-icons">
-                    <li><a href="#"><i class="icon-twitter-with-circle"></i></a></li>
-                    <li><a href="#"><i class="icon-facebook-with-circle"></i></a></li>
-                    <li><a href="#"><i class="icon-linkedin-with-circle"></i></a></li>
-                    <li><a href="#"><i class="icon-dribbble-with-circle"></i></a></li>
-                  </ul>
-                  </p>
+                  <span>高二3班</span>
+                  <p>JPSP前端工程师</p>
                 </div>
               </div>
             </div>
@@ -200,18 +179,11 @@
               </div>
               <div class="col-md-6 nopadding col-md-pull-6">
                 <div class="desc">
-                  <h3>倪楚劼 Cheney Ni</h3>
-                  <span>JEEK信息社 社长</span>
+                  <h3>苏孟帅 Mengshuai Su</h3>
+                  <span>原JTV摄制组组长</span>
                   <p>
-                    Quos quia provident consequuntur culpa facere ratione maxime commodi voluptates id repellat velit eaque aspernatur expedita. Possimus itaque adipisci.</p>
-                  <p>
-                  <ul class="fh5co-social-icons">
-                    <li><a href="#"><i class="icon-twitter-with-circle"></i></a></li>
-                    <li><a href="#"><i class="icon-facebook-with-circle"></i></a></li>
-                    <li><a href="#"><i class="icon-linkedin-with-circle"></i></a></li>
-                    <li><a href="#"><i class="icon-dribbble-with-circle"></i></a></li>
-                  </ul>
-                  </p>
+                    JPSP特邀摄影师<br>
+                    热爱摄影，摄影技术高超，兼具轻微PS技能，是美化网站、居家必备的人才。</p>
                 </div>
               </div>
             </div>
@@ -273,4 +245,11 @@
     background-image: url(../../assets/5.jpg);
   }
 
+  .bi5{
+    background-image: url(../../assets/9.jpg);
+  }
+  
+  .qsm{
+    background-image: url(../../assets/Contributors/qiushimao.jpg)
+  }
 </style>
