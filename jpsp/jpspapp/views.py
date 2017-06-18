@@ -417,3 +417,17 @@ def cd_post_list(request):
         })
     except:
         returnMessage(message='error')
+
+@require_http_methods(['POST'])
+def change_password_submit(request):
+    try:
+        body= json.loads(request.body)
+        token=body['Token']
+        password=body['Password']
+        userid=body['UserId']
+        try:
+            pass
+        except:
+            returnMessage(message='error')
+    except:
+        returnMessage(message='error')
