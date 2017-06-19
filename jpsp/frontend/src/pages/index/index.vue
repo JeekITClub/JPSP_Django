@@ -150,20 +150,20 @@
             </div>
             <div class="member">
               <div class="col-md-6 nopadding col-md-push-6">
-                <div class="author" style="background-image: url(images/user-2.jpg);"></div>
+                <div class="author ncj"></div>
               </div>
               <div class="col-md-6 nopadding col-md-pull-6">
                 <div class="desc">
                   <h3>倪楚劼 Cheney Ni</h3>
                   <span>JEEK信息社 社长</span>
                   <p>
-                    JPSP前端、后端工程师、项目经理<br>编程爱好者，自学C++，JAVA，安卓，python，Web开发，略懂算法和数据结构。</p>
+                    JPSP前端、后端工程师、项目经理<br>编程爱好者，在担任班级电管员期间自学了C++，JAVA，安卓，python，Web开发，略懂算法和数据结构。</p>
                 </div>
               </div>
             </div>
             <div class="member">
               <div class="col-md-6 nopadding">
-                <div class="author" style="background-image: url(images/user-3.jpg);"></div>
+                <div class="author qlt"></div>
               </div>
               <div class="col-md-6 nopadding">
                 <div class="desc">
@@ -175,7 +175,7 @@
             </div>
             <div class="member">
               <div class="col-md-6 nopadding col-md-push-6">
-                <div class="author" style="background-image: url(images/user-2.jpg);"></div>
+                <div class="author sms"></div>
               </div>
               <div class="col-md-6 nopadding col-md-pull-6">
                 <div class="desc">
@@ -250,6 +250,18 @@
   }
   
   .qsm{
-    background-image: url(../../assets/Contributors/qiushimao.jpg)
+    background-image: url(../../assets/Contributors/qsm.jpg);
+  }
+
+  .ncj{
+    background-image: url(../../assets/Contributors/ncj.jpg);
+  }
+
+  .qlt{
+    background-image: url(../../assets/Contributors/qsm.jpg);
+  }
+
+  .sms{
+    background-image: url(../../assets/Contributors/sms.jpg);
   }
 </style>
