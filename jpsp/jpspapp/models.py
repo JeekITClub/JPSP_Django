@@ -28,26 +28,26 @@ class CDUser(models.Model):
 
 
 class Club(models.Model):
-    clubname = models.CharField(max_length=30, default="社团")
-    clubid = models.ForeignKey(User)
+    ClubName = models.CharField(max_length=30, default="社团")
+    ClubId = models.ForeignKey(User)
     # 社团id
-    shezhang_name = models.CharField(max_length=8, default="")
-    shezhang_qq = models.CharField(max_length=20, default="")
-    shezhang_grade = models.CharField(max_length=1, default="")
-    shezhang_classroom = models.CharField(max_length=2, default="")
+    ShezhangName = models.CharField(max_length=8, default="")
+    ShezhangQq = models.CharField(max_length=20, default="")
+    ShezhangGrade = models.CharField(max_length=1, default="")
+    ShezhangClassroom = models.CharField(max_length=2, default="")
     # 社长的QQ
-    if_recruit = models.BooleanField()
+    IfRecruit = models.BooleanField()
     # 是否进行招新
-    enroll_group_qq = models.CharField(max_length=20, default="")
+    EnrollGroupQq = models.CharField(max_length=20, default="")
     # 招新QQ群号
-    email = models.EmailField()
-    label = models.TextField(default="")
-    state = models.BooleanField()
+    Email = models.EmailField()
+    Label = models.TextField(default="")
+    State = models.BooleanField()
     # 该社团是否已成立
-    stars = models.IntegerField(default=0)
-    introduction = models.TextField(default="")
+    Stars = models.IntegerField(default=0)
+    Introduction = models.TextField(default="")
     # 社团介绍
-    achievements = models.TextField(default="")
+    Achievements = models.TextField(default="")
 
 
 class Post(models.Model):
@@ -67,7 +67,7 @@ class Post(models.Model):
     Feeling = models.TextField(default="")
     Stars = models.FloatField(default=0.0)
     StarTime = models.DateTimeField(default=None)
-
+    IfPass= models.BooleanField(default=False)
 
 class Message(models.Model):
     from_user = models.ForeignKey(User)
@@ -100,7 +100,7 @@ class Token(models.Model):
 class Activity(models.Model):
     ActivityName = models.CharField(max_length=30, default="活动名称")
     Region = models.CharField(max_length=30, default="活动地点")
-    Clubid = models.ForeignKey(Club)
+    ClubId = models.ForeignKey(Club)
     ClubName = models.CharField(max_length=30, default="社团")
     Content = models.TextField(default="活动内容")
     Date1 = models.DateTimeField()
@@ -110,16 +110,16 @@ class Activity(models.Model):
     state_choices = (
         ('0', 'Draft'),
         ('1', 'Accepted'),
-        ('2', 'Denied'),
-        ('3', 'Happening')
+        ('2', 'Denied')
     )
-    state = models.CharField(max_length=1, choices=state_choices, default='0')
+    State = models.CharField(max_length=1, choices=state_choices, default='0')
     type_choices = (
         ('0', '普通'),
         ('1', '义卖'),
         ('2', '销售'),
     )
     Type = models.TextField(default='0', choices=type_choices)
+    Participants = models.TextField(default="")
 
 
 class Classroom(models.Model):
@@ -128,10 +128,6 @@ class Classroom(models.Model):
     ClubName = models.CharField(max_length=30, default="社团")
     Date1 = models.DateTimeField()
     Date2 = models.DateTimeField()
-
-
-class ActivityParticipant(models.Model):
-    pass
 
 
 class LostAndFound(models.Model):

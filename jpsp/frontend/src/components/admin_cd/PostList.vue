@@ -53,17 +53,17 @@
       return {
         PostListTable: [
           {
-            PostId: '',
-            ClubName: '',
-            Linkman: '',
-            Region: '',
-            Date1: '',
-            Date2: '',
-            Star: '',
-            Content: '',
-            Process: '',
-            Assessment: '',
-            Feeling: ''
+            PostId: 'A',
+            ClubName: 'A',
+            Linkman: 'A',
+            Region: 'A',
+            Date1: 'A',
+            Date2: 'A',
+            Star: 'A',
+            Content: 'A',
+            Process: 'A',
+            Assessment: 'A',
+            Feeling: 'A'
           }
         ]
       }

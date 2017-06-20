@@ -27,21 +27,21 @@ def login(request):
     user = authenticate(username=userid, password=password)
     if user is not None:
         token_object = JPSPToken(username=userid, usertype=usertype)
-        if usertype=="student":
+        if usertype == "student":
             return JsonResponse({
                 "UserName": UserProfile(User.objects.get(username=userid)).UserName,
                 "message": "User Authenticated",
                 "Token": token_object.generate(),
                 "Access-Control-Allow-Origin": '*'
             })
-        elif usertype=="Club":
+        elif usertype == "Club":
             return JsonResponse({
                 "UserName": Club(User.objects.get(username=userid)).clubname,
                 "message": "User Authenticated",
                 "Token": token_object.generate(),
                 "Access-Control-Allow-Origin": '*'
             })
-        elif usertype=="Club Department":
+        elif usertype == "Club Department":
             return JsonResponse({
                 "UserName": CDUser(User.objects.get(username=userid)).username,
                 "message": "User Authenticated",
@@ -70,10 +70,26 @@ def logout(request):
 @require_http_methods(["GET"])
 def club_list(request):
     try:
-        data = serializers.serialize("json", Club.objects.all())
-        response = JsonResponse(json.dumps(data), safe=False)
-        response['Access-Control-Allow-Origin'] = '*'
-        return response
+        for num in range(0,Club.objects.all().count()):
+            for data in Club.objects.all():
+                return JsonResponse({
+                    str(num):{
+                        'ClubName': data.ClubName,
+                        'ClubId': data.ClubId,
+                        'ShezhangName': data.ShezhangName,
+                        'ShezhangQq': data.ShezhangQq,
+                        'ShezhangGrade': data.ShezhangGrade,
+                        'ShezhangClassroom': data.ShezhangClassroom,
+                        'IfRecruit': data.IfRecruit,
+                        'EnrollGroupQq': data.EnrollGroupQq,
+                        'Email': data.Email,
+                        'Label': data.Label,
+                        'State': data.State,
+                        'Stars': data.Stars,
+                        'Introduction': data.Introduction,
+                        'Achievements': data.Achievements
+                    }
+                })
     except:
         returnMessage(message='error')
 
@@ -115,21 +131,12 @@ def club_post_edit_submit(request):
                     Assessment=assessment,
                     Feeling=feeling,
                     Stars=0,
-                    StarTime=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                    StarTime=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                    IfPass=False
                 )
-            return JsonResponse(
-                {
-                    'message': 'Success',
-                    'Access-Control-Allow-Origin': '*'
-                }
-            )
+            returnMessage('success')
         except:
-            return JsonResponse(
-                {
-                    'message': 'Error',
-                    'Access-Control-Allow-Origin': '*'
-                }
-            )
+            returnMessage('error')
     except:
         returnMessage(message='error')
 
@@ -154,18 +161,18 @@ def club_profile_edit_submit(request):
         achievements = body['achievements']
         try:
             club_object = Club.objects.get(clubid=clubid)
-            club_object.clubname = clubname
-            club_object.shezhang_name = shezhang_name
-            club_object.shezhang_grade = shezhang_grade
-            club_object.shezhang_classroom = shezhang_class
-            club_object.shezhang_qq = shezhang_qq
-            club_object.if_recruit = if_recruit
-            club_object.enroll_group_qq = enroll_group_qq
-            club_object.email = email
-            club_object.label = label
-            club_object.state = state
-            club_object.introduction = introduction
-            club_object.achievements = achievements
+            club_object.Clubname = clubname
+            club_object.ShezhangName = shezhang_name
+            club_object.ShezhangGrade = shezhang_grade
+            club_object.ShezhangClassroom = shezhang_class
+            club_object.ShezhangQq = shezhang_qq
+            club_object.IfRecruit = if_recruit
+            club_object.EnrollGroupQq = enroll_group_qq
+            club_object.Email = email
+            club_object.Label = label
+            club_object.State = state
+            club_object.Introduction = introduction
+            club_object.Achievements = achievements
             club_object.save()
             returnMessage(message='success')
         except:
@@ -181,10 +188,18 @@ def club_recruit_classroom_apply_submit(request):
         token = body['Token']
         club_id = body['ClubId']
         club_name = body['ClubName']
-        classroom = body['Classroom']
         date1 = body['Date1']
         date2 = body['Date2']
         date3 = body['Date3']
+        # TODO: deal with date
+        Classroom.objects.create(
+            ClassroomId=0,
+            ClubId=Club.objects.get(User.objects.get(username=club_id)),
+            ClubName=club_name,
+            Date1=date1+date2,
+            Date2=date1+date3
+            # TODO: deal with date
+        )
         returnMessage('success')
     except:
         returnMessage('error')
@@ -198,8 +213,9 @@ def cd_post_star_submit(request):
         stars = body['Stars']
         postid = body['PostId']
         try:
-            post=Post.objects.get(pk=postid)
-            post.stars=stars
+            post_object = Post.objects.get(pk=postid)
+            post_object.Stars = stars
+            post_object.IfPass = True
             post.save()
             returnMessage('success')
         except:
@@ -212,7 +228,11 @@ def cd_post_star_submit(request):
 def cd_recruit_classroom_apply_verify_submit(request):
     try:
         body = json.loads(request.body)
-        token = body['token']
+        token = body['Token']
+        classroom = body['Classroom']
+        clubid = body['ClubId']
+        # date
+        returnMessage('success')
     except:
         returnMessage('error')
 
@@ -222,6 +242,7 @@ def user_profile_edit_submit(request):
     try:
         body = json.loads(request.body)
         token = body['token']
+        returnMessage('success')
     except:
         returnMessage('error')
 
@@ -231,6 +252,7 @@ def club_member_add_submit(request):
     try:
         body = json.loads(request.body)
         token = body['token']
+        returnMessage('success')
     except:
         returnMessage('error')
 
@@ -240,6 +262,7 @@ def club_member_remove_submit(request):
     try:
         body = json.loads(request.body)
         token = body['token']
+        returnMessage('success')
     except:
         returnMessage('error')
 
@@ -249,6 +272,15 @@ def cd_message_list(request):
     try:
         body = json.loads(request.body)
         token = body['token']
+        # TODO: to_user
+        for num in range(0,Message.objects.filter(to_user='')):
+            for data in Message.objects.filter(to_user=''):
+                return JsonResponse({
+                    str(num):{
+                        
+                    }
+                })
+        returnMessage('success')
     except:
         returnMessage('error')
 
@@ -258,6 +290,7 @@ def cd_message_remove_submit(request):
     try:
         body = json.loads(request.body)
         token = body['token']
+        returnMessage('success')
     except:
         returnMessage('error')
 
@@ -283,9 +316,11 @@ def club_activity_apply_submit(request):
             Content=content,
             Date1=date1,
             Date2=date2,
-            state='0',
-            Type=type
+            State='0',
+            Type=type,
+            Participants=''
         )
+        returnMessage('success')
     except:
         returnMessage('error')
 
@@ -295,6 +330,11 @@ def cd_activity_agree_submit(request):
     try:
         body = json.loads(request.body)
         token = body['token']
+        activity_id = body['AcitivityId']
+        try:
+            activity_object = Acitivity.objects.get(pk=activity_id)
+            activity_object.state = '1'
+            activity_object.save()
     except:
         returnMessage('error')
 
@@ -305,29 +345,58 @@ def cd_activity_list(request):
         body = json.loads(request.body)
         token = body['token']
         # TODO : token authenticate
-        data = serializers.serialize("json", Activity.objects.filter(state='0'))
-        response = JsonResponse(json.dumps(data), safe=False)
-        response['Access-Control-Allow-Origin'] = '*'
-        response['message'] = 'success'
-        return response
+        for num in range(0,Activity.objects.all().count()):
+            for data in Activity.objects.all():
+                return JsonResponse({
+                    str(num):{
+                        'ActivityId': data.pk
+                        'ActivityName': data.ActivityName,
+                        'Region': data.Region,
+                        'ClubId': data.ClubId,
+                        'ClubName': data.ClubName,
+                        'Content': data.Content,
+                        'Date1': data.Date1,
+                        'Date2': data.Date2,
+                        'State': data.State,
+                        'Type': data.Type
+                    }
+                })
+
     except:
         returnMessage('error')
 
 
 @require_http_methods(['POST'])
-def cd_activity_disagree_submit(request):
+def cd_activity_deny_submit(request):
     try:
         body = json.loads(request.body)
         token = body['token']
+        acitivity_id = body['AcitivityId']
+        try:
+            activity_object = Acitivity.objects.get(pk=acivity_id)
+            activity_object.state='2'
+            activity_object.save()
+            # 2-> denied
+            returnMessage('success')
+        except:
+            returnMessage('error')
     except:
         returnMessage('error')
 
 
 @require_http_methods(['POST'])
-def cd_post_delete_submit(request):
+def cd_post_deny_submit(request):
     try:
         body = json.loads(request.body)
         token = body['token']
+        post_id = body['PostId']
+        try:
+            post_object = Post.objects.get(pk=post_id)
+            post_object.IfPass = False
+            post_object.save()
+            returnMessage('success')
+        except:
+            returnMessage('error')
     except:
         returnMessage('error')
 
@@ -338,7 +407,7 @@ def club_establish(request):
         body = json.loads(request.body)
         clubname = body['Clubname']
         shezhang_name = body['Shezhang_Name']
-        shezhang_qq = body['Shezhang-QQ']
+        shezhang_qq = body['Shezhang_QQ']
         shezhang_grade = body['Shezhang_Grade']
         shezhang_classroom = body['Shezhang_Classroom']
         introduction = body['Introduction']
@@ -347,29 +416,24 @@ def club_establish(request):
         email = body['Email']
         settings = Settings.objects.filter(name="settings")
         Club.objects.create(
-            clubname=clubname,
-            clubid=settings.clubid,
-            shezhang_name=shezhang_name,
-            shezhang_qq=shezhang_qq,
-            shezhang_grade=shezhang_grade,
-            shezhang_classroom=shezhang_classroom,
-            if_recruit=if_recruit,
-            introduction=introduction,
-            email=email,
+            Clubname=clubname,
+            ClubId=settings.clubid,
+            ShezhangName=shezhang_name,
+            SheZhangQq=shezhang_qq,
+            ShezhangGrade=shezhang_grade,
+            ShezhangClassroom=shezhang_classroom,
+            IfRecruit=if_recruit,
+            Introduction=introduction,
+            Email=email,
             # label
-            state=False,
-            achievements="",
-            stars=0,
-            enroll_group_qq=qq_group,
+            State=False,
+            Achievements="",
+            Stars=0,
+            EnrollGroupQq=qq_group,
         )
         settings.cludid += 1
         settings.save()
-        return JsonResponse(
-            {
-                'message': 'success',
-                'Access-Control-Allow-Origin': '*'
-            }
-        )
+        returnMessage(message='success')
     except:
         returnMessage('error')
 
@@ -411,38 +475,34 @@ def lost_and_found_submit(request):
     except:
         returnMessage(message='error')
 
+
 # TODO: CHANGE INTO POST!!!
 @require_http_methods(["GET"])
 def cd_post_list(request):
     try:
-        body = json.loads(request.body)
-        token = body['Token']
-        querySet = Post.objects.all()
-        response = {}
-        for num in range(0, querySet.count()):
-            for data in querySet:
-                response[str(num)]['PostId'] = data.pk
-                response[str(num)]['ClubName'] = data.ClubName
-                response[str(num)]['ClubId'] = data.ClubId.clubid.username
-                response[str(num)]['LinkmanGrade'] = data.LinkmanGrade
-                response[str(num)]['LinkmanName'] = data.LinkmanName
-                response[str(num)]['LinkmanPhoneNumber'] = data.LinkmanPhoneNumber
-                response[str(num)]['LinkmanQq'] = data.LinkmanQq
-                response[str(num)]['Region'] = data.Region
-                response[str(num)]['Date1'] = data.Date1
-                response[str(num)]['Date2'] = data.Date2
-                response[str(num)]['Process'] = data.Process
-                response[str(num)]['Content'] = data.Content
-                response[str(num)]['Assessment'] = data.Assessment
-                response[str(num)]['Feeling'] = data.Feeling
-                response[str(num)]['Stars'] = data.Stars
-                response[str(num)]['StarTime'] = data.StarTime
-        return JsonResponse({
-            'quertset': json.dumps(response),
-            'message': 'success'
-        })
+        # body = json.loads(request.body)
+        # token = body['Token']
+        for num in range(1, Post.objects.all().count()):
+            for data in Post.objects.all():
+                return JsonResponse({str(num): {
+                    'pk': data.pk,
+                    'ClubName': data.ClubName,
+                    'LinkmanGrade': data.LinkmanGrade,
+                    'LinkmanPhoneNumber': data.LinkmanPhoneNumber,
+                    'LinkmanName': data.LinkmanName,
+                    'LinkmanQq': data.LinkmanQq,
+                    'Region': data.Region,
+                    'Date1': data.Date1,
+                    'Date2': data.Date2,
+                    'Process': data.Process,
+                    'Content': data.Content,
+                    'Assessment': data.Assessment,
+                    'Feeling': data.Feeling,
+                    'Stars': data.Stars
+                }
+                                     })
     except:
-        returnMessage(message='error')
+        returnMessage('error')
 
 
 @require_http_methods(['POST'])

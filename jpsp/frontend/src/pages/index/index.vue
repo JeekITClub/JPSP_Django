@@ -138,24 +138,24 @@
           <div class="row">
             <div class="member">
               <div class="col-md-6 nopadding">
-                <div class="author qsm"></div>
+                <div class="author qsm img-rounded"></div>
               </div>
               <div class="col-md-6 nopadding">
                 <div class="desc">
                   <h3>邱世贸 Harvey Qiu</h3>
-                  <span>JEEK信息社 副社长</span>
+                  <span>2015届？？班 JEEK信息社 副社长</span>
                   <p>JPSP前端、后端工程师、架构师<br>曾经的2018届金苹果电视台台长。放弃视频后改行编程。</p>
                 </div>
               </div>
             </div>
             <div class="member">
               <div class="col-md-6 nopadding col-md-push-6">
-                <div class="author ncj"></div>
+                <div class="author ncj img-rounded"></div>
               </div>
               <div class="col-md-6 nopadding col-md-pull-6">
                 <div class="desc">
                   <h3>倪楚劼 Cheney Ni</h3>
-                  <span>JEEK信息社 社长</span>
+                  <span>2015届13班 JEEK信息社 社长</span>
                   <p>
                     JPSP前端、后端工程师、项目经理<br>编程爱好者，在担任班级电管员期间自学了C++，JAVA，安卓，python，Web开发，略懂算法和数据结构。</p>
                 </div>
@@ -163,24 +163,24 @@
             </div>
             <div class="member">
               <div class="col-md-6 nopadding">
-                <div class="author qlt"></div>
+                <div class="author qlt img-rounded"></div>
               </div>
               <div class="col-md-6 nopadding">
                 <div class="desc">
                   <h3>邱龙田</h3>
-                  <span>高二3班</span>
+                  <span>2015届3班</span>
                   <p>JPSP前端工程师</p>
                 </div>
               </div>
             </div>
             <div class="member">
-              <div class="col-md-6 nopadding col-md-push-6">
-                <div class="author sms"></div>
+              <div class="col-md-6 no adding col-md-push-6">
+                <div class="author sms img-rounded"></div>
               </div>
               <div class="col-md-6 nopadding col-md-pull-6">
                 <div class="desc">
                   <h3>苏孟帅 Monsell Su</h3>
-                  <span>原JTV摄制组组长</span>
+                  <span>2015届11班 原JTV摄制组组长</span>
                   <p>
                     JPSP特邀摄影师<br>
                     热爱摄影，摄影技术高超，兼具轻微PS技能，是美化网站、居家必备的人才。</p>
@@ -206,7 +206,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 <script>
@@ -254,7 +253,7 @@
   .bi5{
     background-image: url(../../assets/9.jpg);
   }
-  
+
   .qsm{
     background-image: url(../../assets/Contributors/qsm.jpg);
   }

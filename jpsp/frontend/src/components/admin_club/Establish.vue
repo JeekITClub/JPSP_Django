@@ -5,17 +5,17 @@
         <el-input v-model="EstablishClubForm.ClubName"></el-input>
       </el-form-item>
       <el-form-item label="社长姓名">
-        <el-input v-model="EstablishClubForm.Shezhang.Name"></el-input>
+        <el-input v-model="EstablishClubForm.ShezhangName"></el-input>
       </el-form-item>
-      <el-form-item prop="EstablishClubForm.Shezhang.Grade" label="社长年级">
-        <el-select v-model="EstablishClubForm.Shezhang.Grade" value="">
+      <el-form-item prop="EstablishClubForm.ShezhangGrade" label="社长年级">
+        <el-select v-model="EstablishClubForm.ShezhangGrade" value="">
           <el-option label="高一" value="1"></el-option>
           <el-option label="高二" value="2"></el-option>
           <el-option label="高三" value="3"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item prop="EstablishClubForm.Shezhang.Class" label="社长班级" required>
-        <el-select v-model="EstablishClubForm.Shezhang.Class" value="">
+      <el-form-item prop="EstablishClubForm.ShezhangClassroom" label="社长班级" required>
+        <el-select v-model="EstablishClubForm.ShezhangClassroom" value="">
           <el-option label="1" value="1"></el-option>
           <el-option label="2" value="2"></el-option>
           <el-option label="3" value="3"></el-option>
@@ -32,7 +32,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="社长QQ号">
-        <el-input v-model="EstablishClubForm.Shezhang.QQ"></el-input>
+        <el-input v-model="EstablishClubForm.ShezhangQQ"></el-input>
       </el-form-item>
       <el-form-item label="是否进行招新">
         <el-radio-group v-model="EstablishClubForm.IfRecruit">
@@ -73,12 +73,10 @@
       return {
         EstablishClubForm: {
           ClubName: '',
-          Shezhang: {
-            Name: '',
-            QQ: '',
-            Grade: '',
-            Classroom: ''
-          },
+          ShezhangName: '',
+          ShezhangQQ: '',
+          ShezhangGrade: '',
+          ShezhangClassroom: '',
           Label: [],
           Introduction: '',
           IfRecruit: true,
@@ -95,10 +93,10 @@
           url: 'api/club/establish',
           data: JSON.stringify({
             Clubname: this.EstablishClubForm.ClubName,
-            Shezhang_Name: this.EstablishClubForm.Shezhang.Name,
-            Shezhang_QQ: this.EstablishClubForm.Shezhang.QQ,
-            Shezhang_Grade: this.EstablishClubForm.Shezhang.Grade,
-            Shezhang_Classroom: this.EstablishClubForm.Shezhang.Classroom,
+            Shezhang_Name: this.EstablishClubForm.ShezhangName,
+            Shezhang_QQ: this.EstablishClubForm.ShezhangQQ,
+            Shezhang_Grade: this.EstablishClubForm.ShezhangGrade,
+            Shezhang_Classroom: this.EstablishClubForm.ShezhangClassroom,
             Label: this.Label,
             // TODO: Label is stringified to a string not an array
             Introduction: this.EstablishClubForm.Introduction,
