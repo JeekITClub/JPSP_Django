@@ -179,7 +179,7 @@
               </div>
               <div class="col-md-6 nopadding col-md-pull-6">
                 <div class="desc">
-                  <h3>苏孟帅 Mengshuai Su</h3>
+                  <h3>苏孟帅 Monsell Su</h3>
                   <span>原JTV摄制组组长</span>
                   <p>
                     JPSP特邀摄影师<br>
@@ -218,6 +218,12 @@
     computed: {
       Authenticate () {
         return this.$store.state.Authenticated
+      },
+      GetToken () {
+        return this.$store.state.Token
+      },
+      GetUserName () {
+        return this.$store.state.UserName
       }
     }
   }

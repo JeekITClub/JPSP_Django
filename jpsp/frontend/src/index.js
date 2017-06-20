@@ -17,7 +17,6 @@ Vue.use(Vuex)
 const UserVuexStore = new Vuex.Store({
   state: {
     UserName: '用户名',
-    UserId: '',
     Token: '',
     Authenticated: null
   },
@@ -30,9 +29,6 @@ const UserVuexStore = new Vuex.Store({
     },
     ApplyToken (state, Token) {
       state.Token = Token
-    },
-    ApplyUserId (state, Id) {
-      state.UserId = Id
     }
   }
 })
