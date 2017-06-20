@@ -12,18 +12,19 @@
 	<div class="avtar">
 		<img src="../../assets/index/images/avtar.png" />
 	</div>
-			<el-form>
-				<el-form-item label="学号">
-					<el-input type="text" v-model="LoginForm.UserName"></el-input>
-						</el-form-item>
-						<el-form-item label="密码">
-						<el-input type="password" v-model="LoginForm.Password"></el-input>
-					</el-form-item>
-					<el-button type="primary" @click="onSubmit()">登陆</el-button>
-			</el-form>
+		<el-form>
+			<el-form-item label="学号">
+				<el-input type="text" v-model="LoginForm.UserId"></el-input>
+			</el-form-item>
+			<el-form-item label="密码">
+				<el-input type="password" v-model="LoginForm.Password"></el-input>
+			</el-form-item>
+			<el-button type="primary" @click="onSubmit">登陆</el-button>
+		</el-form>
 </div>
 </div>
 </template>
+
 <script>
   import axios from 'axios'
   export default {
@@ -41,22 +42,20 @@
           method: 'POST',
           url: 'http://127.0.0.1/api/login',
           data: {
-            UserName: this.LoginForm.UserId,
-            Password: this.LoginForm.Password,
+            UserId: this.LoginForm.UserId,
+            Password: this.LoginForm.Password
           }
         })
           .then(function (response) {
             if (response.data.message === 'User Authenticated') {
               console.log('success!!!')
-              this.$store.commit('Authenticate')
-              this.$store.commit('ApplyUserName', this.UserName)
-			  //  TODO: username shoud be from response
-			  this.$store.commit('ApplyId', this.UserId)
-			  this.$store.commit('ApplyToken', response.data.Token)
+              this.$store.commit('Authenticated', true)
+              this.$store.commit('ApplyUserName', response.data.UserName)
+              this.$store.commit('ApplyToken', response.data.Token)
             } else if (response.data.message === 'User Not Authenticated') {
-
+              console.log('Failed')
             }
-		}.bind(this))
+          }.bind(this))
           .catch(function (error) {
             console.log(error)
           })
@@ -64,6 +63,7 @@
     }
   }
 </script>
+
 <style scoped>
   @import '../../assets/index/css/bootstrap.css';
   @import '../../assets/index/css/login.css';

@@ -24,7 +24,6 @@ img{max-width:100%;}
 /*end reset*/
 /****-----start-.main----****/
 .main{
-	background: url(../images/bg1.jpg) no-repeat 0px 0px;
 	font-family: 'Open Sans', sans-serif;
 	background-size:cover;
 	-webkit-background-size:cover;
@@ -60,7 +59,6 @@ background: url('../images/close.png') no-repeat 0px 0px;
 h1 {
 	font-family: 'Exo 2', sans-serif;
 	  text-align: center;
-	  padding-top: 4em;
 	  font-weight: 400;
 	  color: #2B2B36;
 	  font-size: 2em;
@@ -255,9 +253,6 @@ label.lbl-3 {
 	}
 	.copy-rights {
 	  margin-top: 3em;
-	}
-	h1 {
-	  padding-top: 2em;
 	}
 	.main {
 	  min-height: 675px;

@@ -108,6 +108,7 @@
             Token: this.GetToken
           })
         }).then(function (response) {
+          // TODO: Actions after success
           if (response.data.message === 'Error') {
             this.data.error = true
           }
