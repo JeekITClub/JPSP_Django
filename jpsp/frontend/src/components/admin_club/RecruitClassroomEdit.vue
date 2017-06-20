@@ -56,11 +56,14 @@
             Token: this.GetToken
           })
         }).then(function (response) {
-          if (response.data.message === 'Error') {
-            this.data.error = true
+          if (response.data.message === 'success') {
+            console.log('success')
           }
-        }).catch(function () {
-          alert('error: PostEdit')
+          if (response.data.message === 'error') {
+            console.log('error')
+          }
+        }.bind(this)).catch(function () {
+          console.log('error')
         })
       }
     },

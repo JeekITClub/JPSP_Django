@@ -17,7 +17,7 @@ Vue.use(Vuex)
 const AdminClubVuexStore = new Vuex.Store({
   state: {
     ClubId: '',
-    UserName: '用户名',
+    UserName: '',
     Token: '',
     Authenticated: null
   },

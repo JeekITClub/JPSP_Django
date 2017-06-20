@@ -16,7 +16,8 @@ Vue.use(Vuex)
 
 const UserVuexStore = new Vuex.Store({
   state: {
-    UserName: '用户名',
+    UserId: '用户名',
+    UserName: '',
     Token: '',
     Authenticated: null
   },

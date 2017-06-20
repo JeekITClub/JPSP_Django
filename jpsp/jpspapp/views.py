@@ -3,7 +3,7 @@ from django.http import JsonResponse, HttpResponse
 import json
 from django.contrib.auth.models import User
 from jpsp.shortcut import JPSPToken, JPSPTime
-from jpspapp.models import Club, Post, Settings, Token, Activity, Message, Classroom, LostAndFound
+from jpspapp.models import Club, Post, Settings, Token, Activity, Message, Classroom, LostAndFound, UserProfile
 from django.core import serializers
 from django.views.decorators.http import require_http_methods
 import datetime
@@ -21,16 +21,33 @@ def returnMessage(message):
 @require_http_methods(['POST'])
 def login(request):
     body = json.loads(request.body)
-    username = body['UserName']
+    userid = body['UserName']
     password = body['Password']
-    user = authenticate(username=username, password=password)
+    usertype = body['UserType']
+    user = authenticate(username=userid, password=password)
     if user is not None:
-        token_object = JPSPToken(username=username, usertype="club")
-        return JsonResponse({
-            "message": "User Authenticated",
-            "Token": token_object.generate(),
-            "Access-Control-Allow-Origin": '*'
-        })
+        token_object = JPSPToken(username=userid, usertype=usertype)
+        if usertype=="student":
+            return JsonResponse({
+                "UserName": UserProfile(User.objects.get(username=userid)).UserName,
+                "message": "User Authenticated",
+                "Token": token_object.generate(),
+                "Access-Control-Allow-Origin": '*'
+            })
+        elif usertype=="Club":
+            return JsonResponse({
+                "UserName": Club(User.objects.get(username=userid)).clubname,
+                "message": "User Authenticated",
+                "Token": token_object.generate(),
+                "Access-Control-Allow-Origin": '*'
+            })
+        elif usertype=="Club Department":
+            return JsonResponse({
+                "UserName": CDUser(User.objects.get(username=userid)).username,
+                "message": "User Authenticated",
+                "Token": token_object.generate(),
+                "Access-Control-Allow-Origin": '*'
+            })
     else:
         return JsonResponse({
             "message": "User Not Authenticated",
@@ -418,13 +435,14 @@ def cd_post_list(request):
     except:
         returnMessage(message='error')
 
+
 @require_http_methods(['POST'])
 def change_password_submit(request):
     try:
-        body= json.loads(request.body)
-        token=body['Token']
-        password=body['Password']
-        userid=body['UserId']
+        body = json.loads(request.body)
+        token = body['Token']
+        password = body['Password']
+        userid = body['UserId']
         try:
             pass
         except:

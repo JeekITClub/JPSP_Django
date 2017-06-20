@@ -24,6 +24,7 @@ class UserProfile(models.Model):
 
 class CDUser(models.Model):
     user = models.ForeignKey(User)
+    username = models.CharField(max_length=30, default="社团部")
 
 
 class Club(models.Model):

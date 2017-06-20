@@ -47,7 +47,8 @@
           url: 'http://127.0.0.1:8000/api/login',
           data: JSON.stringify({
             UserName: this.LoginForm.ClubId,
-            Password: this.LoginForm.Password
+            Password: this.LoginForm.Password,
+            UserType: 'Club'
           })
         }).then(function (response) {
           if (response.data.message === 'User Authenticated') {

@@ -30,9 +30,19 @@ import axios from 'axios'
               method: 'POST',
               url: 'api/index/profile/ChangePassword',
               data : {
-                 
+
               }
+          }).then(function (response) {
+            if (response.data.message === 'success') {
+              console.log('success')
+            }
+            if (response.data.message === 'error') {
+              console.log('error')
+            }
+          }.bind(this)).catch(function () {
+            console.log('error')
           })
+        },
       }
   }
   }

@@ -43,12 +43,12 @@
           url: 'http://127.0.0.1/api/login',
           data: {
             UserId: this.LoginForm.UserId,
-            Password: this.LoginForm.Password
+            Password: this.LoginForm.Password,
+            UserType: 'Student'
           }
         })
           .then(function (response) {
             if (response.data.message === 'User Authenticated') {
-              console.log('success!!!')
               this.$store.commit('Authenticated', true)
               this.$store.commit('ApplyUserName', response.data.UserName)
               this.$store.commit('ApplyToken', response.data.Token)

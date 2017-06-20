@@ -109,11 +109,14 @@
           })
         }).then(function (response) {
           // TODO: Actions after success
-          if (response.data.message === 'Error') {
-            this.data.error = true
+          if (response.data.message === 'success') {
+            console.log('success')
           }
-        }).catch(function () {
-          alert('error: Establish')
+          if (response.data.message === 'error') {
+            console.log('error')
+          }
+        }.bind(this)).catch(function () {
+          console.log('error')
         })
       }
     },

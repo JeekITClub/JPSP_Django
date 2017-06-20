@@ -70,9 +70,13 @@
             Token: this.GetToken
           })
         }).then(function (response) {
-          if (response.data.message === 'Error') {
+          if (response.data.message === 'success') {
+            console.log('success')
           }
-        }).catch(function () {
+          if (response.data.message === 'error') {
+            console.log('error')
+          }
+        }.bind(this)).catch(function () {
           alert('error: ActivityApply')
         })
       },

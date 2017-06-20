@@ -5,9 +5,6 @@
       :label="'成就' + index"
       :key="achievement.key"
       :prop="'achievement.' + index + '.value'"
-      :rules="{
-      required: true, message: '不能为空', trigger: 'blur'
-    }"
     >
       <el-input v-model="achievement.value"></el-input>
       <el-button @click.prevent="removeAchievement(achievement)">删除</el-button>
@@ -49,11 +46,14 @@
             Token: this.GetToken
           })
         }).then(function (response) {
-          if (response.data.message === 'Error') {
-            this.data.error = true
+          if (response.data.message === 'success') {
+            console.log('success')
           }
-        }).catch(function () {
-          alert('error: EventAdd')
+          if (response.data.message === 'error') {
+            console.log('error')
+          }
+        }.bind(this)).catch(function () {
+          console.log('error')
         })
       },
       resetForm (formName) {
@@ -90,5 +90,4 @@
   }
 </script>
 <style>
-  @import url("//unpkg.com/element-ui@1.3.2/lib/theme-default/index.css");
 </style>
