@@ -194,7 +194,16 @@ def club_recruit_classroom_apply_submit(request):
 def cd_post_star_submit(request):
     try:
         body = json.loads(request.body)
-        token = body['token']
+        token = body['Token']
+        stars = body['Stars']
+        postid = body['PostId']
+        try:
+            post=Post.objects.get(pk=postid)
+            post.stars=stars
+            post.save()
+            returnMessage('success')
+        except:
+            returnMessage('error')
     except:
         returnMessage('error')
 
@@ -403,7 +412,7 @@ def lost_and_found_submit(request):
         returnMessage(message='error')
 
 
-@require_http_methods(["POST"])
+@require_http_methods(["GET"])
 def cd_post_list(request):
     try:
         body = json.loads(request.body)

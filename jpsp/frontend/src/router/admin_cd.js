@@ -18,6 +18,11 @@ export default new Router({
       path: '/activity',
       name: 'activity',
       component: ActivityList
+    },
+    {
+      path: '/post',
+      name: 'post',
+      component: PostList
     }
   ]
 })

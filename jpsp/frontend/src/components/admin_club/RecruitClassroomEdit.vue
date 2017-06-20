@@ -62,7 +62,7 @@
           if (response.data.message === 'error') {
             console.log('error')
           }
-        }.bind(this)).catch(function () {
+        }).catch(function () {
           console.log('error')
         })
       }

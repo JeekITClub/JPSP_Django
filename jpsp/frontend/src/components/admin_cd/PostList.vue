@@ -2,29 +2,27 @@
   <el-table :data="PostListTable" border style="width: 100%">
     <el-table-column type="expand">
       <template :scope="props">
-        <el-form :label-position="left" inline>
-          <el-form-item label="活动地点">
+        <el-table :label-position="left" inline>
+          <el-table-item label="活动地点">
             <span>{{ props.row.Region }}</span>
-          </el-form-item>
-          <el-form-item label="活动内容">
+          </el-table-item>
+          <el-table-item label="活动内容">
             <span>{{ props.row.Content }}</span>
-          </el-form-item>
-          <el-form-item label="活动过程">
+          </el-table-item>
+          <el-table-item label="活动过程">
             <span>{{ props.row.Process }}</span>
-          </el-form-item>
-          <el-form-item label="活动评价">
+          </el-table-item>
+          <el-table-item label="活动评价">
             <span>{{ props.row.Assessment }}</span>
-          </el-form-item>
-          <el-form-item label="感悟分析">
+          </el-table-item>
+          <el-table-item label="感悟分析">
             <span>{{ props.row.Feeling }}</span>
-          </el-form-item>
-        </el-form>
+          </el-table-item>
+        </el-table>
       </template>
     </el-table-column>
-    <el-table-column label="PostID" width="100">
-      <template :scope="scope">
+    <el-table-column label="PostID" width="100" prop="PostId">
         <span style="margin-left: 10px">{{ scope.row.id }}</span>
-      </template>
     </el-table-column>
     <el-table-column label="社团" width="100">
       <span style="margin-left: 10px">{{ scope.row.ClubName }}</span>
@@ -71,11 +69,12 @@
       }
     },
     methods: {
-      StarSubmit (index, row) {
+      StarSubmit (index, row, star) {
         axios({
           method: 'POST',
           url: '/api/cd/star/Submit',
           data: JSON.stringify({
+            Stars: Star
             StarTime: '',
             // TODO: startime
             PostId: '',

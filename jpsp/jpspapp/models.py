@@ -135,7 +135,7 @@ class ActivityParticipant(models.Model):
 
 
 class LostAndFound(models.Model):
-    LostOrFound = models.CharField(max_length="4", default="丢失")
+    LostOrFound = models.CharField(max_length=4, default="丢失")
     LinkmanName = models.CharField(max_length=30, default="匿名")
     LinkmanGrade = models.CharField(max_length=1, default="0")
     LinkmanClassroom = models.CharField(max_length=2, default="0")

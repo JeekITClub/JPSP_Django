@@ -76,7 +76,7 @@
           if (response.data.message === 'error') {
             console.log('error')
           }
-        }.bind(this)).catch(function () {
+        }).catch(function () {
           alert('error: ActivityApply')
         })
       },
