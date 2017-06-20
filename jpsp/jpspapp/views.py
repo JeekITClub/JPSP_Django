@@ -411,7 +411,7 @@ def lost_and_found_submit(request):
     except:
         returnMessage(message='error')
 
-
+# TODO: CHANGE INTO POST!!!
 @require_http_methods(["GET"])
 def cd_post_list(request):
     try:
