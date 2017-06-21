@@ -67,7 +67,7 @@ class Post(models.Model):
     Feeling = models.TextField(default="")
     Stars = models.FloatField(default=0.0)
     StarTime = models.DateTimeField(default=None)
-    IfPass= models.BooleanField(default=False)
+    Pass = models.BooleanField(default=False)
 
 
 class Message(models.Model):

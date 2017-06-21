@@ -3,7 +3,7 @@ from django.http import JsonResponse, HttpResponse
 import json
 from django.contrib.auth.models import User
 from jpsp.shortcut import JPSPToken, JPSPTime
-from jpspapp.models import Club, Post, Settings, Token, Activity, Message, Classroom, LostAndFound, UserProfile, CDUser
+from jpspapp.models import Club, Post, Settings, Token, Activity, Message, Classroom, LostAndFound, UserProfile
 from django.core import serializers
 from django.views.decorators.http import require_http_methods
 import datetime
@@ -132,7 +132,7 @@ def club_post_edit_submit(request):
                     Feeling=feeling,
                     Stars=0,
                     StarTime=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                    IfPass=False
+                    Pass=False
                 )
             returnMessage('success')
         except:
@@ -505,17 +505,21 @@ def lost_and_found_submit(request):
 # TODO: CHANGE INTO POST!!!
 @require_http_methods(["GET"])
 def cd_post_list(request):
-    # try:
+    try:
         # body = json.loads(request.body)
         # token = body['Token']
-    response = [{}]
-    for num in range(0, Post.objects.all().count()):
-        for data in Post.objects.all():
-                # return JsonResponse({str(num):
-                #     {
+        num = 0
+        response = {}
+        if Post.objects.all():
+            for data in Post.objects.all():
+                num += 1
+                response[str[num]]['pk'] = data.pk
+                # return JsonResponse(
+                #     {str(num):{
                 #         'pk': data.pk,
                 #         'ClubName': data.ClubName,
                 #         'LinkmanGrade': data.LinkmanGrade,
+                #         'LinkmanClassroom': data.LinkmanClass,
                 #         'LinkmanPhoneNumber': data.LinkmanPhoneNumber,
                 #         'LinkmanName': data.LinkmanName,
                 #         'LinkmanQq': data.LinkmanQq,
@@ -528,14 +532,11 @@ def cd_post_list(request):
                 #         'Feeling': data.Feeling,
                 #         'Stars': data.Stars
                 #     }
-                #                      })
-            response[num]['pk'] = data.pk
-    return JsonResponse(json.dump(response))
-    # except:
-    #     return JsonResponse({
-    #         'message': 'error',
-    #         'Access-Control-Allow-Origin': '*'
-    #     })
+                # })
+        return JsonResponse(response)
+    except:
+        return JsonResponse({'message': 'error',
+                             'Access-Control-Allow-Origin': '*'})
 
 
 @require_http_methods(['POST'])
