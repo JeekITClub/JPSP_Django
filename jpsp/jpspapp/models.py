@@ -52,7 +52,7 @@ class Club(models.Model):
 
 class Post(models.Model):
     ClubName = models.CharField(max_length=30, default="社团")
-    CludId = models.ForeignKey(Club)
+    CludId = models.ForeignKey(Club, default=None)
     LinkmanGrade = models.CharField(max_length=1, default="1")
     LinkmanClass = models.CharField(max_length=2, default="1")
     LinkmanName = models.CharField(max_length=8, default="")
@@ -94,7 +94,7 @@ class Token(models.Model):
         ('s', 'student'),
         ('t', 'teacher')
     )
-    UserType = models.CharField(max_length=4, choices=usertype_choices)
+    UserType = models.CharField(max_length=4, choices=usertype_choices,default=None)
     # start_time = models.DateTimeField()
     # end_time = models.DateTimeField()
 
