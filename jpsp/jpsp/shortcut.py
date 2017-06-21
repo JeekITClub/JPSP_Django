@@ -23,26 +23,29 @@ class JPSPToken:
         for i in range(length):
             self.token += alphabet[random.randint(0, len(alphabet) - 1)]
         try:
-            # Token.objects.create(
-            #     token=self.token,
-            #     user=User.objects.get(username=self.username),
-            #     usertype=self.usertype,
-            #     # start_time=datetime.datetime.now(),
-            #     # TODO:  datetime in python and SQL ??
-            #     # end_time =datetime.datetime.now(),
-            # )
+            Token.objects.create(
+                Token=self.token,
+                User=User.objects.get(username=self.username),
+                UserType=self.usertype
+                # start_time=datetime.datetime.now(),
+                # TODO:  datetime in python and SQL ??
+                # end_time =datetime.datetime.now(),
+            )
             self.message = 'Message'
             return self.token
         except:
-            self.message = 'Error'
+            self.message = 'error'
 
     def remove(self):
-        token = Token.objects.filter(username=self.username, usertype=self.usertype)
-        if token:
-            token.delete()
+        try:
+            token = Token.objects.get(UserName=self.username, UserType=self.usertype)
+            if token:
+                token.delete()
+        except:
+            return False
 
     def authenticate(self):
-        token = Token.objects.get(username=self.username, usertype=self.usertype).token
+        token = Token.objects.get(UserName=self.username, UserType=self.usertype).Token
         if token:
             if self.token == token:
                 return True

@@ -17,7 +17,6 @@ class UserProfile(models.Model):
     Grade = models.IntegerField()
     Classroom = models.IntegerField()
     AttendYear = models.CharField(max_length=4, default="2016")
-    Club = models.TextField()
     Lftlip = models.TextField(default="")
     # lftlip ->last_five_loginin_time
 
@@ -29,7 +28,7 @@ class CDUser(models.Model):
 
 class Club(models.Model):
     ClubName = models.CharField(max_length=30, default="社团")
-    ClubId = models.ForeignKey(User)
+    # ClubId = models.ForeignKey(User,default=User.objects.get(username=''))
     # 社团id
     ShezhangName = models.CharField(max_length=8, default="")
     ShezhangQq = models.CharField(max_length=20, default="")
@@ -48,6 +47,7 @@ class Club(models.Model):
     Introduction = models.TextField(default="")
     # 社团介绍
     Achievements = models.TextField(default="")
+    Member =  models.TextField(default="")
 
 
 class Post(models.Model):
@@ -69,30 +69,32 @@ class Post(models.Model):
     StarTime = models.DateTimeField(default=None)
     IfPass= models.BooleanField(default=False)
 
+
 class Message(models.Model):
-    from_user = models.ForeignKey(User)
-    send_time = models.DateTimeField(auto_now=True)
-    to_user = models.CharField(max_length=30)
-    read_time = models.DateTimeField(default=None)
+    FromUser = models.ForeignKey(User)
+    SendTime = models.DateTimeField(auto_now=True)
+    ToUser = models.CharField(max_length=30)
+    ReadTime = models.DateTimeField(default=None)
     message_type = (
         ('cps', '需要进行社团活动进行打分'),
         ('ca', '需要审核社团活动'),
-        ('ce', '需要审核社团建立')
+        ('ce', '需要审核社团建立'),
+        ('default', 'default')
     )
-    type = models.CharField(max_length=3, choices=message_type)
-    content = models.TextField(default='')
+    Type = models.CharField(max_length=3, choices=message_type,default='default')
+    Content = models.TextField(default='')
 
 
 class Token(models.Model):
-    token = models.CharField(max_length=30, default="")
-    username = models.ForeignKey(User)
+    Token = models.CharField(max_length=30, default="")
+    UserName = models.ForeignKey(User)
     usertype_choices = (
         ('club', 'club'),
         ('cd', 'club_department'),
         ('s', 'student'),
         ('t', 'teacher')
     )
-    usertype = models.CharField(max_length=4, choices=usertype_choices)
+    UserType = models.CharField(max_length=4, choices=usertype_choices)
     # start_time = models.DateTimeField()
     # end_time = models.DateTimeField()
 

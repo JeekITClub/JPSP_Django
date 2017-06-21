@@ -3,7 +3,7 @@ from django.http import JsonResponse, HttpResponse
 import json
 from django.contrib.auth.models import User
 from jpsp.shortcut import JPSPToken, JPSPTime
-from jpspapp.models import Club, Post, Settings, Token, Activity, Message, Classroom, LostAndFound, UserProfile
+from jpspapp.models import Club, Post, Settings, Token, Activity, Message, Classroom, LostAndFound, UserProfile, CDUser
 from django.core import serializers
 from django.views.decorators.http import require_http_methods
 import datetime
@@ -211,12 +211,12 @@ def cd_post_star_submit(request):
         body = json.loads(request.body)
         token = body['Token']
         stars = body['Stars']
-        postid = body['PostId']
+        post_id = body['PostId']
         try:
-            post_object = Post.objects.get(pk=postid)
+            post_object = Post.objects.get(pk=post_id)
             post_object.Stars = stars
             post_object.IfPass = True
-            post.save()
+            post_object.save()
             returnMessage('success')
         except:
             returnMessage('error')
@@ -242,7 +242,14 @@ def user_profile_edit_submit(request):
     try:
         body = json.loads(request.body)
         token = body['token']
-        returnMessage('success')
+        classroom = body['Classroom']
+        grade = body['Grade']
+        attend_year = body['AttendYear']
+        try:
+            user_profile_object = UserProfile.objects.get()
+            returnMessage('success')
+        except:
+            returnMessage('error')
     except:
         returnMessage('error')
 
@@ -252,6 +259,10 @@ def club_member_add_submit(request):
     try:
         body = json.loads(request.body)
         token = body['token']
+        club_id = body['ClubId']
+        userid = body['userid']
+        club_object = Club.objects.get(Club)
+        # userid 为学生账号 为学号  数字
         returnMessage('success')
     except:
         returnMessage('error')
@@ -262,6 +273,7 @@ def club_member_remove_submit(request):
     try:
         body = json.loads(request.body)
         token = body['token']
+
         returnMessage('success')
     except:
         returnMessage('error')
@@ -273,11 +285,15 @@ def cd_message_list(request):
         body = json.loads(request.body)
         token = body['token']
         # TODO: to_user
-        for num in range(0,Message.objects.filter(to_user='')):
+        for num in range(0, Message.objects.filter(to_user='')):
             for data in Message.objects.filter(to_user=''):
                 return JsonResponse({
-                    str(num):{
-                        
+                    str(num): {
+                        'FromUser': data.FromUser,
+                        'SendTime': data.SendTime,
+                        'ToUser': data.ToUser,
+                        'Type': data.Type,
+                        'Content': data.Content
                     }
                 })
         returnMessage('success')
@@ -290,7 +306,16 @@ def cd_message_remove_submit(request):
     try:
         body = json.loads(request.body)
         token = body['token']
-        returnMessage('success')
+        message_id = body['MessageId']
+        if body['ToUser'] == 'Club Department':
+            try:
+                message_object = Message.objects.filter(ToUser=to_user)
+                message_object.remove()
+                returnMessage('success')
+            except:
+                returnMessage('error')
+        else:
+            returnMessage('error')
     except:
         returnMessage('error')
 
@@ -330,11 +355,13 @@ def cd_activity_agree_submit(request):
     try:
         body = json.loads(request.body)
         token = body['token']
-        activity_id = body['AcitivityId']
+        activity_id = body['ActivityId']
         try:
-            activity_object = Acitivity.objects.get(pk=activity_id)
+            activity_object = Activity.objects.get(pk=activity_id)
             activity_object.state = '1'
             activity_object.save()
+        except:
+            returnMessage('error')
     except:
         returnMessage('error')
 
@@ -345,11 +372,11 @@ def cd_activity_list(request):
         body = json.loads(request.body)
         token = body['token']
         # TODO : token authenticate
-        for num in range(0,Activity.objects.all().count()):
+        for num in range(0, Activity.objects.all().count()):
             for data in Activity.objects.all():
                 return JsonResponse({
-                    str(num):{
-                        'ActivityId': data.pk
+                    str(num): {
+                        'ActivityId': data.pk,
                         'ActivityName': data.ActivityName,
                         'Region': data.Region,
                         'ClubId': data.ClubId,
@@ -373,7 +400,7 @@ def cd_activity_deny_submit(request):
         token = body['token']
         acitivity_id = body['AcitivityId']
         try:
-            activity_object = Acitivity.objects.get(pk=acivity_id)
+            activity_object = Activity.objects.get(pk=acivity_id)
             activity_object.state='2'
             activity_object.save()
             # 2-> denied
@@ -414,10 +441,11 @@ def club_establish(request):
         if_recruit = body['IfRecruit']
         qq_group = body['QQGroup']
         email = body['Email']
-        settings = Settings.objects.filter(name="settings")
+        #
+        # settings = Settings.objects.filter(name="settings")
         Club.objects.create(
             Clubname=clubname,
-            ClubId=settings.clubid,
+            # TODO: ClubId
             ShezhangName=shezhang_name,
             SheZhangQq=shezhang_qq,
             ShezhangGrade=shezhang_grade,
@@ -425,14 +453,12 @@ def club_establish(request):
             IfRecruit=if_recruit,
             Introduction=introduction,
             Email=email,
-            # label
+            # TODO: label!
             State=False,
             Achievements="",
             Stars=0,
             EnrollGroupQq=qq_group,
         )
-        settings.cludid += 1
-        settings.save()
         returnMessage(message='success')
     except:
         returnMessage('error')
@@ -479,30 +505,37 @@ def lost_and_found_submit(request):
 # TODO: CHANGE INTO POST!!!
 @require_http_methods(["GET"])
 def cd_post_list(request):
-    try:
+    # try:
         # body = json.loads(request.body)
         # token = body['Token']
-        for num in range(1, Post.objects.all().count()):
-            for data in Post.objects.all():
-                return JsonResponse({str(num): {
-                    'pk': data.pk,
-                    'ClubName': data.ClubName,
-                    'LinkmanGrade': data.LinkmanGrade,
-                    'LinkmanPhoneNumber': data.LinkmanPhoneNumber,
-                    'LinkmanName': data.LinkmanName,
-                    'LinkmanQq': data.LinkmanQq,
-                    'Region': data.Region,
-                    'Date1': data.Date1,
-                    'Date2': data.Date2,
-                    'Process': data.Process,
-                    'Content': data.Content,
-                    'Assessment': data.Assessment,
-                    'Feeling': data.Feeling,
-                    'Stars': data.Stars
-                }
-                                     })
-    except:
-        returnMessage('error')
+    response = [{}]
+    for num in range(0, Post.objects.all().count()):
+        for data in Post.objects.all():
+                # return JsonResponse({str(num):
+                #     {
+                #         'pk': data.pk,
+                #         'ClubName': data.ClubName,
+                #         'LinkmanGrade': data.LinkmanGrade,
+                #         'LinkmanPhoneNumber': data.LinkmanPhoneNumber,
+                #         'LinkmanName': data.LinkmanName,
+                #         'LinkmanQq': data.LinkmanQq,
+                #         'Region': data.Region,
+                #         'Date1': data.Date1,
+                #         'Date2': data.Date2,
+                #         'Process': data.Process,
+                #         'Content': data.Content,
+                #         'Assessment': data.Assessment,
+                #         'Feeling': data.Feeling,
+                #         'Stars': data.Stars
+                #     }
+                #                      })
+            response[num]['pk'] = data.pk
+    return JsonResponse(json.dump(response))
+    # except:
+    #     return JsonResponse({
+    #         'message': 'error',
+    #         'Access-Control-Allow-Origin': '*'
+    #     })
 
 
 @require_http_methods(['POST'])
