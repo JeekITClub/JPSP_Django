@@ -15,7 +15,7 @@ export default new Router({
     {
       path: '/test',
       name: 'test',
-      component: Login
+      component: ClubPostList
     },
     {
       path: '/lost',
