@@ -10,12 +10,6 @@ import datetime
 from django.contrib.auth import authenticate
 
 
-def returnMessage(message):
-    return JsonResponse({
-        'message': message,
-        'Access-Control-Allow-Origin': '*'
-    })
-
 
 # Create your views here.
 @require_http_methods(['POST'])
@@ -64,7 +58,10 @@ def logout(request):
         token_object = JPSPToken(username=username, usertype=usertype)
         token_object.remove()
     except:
-        returnMessage(message='error')
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
 
 
 @require_http_methods(["GET"])
@@ -91,7 +88,10 @@ def club_list(request):
                     }
                 })
     except:
-        returnMessage(message='error')
+        return JsonResponse({
+        'message': 'success',
+        'Access-Control-Allow-Origin': '*'
+        })
 
 
 @require_http_methods(["POST"])
@@ -134,11 +134,20 @@ def club_post_edit_submit(request):
                     StarTime=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                     Pass=False
                 )
-            returnMessage('success')
+            return JsonResponse({
+                'message': 'success',
+                'Access-Control-Allow-Origin': '*'
+            })
         except:
-            returnMessage('error')
+            return JsonResponse({
+                'message': 'error',
+                'Access-Control-Allow-Origin': '*'
+            })
     except:
-        returnMessage(message='error')
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
 
 
 @require_http_methods(["POST"])
@@ -174,11 +183,20 @@ def club_profile_edit_submit(request):
             club_object.Introduction = introduction
             club_object.Achievements = achievements
             club_object.save()
-            returnMessage(message='success')
+            return JsonResponse({
+                'message': 'success',
+                'Access-Control-Allow-Origin': '*'
+            })
         except:
-            returnMessage(message='error')
+            return JsonResponse({
+                'message': 'error',
+                'Access-Control-Allow-Origin': '*'
+            })
     except:
-        returnMessage(message='error')
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
 
 
 @require_http_methods(['GET'])
@@ -196,13 +214,19 @@ def club_recruit_classroom_apply_submit(request):
             ClassroomId=0,
             ClubId=Club.objects.get(User.objects.get(username=club_id)),
             ClubName=club_name,
-            Date1=date1 + date2,
-            Date2=date1 + date3
+            # Date1=date1 + date2,
+            # Date2=date1 + date3
             # TODO: deal with date
         )
-        returnMessage('success')
+        return JsonResponse({
+            'message': 'success',
+            'Access-Control-Allow-Origin': '*'
+        })
     except:
-        returnMessage('error')
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
 
 
 @require_http_methods(['POST'])
@@ -217,11 +241,20 @@ def cd_post_star_submit(request):
             post_object.Stars = stars
             post_object.IfPass = True
             post_object.save()
-            returnMessage('success')
+            return JsonResponse({
+                'message': 'success',
+                'Access-Control-Allow-Origin': '*'
+            })
         except:
-            returnMessage('error')
+            return JsonResponse({
+                'message': 'error',
+                'Access-Control-Allow-Origin': '*'
+            })
     except:
-        returnMessage('error')
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
 
 
 @require_http_methods(['POST'])
@@ -232,9 +265,15 @@ def cd_recruit_classroom_apply_verify_submit(request):
         classroom = body['Classroom']
         clubid = body['ClubId']
         # date
-        returnMessage('success')
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
     except:
-        returnMessage('error')
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
 
 
 @require_http_methods(['POST'])
@@ -247,11 +286,20 @@ def user_profile_edit_submit(request):
         attend_year = body['AttendYear']
         try:
             user_profile_object = UserProfile.objects.get()
-            returnMessage('success')
+            return JsonResponse({
+            'message': 'success',
+            'Access-Control-Allow-Origin': '*'
+            })
         except:
-            returnMessage('error')
+            return JsonResponse({
+                'message': 'error',
+                'Access-Control-Allow-Origin': '*'
+            })
     except:
-        returnMessage('error')
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
 
 
 @require_http_methods(['POST'])
@@ -263,9 +311,15 @@ def club_member_add_submit(request):
         userid = body['userid']
         club_object = Club.objects.get(Club)
         # userid 为学生账号 为学号  数字
-        returnMessage('success')
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
     except:
-        returnMessage('error')
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
 
 
 @require_http_methods(['POST'])
@@ -274,9 +328,15 @@ def club_member_remove_submit(request):
         body = json.loads(request.body)
         token = body['token']
 
-        returnMessage('success')
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
     except:
-        returnMessage('error')
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
 
 
 @require_http_methods(['POST'])
@@ -296,9 +356,15 @@ def cd_message_list(request):
                         'Content': data.Content
                     }
                 })
-        returnMessage('success')
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
     except:
-        returnMessage('error')
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
 
 
 @require_http_methods(['POST'])
@@ -311,13 +377,25 @@ def cd_message_remove_submit(request):
             try:
                 message_object = Message.objects.filter(ToUser=to_user)
                 message_object.remove()
-                returnMessage('success')
+                return JsonResponse({
+                    'message': 'success',
+                    'Access-Control-Allow-Origin': '*'
+                })
             except:
-                returnMessage('error')
+                return JsonResponse({
+                    'message': 'error',
+                    'Access-Control-Allow-Origin': '*'
+                })
         else:
-            returnMessage('error')
+            return JsonResponse({
+                'message': 'error',
+                'Access-Control-Allow-Origin': '*'
+            })
     except:
-        returnMessage('error')
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
 
 
 @require_http_methods(['POST'])
@@ -345,9 +423,15 @@ def club_activity_apply_submit(request):
             Type=type,
             Participants=''
         )
-        returnMessage('success')
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
     except:
-        returnMessage('error')
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
 
 
 @require_http_methods(['POST'])
@@ -361,9 +445,15 @@ def cd_activity_agree_submit(request):
             activity_object.state = '1'
             activity_object.save()
         except:
-            returnMessage('error')
+            return JsonResponse({
+                'message': 'error',
+                'Access-Control-Allow-Origin': '*'
+            })
     except:
-        returnMessage('error')
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
 
 
 @require_http_methods(['POST'])
@@ -390,7 +480,10 @@ def cd_activity_list(request):
                 })
 
     except:
-        returnMessage('error')
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
 
 
 @require_http_methods(['POST'])
@@ -404,11 +497,20 @@ def cd_activity_deny_submit(request):
             activity_object.state = '2'
             activity_object.save()
             # 2-> denied
-            returnMessage('success')
+            return JsonResponse({
+                'message': 'error',
+                'Access-Control-Allow-Origin': '*'
+            })
         except:
-            returnMessage('error')
+            return JsonResponse({
+                'message': 'error',
+                'Access-Control-Allow-Origin': '*'
+            })
     except:
-        returnMessage('error')
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
 
 
 @require_http_methods(['POST'])
@@ -421,11 +523,20 @@ def cd_post_deny_submit(request):
             post_object = Post.objects.get(pk=post_id)
             post_object.IfPass = False
             post_object.save()
-            returnMessage('success')
+            return JsonResponse({
+                'message': 'error',
+                'Access-Control-Allow-Origin': '*'
+            })
         except:
-            returnMessage('error')
+            return JsonResponse({
+                'message': 'error',
+                'Access-Control-Allow-Origin': '*'
+            })
     except:
-        returnMessage('error')
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
 
 
 @require_http_methods(['POST'])
@@ -459,9 +570,15 @@ def club_establish(request):
             Stars=0,
             EnrollGroupQq=qq_group,
         )
-        returnMessage(message='success')
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
     except:
-        returnMessage('error')
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
 
 
 @require_http_methods(["POST"])
@@ -495,11 +612,20 @@ def lost_and_found_submit(request):
                 Desc=desc,
                 LostDateTime=date1
             )
-            returnMessage(message='success')
+            return JsonResponse({
+                'message': 'error',
+                'Access-Control-Allow-Origin': '*'
+            })
         except:
-            returnMessage(message='error')
+            return JsonResponse({
+                'message': 'error',
+                'Access-Control-Allow-Origin': '*'
+            })
     except:
-        returnMessage(message='error')
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
 
 
 # TODO: CHANGE INTO POST!!!
@@ -547,6 +673,12 @@ def change_password_submit(request):
         try:
             pass
         except:
-            returnMessage(message='error')
+            return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+            })
     except:
-        returnMessage(message='error')
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
