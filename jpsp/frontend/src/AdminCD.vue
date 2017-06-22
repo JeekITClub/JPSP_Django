@@ -1,8 +1,6 @@
 <template>
   <div id="app_cd">
-    <div>
-      <j-nav-top></j-nav-top>
-    </div>
+    <JNavTop></JNavTop>
     <router-view></router-view>
   </div>
 </template>

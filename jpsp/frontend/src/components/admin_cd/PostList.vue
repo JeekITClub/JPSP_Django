@@ -1,5 +1,6 @@
 <template>
-  <el-table :data="PostList" border style="width: 100%">
+  <!--
+<el-table :data="PostList" border style="width: 100%">
     <el-table-column type="expand">
       <template :scope="props">
         <el-table :label-position="left" inline>
@@ -44,6 +45,25 @@
       </el-button>
     </el-table-column>
   </el-table>
+  -->
+  <el-table
+      :data="PostList"
+      style="width: 100%">
+      <el-table-column
+        prop="ClubName"
+        label="ClubName"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        prop="Content"
+        label="Content"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        prop="LinkManQq"
+        label="QQ">
+      </el-table-column>
+    </el-table>
 </template>
 
 <script>
@@ -51,7 +71,7 @@
   export default {
     data () {
       return {
-        PostListTable: []
+        tableData: {}
       }
     },
     methods: {
@@ -94,23 +114,27 @@
       GetToken () {
         return this.$store.state.Token
       },
-      PostList() {
+      PostList () {
+        var PostList
         axios({
           method: 'GET',
           url: '/api/cd/post/list',
           data: JSON.stringify({
             Token: ''
-          }).then(function (response) {
-            if(response.data.message === 'error') {
-                console.log('error')
-            }
-            else {
-              console.log(response.data)
-            }
-          }.bind(this)).catch(function (error) {
-              console.log(error)
           })
+        }).then(function (response) {
+          if (response.data.message === 'error') {
+            console.log('error')
+          } else {
+            PostList = JSON.parse(response.data)
+            console.log(PostList)
+          }
+        }).catch(function (error) {
+          console.log(error)
         })
+        console.log(typeof PostList)
+        return Array(PostList)
+        // TODO: 这个强制转换很丑，想办法把上面parse出的undefined变成object
       }
     }
   }
