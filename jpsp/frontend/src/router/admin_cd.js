@@ -10,7 +10,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/post',
+      path: '/',
       name: 'post',
       component: PostList
     },
