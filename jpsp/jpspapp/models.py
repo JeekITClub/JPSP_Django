@@ -48,7 +48,7 @@ class Club(models.Model):
     # 社团介绍
     Achievements = models.TextField(default="")
     Member =  models.TextField(default="")
-
+    # TODO: Member many to many field?
 
 class Post(models.Model):
     ClubName = models.CharField(max_length=30, default="社团")
@@ -68,7 +68,7 @@ class Post(models.Model):
     Stars = models.FloatField(default=0.0)
     StarTime = models.DateTimeField(default=None)
     Pass = models.BooleanField(default=False)
-
+    
 
 class Message(models.Model):
     FromUser = models.ForeignKey(User)

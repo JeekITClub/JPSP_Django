@@ -57,6 +57,10 @@ def logout(request):
         usertype = body['UserType']
         token_object = JPSPToken(username=username, usertype=usertype)
         token_object.remove()
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
     except:
         return JsonResponse({
             'message': 'error',
@@ -67,30 +71,30 @@ def logout(request):
 @require_http_methods(["GET"])
 def club_list(request):
     try:
-        for num in range(0, Club.objects.all().count()):
-            for data in Club.objects.all():
-                return JsonResponse({
-                    str(num): {
-                        'ClubName': data.ClubName,
-                        'ClubId': data.ClubId,
-                        'ShezhangName': data.ShezhangName,
-                        'ShezhangQq': data.ShezhangQq,
-                        'ShezhangGrade': data.ShezhangGrade,
-                        'ShezhangClassroom': data.ShezhangClassroom,
-                        'IfRecruit': data.IfRecruit,
-                        'EnrollGroupQq': data.EnrollGroupQq,
-                        'Email': data.Email,
-                        'Label': data.Label,
-                        'State': data.State,
-                        'Stars': data.Stars,
-                        'Introduction': data.Introduction,
-                        'Achievements': data.Achievements
-                    }
-                })
+        response = []
+        club_object = Club.objects.all()
+        for data in club_object:
+            response.attend({'pk': data.pk,
+                            'ClubName': data.ClubName,
+                            'ShezhangName': data.ShezhangName,
+                            'ShezhangQq': data.ShezhangQq,
+                            'ShezhangGrade': data.ShezhangGrade,
+                            'ShezhangClassroom': data.ShezhangClassroom,
+                            'IfRecruit': data.IfRecruit,
+                            'EnrollGroupQq': data.EnrollGroupQq,
+                            'Email': data.Label,
+                            'State': data.State,
+                            'Stars': data.Stars,
+                            'Introduction': data.Introduction,
+                            'Achievements': data.Achievements,
+                            #'Member'
+            })
+            response_json = json.dumps(response)
+            return JsonResponse(response_json, safe=False)
     except:
         return JsonResponse({
-        'message': 'success',
-        'Access-Control-Allow-Origin': '*'
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
         })
 
 
@@ -344,22 +348,18 @@ def cd_message_list(request):
     try:
         body = json.loads(request.body)
         token = body['token']
-        # TODO: to_user
-        for num in range(0, Message.objects.filter(to_user='')):
-            for data in Message.objects.filter(to_user=''):
-                return JsonResponse({
-                    str(num): {
-                        'FromUser': data.FromUser,
-                        'SendTime': data.SendTime,
-                        'ToUser': data.ToUser,
-                        'Type': data.Type,
-                        'Content': data.Content
-                    }
-                })
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
+        response = []
+        # message_object = Message.objects.filter(ToUser=)
+        #  TODO: message_object !
+        for data in message_object:
+            response.append({'pk': data.pk,
+                            'FromUser': data.FromUser,
+                            'ToUser': data.ToUser,
+                            'Type': data.Type,
+                            'Content': data.Content
+                            })
+        response_json = json.dumps(response)
+        return JsonResponse(response_json, safa=False)
     except:
         return JsonResponse({
             'message': 'error',
@@ -634,7 +634,6 @@ def cd_post_list(request):
     try:
         # body = json.loads(request.body)
         # token = body['Token']
-        num = 0
         response = []
         post_object = Post.objects.all()
         for data in post_object:
@@ -653,7 +652,6 @@ def cd_post_list(request):
                              'Feeling': data.Feeling,
                              'Stars': data.Stars
                              })
-            num = num + 1
         response_json = json.dumps(response)
         return JsonResponse(response_json, safe=False)
     except:
