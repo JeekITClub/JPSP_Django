@@ -70,10 +70,10 @@ def logout(request):
 @require_http_methods(["GET"])
 def club_list(request):
     try:
-        for num in range(0,Club.objects.all().count()):
+        for num in range(0, Club.objects.all().count()):
             for data in Club.objects.all():
                 return JsonResponse({
-                    str(num):{
+                    str(num): {
                         'ClubName': data.ClubName,
                         'ClubId': data.ClubId,
                         'ShezhangName': data.ShezhangName,
@@ -196,8 +196,8 @@ def club_recruit_classroom_apply_submit(request):
             ClassroomId=0,
             ClubId=Club.objects.get(User.objects.get(username=club_id)),
             ClubName=club_name,
-            Date1=date1+date2,
-            Date2=date1+date3
+            Date1=date1 + date2,
+            Date2=date1 + date3
             # TODO: deal with date
         )
         returnMessage('success')
@@ -401,7 +401,7 @@ def cd_activity_deny_submit(request):
         acitivity_id = body['AcitivityId']
         try:
             activity_object = Activity.objects.get(pk=acivity_id)
-            activity_object.state='2'
+            activity_object.state = '2'
             activity_object.save()
             # 2-> denied
             returnMessage('success')
@@ -512,33 +512,29 @@ def cd_post_list(request):
         response = []
         post_object = Post.objects.all()
         for data in post_object:
-                response.append({str(num):
-                {
-                    'pk': data.pk,
-                    'ClubName': data.ClubName,
-                    'LinkmanGrade': data.LinkmanGrade,
-                    'LinkmanPhoneNumber': data.LinkmanPhoneNumber,
-                    'LinkmanName': data.LinkmanName,
-                    'LinkmanQq': data.LinkmanQq,
-                    'Region': data.Region,
-                    'Date1': data.Date1,
-                    'Date2': data.Date2,
-                    'Process': data.Process,
-                    'Content': data.Content,
-                    'Assessment': data.Assessment,
-                    'Feeling': data.Feeling,
-                    'Stars': data.Stars
-                }
-                        })
-                num = num + 1
+            response.append({'pk': data.pk,
+                             'ClubName': data.ClubName,
+                             'LinkmanGrade': data.LinkmanGrade,
+                             'LinkmanPhoneNumber': data.LinkmanPhoneNumber,
+                             'LinkmanName': data.LinkmanName,
+                             'LinkmanQq': data.LinkmanQq,
+                             'Region': data.Region,
+                             'Date1': str(data.Date1),
+                             'Date2': str(data.Date2),
+                             'Process': data.Process,
+                             'Content': data.Content,
+                             'Assessment': data.Assessment,
+                             'Feeling': data.Feeling,
+                             'Stars': data.Stars
+                             })
+            num = num + 1
         response_json = json.dumps(response)
-        return JsonResponse(response_json)
+        return JsonResponse(response_json, safe=False)
     except:
         return JsonResponse({
             'message': 'error',
             'Access-Control-Allow-Origin': '*'
         })
-
 
 
 @require_http_methods(['POST'])
