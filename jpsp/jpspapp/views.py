@@ -509,34 +509,36 @@ def cd_post_list(request):
         # body = json.loads(request.body)
         # token = body['Token']
         num = 0
-        response = {}
-        if Post.objects.all():
-            for data in Post.objects.all():
-                num += 1
-                response[str[num]]['pk'] = data.pk
-                # return JsonResponse(
-                #     {str(num):{
-                #         'pk': data.pk,
-                #         'ClubName': data.ClubName,
-                #         'LinkmanGrade': data.LinkmanGrade,
-                #         'LinkmanClassroom': data.LinkmanClass,
-                #         'LinkmanPhoneNumber': data.LinkmanPhoneNumber,
-                #         'LinkmanName': data.LinkmanName,
-                #         'LinkmanQq': data.LinkmanQq,
-                #         'Region': data.Region,
-                #         'Date1': data.Date1,
-                #         'Date2': data.Date2,
-                #         'Process': data.Process,
-                #         'Content': data.Content,
-                #         'Assessment': data.Assessment,
-                #         'Feeling': data.Feeling,
-                #         'Stars': data.Stars
-                #     }
-                # })
-        return JsonResponse(response)
+        response = []
+        post_object = Post.objects.all()
+        for data in post_object:
+                response.append({str(num):
+                {
+                    'pk': data.pk,
+                    'ClubName': data.ClubName,
+                    'LinkmanGrade': data.LinkmanGrade,
+                    'LinkmanPhoneNumber': data.LinkmanPhoneNumber,
+                    'LinkmanName': data.LinkmanName,
+                    'LinkmanQq': data.LinkmanQq,
+                    'Region': data.Region,
+                    'Date1': data.Date1,
+                    'Date2': data.Date2,
+                    'Process': data.Process,
+                    'Content': data.Content,
+                    'Assessment': data.Assessment,
+                    'Feeling': data.Feeling,
+                    'Stars': data.Stars
+                }
+                        })
+                num = num + 1
+        response_json = json.dumps(response)
+        return JsonResponse(response_json)
     except:
-        return JsonResponse({'message': 'error',
-                             'Access-Control-Allow-Origin': '*'})
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
+
 
 
 @require_http_methods(['POST'])
