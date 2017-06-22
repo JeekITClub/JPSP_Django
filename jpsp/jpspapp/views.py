@@ -505,37 +505,37 @@ def lost_and_found_submit(request):
 # TODO: CHANGE INTO POST!!!
 @require_http_methods(["GET"])
 def cd_post_list(request):
-    # try:
-        # body = json.loads(request.body)
-        # token = body['Token']
-    response = [{}]
-    for num in range(0, Post.objects.all().count()):
-        for data in Post.objects.all():
-                # return JsonResponse({str(num):
-                #     {
-                #         'pk': data.pk,
-                #         'ClubName': data.ClubName,
-                #         'LinkmanGrade': data.LinkmanGrade,
-                #         'LinkmanPhoneNumber': data.LinkmanPhoneNumber,
-                #         'LinkmanName': data.LinkmanName,
-                #         'LinkmanQq': data.LinkmanQq,
-                #         'Region': data.Region,
-                #         'Date1': data.Date1,
-                #         'Date2': data.Date2,
-                #         'Process': data.Process,
-                #         'Content': data.Content,
-                #         'Assessment': data.Assessment,
-                #         'Feeling': data.Feeling,
-                #         'Stars': data.Stars
-                #     }
-                #                      })
-            response[num]['pk'] = data.pk
-    return JsonResponse(json.dump(response))
-    # except:
-    #     return JsonResponse({
-    #         'message': 'error',
-    #         'Access-Control-Allow-Origin': '*'
-    #     })
+    response = []
+    try:
+        body = json.loads(request.body)
+        token = body['Token']
+        try:
+            num = 0
+            for data in Post.objects.all():
+                response.append({str(num):
+                {
+                    'pk': data.pk,
+                    'ClubName': data.ClubName,
+                    'LinkmanGrade': data.LinkmanGrade,
+                    'LinkmanPhoneNumber': data.LinkmanPhoneNumber,
+                    'LinkmanName': data.LinkmanName,
+                    'LinkmanQq': data.LinkmanQq,
+                    'Region': data.Region,
+                    'Date1': data.Date1,
+                    'Date2': data.Date2,
+                    'Process': data.Process,
+                    'Content': data.Content,
+                    'Assessment': data.Assessment,
+                    'Feeling': data.Feeling,
+                    'Stars': data.Stars
+                }
+                        })
+            num = num + 1
+        except:
+            returnMessage(message='error')
+    except:
+        returnMessage(message='error')
+    return JsonResponse(json.dumps(response))
 
 
 @require_http_methods(['POST'])
