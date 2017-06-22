@@ -530,7 +530,7 @@ def cd_post_list(request):
                     'Stars': data.Stars
                 }
                         })
-            num = num + 1
+                num = num + 1
         except:
             returnMessage(message='error')
     except:
