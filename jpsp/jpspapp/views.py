@@ -506,11 +506,11 @@ def lost_and_found_submit(request):
 @require_http_methods(["GET"])
 def cd_post_list(request):
     response = []
+    num = 0
     try:
         body = json.loads(request.body)
         token = body['Token']
         try:
-            num = 0
             for data in Post.objects.all():
                 response.append({str(num):
                 {
