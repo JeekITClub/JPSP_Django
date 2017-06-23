@@ -22,7 +22,7 @@
       </template>
     </el-table-column>
     <el-table-column label="PostID" width="100" prop="PostId">
-        <span style="margin-left: 10px">{{ scope.row.pk }}</span>
+      <span style="margin-left: 10px">{{ scope.row.pk }}</span>
     </el-table-column>
     <el-table-column label="社团" width="100">
       <span style="margin-left: 10px">{{ scope.row.ClubName }}</span>
@@ -101,14 +101,14 @@
           data: JSON.stringify({
             Token: ''
           }).then(function (response) {
-            if(response.data.message === 'error') {
-                console.log('error')
+            if (response.data.message === 'error') {
+              console.log('error')
             }
             else {
               console.log(response.data)
             }
           }.bind(this)).catch(function (error) {
-              console.log(error)
+            console.log(error)
           })
         })
       }

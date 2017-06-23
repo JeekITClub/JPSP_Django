@@ -7,7 +7,7 @@
         </el-menu-item>
         <el-submenu index="2">
           <template slot="title">
-          <i class="el-icon-document"></i>社团动态
+            <i class="el-icon-document"></i>社团动态
           </template>
           <el-menu-item-group>
             <el-menu-item index="2-1" route="" disabled="">概览</el-menu-item>
