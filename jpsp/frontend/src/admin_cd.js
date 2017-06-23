@@ -2,7 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import AdminCD from './AdminCD.vue'
-import router from './router'
+import router from './router/admin_cd'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import Vuex from 'vuex'
