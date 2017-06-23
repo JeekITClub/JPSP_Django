@@ -22,7 +22,7 @@
       </template>
     </el-table-column>
     <el-table-column label="PostID" width="100" prop="PostId">
-        <span style="margin-left: 10px">{{ scope.row.pk }}</span>
+      <span style="margin-left: 10px">{{ scope.row.pk }}</span>
     </el-table-column>
     <el-table-column label="社团" width="100">
       <span style="margin-left: 10px">{{ scope.row.ClubName }}</span>
@@ -58,7 +58,7 @@
       StarSubmit (index, row, star) {
         axios({
           method: 'POST',
-          url: '/api/cd/star/Submit',
+          url: 'http://127.0.0.1:8000/api/cd/star/Submit',
           data: JSON.stringify({
             Stars: star,
             StarTime: '',
@@ -94,21 +94,21 @@
       GetToken () {
         return this.$store.state.Token
       },
-      PostList() {
+      PostList () {
         axios({
           method: 'GET',
           url: '/api/cd/post/list',
           data: JSON.stringify({
             Token: ''
           }).then(function (response) {
-            if(response.data.message === 'error') {
-                console.log('error')
-            }
-            else {
+            if (response.data.message === 'error') {
+              console.log('error')
+            } else {
               console.log(response.data)
+              this.data.PostListTable = response.data
             }
           }.bind(this)).catch(function (error) {
-              console.log(error)
+            console.log(error)
           })
         })
       }

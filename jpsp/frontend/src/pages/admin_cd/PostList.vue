@@ -1,13 +1,6 @@
 <template>
   <div>
-    <el-row class="tac">
-      <el-col :span="4">
-        <cd_aside></cd_aside>
-      </el-col>
-      <el-col :span="20" offset="4">
-        <cd_post_list></cd_post_list>
-      </el-col>
-    </el-row>
+    <cd_post_list></cd_post_list>
   </div>
 </template>
 <script>
