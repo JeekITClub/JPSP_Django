@@ -58,8 +58,6 @@
     </el-submenu>
     <el-menu-item index="7" disabled="" route="">导航三</el-menu-item>
   </el-menu>
-  </el-col>
-  </el-row>
 </template>
 <script>
 </script>
