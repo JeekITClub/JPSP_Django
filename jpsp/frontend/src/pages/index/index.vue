@@ -145,6 +145,10 @@
                   <h3>邱世贸 Harvey Qiu</h3>
                   <span>2015届？？班 JEEK信息社 副社长</span>
                   <p>JPSP前端、后端工程师、架构师<br>曾经的2018届金苹果电视台台长。放弃视频后改行编程。</p>
+                  <br>
+                  <blockquote>
+                    <p>多读文档、多读源码就能变强。<footer>邱世贸</footer></p>
+                  </blockquote>
                 </div>
               </div>
             </div>
@@ -167,7 +171,7 @@
               </div>
               <div class="col-md-6 nopadding">
                 <div class="desc">
-                  <h3>邱龙田</h3>
+                  <h3>邱龙田 Artanic Qiu</h3>
                   <span>2015届3班</span>
                   <p>JPSP前端工程师</p>
                 </div>
