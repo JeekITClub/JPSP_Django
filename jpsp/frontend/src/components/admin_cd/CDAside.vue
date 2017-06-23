@@ -3,7 +3,7 @@
     <el-col :span="4">
       <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
         <el-menu-item index="1" disabled="">
-          <template slot="title"><i class="el-icon-menu"></i>仪表盘</template>
+          <template slot="title">仪表盘</template>
         </el-menu-item>
         <el-submenu index="2">
           <template slot="title">
