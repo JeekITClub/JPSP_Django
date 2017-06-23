@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-sfrom . import views
+from . import views
 
 urlpatterns = [
     url(r'^club_list', views.club_list),
