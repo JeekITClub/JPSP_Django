@@ -94,7 +94,7 @@
       GetToken () {
         return this.$store.state.Token
       },
-      PostList() {
+      PostList () {
         axios({
           method: 'GET',
           url: '/api/cd/post/list',
