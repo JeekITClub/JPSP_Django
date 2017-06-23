@@ -1,5 +1,5 @@
 <template>
-  <el-table :data="PostList" border style="width: 100%">
+  <el-table :data="PostListTable" border style="width: 100%">
     <el-table-column type="expand">
       <template :scope="props">
         <el-table :label-position="left" inline>
@@ -93,7 +93,9 @@
       },
       GetToken () {
         return this.$store.state.Token
-      },
+      }
+    },
+    mounted: {
       PostList () {
         axios({
           method: 'GET',
@@ -104,7 +106,7 @@
             if (response.data.message === 'error') {
               console.log('error')
             } else {
-              console.log(response.data)
+              this.data.PostListTable = response.data
             }
           }.bind(this)).catch(function (error) {
             console.log(error)

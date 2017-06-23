@@ -5,10 +5,8 @@
 </template>
 <script>
   import PostList from '../../components/admin_cd/PostList.vue'
-  import CDAside from '../../components/admin_cd/CDAside.vue'
   export default {
     components: {
-      'cd_aside': CDAside,
       'cd_post_list': PostList
     },
     data () {
