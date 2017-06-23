@@ -103,8 +103,7 @@
           }).then(function (response) {
             if (response.data.message === 'error') {
               console.log('error')
-            }
-            else {
+            } else {
               console.log(response.data)
             }
           }.bind(this)).catch(function (error) {
