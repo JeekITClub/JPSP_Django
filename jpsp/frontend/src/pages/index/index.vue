@@ -263,7 +263,7 @@
   }
 
   .qlt{
-    background-image: url(../../assets/Contributors/qsm.jpg);
+    background-image: url(../../assets/Contributors/qlt.jpg);
   }
 
   .sms{
