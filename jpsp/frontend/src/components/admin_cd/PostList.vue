@@ -2,7 +2,7 @@
   <el-table :data="PostListTable" border style="width: 100%">
     <el-table-column type="expand">
       <template :scope="props">
-        <el-table :label-position="left" inline>
+        <el-table inline>
           <el-table-item label="活动地点">
             <span>{{ props.row.Region }}</span>
           </el-table-item>
@@ -95,24 +95,38 @@
         return this.$store.state.Token
       }
     },
-    mounted: {
-      PostList () {
-        axios({
-          method: 'GET',
-          url: '/api/cd/post/list',
-          data: JSON.stringify({
-            Token: ''
-          }).then(function (response) {
-            if (response.data.message === 'error') {
-              console.log('error')
-            } else {
-              this.data.PostListTable = response.data
-            }
-          }.bind(this)).catch(function (error) {
-            console.log(error)
-          })
-        })
-      }
+//    mounted: {
+//      PostList () {
+//        axios({
+//          method: 'GET',
+//          url: '/api/cd/post/list',
+//          data: JSON.stringify({
+//            Token: ''
+//          }).then(function (response) {
+//            if (response.data.message === 'error') {
+//              console.log('error')
+//            } else if (response.data.message === 'success') {
+//              console.log('success')
+//            }
+//          }.bind(this)).catch(function (error) {
+//            console.log(error)
+//          })
+//        })
+//      }
+//    }
+    mounted: function () {
+      axios({
+        method: 'GET',
+        url: 'http://127.0.0.1:8000/api/cd/post/list'
+      })
+        .then(function (response) {
+          if (response.data.message === 'success') {
+            this.PostListTable = response.data.data
+            console.log('success')
+          } else {
+            console.log('error')
+          }
+        }.bind(this))
     }
   }
 </script>

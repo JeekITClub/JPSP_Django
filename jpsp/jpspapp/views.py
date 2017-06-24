@@ -653,7 +653,8 @@ def cd_post_list(request):
                              'Stars': data.Stars
                              })
         response_json = json.dumps(response)
-        return JsonResponse(response_json, safe=False)
+
+        return JsonResponse({'message': 'success','Access-Control-Allow-Origin': '*','data': response_json}, safe=False)
     except:
         return JsonResponse({
             'message': 'error',
