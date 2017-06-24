@@ -1,9 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import index from '@/pages/index/index'
+
 Vue.use(Router)
 import index from '@/pages/index/index.vue'
-// import Login from '@/pages/index/Login.vue'
+import Login from '@/pages/index/Login.vue'
+import ClubIndex from '@/pages/index/ClubIndex'
+import ClubPost from '@/pages/index/ClubPost.vue'
+import ClubPostList from '@/pages/index/ClubPostList.vue'
+import ProfileEdit from '@/pages/index/ProfileEdit.vue'
 // import LostAndFound from '../pages/index/LostAndFound.vue'
 export default new Router({
   routes: [
@@ -13,14 +17,29 @@ export default new Router({
       component: index
     },
     {
-      path: '/test',
-      name: 'test',
-      component: index
+      path: '/login',
+      name: 'login',
+      component: Login
     },
     {
-      path: '/lost',
-      name: 'LostAndFound',
-      component: index
+      path: '/clubindex',
+      name: 'ClubIndex',
+      component: ClubIndex
+    },
+    {
+      path: '/clubpostlist',
+      name: 'ClubPostList',
+      component: ClubPostList
+    },
+    {
+      path: '/clubpost',
+      name: 'ClubPost',
+      component: ClubPost
+    },
+    {
+      path: '/profile',
+      name: 'ProfileEdit',
+      component: ProfileEdit
     }
   ]
 })
