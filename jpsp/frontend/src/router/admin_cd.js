@@ -14,7 +14,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'post',
+      name: 'index',
       component: Index
     },
     {
