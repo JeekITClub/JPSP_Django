@@ -5,7 +5,6 @@ import AdminClub from './AdminClub.vue'
 import router from './router/admin_club.js'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
-import 'bootstrap/dist/css/bootstrap.css'
 import Vuex from 'vuex'
 import axios from 'axios'
 Vue.config.productionTip = false
