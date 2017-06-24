@@ -3,7 +3,7 @@
     <el-row class="tac">
       <el-col :span="8" :offset="8">
         <el-form ref="LoginForm" :model="LoginForm" v-if="Authenticate===false || Authenticate===null">
-          <el-form-item label="学号" :required=true>
+          <el-form-item label="社团部账号" :required=true>
             <el-input v-model="LoginForm.UserName" placeholder="社团部账号" autofocus=""></el-input>
           </el-form-item>
           <el-form-item label="密码" :required=true>
@@ -64,18 +64,4 @@
   }
 </script>
 <style>
-  .el-row {
-    margin-bottom: 20px;
-
-  }
-
-  .bg-purple-dark {
-    background: #99a9bf;
-  }
-
-  .grid-content {
-    border-radius: 4px;
-    min-height: 36px;
-  }
-
 </style>

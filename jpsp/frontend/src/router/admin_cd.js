@@ -3,8 +3,11 @@
  */
 import Vue from 'vue'
 import Router from 'vue-router'
+import Index from '../pages/admin_cd/index.vue'
 import PostList from '../pages/admin_cd/PostList.vue'
 import ActivityList from '../pages/admin_cd/ActivityList.vue'
+import Contact from '../pages/public/Contact.vue'
+import About from '../pages/public/About.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -12,7 +15,7 @@ export default new Router({
     {
       path: '/',
       name: 'post',
-      component: PostList
+      component: Index
     },
     {
       path: '/activity',
@@ -23,6 +26,16 @@ export default new Router({
       path: '/post',
       name: 'post',
       component: PostList
+    },
+    {
+      path: '/contact',
+      name: 'contact',
+      component: Contact
+    },
+    {
+      path: '/about',
+      name: 'contact',
+      component: About
     }
   ]
 })

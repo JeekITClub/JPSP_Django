@@ -25,26 +25,34 @@
       <p>特别感谢<a href="" target="_blank">Github</a>以及<a href="" target="_blank">JetBrains</a></p>
     </div>
     <div>
-      <h1>Contributors</h1>
+      <p class="lead">Contributors</p>
       <p><a href="https://about.me/nichujie">2018届（13）班倪楚劼</a>
         <span>、</span>
-        <a href="https://alienmao.github.io/">2018届（3）班邱世贸</a>
-        <!--<span>、</span>-->
-        <!--<a href="https://github.com/Artanic30">2018届（3）班邱龙田</a>-->
+        <a href="https://alienmao.github.io/">2018届（??）班邱世贸</a>
+        <span>、</span>
+        <a href="https://github.com/Artanic30">2018届（3）班邱龙田</a>
       </p>
     </div>
     <div>
-      <h1>
-        后端
-      </h1>
-      <p>后端架构为Nginx+uwsgi+Django</p>
-      <h1>
-        前端
-      </h1>
-      <p>
-        前端采用了Vue.js框架，使用axios进行与后端交互，使用Vuex进行状态管理。
-      </p>
+      <div>
+        <p class="lead">后端</p>
+        <p>后端架构为Nginx+uwsgi+Django</p>
+      </div>
+      <div>
+        <p class="lead">
+          前端
+        </p>
+        <p>
+          前端采用了Vue.js框架，使用axios进行与后端交互，使用Vuex进行状态管理。
+        </p>
+      </div>
     </div>
+    <div>
+    <p class="lead">
+      JPSP开发日记
+    </p>
+    <a href="https://alienmao.gitbooks.io/jpsp_diary/content/">JPSP DEVELOP DIARY</a>
+  </div>
   </div>
 </template>
 <script>

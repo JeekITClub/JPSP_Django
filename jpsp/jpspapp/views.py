@@ -58,7 +58,7 @@ def logout(request):
         token_object = JPSPToken(username=username, usertype=usertype)
         token_object.remove()
         return JsonResponse({
-            'message': 'error',
+            'message': 'success',
             'Access-Control-Allow-Origin': '*'
         })
     except:
