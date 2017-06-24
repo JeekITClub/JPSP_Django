@@ -1,47 +1,59 @@
 <template>
-  <el-table :data="PostListTable" border style="width: 100%">
+  <el-table :data=PostListTable>
     <el-table-column type="expand">
-      <template :scope="props">
-        <el-table inline>
-          <el-table-item label="活动地点">
-            <span>{{ props.row.Region }}</span>
-          </el-table-item>
-          <el-table-item label="活动内容">
-            <span>{{ props.row.Content }}</span>
-          </el-table-item>
-          <el-table-item label="活动过程">
-            <span>{{ props.row.Process }}</span>
-          </el-table-item>
-          <el-table-item label="活动评价">
-            <span>{{ props.row.Assessment }}</span>
-          </el-table-item>
-          <el-table-item label="感悟分析">
-            <span>{{ props.row.Feeling }}</span>
-          </el-table-item>
-        </el-table>
+      <template scope="props">
+        <el-form inline class="demo-table-expand">
+          <el-row class="tac">
+            <el-col :span="6">
+              <el-form-item label="活动内容">
+                <span>{{ props.row.Content }}</span>
+              </el-form-item>
+            </el-col>
+            <el-col :span="6">
+              <el-form-item label="活动过程">
+                <span>{{ props.row.Process }}</span>
+              </el-form-item>
+            </el-col>
+            <el-col :span="6">
+              <el-form-item label="活动评价">
+                <span>{{ props.row.Assessment }}</span>
+              </el-form-item>
+            </el-col>
+            <el-col :span="6">
+              <el-form-item label="感悟分析">
+                <span>{{ props.row.Feeling }}</span>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-form>
       </template>
     </el-table-column>
-    <el-table-column label="PostID" width="100" prop="PostId">
-      <span style="margin-left: 10px">{{ scope.row.pk }}</span>
+    <el-table-column prop="pk" label="PostId">
     </el-table-column>
-    <el-table-column label="社团" width="100">
-      <span style="margin-left: 10px">{{ scope.row.ClubName }}</span>
+    <el-table-column prop="ClubName" label="社团名称">
     </el-table-column>
-    <el-table-column label="联系人" width="100">
-      <span style="margin-left: 10px">{{ scope.row.Linkman }}</span>
+    <el-table-column prop="LinkmanName" label="联系人">>
     </el-table-column>
-    <el-table-column label="社团活动时间">
-      <span style="margin-left: 10px">{{ scope.row.Date1 }}--{{ scope.row.Date2 }}</span>
+    <el-table-column prop="Date1" label="社团活动日期">
+    </el-table-column>
+    <el-table-column prop="Date2" label="社团活动时间">
+    </el-table-column>
+    <el-table-column prop="Region" label="活动地点">
+    </el-table-column>
+    <el-table-column prop="Stars" label="评价">
     </el-table-column>
     <el-table-column label="评价">
-      <template :scope=scope>
-        <el-rate v-model="scope.row.Star" v-on:change="StarSubmit"></el-rate>
+      <template scope="scope">
+        <el-rate v-on:change="StarSubmit"></el-rate>
+        <!--TODO: EL RATE function and its parameters-->
       </template>
     </el-table-column>
     <el-table-column label="操作">
-      <el-button size="small" type="danger" @click="HandleDeleteSubmit(scope.$index,scope.row)">
-        删除
-      </el-button>
+      <template scope="scope">
+        <el-button size="small" type="danger" @click="HandleDeleteSubmit(scope.$index,scope.row)">
+          删除
+        </el-button>
+      </template>
     </el-table-column>
   </el-table>
 </template>
@@ -121,7 +133,7 @@
       })
         .then(function (response) {
           if (response.data.message === 'success') {
-            this.PostListTable = response.data.data
+            this.PostListTable = JSON.parse(response.data.data)
             console.log('success')
           } else {
             console.log('error')
