@@ -629,18 +629,78 @@ def lost_and_found_submit(request):
 
 
 # TODO: CHANGE INTO POST!!!
-@require_http_methods(["GET"])
+@require_http_methods(["POST"])
 def cd_post_list(request):
     try:
-        # body = json.loads(request.body)
-        # token = body['Token']
-        # type = body['Type']
+        body = json.loads(request.body)
+        token = body['Token']
+        type = body['Type']
         if type == 'UnStared':
-            pass
+            response = []
+            post_object = Post.objects.filter(Stars=0)
+            for data in post_object:
+                response.append({'pk': data.pk,
+                                 'ClubName': data.ClubName,
+                                 'LinkmanGrade': data.LinkmanGrade,
+                                 'LinkmanPhoneNumber': data.LinkmanPhoneNumber,
+                                 'LinkmanName': data.LinkmanName,
+                                 'LinkmanQq': data.LinkmanQq,
+                                 'Region': data.Region,
+                                 'Date1': str(data.Date1),
+                                 'Date2': str(data.Date2),
+                                 'Process': data.Process,
+                                 'Content': data.Content,
+                                 'Assessment': data.Assessment,
+                                 'Feeling': data.Feeling,
+                                 'Stars': data.Stars
+                                 })
+            response_json = json.dumps(response)
+            return JsonResponse({'message': 'success', 'Access-Control-Allow-Origin': '*', 'data': response_json},
+                                safe=False)
         elif type == "Stared":
-            pass
+            response = []
+            post_object = Post.objects.exclude(Stars=0.0)
+            for data in post_object:
+                response.append({'pk': data.pk,
+                                 'ClubName': data.ClubName,
+                                 'LinkmanGrade': data.LinkmanGrade,
+                                 'LinkmanPhoneNumber': data.LinkmanPhoneNumber,
+                                 'LinkmanName': data.LinkmanName,
+                                 'LinkmanQq': data.LinkmanQq,
+                                 'Region': data.Region,
+                                 'Date1': str(data.Date1),
+                                 'Date2': str(data.Date2),
+                                 'Process': data.Process,
+                                 'Content': data.Content,
+                                 'Assessment': data.Assessment,
+                                 'Feeling': data.Feeling,
+                                 'Stars': data.Stars
+                                 })
+            response_json = json.dumps(response)
+            return JsonResponse({'message': 'success', 'Access-Control-Allow-Origin': '*', 'data': response_json},
+                                safe=False)
         elif type == "UnPassed":
-            pass
+            response = []
+            post_object = Post.objects.filter(Pass=False)
+            for data in post_object:
+                response.append({'pk': data.pk,
+                                 'ClubName': data.ClubName,
+                                 'LinkmanGrade': data.LinkmanGrade,
+                                 'LinkmanPhoneNumber': data.LinkmanPhoneNumber,
+                                 'LinkmanName': data.LinkmanName,
+                                 'LinkmanQq': data.LinkmanQq,
+                                 'Region': data.Region,
+                                 'Date1': str(data.Date1),
+                                 'Date2': str(data.Date2),
+                                 'Process': data.Process,
+                                 'Content': data.Content,
+                                 'Assessment': data.Assessment,
+                                 'Feeling': data.Feeling,
+                                 'Stars': data.Stars
+                                 })
+            response_json = json.dumps(response)
+            return JsonResponse({'message': 'success', 'Access-Control-Allow-Origin': '*', 'data': response_json},
+                                safe=False)
         elif type == "All":
             response = []
             post_object = Post.objects.all()
@@ -661,7 +721,6 @@ def cd_post_list(request):
                                  'Stars': data.Stars
                                  })
             response_json = json.dumps(response)
-
             return JsonResponse({'message': 'success', 'Access-Control-Allow-Origin': '*', 'data': response_json},
                                 safe=False)
     except:

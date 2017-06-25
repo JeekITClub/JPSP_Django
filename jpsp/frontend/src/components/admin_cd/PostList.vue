@@ -4,22 +4,22 @@
       <template scope="props">
         <el-form inline class="demo-table-expand">
           <el-row class="tac">
-            <el-col :span="6">
+            <el-col :span="24">
               <el-form-item label="活动内容">
                 <span>{{ props.row.Content }}</span>
               </el-form-item>
             </el-col>
-            <el-col :span="6">
+            <el-col :span="24">
               <el-form-item label="活动过程">
                 <span>{{ props.row.Process }}</span>
               </el-form-item>
             </el-col>
-            <el-col :span="6">
+            <el-col :span="24">
               <el-form-item label="活动评价">
                 <span>{{ props.row.Assessment }}</span>
               </el-form-item>
             </el-col>
-            <el-col :span="6">
+            <el-col :span="24">
               <el-form-item label="感悟分析">
                 <span>{{ props.row.Feeling }}</span>
               </el-form-item>
@@ -111,8 +111,12 @@
     },
     mounted: function () {
       axios({
-        method: 'GET',
-        url: 'http://127.0.0.1:8000/api/cd/post/list'
+        method: 'POST',
+        url: 'http://127.0.0.1:8000/api/cd/post/list',
+        data: JSON.stringify({
+          Type: this.type,
+          Token: this.GetToken
+        })
       })
         .then(function (response) {
           if (response.data.message === 'success') {
