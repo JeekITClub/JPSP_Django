@@ -44,8 +44,7 @@
     </el-table-column>
     <el-table-column label="评价">
       <template scope="scope">
-        <el-rate v-on:change="StarSubmit"></el-rate>
-        <!--TODO: EL RATE function and its parameters-->
+        <el-rate v-on:change="StarSubmit(scope.row.pk, scope.row.Stars)" v-model="scope.row.Stars"></el-rate>
       </template>
     </el-table-column>
     <el-table-column label="操作">
@@ -63,33 +62,31 @@
   export default {
     data () {
       return {
-        tableData: {}
+        PostListTable: []
       }
     },
     methods: {
-      StarSubmit (index, row, star) {
+      StarSubmit (postid, star) {
         axios({
           method: 'POST',
-          url: '/api/cd/star/Submit',
+          url: 'http://127.0.0.1:8000/api/cd/post/star/submit',
           data: JSON.stringify({
             Stars: star,
             StarTime: '',
             // TODO: star_time
-            PostId: '',
+            PostId: postid,
             // TODO: PostId
             Token: ''
           })
         })
       },
-      HandleDeleteSubmit (index, row) {
-        console.log(index, row)
+      HandleDeleteSubmit (postid) {
         axios({
           method: 'POST',
-          url: '/api/cd/Post/DeleteSubmit',
+          url: 'http://127.0.0.1:8000/api/cd/post/deny/submit',
           data: JSON.stringify({
-            HandleTime: '',
             // TODO: HandleTime
-            PostId: '',
+            PostId: postid,
             // TODO: PostId
             Token: ''
           })
@@ -107,25 +104,6 @@
         return this.$store.state.Token
       }
     },
-//    mounted: {
-//      PostList () {
-//        axios({
-//          method: 'GET',
-//          url: '/api/cd/post/list',
-//          data: JSON.stringify({
-//            Token: ''
-//          }).then(function (response) {
-//            if (response.data.message === 'error') {
-//              console.log('error')
-//            } else if (response.data.message === 'success') {
-//              console.log('success')
-//            }
-//          }.bind(this)).catch(function (error) {
-//            console.log(error)
-//          })
-//        })
-//      }
-//    }
     mounted: function () {
       axios({
         method: 'GET',

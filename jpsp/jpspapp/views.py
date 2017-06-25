@@ -240,6 +240,7 @@ def cd_post_star_submit(request):
         token = body['Token']
         stars = body['Stars']
         post_id = body['PostId']
+        star_time = body['StarTime']
         try:
             post_object = Post.objects.get(pk=post_id)
             post_object.Stars = stars
@@ -517,14 +518,14 @@ def cd_activity_deny_submit(request):
 def cd_post_deny_submit(request):
     try:
         body = json.loads(request.body)
-        token = body['token']
+        token = body['Token']
         post_id = body['PostId']
         try:
             post_object = Post.objects.get(pk=post_id)
-            post_object.IfPass = False
+            post_object.Pass = False
             post_object.save()
             return JsonResponse({
-                'message': 'error',
+                'message': 'success',
                 'Access-Control-Allow-Origin': '*'
             })
         except:
