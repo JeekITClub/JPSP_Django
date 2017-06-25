@@ -56,25 +56,6 @@
       </template>
     </el-table-column>
   </el-table>
-  -->
-  <el-table
-      :data="PostList"
-      style="width: 100%">
-      <el-table-column
-        prop="ClubName"
-        label="ClubName"
-        width="180">
-      </el-table-column>
-      <el-table-column
-        prop="Content"
-        label="Content"
-        width="180">
-      </el-table-column>
-      <el-table-column
-        prop="LinkManQq"
-        label="QQ">
-      </el-table-column>
-    </el-table>
 </template>
 
 <script>

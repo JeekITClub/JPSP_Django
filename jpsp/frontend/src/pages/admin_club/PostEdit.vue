@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <el-row :gutter=20>
       <el-col :span="4">
         <club_aside></club_aside>

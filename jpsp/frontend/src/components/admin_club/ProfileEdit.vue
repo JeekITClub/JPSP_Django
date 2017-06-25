@@ -4,21 +4,30 @@
       <el-form-item label="社团名称" :required="true">
         <el-input v-model="PostForm.ClubName"></el-input>
       </el-form-item>
+      <el-form-item label="社团头像">
+        <el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/"
+                   :show-file-list="false"
+                   :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+        </el-upload>
+        <img v-if="imageUrl" :src="imageUrl" class="avatar">
+        <i v-else class="avatar-uploader-icon
+        el-icon-document"></i>
+      </el-form-item>
       <el-form-item label="社长姓名" :required="true">
-        <el-input v-model="PostForm.Shezhang.Name"></el-input>
+        <el-input v-model="PostForm.ShezhangName"></el-input>
       </el-form-item>
       <el-form-item label="社长QQ" :required="true">
-        <el-input v-model="PostForm.Shezhang.QQ"></el-input>
+        <el-input v-model="PostForm.ShezhangQQ"></el-input>
       </el-form-item>
       <el-form-item prop="PostForm.Shezhang.Grade" label="社长年级" :required="true">
-        <el-select v-model="PostForm.Shezhang.Grade" value="">
+        <el-select v-model="PostForm.ShezhangGrade" value="">
           <el-option label="高一" value="1"></el-option>
           <el-option label="高二" value="2"></el-option>
           <el-option label="高三" value="3"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item prop="PostForm.Shezhang.Class" label="社长班级" :required="true">
-        <el-select v-model="PostForm.Shezhang.Class" value="">
+      <el-form-item prop="PostForm.ShezhangClass" label="社长班级" :required="true">
+        <el-select v-model="PostForm.ShezhangClass" value="">
           <el-option label="1" value="1"></el-option>
           <el-option label="2" value="2"></el-option>
           <el-option label="3" value="3"></el-option>
@@ -100,19 +109,18 @@
             }
           ],
           Email: '',
-          Shezhang: {
-            Name: '',
-            QQ: '',
-            Grade: '',
-            Class: ''
-          }
+          ShezhangName: '',
+          ShezhangQQ: '',
+          ShezhangGrade: '',
+          ShezhangClass: ''
         },
-        error: false
+        error: false,
+        imageUrl: ''
       }
     },
     methods: {
       removeAchievement (item) {
-        var index = this.PostForm.achievements.indexOf(item)
+        const index = this.PostForm.achievements.indexOf(item)
         if (index !== -1) {
           this.PostForm.achievements.splice(index, 1)
         }
@@ -151,6 +159,21 @@
         }.bind(this)).catch(function () {
           alert('error: ProfileEdit')
         })
+      },
+      handleAvatarSuccess (res, file) {
+        this.imageUrl = URL.createObjectURL(file.raw)
+      },
+      beforeAvatarUpload (file) {
+        const isJPG = file.type === 'image/jpeg'
+        const isLt2M = file.size / 1024 / 1024 < 2
+
+        if (!isJPG) {
+          this.$message.error('上传头像图片只能是 JPG 格式!')
+        }
+        if (!isLt2M) {
+          this.$message.error('上传头像图片大小不能超过 2MB!')
+        }
+        return isJPG && isLt2M
       }
     },
     computed: {
@@ -170,4 +193,30 @@
   }
 </script>
 <style>
+  .avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .avatar-uploader .el-upload:hover {
+    border-color: #20a0ff;
+  }
+
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+  }
+
+  .avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+  }
 </style>

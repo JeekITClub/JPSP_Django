@@ -1,50 +1,51 @@
 <template>
-  <el-form :ref="ChangePasswordForm" :model="ChangePasswordForm">
-<el-form-item label="原密码">
-<el-input v-model="ChangePasswordForm.OriginalPassword" placeholder="请输入原密码"></el-input></el-form-item>
-  </el-form>
-  <el-form-item label="新密码">
-  <el-input v-model="ChangePasswordForm.NewPassword" placeholder="请输入新密码"></el-input>
-</el-form-item>
-<el-form-item label="确定新密码">
-<el-input v-model="ChangePasswordForm" placeholder="重复新密码"></el-input></el-form-item>
-<el-form-item>
-<el-button @click="submitForm" type="primary">提交修改</el-button>
-</el-form-item>
+  <div>
+    <el-form :ref="ChangePasswordForm" :model="ChangePasswordForm">
+      <el-form-item label="原密码">
+        <el-input v-model="ChangePasswordForm.OriginalPassword" placeholder="请输入原密码"></el-input>
+      </el-form-item>
+    </el-form>
+    <el-form-item label="新密码">
+      <el-input v-model="ChangePasswordForm.NewPassword" placeholder="请输入新密码"></el-input>
+    </el-form-item>
+    <el-form-item label="确定新密码">
+      <el-input v-model="ChangePasswordForm" placeholder="重复新密码"></el-input>
+    </el-form-item>
+    <el-form-item>
+      <el-button @click="submitForm" type="primary">提交修改</el-button>
+    </el-form-item>
+  </div>
 </template>
 <script>
-import axios from 'axios'
+  import axios from 'axios'
   export default {
     data () {
       return {
-          ChangePasswordForm: {
-              OriginalPassword: '',
-              NewPassword: '',
-              ConfirmNewPassword: ''
-          }
+        ChangePasswordForm: {
+          OriginalPassword: '',
+          NewPassword: '',
+          ConfirmNewPassword: ''
+        }
       }
-  },
-  methods: {
+    },
+    methods: {
       submitForm () {
-          axios({
-              method: 'POST',
-              url: 'api/index/profile/ChangePassword',
-              data : {
-
-              }
-          }).then(function (response) {
-            if (response.data.message === 'success') {
-              console.log('success')
-            }
-            if (response.data.message === 'error') {
-              console.log('error')
-            }
-          }.bind(this)).catch(function () {
+        axios({
+          method: 'POST',
+          url: 'api/index/profile/ChangePassword',
+          data: {}
+        }).then(function (response) {
+          if (response.data.message === 'success') {
+            console.log('success')
+          }
+          if (response.data.message === 'error') {
             console.log('error')
-          })
-        },
-      }
-  }
+          }
+        }.bind(this)).catch(function () {
+          console.log('error')
+        })
+      },
+    }
   }
 </script>
 <style>

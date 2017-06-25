@@ -61,13 +61,13 @@
       },
 
       removeAchievement (item) {
-        var index = this.AchievementForm.ahievements.indexOf(item)
+        var index = this.AchievementForm.achievements.indexOf(item)
         if (index !== -1) {
           this.AchievementForm.achievements.splice(index, 1)
         }
       },
       addAchievement () {
-        this.AchievementForm.ahievements.push({
+        this.AchievementForm.achievements.push({
           value: '',
           key: Date.now()
         })

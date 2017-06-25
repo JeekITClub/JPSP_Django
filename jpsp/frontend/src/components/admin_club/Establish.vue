@@ -4,17 +4,15 @@
       <el-form-item label="社团名称">
         <el-input v-model="EstablishClubForm.ClubName"></el-input>
       </el-form-item>
-      <el-form-item label="社长姓名">
-        <el-input v-model="EstablishClubForm.ShezhangName"></el-input>
-      </el-form-item>
-      <el-form-item prop="EstablishClubForm.ShezhangGrade" label="社长年级">
+      <el-form-item label="社长姓名"><el-input v-model="EstablishClubForm.ShezhangName"></el-input></el-form-item>
+      <el-form-item label="社长年级">
         <el-select v-model="EstablishClubForm.ShezhangGrade" value="">
           <el-option label="高一" value="1"></el-option>
           <el-option label="高二" value="2"></el-option>
           <el-option label="高三" value="3"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item prop="EstablishClubForm.ShezhangClassroom" label="社长班级" required>
+      <el-form-item label="社长班级" required>
         <el-select v-model="EstablishClubForm.ShezhangClassroom" value="">
           <el-option label="1" value="1"></el-option>
           <el-option label="2" value="2"></el-option>
@@ -41,7 +39,7 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item label="招新QQ群">
-        <el-input v-if="EstablishClubForm.IfRecruit" v-model="PostForm.QQGroup"></el-input>
+        <el-input v-if="EstablishClubForm.IfRecruit" v-model="EstablishClubForm.QQGroup"></el-input>
       </el-form-item>
       <el-form-item label="社团邮箱">
         <el-input v-model="EstablishClubForm.Email"></el-input>
