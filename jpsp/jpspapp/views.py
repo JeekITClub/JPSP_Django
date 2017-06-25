@@ -460,25 +460,25 @@ def cd_activity_agree_submit(request):
 def cd_activity_list(request):
     try:
         body = json.loads(request.body)
-        token = body['token']
+        token = body['Token']
+        response = []
         # TODO : token authenticate
-        for num in range(0, Activity.objects.all().count()):
-            for data in Activity.objects.all():
-                return JsonResponse({
-                    str(num): {
-                        'ActivityId': data.pk,
-                        'ActivityName': data.ActivityName,
-                        'Region': data.Region,
-                        'ClubId': data.ClubId,
-                        'ClubName': data.ClubName,
-                        'Content': data.Content,
-                        'Date1': data.Date1,
-                        'Date2': data.Date2,
-                        'State': data.State,
-                        'Type': data.Type
-                    }
+        for data in Activity.objects.all():
+            response.append({
+                    'ActivityId': data.pk,
+                    'ActivityName': data.ActivityName,
+                    'Region': data.Region,
+                    'ClubId': data.ClubId,
+                    'ClubName': data.ClubName,
+                    'Content': data.Content,
+                    'Date1': data.Date1,
+                    'Date2': data.Date2,
+                    'State': data.State,
+                    'Type': data.Type
                 })
-
+        response_json = json.dumps(response)
+        return JsonResponse({'message': 'success', 'Access-Control-Allow-Origin': '*', 'data': response_json},
+                            safe=False)
     except:
         return JsonResponse({
             'message': 'error',

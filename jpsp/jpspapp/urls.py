@@ -20,6 +20,7 @@ urlpatterns = [
     url(r'^club/activity/ApplySubmit', views.club_activity_apply_submit),
     url(r'^cd/activity/AgreeSubmit', views.cd_activity_agree_submit),
     url(r'^cd/activity/DenySubmit', views.cd_activity_deny_submit),
+    url(r'^cd/activity/list', views.cd_activity_list),
     url(r'^cd/post/list',views.cd_post_list),
     url(r'^index/LAF/Submit',views.lost_and_found_submit)
 ]
