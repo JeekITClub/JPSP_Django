@@ -34,7 +34,7 @@ export default new Router({
     },
     {
       path: '/about',
-      name: 'contact',
+      name: 'about',
       component: About
     }
   ]

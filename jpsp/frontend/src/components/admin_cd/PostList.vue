@@ -65,6 +65,11 @@
         PostListTable: []
       }
     },
+    props: {
+      type: {
+        'default': 'UnStared'
+      }
+    },
     methods: {
       StarSubmit (postid, star) {
         axios({

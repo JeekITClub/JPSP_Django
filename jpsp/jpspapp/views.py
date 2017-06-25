@@ -10,7 +10,6 @@ import datetime
 from django.contrib.auth import authenticate
 
 
-
 # Create your views here.
 @require_http_methods(['POST'])
 def login(request):
@@ -75,20 +74,20 @@ def club_list(request):
         club_object = Club.objects.all()
         for data in club_object:
             response.attend({'pk': data.pk,
-                            'ClubName': data.ClubName,
-                            'ShezhangName': data.ShezhangName,
-                            'ShezhangQq': data.ShezhangQq,
-                            'ShezhangGrade': data.ShezhangGrade,
-                            'ShezhangClassroom': data.ShezhangClassroom,
-                            'IfRecruit': data.IfRecruit,
-                            'EnrollGroupQq': data.EnrollGroupQq,
-                            'Email': data.Label,
-                            'State': data.State,
-                            'Stars': data.Stars,
-                            'Introduction': data.Introduction,
-                            'Achievements': data.Achievements,
-                            #'Member'
-            })
+                             'ClubName': data.ClubName,
+                             'ShezhangName': data.ShezhangName,
+                             'ShezhangQq': data.ShezhangQq,
+                             'ShezhangGrade': data.ShezhangGrade,
+                             'ShezhangClassroom': data.ShezhangClassroom,
+                             'IfRecruit': data.IfRecruit,
+                             'EnrollGroupQq': data.EnrollGroupQq,
+                             'Email': data.Label,
+                             'State': data.State,
+                             'Stars': data.Stars,
+                             'Introduction': data.Introduction,
+                             'Achievements': data.Achievements,
+                             # 'Member'
+                             })
             response_json = json.dumps(response)
             return JsonResponse(response_json, safe=False)
     except:
@@ -292,8 +291,8 @@ def user_profile_edit_submit(request):
         try:
             user_profile_object = UserProfile.objects.get()
             return JsonResponse({
-            'message': 'success',
-            'Access-Control-Allow-Origin': '*'
+                'message': 'success',
+                'Access-Control-Allow-Origin': '*'
             })
         except:
             return JsonResponse({
@@ -354,11 +353,11 @@ def cd_message_list(request):
         #  TODO: message_object !
         for data in message_object:
             response.append({'pk': data.pk,
-                            'FromUser': data.FromUser,
-                            'ToUser': data.ToUser,
-                            'Type': data.Type,
-                            'Content': data.Content
-                            })
+                             'FromUser': data.FromUser,
+                             'ToUser': data.ToUser,
+                             'Type': data.Type,
+                             'Content': data.Content
+                             })
         response_json = json.dumps(response)
         return JsonResponse(response_json, safa=False)
     except:
@@ -635,27 +634,36 @@ def cd_post_list(request):
     try:
         # body = json.loads(request.body)
         # token = body['Token']
-        response = []
-        post_object = Post.objects.all()
-        for data in post_object:
-            response.append({'pk': data.pk,
-                             'ClubName': data.ClubName,
-                             'LinkmanGrade': data.LinkmanGrade,
-                             'LinkmanPhoneNumber': data.LinkmanPhoneNumber,
-                             'LinkmanName': data.LinkmanName,
-                             'LinkmanQq': data.LinkmanQq,
-                             'Region': data.Region,
-                             'Date1': str(data.Date1),
-                             'Date2': str(data.Date2),
-                             'Process': data.Process,
-                             'Content': data.Content,
-                             'Assessment': data.Assessment,
-                             'Feeling': data.Feeling,
-                             'Stars': data.Stars
-                             })
-        response_json = json.dumps(response)
+        # type = body['Type']
+        if type == 'UnStared':
+            pass
+        elif type == "Stared":
+            pass
+        elif type == "UnPassed":
+            pass
+        elif type == "All":
+            response = []
+            post_object = Post.objects.all()
+            for data in post_object:
+                response.append({'pk': data.pk,
+                                 'ClubName': data.ClubName,
+                                 'LinkmanGrade': data.LinkmanGrade,
+                                 'LinkmanPhoneNumber': data.LinkmanPhoneNumber,
+                                 'LinkmanName': data.LinkmanName,
+                                 'LinkmanQq': data.LinkmanQq,
+                                 'Region': data.Region,
+                                 'Date1': str(data.Date1),
+                                 'Date2': str(data.Date2),
+                                 'Process': data.Process,
+                                 'Content': data.Content,
+                                 'Assessment': data.Assessment,
+                                 'Feeling': data.Feeling,
+                                 'Stars': data.Stars
+                                 })
+            response_json = json.dumps(response)
 
-        return JsonResponse({'message': 'success','Access-Control-Allow-Origin': '*','data': response_json}, safe=False)
+            return JsonResponse({'message': 'success', 'Access-Control-Allow-Origin': '*', 'data': response_json},
+                                safe=False)
     except:
         return JsonResponse({
             'message': 'error',
@@ -674,8 +682,8 @@ def change_password_submit(request):
             pass
         except:
             return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
+                'message': 'error',
+                'Access-Control-Allow-Origin': '*'
             })
     except:
         return JsonResponse({

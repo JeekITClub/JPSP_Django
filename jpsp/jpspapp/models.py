@@ -12,8 +12,8 @@ class Settings(models.Model):
 
 
 class UserProfile(models.Model):
-    UserName = models.ForeignKey(User)
-    StudyID = models.CharField(max_length=8, default="")
+    UserObject = models.ForeignKey(User)
+    UserName = models.CharField(max_length=12, default=None)
     Grade = models.IntegerField()
     Classroom = models.IntegerField()
     AttendYear = models.CharField(max_length=4, default="2016")
