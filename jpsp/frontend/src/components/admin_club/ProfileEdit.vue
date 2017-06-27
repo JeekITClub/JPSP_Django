@@ -189,6 +189,25 @@
       Authenticate () {
         return this.$store.state.Authenticated
       }
+    },
+    mounted: function () {
+      axios({
+        method: 'POST',
+        url: 'http://127.0.0.1:8000/api/club/profile/get',
+        data: JSON.stringify({
+          ClubId: this.GetClubId,
+          Token: this.GetToken
+        })
+      })
+        .then(function (response) {
+          if (response.data.message === 'success') {
+            var profile = JSON.parse(response.data.data)
+            console.log('success')
+            this.PostForm.ClubName = profile
+          } else {
+            console.log('error')
+          }
+        }.bind(this))
     }
   }
 </script>

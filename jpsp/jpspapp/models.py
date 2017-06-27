@@ -12,12 +12,15 @@ class Settings(models.Model):
 
 
 class UserProfile(models.Model):
-    UserObject = models.ForeignKey(User)
+    UserObject = models.ForeignKey(User, default=None)
     UserName = models.CharField(max_length=12, default=None)
     Grade = models.IntegerField()
-    Classroom = models.IntegerField()
+    Class = models.IntegerField()
     AttendYear = models.CharField(max_length=4, default="2016")
     Lftlip = models.TextField(default="")
+    QQ = models.CharField(max_length=12, default=None)
+    Phone = models.CharField(max_length=12, default=None)
+    Email = models.EmailField()
     # lftlip ->last_five_loginin_time
 
 
@@ -33,7 +36,7 @@ class Club(models.Model):
     ShezhangName = models.CharField(max_length=8, default="")
     ShezhangQq = models.CharField(max_length=20, default="")
     ShezhangGrade = models.CharField(max_length=1, default="")
-    ShezhangClassroom = models.CharField(max_length=2, default="")
+    ShezhangClass = models.CharField(max_length=2, default="")
     # 社长的QQ
     IfRecruit = models.BooleanField()
     # 是否进行招新
