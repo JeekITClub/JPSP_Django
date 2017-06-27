@@ -31,8 +31,8 @@ class CDUser(models.Model):
 
 class Club(models.Model):
     ClubName = models.CharField(max_length=30, default="社团")
-    # ClubId = models.ForeignKey(User,default=User.objects.get(username=''))
-    # 社团id
+    # ClubObject = models.ForeignKey(User,default=User.objects.get(username=''))
+    ClubId = models.CharField(max_length=4, default=None)
     ShezhangName = models.CharField(max_length=8, default="")
     ShezhangQq = models.CharField(max_length=20, default="")
     ShezhangGrade = models.CharField(max_length=1, default="")
@@ -50,8 +50,9 @@ class Club(models.Model):
     Introduction = models.TextField(default="")
     # 社团介绍
     Achievements = models.TextField(default="")
-    Member =  models.TextField(default="")
+    Member = models.TextField(default="")
     # TODO: Member many to many field?
+
 
 class Post(models.Model):
     ClubName = models.CharField(max_length=30, default="社团")
@@ -71,7 +72,7 @@ class Post(models.Model):
     Stars = models.FloatField(default=0.0)
     StarTime = models.DateTimeField(default=None)
     Pass = models.BooleanField(default=False)
-    
+
 
 class Message(models.Model):
     FromUser = models.ForeignKey(User)
@@ -84,7 +85,7 @@ class Message(models.Model):
         ('ce', '需要审核社团建立'),
         ('default', 'default')
     )
-    Type = models.CharField(max_length=3, choices=message_type,default='default')
+    Type = models.CharField(max_length=3, choices=message_type, default='default')
     Content = models.TextField(default='')
 
 
@@ -97,7 +98,7 @@ class Token(models.Model):
         ('s', 'student'),
         ('t', 'teacher')
     )
-    UserType = models.CharField(max_length=4, choices=usertype_choices,default=None)
+    UserType = models.CharField(max_length=4, choices=usertype_choices, default=None)
     # start_time = models.DateTimeField()
     # end_time = models.DateTimeField()
 

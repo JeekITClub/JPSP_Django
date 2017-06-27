@@ -1,22 +1,41 @@
 <template>
-  <el-table
-    :data="tableData"
-    stripe
-    style="width: 100%">
-    <el-table-column>
-      prop="date"
-      label="日期"
-      width="180">
+  <el-table :data="ClubListTable" stripe style="width: 100%">
+    <el-table-column type="expand">
+      <template scope="props">
+        <el-form inline class="demo-table-expand">
+          <el-row class="tac">
+            <el-col :span="24">
+              <el-form-item label="招新QQ群">
+                <span>{{ props.row.EnrollGroupQQ }}</span>
+              </el-form-item>
+            </el-col>
+            <el-col :span="24">
+              <el-form-item label="社团邮箱">
+                <span>{{ props.row.Email }}</span>
+              </el-form-item>
+            </el-col>
+            <el-col :span="24">
+              <el-form-item label="社团介绍">
+                <span>{{ props.row.Introduction }}</span>
+              </el-form-item>
+            </el-col>
+            <el-col :span="24">
+              <el-form-item label="成就">
+                <span>{{ props.row.Achievements }}</span>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-form>
+      </template>
     </el-table-column>
-    <el-table-column
-      prop="name"
-      label="姓名"
-      width="180">
-    </el-table-column>
-    <el-table-column
-      prop="address"
-      label="地址">
-    </el-table-column>
+    <el-table-column prop="ClubId" label="社团Id"></el-table-column>
+    <el-table-column prop="ShezhangName" label="社长姓名"></el-table-column>
+    <el-table-column prop="ShezhangGrade" label="社长年级"></el-table-column>
+    <el-table-column prop="ShezhangClass" label="社长班级"></el-table-column>
+    <el-table-column prop="ShezhangQQ" label="社长QQ"></el-table-column>
+    <el-table-column prop="IfRecruit" label="是否招新"></el-table-column>
+    <el-table-column prop="State" label="是否已通过"></el-table-column>
+    <el-table-column prop="Stars" label="评分"></el-table-column>
   </el-table>
 </template>
 
@@ -25,33 +44,24 @@
   export default {
     data () {
       return {
-        tableData: [{
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }]
+        ClubListTable: []
       }
     },
-    created: function () {
-      axios.get('/api/club_list')
-        .then(function (response) {
-          console.log(response)
+    mounted: function () {
+      axios({
+        method: 'POST',
+        url: 'http://127.0.0.1:8000/api/public/club/list',
+        data: JSON.stringify({
+          Token: this.GetToken
         })
-        .catch(function (error) {
-          console.log(error)
-        })
+      }).then(function (response) {
+        if (response.data.message === 'success') {
+          this.ClubListTable = JSON.parse(response.data.data)
+          console.log('success')
+        } else {
+          console.log('error')
+        }
+      }.bind(this))
     },
     computed: {
       Authenticate () {

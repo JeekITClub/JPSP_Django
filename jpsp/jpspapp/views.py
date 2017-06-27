@@ -73,14 +73,14 @@ def club_list(request):
         response = []
         club_object = Club.objects.all()
         for data in club_object:
-            response.attend({'pk': data.pk,
+            response.append({'ClubId': data.ClubId,
                              'ClubName': data.ClubName,
                              'ShezhangName': data.ShezhangName,
-                             'ShezhangQq': data.ShezhangQq,
+                             'ShezhangQQ': data.ShezhangQq,
                              'ShezhangGrade': data.ShezhangGrade,
-                             'ShezhangClassroom': data.ShezhangClassroom,
+                             'ShezhangClassroom': data.ShezhangClass,
                              'IfRecruit': data.IfRecruit,
-                             'EnrollGroupQq': data.EnrollGroupQq,
+                             'EnrollGroupQQ': data.EnrollGroupQq,
                              'Email': data.Label,
                              'State': data.State,
                              'Stars': data.Stars,
@@ -88,8 +88,8 @@ def club_list(request):
                              'Achievements': data.Achievements,
                              # 'Member'
                              })
-            response_json = json.dumps(response)
-            return JsonResponse(response_json, safe=False)
+            return JsonResponse({'message': 'success', 'Access-Control-Allow-Origin': '*', data: json.dumps(response)},
+                                safe=False)
     except:
         return JsonResponse({
             'message': 'error',
@@ -466,17 +466,17 @@ def cd_activity_list(request):
         activityList = Activity.objects.all()
         for data in Activity.objects.all():
             response.append({
-                    'ActivityId': data.pk,
-                    'ActivityName': data.ActivityName,
-                    'Region': data.Region,
-                    'ClubId': data.ClubId,
-                    'ClubName': data.ClubName,
-                    'Content': data.Content,
-                    'Date1': str(data.Date1),
-                    'Date2': str(data.Date2),
-                    'State': data.State,
-                    'Type': data.Type
-                })
+                'ActivityId': data.pk,
+                'ActivityName': data.ActivityName,
+                'Region': data.Region,
+                'ClubId': data.ClubId,
+                'ClubName': data.ClubName,
+                'Content': data.Content,
+                'Date1': str(data.Date1),
+                'Date2': str(data.Date2),
+                'State': data.State,
+                'Type': data.Type
+            })
         response_json = json.dumps(response)
         return JsonResponse({'message': 'success', 'Access-Control-Allow-Origin': '*', 'data': response_json},
                             safe=False)
