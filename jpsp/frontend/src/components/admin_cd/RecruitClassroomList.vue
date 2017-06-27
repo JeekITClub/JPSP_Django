@@ -2,12 +2,12 @@
   <el-table :data="RecruitClassroomList" border style="width: 100%">
     <el-table-column type="expand">
       <template scope="props">
-        <el-button @click="ArrangeClassroom()"></el-button>
-        <el-button @clcck="ArrangeClassroom()"></el-button>
-        <el-button @click="ArrangeClassroom()"></el-button>
-        <el-button @click="ArrangeClassroom()"></el-button>
-        <el-button @click="ArrangeClassroom()"></el-button>
-        <el-button @click="ArrangeClassroom()"></el-button>
+        <el-button @click="ArrangeClassroom('1',props.row.ClubName)"></el-button>
+        <el-button @clcck="ArrangeClassroom('2',props.row.ClubName)"></el-button>
+        <el-button @click="ArrangeClassroom('3',props.row.ClubName)"></el-button>
+        <el-button @click="ArrangeClassroom('4',props.row.ClubName)"></el-button>
+        <el-button @click="ArrangeClassroom('5',props.row.ClubName)"></el-button>
+        <el-button @click="ArrangeClassroom('6',props.row.ClubName)"></el-button>
       </template>
     </el-table-column>
     <template scope="props">
@@ -18,10 +18,10 @@
         <span style="margin-left: 10px">{{ props.row.Linkman }}</span>
       </el-table-column>
       <el-table-column label="开始时间">
-        <span style="margin-left: 5px">{{ props.row.Date1 }} -- {{ props.row.Date2 }}</span>
+        <span style="margin-left: 5px">{{ props.row.Date1 }}</span>
       </el-table-column>
       <el-table-column label="结束时间">
-        <span style="margin-left: 5px">{{ props.row.Date1 }} -- {{ props.row.Date3 }}</span>
+        <span style="margin-left: 5px">{{ props.row.Date2 }}</span>
       </el-table-column>
     </template>
     <el-table-column laebl="操作">
@@ -37,30 +37,21 @@
   export default {
     data () {
       return {
-        RecruitClassroom: [
-          {
-            Id: '',
-            ClubName: '',
-            Linkman: '',
-            Date1: '',
-            Date2: '',
-            Date3: ''
-          }
-        ]
+        RecruitClassroom: []
       }
     },
     methods: {
-      ArrangeClassroom (classroom) {
+      ArrangeClassroom (classroom, clubname, date1, date2, date3) {
         axios({
           method: 'POST',
-          url: 'api/cd/',
+          url: 'http://127.0.0.1/api/cd/classroom/arrange/submit',
           data: JSON.stringify({
-            ClubName: '',
-            Classroom: '',
-            Date1: '',
-            Date2: '',
-            Date3: '',
-            Token: ''
+            ClubName: clubname,
+            Classroom: classroom,
+            Date1: date1,
+            Date2: date2,
+            Date3: date3,
+            Token: this.GetToken
           })
         })
       },
@@ -68,11 +59,11 @@
         // TODO: Problems here!
         axios({
           method: 'POST',
-          url: 'api/cd/',
+          url: 'http://127.0.0.1/api/cd/classroom/deny/submit',
           data: JSON.stringify({
             RecruitClassroomID: '',
             Classroom: '',
-            Token: ''
+            Token: this.GetToken
           })
         })
       }
@@ -87,6 +78,22 @@
       GetToken () {
         return this.$store.state.Token
       }
+    },
+    mounted: function () {
+      axios({
+        method: 'POST',
+        url: 'http://127.0.0.1:8000/api/cd/classroom/get',
+        data: JSON.stringify({
+          Token: this.GetToken
+        })
+      }).then(function (response) {
+        if (response.data.message === 'success') {
+          this.RecruitClassroomTable = JSON.parse(response.data.data)
+          console.log('success')
+        } else {
+          console.log('error')
+        }
+      }.bind(this))
     }
   }
 </script>

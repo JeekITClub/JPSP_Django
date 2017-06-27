@@ -67,7 +67,7 @@ def logout(request):
         })
 
 
-@require_http_methods(["GET"])
+@require_http_methods(["POST"])
 def club_list(request):
     try:
         response = []

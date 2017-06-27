@@ -24,5 +24,6 @@ urlpatterns = [
     url(r'^cd/activity/list', views.cd_activity_list),
     url(r'^cd/post/list',views.cd_post_list),
     url(r'^index/LAF/submit',views.lost_and_found_submit),
-    url(r'^index/profile/get',views.user_profile_get)
+    url(r'^index/profile/get',views.user_profile_get),
+    url(r'^public/club/list',views.club_list)
 ]

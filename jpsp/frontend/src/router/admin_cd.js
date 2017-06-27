@@ -8,6 +8,7 @@ import PostList from '../pages/admin_cd/PostList.vue'
 import ActivityList from '../pages/admin_cd/ActivityList.vue'
 import Contact from '../pages/public/Contact.vue'
 import About from '../pages/public/About.vue'
+import ClubList from '../pages/admin_cd/ClubList.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -36,6 +37,11 @@ export default new Router({
       path: '/about',
       name: 'about',
       component: About
+    },
+    {
+      path: '/club',
+      name: 'club',
+      component: ClubList
     }
   ]
 })
