@@ -27,20 +27,20 @@
           <el-option label="12" value="12"></el-option>
           <el-option label="13" value="13"></el-option>
         </el-select>
-        <el-form-item prop="PostForm.QQ" label="QQ" :required="true">
-          <el-form-item label="QQ" prop="QQ">
-            <el-input v-model.number="PostForm.QQ"></el-input>
-          </el-form-item>
-          <el-form-item label="Email" prop="Email">
-            <el-input v-model.number="PostForm.Email"></el-input>
-          </el-form-item>
-          <el-form-item label="Phone" prop="Phone">
-            <el-input v-model.number="PostForm.Phone"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="onSubmit">立即创建</el-button>
-            <el-button>取消</el-button>
-          </el-form-item>
+      </el-form-item>
+      <el-form-item label="QQ" prop="QQ">
+        <el-input v-model="PostForm.QQ"></el-input>
+      </el-form-item>
+      <el-form-item label="Email" prop="Email">
+        <el-input v-model="PostForm.Email"></el-input>
+      </el-form-item>
+      <el-form-item label="Phone" prop="Phone">
+        <el-input v-model="PostForm.Phone"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="onSubmit">立即创建</el-button>
+        <el-button>取消</el-button>
+      </el-form-item>
     </el-form>
   </div>
 </template>
@@ -50,6 +50,7 @@
     data () {
       return {
         PostForm: {
+          Name: '',
           Grade: '',
           Class: '',
           QQ: '',
