@@ -8,6 +8,7 @@ import ClubIndex from '@/pages/index/ClubIndex'
 import ClubPost from '@/pages/index/ClubPost.vue'
 import ClubPostList from '@/pages/index/ClubPostList.vue'
 import ProfileEdit from '@/pages/index/ProfileEdit.vue'
+import ActivityList from '../pages/index/ActiviytList.vue'
 // import LostAndFound from '../pages/index/LostAndFound.vue'
 export default new Router({
   routes: [
@@ -35,6 +36,11 @@ export default new Router({
       path: '/clubpost',
       name: 'ClubPost',
       component: ClubPost
+    },
+    {
+      path: '/list',
+      name: 'ActivityList',
+      component: ActivityList
     },
     {
       path: '/profile',
