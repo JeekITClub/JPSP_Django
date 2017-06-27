@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^cd/post/deny/submit', views.cd_post_deny_submit),
     url(r'^cd/post/star/submit', views.cd_post_star_submit),
     url(r'^club/profile/EditSubmit', views.club_profile_edit_submit),
+    url(r'^club/profile/get', views.club_profile_get),
     url(r'^club/recruit/classroom/ApplySubmit', views.club_recruit_classroom_apply_submit,),
     url(r'^cd/recruit/classroom/Apply/Verify', views.cd_recruit_classroom_apply_verify_submit,),
     url(r'^user/profile/EditSubmit', views.user_profile_edit_submit),
@@ -22,5 +23,6 @@ urlpatterns = [
     url(r'^cd/activity/DenySubmit', views.cd_activity_deny_submit),
     url(r'^cd/activity/list', views.cd_activity_list),
     url(r'^cd/post/list',views.cd_post_list),
-    url(r'^index/LAF/Submit',views.lost_and_found_submit)
+    url(r'^index/LAF/Submit',views.lost_and_found_submit),
+    url(r'^index/profile/get',views.user_profile_get)
 ]

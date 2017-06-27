@@ -459,10 +459,11 @@ def cd_activity_agree_submit(request):
 @require_http_methods(['POST'])
 def cd_activity_list(request):
     try:
-        body = json.loads(request.body)
-        token = body['Token']
+        # body = json.loads(request.body)
+        # token = body['Token']
         response = []
         # TODO : token authenticate
+        activityList = Activity.objects.all()
         for data in Activity.objects.all():
             response.append({
                     'ActivityId': data.pk,
@@ -471,8 +472,8 @@ def cd_activity_list(request):
                     'ClubId': data.ClubId,
                     'ClubName': data.ClubName,
                     'Content': data.Content,
-                    'Date1': data.Date1,
-                    'Date2': data.Date2,
+                    'Date1': str(data.Date1),
+                    'Date2': str(data.Date2),
                     'State': data.State,
                     'Type': data.Type
                 })
@@ -744,6 +745,67 @@ def change_password_submit(request):
                 'message': 'error',
                 'Access-Control-Allow-Origin': '*'
             })
+    except:
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
+
+
+@require_http_methods(['POST'])
+def user_profile_get(request):
+    try:
+        body = json.loads(request.body)
+        token = body['Token']
+        userid = body['UserId']
+        profile = UserProfile.objects.get()
+        # TODO: get profile object
+        response = {
+            'UserName': profile.UserName,
+            'Grade': profile.Grade,
+            'Class': profile.Class,
+            'AttendYear': profile.AttendYear,
+            'QQ': profile.QQ,
+            'Phone': profile.Phone,
+            'Email': profile.Email
+        }
+        response_json = json.dumps(response)
+        return JsonResponse({'message': 'success', 'Access-Control-Allow-Origin': '*', 'data': response_json},
+                            safe=False)
+    except:
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
+
+
+@require_http_methods(['POST'])
+def club_profile_get(request):
+    try:
+        body = json.loads(request.body)
+        token = body['Token']
+        clubid = body['ClubId']
+        profile = Club.objects.get()
+        # TODO: get profile object
+        response = {
+            'ClubName': profile.ClubName,
+            'ShezhangName': profile.ShezhangName,
+            'ShezhangQq': profile.ShezhangQq,
+            'ShezhangGrade': profile.ShezhangGrade,
+            'ShezhangClass': profile.ShezhangClass,
+            'IfRecruit': profile.IfRecruit,
+            'EnrollGroupQq': profile.EnrollGroupQq,
+            'Email': profile.Email,
+            'Label': profile.Label,
+            'State': profile.State,
+            'Stars': profile.Stars,
+            'Introduction': profile.Introduction,
+            'Achievements': profile.Achievements,
+            'Member': profile.Member
+        }
+        response_json = json.dumps(response)
+        return JsonResponse({'message': 'success', 'Access-Control-Allow-Origin': '*', 'data': response_json},
+                            safe=False)
     except:
         return JsonResponse({
             'message': 'error',
