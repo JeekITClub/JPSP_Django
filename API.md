@@ -9,7 +9,7 @@ URL: /api/login
 DATA:{
     UserId:
     Password:
-    UserType: (student, club, club department)
+    UserType: (student or club or club department)
 }
 ```
 OUTPUT
@@ -285,6 +285,12 @@ OUTPUT
 INPUT
 
 OUTPUT
+```
+{
+    'message': ('success' or 'error'),
+    'Access-Control-Allow-Origin': '*'
+}
+```
 
 ### ProfileForm
 INPUT
@@ -305,6 +311,12 @@ DATA:{
 ```
 
 OUTPUT
+```
+{
+    'message': ('success' or 'error'),
+    'Access-Control-Allow-Origin': '*',
+}
+```
 
 ### ProfileGet
 INPUT
@@ -379,6 +391,10 @@ DATA:{
 ```
 OUTPUT
 ```
+{
+    'message': ('success' or 'error'),
+    'Access-Control-Allow-Origin': '*',
+}
 ```
 
 ## ADMIN_CD
