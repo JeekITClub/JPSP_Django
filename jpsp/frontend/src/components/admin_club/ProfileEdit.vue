@@ -19,7 +19,7 @@
       <el-form-item label="社长QQ" :required="true">
         <el-input v-model="PostForm.ShezhangQQ"></el-input>
       </el-form-item>
-      <el-form-item prop="PostForm.Shezhang.Grade" label="社长年级" :required="true">
+      <el-form-item prop="PostForm.ShezhangGrade" label="社长年级" :required="true">
         <el-select v-model="PostForm.ShezhangGrade" value="">
           <el-option label="高一" value="1"></el-option>
           <el-option label="高二" value="2"></el-option>
@@ -138,10 +138,10 @@
           data: {
             clubname: this.PostForm.ClubName,
             clubid: this.GetClubId,
-            shezhang_name: this.PostForm.Shezhang.Name,
-            shezhang_qq: this.PostForm.Shezhang.QQ,
-            shezhang_grade: this.PostForm.Shezhang.Grade,
-            shezhang_class: this.PostForm.Shezhang.Class,
+            shezhang_name: this.PostForm.ShezhangName,
+            shezhang_qq: this.PostForm.ShezhangQQ,
+            shezhang_grade: this.PostForm.ShezhangGrade,
+            shezhang_class: this.PostForm.ShezhangClass,
             if_recruit: this.PostForm.IfRecruit,
             enroll_group_qq: this.PostForm.QQGroup,
             email: this.PostForm.Email,
@@ -154,8 +154,9 @@
         }).then(function (response) {
           if (response.data.message === 'error') {
             this.error = true
+          } else {
+            alert('success')
           }
-          alert(JSON.stringify(response.data))
         }.bind(this)).catch(function () {
           alert('error: ProfileEdit')
         })
