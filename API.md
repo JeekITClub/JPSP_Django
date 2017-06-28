@@ -199,6 +199,19 @@ OUTPUT
 }
 ```
 
+### ClubIndex
+INPUT
+```
+Method: GET
+URL: /api/index/clubindex/clubid
+PARAMETER:{
+    clubid
+}
+```
+OUTPUT
+```
+```
+
 ## ADMIN_CLUB
 
 ### PostForm
@@ -283,7 +296,18 @@ OUTPUT
 ```
 ### EventAdd
 INPUT
-
+```
+Method: POST,
+URL: /api/club/event/add
+DATA:{
+    ClubId:
+    EventName:
+    Date:
+    Region:
+    Content:
+    Token:
+}
+```
 OUTPUT
 ```
 {
@@ -307,6 +331,7 @@ DATA:{
     IfRecruit,
     QQGroup,
     Email
+    Achievements
 }
 ```
 
@@ -331,7 +356,20 @@ DATA:{
 OUTPUT
 ```
 {
-
+    'message': ('success' or 'error'),
+    'Access-Control-Allow-Origin': '*',
+    'data':{
+        'ClubName'
+        'ShezhangName'
+        'ShezhangQQ'
+        'ShezhangGrade'
+        'ShezhangClass'
+        'Introduction',
+        'IfRecruit',
+        'QQGroup',
+        'Email',
+        'Achievements'
+    }
 }
 ```
 
@@ -339,17 +377,12 @@ OUTPUT
 INPUT
 ```
 Method: POST
-URL: /api/club/establish
+URL: /api/club/activity/list
 DATA:{
     ClubName
-    ShezhangName
-    ShezhangQQ
-    ShezhangGrade
-    ShezhangClass
-    Introduction,
-    IfRecruit,
-    QQGroup,
-    Email
+    ClubId
+    Token
+    Type
 }
 ```
 
@@ -360,22 +393,29 @@ OUTPUT
     'Access-Control-Allow-Origin': '*',
     data:[
         {
-             'ClubId': ,
-             'ClubName':,
-             'ShezhangName': ,
-             'ShezhangQQ': ,
-             'ShezhangGrade': ,
-             'ShezhangClas': ,
-             'IfRecruit': ,
-             'EnrollGroupQQ': ,
-             'Email': ,
-             'Label':
-             'State': ,
-             'Stars': ,
-             'Introduction': ,
-             'Achievements': ,
+            'ActivityName':
+            'Region':
+            'ClubId':
+            'ClubName':
+            'Content':
+            'Date1':
+            'Date2':
+            'State':
+            'Type':
+            'Participants'
         },
-
+        {
+            'ActivityName':
+            'Region':
+            'ClubId':
+            'ClubName':
+            'Content':
+            'Date1':
+            'Date2':
+            'State':
+            'Type':
+            'Participants'
+        }
     ]
 }
 ```
