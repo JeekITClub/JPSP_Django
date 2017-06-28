@@ -10,7 +10,7 @@ DATA:{
     UserId:
     Password:
     UserType: (student, club, club department)
-    }
+}
 ```
 OUTPUT
 ```
@@ -30,10 +30,10 @@ INPUT
 Method: POST
 URL: /api/logout
 DATA:{
-    UserId: ,
+    UserId:
     UserType:
     Token:
-    }
+}
 ```
 OUTPUT
 ```
@@ -46,16 +46,113 @@ OUTPUT
 ### ChangePassword
 INPUT
 ```
+Method: 'POST'
+URL: api/changepassword
+DATA:{
+    UserId:
+    UserType:
+    Token:
+    OriginalPassword:
+    NewPassword:
+}
 ```
 OUTPUT
 ```
+{
+    'message': ('success' or 'error'),
+    'Access-Control-Allow-Origin': '*'
+}
+```
+
+
+
+
+## INDEX
+### LostAndFoundList
+INPUT
+```
+Method: 'POST'
+URL: api/index/laf/list
+DATA:{
+    Token:
+}
+```
+OUTPUT
+```
+{
+    'message': ('success' or 'error'),
+    'Access-Control-Allow-Origin': '*',
+    data:[
+        {
+             'ClubId': ,
+             'ClubName':,
+             'ShezhangName': ,
+             'ShezhangQQ': ,
+             'ShezhangGrade': ,
+             'ShezhangClas': ,
+             'IfRecruit': ,
+             'EnrollGroupQQ': ,
+             'Email': ,
+             'Label':
+             'State': ,
+             'Stars': ,
+             'Introduction': ,
+             'Achievements': ,
+        }
+    ]
+}
+```
+
+### LostAndFoundForm
+INPUT
+```
+Method: 'POST'
+URL: api/index/laf/submit
+DATA:{
+    Token:
+}
+```
+OUTPUT
+```
+{
+    'message': ('success' or 'error'),
+    'Access-Control-Allow-Origin': '*'
+}
 ```
 
 ### ClubList
 INPUT
 ```
+Method: 'POST'
+URL: api/index/club/list
+DATA:{
+    Token:
+}
+```
+
+OUTPUT
+```
+
+```
+
+### ActivityList
+INPUT
+```
+Method: 'POST'
+URL: api/index/activity/list
+DATA:{
+    Token:
+}
+```
+OUTPUT
+```
+
+```
+### ClubList
+INPUT
+```
 Method: POST
-URL: /api/public/clublist
+URL: /api/index/clublist
 DATA:{
     'Token':
 }
@@ -102,12 +199,9 @@ OUTPUT
 }
 ```
 
-
-## INDEX
-###
-
 ## ADMIN_CLUB
-### PostEditSubmit
+
+### PostForm
 INPUT
 ```
 Method: POST
@@ -136,7 +230,7 @@ OUTPUT
     'Access-Control-Allow-Origin': '*',
 }
 ```
-### ActivityApplySubmit
+### ActivityApply
 INPUT
 ```
 Method: POST
@@ -192,7 +286,7 @@ INPUT
 
 OUTPUT
 
-### ProfileEditSubmit
+### ProfileForm
 INPUT
 ```
 Method: POST
@@ -225,7 +319,7 @@ DATA:{
 OUTPUT
 ```
 {
-    
+
 }
 ```
 
@@ -274,4 +368,85 @@ OUTPUT
 }
 ```
 
+### RecruitClassroomForm
+INPUT
+```
+Method: 'POST'
+URL: api/index/activity/list
+DATA:{
+    Token:
+}
+```
+OUTPUT
+```
+```
+
 ## ADMIN_CD
+
+### ActivityList
+INPUT
+```
+Method: POST
+URL: /api/cd/activity/list
+DATA:{
+    ClubName
+    ShezhangName
+    ShezhangQQ
+    ShezhangGrade
+    ShezhangClass
+    Introduction,
+    IfRecruit,
+    QQGroup,
+    Email
+}
+```
+OUTPUT
+```
+{
+
+}
+```
+
+### ClubList
+INPUT
+```
+Method: 'POST'
+URL: api/index/activity/list
+DATA:{
+    Token:
+}
+```
+OUTPUT
+```
+```
+
+### RecruitClassroomList
+INPUT
+```
+Method: POST
+URL: /api/cd/recruit/classroomlist
+DATA:{
+    Token
+}
+```
+OUTPUT
+```
+'message': ('success' or 'error'),
+'Access-Control-Allow-Origin': '*',
+data:{
+
+}
+```
+
+### PostList
+INPUT
+```
+Method: 'POST'
+URL: api/index/activity/list
+DATA:{
+    Token:
+}
+```
+OUTPUT
+```
+```
