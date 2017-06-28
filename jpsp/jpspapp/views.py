@@ -813,3 +813,36 @@ def club_profile_get(request):
             'message': 'error',
             'Access-Control-Allow-Origin': '*'
         })
+
+
+@require_http_methods(['POST'])
+def club_activity_list(request):
+    try:
+        body = json.loads(request.body)
+        token = body['Token']
+        type = body['Type']
+        response = []
+        # TODO : token authenticate
+        activityList = Activity.objects.all()
+        # TODO: get activities by clubs (use 'usertype')
+        for data in Activity.objects.all():
+            response.append({
+                'ActivityId': data.pk,
+                'ActivityName': data.ActivityName,
+                'Region': data.Region,
+                'ClubId': data.ClubId,
+                'ClubName': data.ClubName,
+                'Content': data.Content,
+                'Date1': str(data.Date1),
+                'Date2': str(data.Date2),
+                'State': data.State,
+                'Type': data.Type
+            })
+        response_json = json.dumps(response)
+        return JsonResponse({'message': 'success', 'Access-Control-Allow-Origin': '*', 'data': response_json},
+                            safe=False)
+    except:
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })

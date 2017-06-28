@@ -19,6 +19,7 @@ urlpatterns = [
     url(r'^cd/message/list', views.cd_message_list),
     url(r'^cd/message/remove/submit', views.cd_message_remove_submit),
     url(r'^club/activity/apply/submit', views.club_activity_apply_submit),
+    url(r'^club/activity/list', views.club_activity_list),
     url(r'^cd/activity/agree/submit', views.cd_activity_agree_submit),
     url(r'^cd/activity/deny/submit', views.cd_activity_deny_submit),
     url(r'^cd/activity/list', views.cd_activity_list),
