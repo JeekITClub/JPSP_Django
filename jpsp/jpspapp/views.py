@@ -81,7 +81,9 @@ def club_list(request):
                              'ShezhangClassroom': data.ShezhangClass,
                              'IfRecruit': data.IfRecruit,
                              'EnrollGroupQQ': data.EnrollGroupQq,
-                             'Email': data.Label,
+                             # 'Label':
+                             # TODO: LABEL
+                             'Email': data.Email,
                              'State': data.State,
                              'Stars': data.Stars,
                              'Introduction': data.Introduction,
