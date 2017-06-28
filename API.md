@@ -72,7 +72,7 @@ OUTPUT
              'ShezhangName': ,
              'ShezhangQQ': ,
              'ShezhangGrade': ,
-             'ShezhangClassroom': ,
+             'ShezhangClas': ,
              'IfRecruit': ,
              'EnrollGroupQQ': ,
              'Email': ,
@@ -88,7 +88,7 @@ OUTPUT
              'ShezhangName': ,
              'ShezhangQQ': ,
              'ShezhangGrade': ,
-             'ShezhangClassroom': ,
+             'ShezhangClass': ,
              'IfRecruit': ,
              'EnrollGroupQQ': ,
              'Email': ,
@@ -107,7 +107,7 @@ OUTPUT
 ###
 
 ## ADMIN_CLUB
-### ClubPostEditSubmit
+### PostEditSubmit
 INPUT
 ```
 Method: POST
@@ -136,5 +136,142 @@ OUTPUT
     'Access-Control-Allow-Origin': '*',
 }
 ```
-###
+### ActivityApplySubmit
+INPUT
+```
+Method: POST
+URL: /api/club/activity/apply/
+DATA:{
+    ActivityName:,
+    Region,
+    Clubid,
+    ClubName,
+    Content,
+    Date1,
+    Date2,
+    State,
+    Type,
+    Participants,
+    Token
+}
+```
+OUTPUT
+```
+{
+    'message': ('success' or 'error'),
+    'Access-Control-Allow-Origin': '*',
+}
+```
+
+### EstablishClub
+INPUT
+```
+Method: POST
+URL: /api/club/establish
+DATA:{
+    ClubName
+    ShezhangName
+    ShezhangQQ
+    ShezhangGrade
+    ShezhangClass
+    Introduction,
+    IfRecruit,
+    QQGroup,
+    Email
+}
+```
+OUTPUT
+```
+{
+    'message': ('success' or 'error'),
+    'Access-Control-Allow-Origin': '*',
+}
+```
+### EventAdd
+INPUT
+
+OUTPUT
+
+### ProfileEditSubmit
+INPUT
+```
+Method: POST
+URL: /api/club/profile/edit
+DATA:{
+    ClubName
+    ShezhangName
+    ShezhangQQ
+    ShezhangGrade
+    ShezhangClass
+    Introduction,
+    IfRecruit,
+    QQGroup,
+    Email
+}
+```
+
+OUTPUT
+
+### ProfileGet
+INPUT
+```
+Method: POST
+URL: /api/club/establish
+DATA:{
+    ClubId
+    Token
+}
+```
+OUTPUT
+```
+{
+    
+}
+```
+
+### ActivityList
+INPUT
+```
+Method: POST
+URL: /api/club/establish
+DATA:{
+    ClubName
+    ShezhangName
+    ShezhangQQ
+    ShezhangGrade
+    ShezhangClass
+    Introduction,
+    IfRecruit,
+    QQGroup,
+    Email
+}
+```
+
+OUTPUT
+```
+{
+    'message': ('success' or 'error'),
+    'Access-Control-Allow-Origin': '*',
+    data:[
+        {
+             'ClubId': ,
+             'ClubName':,
+             'ShezhangName': ,
+             'ShezhangQQ': ,
+             'ShezhangGrade': ,
+             'ShezhangClas': ,
+             'IfRecruit': ,
+             'EnrollGroupQQ': ,
+             'Email': ,
+             'Label':
+             'State': ,
+             'Stars': ,
+             'Introduction': ,
+             'Achievements': ,
+        },
+
+    ]
+}
+```
+
 ## ADMIN_CD
