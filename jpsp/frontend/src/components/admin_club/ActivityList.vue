@@ -48,7 +48,7 @@
         url: 'http://127.0.0.1:8000/api/club/activity/list',
         data: JSON.stringify({
           Token: this.GetToken,
-          Type: this.type
+          UserType: 'Club'
         })
       })
         .then(function (response) {
