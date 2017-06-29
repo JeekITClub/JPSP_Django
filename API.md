@@ -245,7 +245,7 @@ PARAMETER:{
     clubid:
 }
 ```
-OUTPUT
+OUTPUT(Undevelped yet)
 ```
 ```
 
@@ -293,7 +293,6 @@ DATA:{
     Content:
     Date1:
     Date2:
-    State:
     Type:
     Participants:
     Token:
@@ -464,6 +463,11 @@ INPUT
 Method: 'POST'
 URL: api/recruit/classroom/form
 DATA:{
+    ClubId:
+    ClubName:
+    Date1:
+    Date2:
+    Date3:
     Token:
 }
 ```
