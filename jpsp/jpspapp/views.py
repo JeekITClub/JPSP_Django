@@ -100,7 +100,7 @@ def club_list(request):
 
 
 @require_http_methods(["POST"])
-def club_post_edit_submit(request):
+def club_post_edit(request):
     try:
         body = json.loads(request.body)
         clubname = body['ClubName']
@@ -156,7 +156,7 @@ def club_post_edit_submit(request):
 
 
 @require_http_methods(["POST"])
-def club_profile_edit_submit(request):
+def club_profile_edit(request):
     try:
         body = json.loads(request.body)
         token = body['Token']
@@ -235,7 +235,7 @@ def club_recruit_classroom_apply_submit(request):
 
 
 @require_http_methods(['POST'])
-def cd_post_star_submit(request):
+def post_star(request):
     try:
         body = json.loads(request.body)
         token = body['Token']
@@ -264,7 +264,7 @@ def cd_post_star_submit(request):
 
 
 @require_http_methods(['POST'])
-def cd_recruit_classroom_apply_verify_submit(request):
+def recruit_classroom_operate(request):
     try:
         body = json.loads(request.body)
         token = body['Token']
@@ -283,7 +283,7 @@ def cd_recruit_classroom_apply_verify_submit(request):
 
 
 @require_http_methods(['POST'])
-def user_profile_edit_submit(request):
+def userprofile_submit(request):
     try:
         body = json.loads(request.body)
         token = body['token']
@@ -309,7 +309,7 @@ def user_profile_edit_submit(request):
 
 
 @require_http_methods(['POST'])
-def club_member_add_submit(request):
+def club_member_operate(request):
     try:
         body = json.loads(request.body)
         token = body['token']
@@ -328,49 +328,12 @@ def club_member_add_submit(request):
         })
 
 
-@require_http_methods(['POST'])
-def club_member_remove_submit(request):
-    try:
-        body = json.loads(request.body)
-        token = body['token']
 
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
-    except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
 
 
 @require_http_methods(['POST'])
-def cd_message_list(request):
-    try:
-        body = json.loads(request.body)
-        token = body['token']
-        response = []
-        # message_object = Message.objects.filter(ToUser=)
-        #  TODO: message_object !
-        for data in message_object:
-            response.append({'pk': data.pk,
-                             'FromUser': data.FromUser,
-                             'ToUser': data.ToUser,
-                             'Type': data.Type,
-                             'Content': data.Content
-                             })
-        response_json = json.dumps(response)
-        return JsonResponse(response_json, safa=False)
-    except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
-
-
-@require_http_methods(['POST'])
-def cd_message_remove_submit(request):
+def message_remove(request):
+    # TODO: ////
     try:
         body = json.loads(request.body)
         token = body['token']
@@ -401,7 +364,7 @@ def cd_message_remove_submit(request):
 
 
 @require_http_methods(['POST'])
-def club_activity_apply_submit(request):
+def activity_apply(request):
     try:
         body = json.loads(request.body)
         token = body['Token']
@@ -437,7 +400,7 @@ def club_activity_apply_submit(request):
 
 
 @require_http_methods(['POST'])
-def cd_activity_agree_submit(request):
+def activity_confirm(request):
     try:
         body = json.loads(request.body)
         token = body['token']
@@ -459,7 +422,7 @@ def cd_activity_agree_submit(request):
 
 
 @require_http_methods(['POST'])
-def cd_activity_list(request):
+def activity_list(request):
     try:
         # body = json.loads(request.body)
         # token = body['Token']
@@ -488,36 +451,8 @@ def cd_activity_list(request):
             'Access-Control-Allow-Origin': '*'
         })
 
-
 @require_http_methods(['POST'])
-def cd_activity_deny_submit(request):
-    try:
-        body = json.loads(request.body)
-        token = body['token']
-        acitivity_id = body['AcitivityId']
-        try:
-            activity_object = Activity.objects.get(pk=acivity_id)
-            activity_object.state = '2'
-            activity_object.save()
-            # 2-> denied
-            return JsonResponse({
-                'message': 'error',
-                'Access-Control-Allow-Origin': '*'
-            })
-        except:
-            return JsonResponse({
-                'message': 'error',
-                'Access-Control-Allow-Origin': '*'
-            })
-    except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
-
-
-@require_http_methods(['POST'])
-def cd_post_deny_submit(request):
+def post_operate(request):
     try:
         body = json.loads(request.body)
         token = body['Token']

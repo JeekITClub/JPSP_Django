@@ -280,7 +280,7 @@ OUTPUT
     'Access-Control-Allow-Origin': '*',
 }
 ```
-### ActivityApply
+### ActivityForm
 INPUT
 ```
 Method: POST
