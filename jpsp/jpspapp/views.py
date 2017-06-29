@@ -150,14 +150,13 @@ def recruit_classroom_apply(request):
         club_name = body['ClubName']
         date1 = body['Date1']
         date2 = body['Date2']
-        date3 = body['Date3']
         # TODO: deal with date
         Classroom.objects.create(
             ClassroomId=0,
             ClubId=Club.objects.get(User.objects.get(username=club_id)),
             ClubName=club_name,
-            # Date1=date1 + date2,
-            # Date2=date1 + date3
+            Date1=date1,
+            Date2=date2
             # TODO: deal with date
         )
         return JsonResponse({
@@ -275,7 +274,7 @@ def activity_list(request):
         token = body['Token']
         type = body['Type']
         response = []
-        activityList=None
+        activityList = None
         if type == 'All':
             activityList = Activity.objects.all()
         elif type == 'Past':
@@ -363,14 +362,36 @@ def laf_list(request):
     try:
         body = json.loads(request.body)
         type = body['Type']
+        response = []
+        LostAndFoundList = None
         if type == 'Lost':
-            pass
+            LostAndFoundList = LostAndFound.objects.filter()
+            # TODO: filter
         elif type == 'Found':
-            pass
+            LostAndFoundList = LostAndFound.objects.all()
+            # TODO: filter
         elif type == 'Past':
-            pass
+            LostAndFoundList = LostAndFound.objects.all()
+            # TODO: filter
         elif type == 'All':
-            pass
+            LostAndFoundList = LostAndFound.objects.all()
+        for data in LostAndFoundList:
+            response.append({
+                'LostorFound': data.LostOrFound,
+                'ObjectName': data.LostObjectName,
+                'LinkmanGrade': data.LinkmanGrade,
+                'LinkmanClass': data.LinkmanClass,
+                'LinkmanPhoneNumber': data.LinkmanPhoneNumber,
+                'LinkmanQq': data.LinkmanQq,
+                'LinkmanName': data.LinkmanName,
+                'Region': data.LostPlace,
+                'Date1': data.LostDateTime,
+                'Importance': data.Importacne,
+                'Desc': data.Desc
+            })
+        response_json = json.dumps(response)
+        return JsonResponse({'message': 'success', 'Access-Control-Allow-Origin': '*', 'data': response_json},
+                            safe=False)
     except:
         return JsonResponse({
             'message': 'error',
@@ -470,7 +491,7 @@ def post_list(request):
         token = body['Token']
         type = body['Type']
         response = []
-        post_object=None
+        post_object = None
         if type == 'UnStared':
             post_object = Post.objects.filter(Stars=0)
         elif type == "Stared":
