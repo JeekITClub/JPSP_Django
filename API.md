@@ -1,7 +1,8 @@
 # JPSP API
 [TOC]
 ## PUBLIC
-### LOGIN
+
+### Login
 INPUT
 ```
 Method: POST
@@ -9,7 +10,7 @@ URL: /api/login
 DATA:{
     UserId:
     Password:
-    UserType: (student or club or club department)
+    UserType: ('student' or 'club' or 'cd')
 }
 ```
 OUTPUT
@@ -19,12 +20,12 @@ OUTPUT
     'Access-Control-Allow-Origin': '*',
     data:{
         'Token': ,
-        'UserName'
+        'UserName':
     }
 }
 ```
 
-### LOGOUT
+### Logout
 INPUT
 ```
 Method: POST
@@ -71,11 +72,8 @@ OUTPUT
 ### LostAndFoundList
 INPUT
 ```
-Method: 'POST'
+Method: 'GET'
 URL: api/laf/list
-DATA:{
-    Token:
-}
 ```
 OUTPUT
 ```
@@ -84,20 +82,32 @@ OUTPUT
     'Access-Control-Allow-Origin': '*',
     data:[
         {
-             'ClubId': ,
-             'ClubName':,
-             'ShezhangName': ,
-             'ShezhangQQ': ,
-             'ShezhangGrade': ,
-             'ShezhangClas': ,
-             'IfRecruit': ,
-             'EnrollGroupQQ': ,
-             'Email': ,
-             'Label':
-             'State': ,
-             'Stars': ,
-             'Introduction': ,
-             'Achievements': ,
+            LostOrFound:
+            ObjectName:
+            LinkmanGrade:
+            LinkmanClass:
+            LinkmanName:
+            LinkmanPhoneNumber:
+            LinkmanQq:
+            Region:
+            Date1:
+            Date2:
+            Importance:
+            Desc:
+        },
+        {
+            LostOrFound:
+            ObjectName:
+            LinkmanGrade:
+            LinkmanClass:
+            LinkmanName:
+            LinkmanPhoneNumber:
+            LinkmanQq:
+            Region:
+            Date1:
+            Date2:
+            Importance:
+            Desc:
         }
     ]
 }
@@ -110,6 +120,18 @@ Method: 'POST'
 URL: api/index/laf/submit
 DATA:{
     Token:
+    LostOrFound:
+    ObjectName:
+    LinkmanGrade:
+    LinkmanClass:
+    LinkmanName:
+    LinkmanPhoneNumber:
+    LinkmanQq:
+    Region:
+    Date1:
+    Date2:
+    Importance:
+    Desc:
 }
 ```
 OUTPUT
@@ -166,7 +188,7 @@ OUTPUT
 ### ClubList
 INPUT
 ```
-Method: POST
+Method: GET
 URL: /api/index/clublist
 DATA:{
     'Token':
@@ -220,7 +242,7 @@ INPUT
 Method: GET
 URL: /api/index/clubindex/clubid
 PARAMETER:{
-    clubid
+    clubid:
 }
 ```
 OUTPUT
@@ -239,16 +261,16 @@ DATA:{
     'ClubId':
     'LinkmanGrade':
     'LinkmanClass':
-    'LinkmanName'
-    'LinkmanPhoneNumber'
-    'LinkmanQq'
-    'Region'
-    'Date1'
-    'Content'
-    'Process'
-    'Assessment'
-    'Feeling'
-    'Token'
+    'LinkmanName':
+    'LinkmanPhoneNumber':
+    'LinkmanQq':
+    'Region':
+    'Date1':
+    'Content':
+    'Process':
+    'Assessment':
+    'Feeling':
+    'Token':
 }
 ```
 OUTPUT
@@ -264,17 +286,17 @@ INPUT
 Method: POST
 URL: /api/club/activity/apply/
 DATA:{
-    ActivityName:,
-    Region,
-    Clubid,
-    ClubName,
-    Content,
-    Date1,
-    Date2,
-    State,
-    Type,
-    Participants,
-    Token
+    ActivityName:
+    Region:
+    Clubid:
+    ClubName:
+    Content:
+    Date1:
+    Date2:
+    State:
+    Type:
+    Participants:
+    Token:
 }
 ```
 OUTPUT
@@ -337,16 +359,16 @@ INPUT
 Method: POST
 URL: /api/clubprofile/form
 DATA:{
-    ClubName
-    ShezhangName
-    ShezhangQQ
-    ShezhangGrade
-    ShezhangClass
-    Introduction,
-    IfRecruit,
-    QQGroup,
-    Email
-    Achievements
+    ClubName:
+    ShezhangName:
+    ShezhangQQ:
+    ShezhangGrade:
+    ShezhangClass:
+    Introduction:
+    IfRecruit:
+    QQGroup:
+    Email:
+    Achievements:
 }
 ```
 
