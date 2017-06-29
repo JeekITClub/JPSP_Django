@@ -67,6 +67,48 @@ def logout(request):
         })
 
 
+@require_http_methods(['POST'])
+def club_establish(request):
+    try:
+        body = json.loads(request.body)
+        clubname = body['Clubname']
+        shezhang_name = body['Shezhang_Name']
+        shezhang_qq = body['Shezhang_QQ']
+        shezhang_grade = body['Shezhang_Grade']
+        shezhang_classroom = body['Shezhang_Classroom']
+        introduction = body['Introduction']
+        if_recruit = body['IfRecruit']
+        qq_group = body['QQGroup']
+        email = body['Email']
+        #
+        # settings = Settings.objects.filter(name="settings")
+        Club.objects.create(
+            Clubname=clubname,
+            # TODO: ClubId
+            ShezhangName=shezhang_name,
+            SheZhangQq=shezhang_qq,
+            ShezhangGrade=shezhang_grade,
+            ShezhangClassroom=shezhang_classroom,
+            IfRecruit=if_recruit,
+            Introduction=introduction,
+            Email=email,
+            # TODO: label!
+            State=False,
+            Achievements="",
+            Stars=0,
+            EnrollGroupQq=qq_group,
+        )
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
+    except:
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
+
+
 @require_http_methods(["POST"])
 def club_list(request):
     try:
@@ -99,8 +141,218 @@ def club_list(request):
         })
 
 
+@require_http_methods(['POST'])
+def recruit_classroom_apply(request):
+    try:
+        body = json.loads(request.body)
+        token = body['Token']
+        club_id = body['ClubId']
+        club_name = body['ClubName']
+        date1 = body['Date1']
+        date2 = body['Date2']
+        date3 = body['Date3']
+        # TODO: deal with date
+        Classroom.objects.create(
+            ClassroomId=0,
+            ClubId=Club.objects.get(User.objects.get(username=club_id)),
+            ClubName=club_name,
+            # Date1=date1 + date2,
+            # Date2=date1 + date3
+            # TODO: deal with date
+        )
+        return JsonResponse({
+            'message': 'success',
+            'Access-Control-Allow-Origin': '*'
+        })
+    except:
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
+
+
+@require_http_methods(['POST'])
+def recruit_classroom_operate(request):
+    try:
+        body = json.loads(request.body)
+        token = body['Token']
+        classroom = body['Classroom']
+        clubid = body['ClubId']
+        # date
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
+    except:
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
+
+
+@require_http_methods(['POST'])
+def club_member_operate(request):
+    try:
+        body = json.loads(request.body)
+        token = body['token']
+        club_id = body['ClubId']
+        userid = body['userid']
+        club_object = Club.objects.get(Club)
+        # userid 为学生账号 为学号  数字
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
+    except:
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
+
+
+@require_http_methods(['POST'])
+def activity_apply(request):
+    try:
+        body = json.loads(request.body)
+        token = body['Token']
+        club_id = body['ClubId']
+        club_name = body['ClubName']
+        activity_name = body['ActivityName']
+        region = body['Region']
+        date1 = body['Date1']
+        date2 = body['Date2']
+        content = body['Content']
+        type = body['Type']
+        Activity.objects.create(
+            ActivityName=activity_name,
+            Region=region,
+            Clubid=Club.objects.get(clubid=User.objects.get(username=club_id)),
+            ClubName=club_name,
+            Content=content,
+            Date1=date1,
+            Date2=date2,
+            State='0',
+            Type=type,
+            Participants=''
+        )
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
+    except:
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
+
+
+@require_http_methods(['POST'])
+def activity_operate(request):
+    try:
+        body = json.loads(request.body)
+        token = body['token']
+        activity_id = body['ActivityId']
+        try:
+            activity_object = Activity.objects.get(pk=activity_id)
+            activity_object.state = '1'
+            activity_object.save()
+        except:
+            return JsonResponse({
+                'message': 'error',
+                'Access-Control-Allow-Origin': '*'
+            })
+    except:
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
+
+
+@require_http_methods(['POST'])
+def activity_list(request):
+    try:
+        # body = json.loads(request.body)
+        # token = body['Token']
+        response = []
+        # TODO : token authenticate
+        activityList = Activity.objects.all()
+        for data in Activity.objects.all():
+            response.append({
+                'ActivityId': data.pk,
+                'ActivityName': data.ActivityName,
+                'Region': data.Region,
+                'ClubId': data.ClubId,
+                'ClubName': data.ClubName,
+                'Content': data.Content,
+                'Date1': str(data.Date1),
+                'Date2': str(data.Date2),
+                'State': data.State,
+                'Type': data.Type
+            })
+        response_json = json.dumps(response)
+        return JsonResponse({'message': 'success', 'Access-Control-Allow-Origin': '*', 'data': response_json},
+                            safe=False)
+    except:
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
+
+
 @require_http_methods(["POST"])
-def club_post_edit(request):
+def laf_submit(request):
+    try:
+        body = json.loads(request.body)
+        token = body['Token']
+        lostOrFound = body['LostOrFound']
+        objectName = body['ObjectName']
+        linkmanName = body['LinkmanName']
+        linkmanGrade = body['LinkmanGrade']
+        linkmanPhoneNumber = body['LinkmanPhoneNumber']
+        linkmanClass = body['LinkmanClass']
+        linkmanQq = body['LinkmanQq']
+        region = body['Region']
+        date1 = body['Date1']
+        date2 = body['Date2']
+        importance = body['Importance']
+        desc = body['Desc']
+        try:
+            LostAndFound.objects.create(
+                LostOrFound=lostOrFound,
+                LinkmanName=linkmanName,
+                LinkmanGrade=linkmanGrade,
+                LinkmanClassroom=linkmanClass,
+                LinkmanPhoneNumber=linkmanPhoneNumber,
+                LinkmanQq=linkmanQq,
+                LostObjectName=objectName,
+                LostPlace=region,
+                Importance=importance,
+                Desc=desc,
+                LostDateTime=date1
+            )
+            return JsonResponse({
+                'message': 'error',
+                'Access-Control-Allow-Origin': '*'
+            })
+        except:
+            return JsonResponse({
+                'message': 'error',
+                'Access-Control-Allow-Origin': '*'
+            })
+    except:
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
+
+
+@require_http_methods(["POST"])
+def laf_list(request):
+    pass
+
+
+@require_http_methods(["POST"])
+def post_submit(request):
     try:
         body = json.loads(request.body)
         clubname = body['ClubName']
@@ -155,85 +407,6 @@ def club_post_edit(request):
         })
 
 
-@require_http_methods(["POST"])
-def club_profile_edit(request):
-    try:
-        body = json.loads(request.body)
-        token = body['Token']
-        clubid = body['clubid']
-        clubname = body['clubname']
-        shezhang_name = body['shezhang_name']
-        shezhang_qq = body['shezhang_qq']
-        shezhang_grade = body['shezhang_grade']
-        shezhang_class = body['shezhang_class']
-        if_recruit = body['if_recruit']
-        enroll_group_qq = body['enroll_group_qq']
-        email = body['email']
-        label = body['label']
-        state = body['state']
-        introduction = body['introduction']
-        achievements = body['achievements']
-        try:
-            club_object = Club.objects.get(clubid=clubid)
-            club_object.Clubname = clubname
-            club_object.ShezhangName = shezhang_name
-            club_object.ShezhangGrade = shezhang_grade
-            club_object.ShezhangClassroom = shezhang_class
-            club_object.ShezhangQq = shezhang_qq
-            club_object.IfRecruit = if_recruit
-            club_object.EnrollGroupQq = enroll_group_qq
-            club_object.Email = email
-            club_object.Label = label
-            club_object.State = state
-            club_object.Introduction = introduction
-            club_object.Achievements = achievements
-            club_object.save()
-            return JsonResponse({
-                'message': 'success',
-                'Access-Control-Allow-Origin': '*'
-            })
-        except:
-            return JsonResponse({
-                'message': 'error',
-                'Access-Control-Allow-Origin': '*'
-            })
-    except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
-
-
-@require_http_methods(['GET'])
-def club_recruit_classroom_apply_submit(request):
-    try:
-        body = json.loads(request.body)
-        token = body['Token']
-        club_id = body['ClubId']
-        club_name = body['ClubName']
-        date1 = body['Date1']
-        date2 = body['Date2']
-        date3 = body['Date3']
-        # TODO: deal with date
-        Classroom.objects.create(
-            ClassroomId=0,
-            ClubId=Club.objects.get(User.objects.get(username=club_id)),
-            ClubName=club_name,
-            # Date1=date1 + date2,
-            # Date2=date1 + date3
-            # TODO: deal with date
-        )
-        return JsonResponse({
-            'message': 'success',
-            'Access-Control-Allow-Origin': '*'
-        })
-    except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
-
-
 @require_http_methods(['POST'])
 def post_star(request):
     try:
@@ -263,312 +436,9 @@ def post_star(request):
         })
 
 
-@require_http_methods(['POST'])
-def recruit_classroom_operate(request):
-    try:
-        body = json.loads(request.body)
-        token = body['Token']
-        classroom = body['Classroom']
-        clubid = body['ClubId']
-        # date
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
-    except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
-
-
-@require_http_methods(['POST'])
-def userprofile_submit(request):
-    try:
-        body = json.loads(request.body)
-        token = body['token']
-        classroom = body['Classroom']
-        grade = body['Grade']
-        attend_year = body['AttendYear']
-        try:
-            user_profile_object = UserProfile.objects.get()
-            return JsonResponse({
-                'message': 'success',
-                'Access-Control-Allow-Origin': '*'
-            })
-        except:
-            return JsonResponse({
-                'message': 'error',
-                'Access-Control-Allow-Origin': '*'
-            })
-    except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
-
-
-@require_http_methods(['POST'])
-def club_member_operate(request):
-    try:
-        body = json.loads(request.body)
-        token = body['token']
-        club_id = body['ClubId']
-        userid = body['userid']
-        club_object = Club.objects.get(Club)
-        # userid 为学生账号 为学号  数字
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
-    except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
-
-
-
-
-
-@require_http_methods(['POST'])
-def message_remove(request):
-    # TODO: ////
-    try:
-        body = json.loads(request.body)
-        token = body['token']
-        message_id = body['MessageId']
-        if body['ToUser'] == 'Club Department':
-            try:
-                message_object = Message.objects.filter(ToUser=to_user)
-                message_object.remove()
-                return JsonResponse({
-                    'message': 'success',
-                    'Access-Control-Allow-Origin': '*'
-                })
-            except:
-                return JsonResponse({
-                    'message': 'error',
-                    'Access-Control-Allow-Origin': '*'
-                })
-        else:
-            return JsonResponse({
-                'message': 'error',
-                'Access-Control-Allow-Origin': '*'
-            })
-    except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
-
-
-@require_http_methods(['POST'])
-def activity_apply(request):
-    try:
-        body = json.loads(request.body)
-        token = body['Token']
-        club_id = body['ClubId']
-        club_name = body['ClubName']
-        activity_name = body['ActivityName']
-        region = body['Region']
-        date1 = body['Date1']
-        date2 = body['Date2']
-        content = body['Content']
-        type = body['Type']
-        Activity.objects.create(
-            ActivityName=activity_name,
-            Region=region,
-            Clubid=Club.objects.get(clubid=User.objects.get(username=club_id)),
-            ClubName=club_name,
-            Content=content,
-            Date1=date1,
-            Date2=date2,
-            State='0',
-            Type=type,
-            Participants=''
-        )
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
-    except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
-
-
-@require_http_methods(['POST'])
-def activity_confirm(request):
-    try:
-        body = json.loads(request.body)
-        token = body['token']
-        activity_id = body['ActivityId']
-        try:
-            activity_object = Activity.objects.get(pk=activity_id)
-            activity_object.state = '1'
-            activity_object.save()
-        except:
-            return JsonResponse({
-                'message': 'error',
-                'Access-Control-Allow-Origin': '*'
-            })
-    except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
-
-
-@require_http_methods(['POST'])
-def activity_list(request):
-    try:
-        # body = json.loads(request.body)
-        # token = body['Token']
-        response = []
-        # TODO : token authenticate
-        activityList = Activity.objects.all()
-        for data in Activity.objects.all():
-            response.append({
-                'ActivityId': data.pk,
-                'ActivityName': data.ActivityName,
-                'Region': data.Region,
-                'ClubId': data.ClubId,
-                'ClubName': data.ClubName,
-                'Content': data.Content,
-                'Date1': str(data.Date1),
-                'Date2': str(data.Date2),
-                'State': data.State,
-                'Type': data.Type
-            })
-        response_json = json.dumps(response)
-        return JsonResponse({'message': 'success', 'Access-Control-Allow-Origin': '*', 'data': response_json},
-                            safe=False)
-    except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
-
-@require_http_methods(['POST'])
-def post_operate(request):
-    try:
-        body = json.loads(request.body)
-        token = body['Token']
-        post_id = body['PostId']
-        try:
-            post_object = Post.objects.get(pk=post_id)
-            post_object.Pass = False
-            post_object.save()
-            return JsonResponse({
-                'message': 'success',
-                'Access-Control-Allow-Origin': '*'
-            })
-        except:
-            return JsonResponse({
-                'message': 'error',
-                'Access-Control-Allow-Origin': '*'
-            })
-    except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
-
-
-@require_http_methods(['POST'])
-def club_establish(request):
-    try:
-        body = json.loads(request.body)
-        clubname = body['Clubname']
-        shezhang_name = body['Shezhang_Name']
-        shezhang_qq = body['Shezhang_QQ']
-        shezhang_grade = body['Shezhang_Grade']
-        shezhang_classroom = body['Shezhang_Classroom']
-        introduction = body['Introduction']
-        if_recruit = body['IfRecruit']
-        qq_group = body['QQGroup']
-        email = body['Email']
-        #
-        # settings = Settings.objects.filter(name="settings")
-        Club.objects.create(
-            Clubname=clubname,
-            # TODO: ClubId
-            ShezhangName=shezhang_name,
-            SheZhangQq=shezhang_qq,
-            ShezhangGrade=shezhang_grade,
-            ShezhangClassroom=shezhang_classroom,
-            IfRecruit=if_recruit,
-            Introduction=introduction,
-            Email=email,
-            # TODO: label!
-            State=False,
-            Achievements="",
-            Stars=0,
-            EnrollGroupQq=qq_group,
-        )
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
-    except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
-
-
-@require_http_methods(["POST"])
-def lost_and_found_submit(request):
-    try:
-        body = json.loads(request.body)
-        token = body['Token']
-        lostOrFound = body['LostOrFound']
-        objectName = body['ObjectName']
-        linkmanName = body['LinkmanName']
-        linkmanGrade = body['LinkmanGrade']
-        linkmanPhoneNumber = body['LinkmanPhoneNumber']
-        linkmanClass = body['LinkmanClass']
-        linkmanQq = body['LinkmanQq']
-        region = body['Region']
-        date1 = body['Date1']
-        date2 = body['Date2']
-        importance = body['Importance']
-        desc = body['Desc']
-        try:
-            LostAndFound.objects.create(
-                LostOrFound=lostOrFound,
-                LinkmanName=linkmanName,
-                LinkmanGrade=linkmanGrade,
-                LinkmanClassroom=linkmanClass,
-                LinkmanPhoneNumber=linkmanPhoneNumber,
-                LinkmanQq=linkmanQq,
-                LostObjectName=objectName,
-                LostPlace=region,
-                Importance=importance,
-                Desc=desc,
-                LostDateTime=date1
-            )
-            return JsonResponse({
-                'message': 'error',
-                'Access-Control-Allow-Origin': '*'
-            })
-        except:
-            return JsonResponse({
-                'message': 'error',
-                'Access-Control-Allow-Origin': '*'
-            })
-    except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
-
-
 # TODO: CHANGE INTO POST!!!
 @require_http_methods(["POST"])
-def cd_post_list(request):
+def post_list(request):
     try:
         body = json.loads(request.body)
         token = body['Token']
@@ -669,7 +539,36 @@ def cd_post_list(request):
 
 
 @require_http_methods(['POST'])
-def change_password_submit(request):
+def post_operate(request):
+    try:
+        body = json.loads(request.body)
+        token = body['Token']
+        post_id = body['PostId']
+        operation= body['Operation']
+        if operation == 'Deny':
+            pass
+        try:
+            post_object = Post.objects.get(pk=post_id)
+            post_object.Pass = False
+            post_object.save()
+            return JsonResponse({
+                'message': 'success',
+                'Access-Control-Allow-Origin': '*'
+            })
+        except:
+            return JsonResponse({
+                'message': 'error',
+                'Access-Control-Allow-Origin': '*'
+            })
+    except:
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
+
+
+@require_http_methods(['POST'])
+def change_password(request):
     try:
         body = json.loads(request.body)
         token = body['Token']
@@ -690,7 +589,7 @@ def change_password_submit(request):
 
 
 @require_http_methods(['POST'])
-def user_profile_get(request):
+def userprofile_get(request):
     try:
         body = json.loads(request.body)
         token = body['Token']
@@ -717,7 +616,33 @@ def user_profile_get(request):
 
 
 @require_http_methods(['POST'])
-def club_profile_get(request):
+def userprofile_submit(request):
+    try:
+        body = json.loads(request.body)
+        token = body['token']
+        classroom = body['Classroom']
+        grade = body['Grade']
+        attend_year = body['AttendYear']
+        try:
+            user_profile_object = UserProfile.objects.get()
+            return JsonResponse({
+                'message': 'success',
+                'Access-Control-Allow-Origin': '*'
+            })
+        except:
+            return JsonResponse({
+                'message': 'error',
+                'Access-Control-Allow-Origin': '*'
+            })
+    except:
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
+
+
+@require_http_methods(['POST'])
+def clubprofile_get(request):
     try:
         body = json.loads(request.body)
         token = body['Token']
@@ -748,3 +673,72 @@ def club_profile_get(request):
             'message': 'error',
             'Access-Control-Allow-Origin': '*'
         })
+
+
+@require_http_methods(["POST"])
+def club_profile_edit(request):
+    try:
+        body = json.loads(request.body)
+        token = body['Token']
+        clubid = body['clubid']
+        clubname = body['clubname']
+        shezhang_name = body['shezhang_name']
+        shezhang_qq = body['shezhang_qq']
+        shezhang_grade = body['shezhang_grade']
+        shezhang_class = body['shezhang_class']
+        if_recruit = body['if_recruit']
+        enroll_group_qq = body['enroll_group_qq']
+        email = body['email']
+        label = body['label']
+        state = body['state']
+        introduction = body['introduction']
+        achievements = body['achievements']
+        try:
+            club_object = Club.objects.get(clubid=clubid)
+            club_object.Clubname = clubname
+            club_object.ShezhangName = shezhang_name
+            club_object.ShezhangGrade = shezhang_grade
+            club_object.ShezhangClassroom = shezhang_class
+            club_object.ShezhangQq = shezhang_qq
+            club_object.IfRecruit = if_recruit
+            club_object.EnrollGroupQq = enroll_group_qq
+            club_object.Email = email
+            club_object.Label = label
+            club_object.State = state
+            club_object.Introduction = introduction
+            club_object.Achievements = achievements
+            club_object.save()
+            return JsonResponse({
+                'message': 'success',
+                'Access-Control-Allow-Origin': '*'
+            })
+        except:
+            return JsonResponse({
+                'message': 'error',
+                'Access-Control-Allow-Origin': '*'
+            })
+    except:
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
+
+
+@require_http_methods(["POST"])
+def event_submit(request):
+    pass
+
+
+@require_http_methods(["POST"])
+def event_list(request):
+    pass
+
+
+@require_http_methods(["GET"])
+def club_page(request):
+    pass
+
+
+@require_http_methods(["POST"])
+def club_page_setting(request):
+    pass
