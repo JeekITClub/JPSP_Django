@@ -29,7 +29,7 @@ def login(request):
             })
         elif usertype == "Club":
             return JsonResponse({
-                "UserName": Club(User.objects.get(username=userid)).clubname,
+                "UserName": Club(User.objects.get(username=userid)).ClubName,
                 "message": "User Authenticated",
                 "Token": token_object.generate(),
                 "Access-Control-Allow-Origin": '*'

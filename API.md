@@ -48,7 +48,7 @@ OUTPUT
 INPUT
 ```
 Method: 'POST'
-URL: api/changepassword
+URL: /api/changepassword
 DATA:{
     UserId:
     UserType:

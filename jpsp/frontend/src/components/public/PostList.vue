@@ -42,20 +42,18 @@
     </el-table-column>
     <el-table-column prop="Stars" label="评价">
     </el-table-column>
-    <div v-if="user === 'CD' ">
-      <el-table-column label="评价">
-        <template scope="scope">
-          <el-rate v-on:change="StarSubmit(scope.row.pk, scope.row.Stars)" v-model="scope.row.Stars"></el-rate>
-        </template>
-      </el-table-column>
-      <el-table-column label="操作">
-        <template scope="scope">
-          <el-button size="small" type="danger" @click="HandleDeleteSubmit(scope.$index,scope.row)">
-            删除
-          </el-button>
-        </template>
-      </el-table-column>
-    </div>
+    <el-table-column label="评价" v-if="user === 'CD' ">
+      <template scope="scope">
+        <el-rate v-on:change="StarSubmit(scope.row.pk, scope.row.Stars)" v-model="scope.row.Stars"></el-rate>
+      </template>
+    </el-table-column>
+    <el-table-column label="操作" v-if="user === 'CD' ">
+      <template scope="scope">
+        <el-button size="small" type="danger" @click="HandleDeleteSubmit(scope.$index,scope.row)">
+          删除
+        </el-button>
+      </template>
+    </el-table-column>
   </el-table>
 </template>
 
@@ -88,7 +86,7 @@
         })
       },
       HandleDeleteSubmit (postid) {
-          axios({
+        axios({
           method: 'POST',
           url: 'http://127.0.0.1:8000/api/post/operate',
           data: JSON.stringify({
