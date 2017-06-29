@@ -12,7 +12,7 @@
 </template>
 <script>
   import CDAside from '../../components/admin_cd/CDAside.vue'
-  import ActivityList from '../../components/admin_cd/ActivityList.vue'
+  import ActivityList from '../../components/public/ActivityList.vue'
   export default {
     components: {
       'cd_aside': CDAside,

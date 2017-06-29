@@ -68,6 +68,9 @@
     props: {
       type: {
         'default': 'UnStared'
+      },
+      user: {
+        'default': 'Student'
       }
     },
     methods: {
@@ -81,8 +84,9 @@
             // TODO: star_time
             PostId: postid,
             // TODO: PostId
-            Token: ''
-          })
+            Token: '',
+            User: this.user
+          }.bind(this))
         })
       },
       HandleDeleteSubmit (postid) {

@@ -2,22 +2,22 @@
   <div>
     <el-tabs v-model="TabsValue" type="card">
       <el-tab-pane label="未来活动" name="Future">
-        <cd_list type="future"></cd_list>
+        <activity_list type="future" user="Student"></activity_list>
       </el-tab-pane>
       <el-tab-pane label="正在进行" name="Now">
-        <cd_list type="now"></cd_list>
+        <activity_list type="now" user="Student"></activity_list>
       </el-tab-pane>
       <el-tab-pane label="已经结束" name="Stared">
-        <cd_list type="past"></cd_list>
+        <activity_list type="past" user="Student"></activity_list>
       </el-tab-pane>
     </el-tabs>
   </div>
 </template>
 <script>
-  import ActivityList from '../../components/index/ActivityList.vue'
+  import ActivityList from '../../components/public/ActivityList.vue'
   export default {
     components: {
-      'cd_list': ActivityList
+      'activity_list': ActivityList
     },
     data () {
       return {

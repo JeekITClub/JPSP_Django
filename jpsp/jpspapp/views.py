@@ -677,7 +677,7 @@ def clubprofile_get(request):
 
 
 @require_http_methods(["POST"])
-def club_profile_edit(request):
+def clubprofile_submit(request):
     try:
         body = json.loads(request.body)
         token = body['Token']

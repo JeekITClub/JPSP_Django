@@ -42,18 +42,20 @@
     </el-table-column>
     <el-table-column prop="Stars" label="评价">
     </el-table-column>
-    <el-table-column label="评价">
-      <template scope="scope">
-        <el-rate v-on:change="StarSubmit(scope.row.pk, scope.row.Stars)" v-model="scope.row.Stars"></el-rate>
-      </template>
-    </el-table-column>
-    <el-table-column label="操作">
-      <template scope="scope">
-        <el-button size="small" type="danger" @click="HandleDeleteSubmit(scope.$index,scope.row)">
-          删除
-        </el-button>
-      </template>
-    </el-table-column>
+    <div v-if="user === 'CD' ">
+      <el-table-column label="评价">
+        <template scope="scope">
+          <el-rate v-on:change="StarSubmit(scope.row.pk, scope.row.Stars)" v-model="scope.row.Stars"></el-rate>
+        </template>
+      </el-table-column>
+      <el-table-column label="操作">
+        <template scope="scope">
+          <el-button size="small" type="danger" @click="HandleDeleteSubmit(scope.$index,scope.row)">
+            删除
+          </el-button>
+        </template>
+      </el-table-column>
+    </div>
   </el-table>
 </template>
 
@@ -68,32 +70,31 @@
     props: {
       type: {
         'default': 'UnStared'
+      },
+      user: {
+        'default': 'ClubId'
       }
     },
     methods: {
       StarSubmit (postid, star) {
         axios({
           method: 'POST',
-          url: 'http://127.0.0.1:8000/api/cd/post/star/submit',
+          url: 'http://127.0.0.1:8000/api/post/star',
           data: JSON.stringify({
             Stars: star,
-            StarTime: '',
-            // TODO: star_time
             PostId: postid,
-            // TODO: PostId
             Token: ''
           })
         })
       },
       HandleDeleteSubmit (postid) {
-        axios({
+          axios({
           method: 'POST',
-          url: 'http://127.0.0.1:8000/api/cd/post/deny/submit',
+          url: 'http://127.0.0.1:8000/api/post/operate',
           data: JSON.stringify({
-            // TODO: HandleTime
             PostId: postid,
-            // TODO: PostId
-            Token: ''
+            Token: this.GetToken,
+            Operate: 'Deny'
           })
         })
       }
