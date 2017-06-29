@@ -72,8 +72,9 @@ OUTPUT
 ### LostAndFoundList
 INPUT
 ```
-Method: 'GET'
+Method: 'POST'
 URL: api/laf/list
+TYPE: ('Lost' or 'Found' or 'Past' or 'All')
 ```
 OUTPUT
 ```
@@ -91,7 +92,6 @@ OUTPUT
             LinkmanQq:
             Region:
             Date1:
-            Date2:
             Importance:
             Desc:
         },
@@ -105,7 +105,6 @@ OUTPUT
             LinkmanQq:
             Region:
             Date1:
-            Date2:
             Importance:
             Desc:
         }
@@ -129,7 +128,6 @@ DATA:{
     LinkmanQq:
     Region:
     Date1:
-    Date2:
     Importance:
     Desc:
 }
@@ -149,7 +147,7 @@ Method: 'POST'
 URL: api/activity/list
 DATA:{
     Token:
-    Type: 'index'
+    Type: ('Happening', 'Past', 'Future')
 }
 ```
 OUTPUT
@@ -330,7 +328,7 @@ OUTPUT
     'Access-Control-Allow-Origin': '*',
 }
 ```
-### EventAdd
+### EventForm
 INPUT
 ```
 Method: POST,
@@ -419,7 +417,7 @@ DATA:{
     ClubId:
     Token:
     User: 'Club'
-    Type: ('Past' or 'Happening' or 'Confirmed' or 'Denied')
+    Type: ('Past' or 'Happening' or 'Confirmed' or 'Denied','Future')
 }
 ```
 

@@ -271,12 +271,25 @@ def activity_operate(request):
 @require_http_methods(['POST'])
 def activity_list(request):
     try:
-        # body = json.loads(request.body)
-        # token = body['Token']
+        body = json.loads(request.body)
+        token = body['Token']
+        type = body['Type']
         response = []
+        activityList=None
+        if type == 'All':
+            activityList = Activity.objects.all()
+        elif type == 'Past':
+            activityList = Activity.objects.all()
+        elif type == 'Happening':
+            activityList = Activity.objects.all()
+        elif type == 'Future':
+            activityList = Activity.objects.all()
+        elif type == 'Denied':
+            activityList = Activity.objects.all()
+        elif type == 'Confirmed':
+            activityList = Activity.objects.all()
         # TODO : token authenticate
-        activityList = Activity.objects.all()
-        for data in Activity.objects.all():
+        for data in activityList:
             response.append({
                 'ActivityId': data.pk,
                 'ActivityName': data.ActivityName,
@@ -313,7 +326,6 @@ def laf_submit(request):
         linkmanQq = body['LinkmanQq']
         region = body['Region']
         date1 = body['Date1']
-        date2 = body['Date2']
         importance = body['Importance']
         desc = body['Desc']
         try:
@@ -348,7 +360,22 @@ def laf_submit(request):
 
 @require_http_methods(["POST"])
 def laf_list(request):
-    pass
+    try:
+        body = json.loads(request.body)
+        type = body['Type']
+        if type == 'Lost':
+            pass
+        elif type == 'Found':
+            pass
+        elif type == 'Past':
+            pass
+        elif type == 'All':
+            pass
+    except:
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
 
 
 @require_http_methods(["POST"])
@@ -436,101 +463,41 @@ def post_star(request):
         })
 
 
-# TODO: CHANGE INTO POST!!!
 @require_http_methods(["POST"])
 def post_list(request):
     try:
         body = json.loads(request.body)
         token = body['Token']
         type = body['Type']
+        response = []
+        post_object=None
         if type == 'UnStared':
-            response = []
             post_object = Post.objects.filter(Stars=0)
-            for data in post_object:
-                response.append({'pk': data.pk,
-                                 'ClubName': data.ClubName,
-                                 'LinkmanGrade': data.LinkmanGrade,
-                                 'LinkmanPhoneNumber': data.LinkmanPhoneNumber,
-                                 'LinkmanName': data.LinkmanName,
-                                 'LinkmanQq': data.LinkmanQq,
-                                 'Region': data.Region,
-                                 'Date1': str(data.Date1),
-                                 'Date2': str(data.Date2),
-                                 'Process': data.Process,
-                                 'Content': data.Content,
-                                 'Assessment': data.Assessment,
-                                 'Feeling': data.Feeling,
-                                 'Stars': data.Stars
-                                 })
-            response_json = json.dumps(response)
-            return JsonResponse({'message': 'success', 'Access-Control-Allow-Origin': '*', 'data': response_json},
-                                safe=False)
         elif type == "Stared":
-            response = []
             post_object = Post.objects.exclude(Stars=0.0)
-            for data in post_object:
-                response.append({'pk': data.pk,
-                                 'ClubName': data.ClubName,
-                                 'LinkmanGrade': data.LinkmanGrade,
-                                 'LinkmanPhoneNumber': data.LinkmanPhoneNumber,
-                                 'LinkmanName': data.LinkmanName,
-                                 'LinkmanQq': data.LinkmanQq,
-                                 'Region': data.Region,
-                                 'Date1': str(data.Date1),
-                                 'Date2': str(data.Date2),
-                                 'Process': data.Process,
-                                 'Content': data.Content,
-                                 'Assessment': data.Assessment,
-                                 'Feeling': data.Feeling,
-                                 'Stars': data.Stars
-                                 })
-            response_json = json.dumps(response)
-            return JsonResponse({'message': 'success', 'Access-Control-Allow-Origin': '*', 'data': response_json},
-                                safe=False)
         elif type == "UnPassed":
-            response = []
             post_object = Post.objects.filter(Pass=False)
-            for data in post_object:
-                response.append({'pk': data.pk,
-                                 'ClubName': data.ClubName,
-                                 'LinkmanGrade': data.LinkmanGrade,
-                                 'LinkmanPhoneNumber': data.LinkmanPhoneNumber,
-                                 'LinkmanName': data.LinkmanName,
-                                 'LinkmanQq': data.LinkmanQq,
-                                 'Region': data.Region,
-                                 'Date1': str(data.Date1),
-                                 'Date2': str(data.Date2),
-                                 'Process': data.Process,
-                                 'Content': data.Content,
-                                 'Assessment': data.Assessment,
-                                 'Feeling': data.Feeling,
-                                 'Stars': data.Stars
-                                 })
-            response_json = json.dumps(response)
-            return JsonResponse({'message': 'success', 'Access-Control-Allow-Origin': '*', 'data': response_json},
-                                safe=False)
         elif type == "All":
-            response = []
             post_object = Post.objects.all()
-            for data in post_object:
-                response.append({'pk': data.pk,
-                                 'ClubName': data.ClubName,
-                                 'LinkmanGrade': data.LinkmanGrade,
-                                 'LinkmanPhoneNumber': data.LinkmanPhoneNumber,
-                                 'LinkmanName': data.LinkmanName,
-                                 'LinkmanQq': data.LinkmanQq,
-                                 'Region': data.Region,
-                                 'Date1': str(data.Date1),
-                                 'Date2': str(data.Date2),
-                                 'Process': data.Process,
-                                 'Content': data.Content,
-                                 'Assessment': data.Assessment,
-                                 'Feeling': data.Feeling,
-                                 'Stars': data.Stars
-                                 })
-            response_json = json.dumps(response)
-            return JsonResponse({'message': 'success', 'Access-Control-Allow-Origin': '*', 'data': response_json},
-                                safe=False)
+        for data in post_object:
+            response.append({'pk': data.pk,
+                             'ClubName': data.ClubName,
+                             'LinkmanGrade': data.LinkmanGrade,
+                             'LinkmanPhoneNumber': data.LinkmanPhoneNumber,
+                             'LinkmanName': data.LinkmanName,
+                             'LinkmanQq': data.LinkmanQq,
+                             'Region': data.Region,
+                             'Date1': str(data.Date1),
+                             'Date2': str(data.Date2),
+                             'Process': data.Process,
+                             'Content': data.Content,
+                             'Assessment': data.Assessment,
+                             'Feeling': data.Feeling,
+                             'Stars': data.Stars
+                             })
+        response_json = json.dumps(response)
+        return JsonResponse({'message': 'success', 'Access-Control-Allow-Origin': '*', 'data': response_json},
+                            safe=False)
     except:
         return JsonResponse({
             'message': 'error',
@@ -544,22 +511,35 @@ def post_operate(request):
         body = json.loads(request.body)
         token = body['Token']
         post_id = body['PostId']
-        operation= body['Operation']
+        operation = body['Operation']
         if operation == 'Deny':
-            pass
-        try:
-            post_object = Post.objects.get(pk=post_id)
-            post_object.Pass = False
-            post_object.save()
-            return JsonResponse({
-                'message': 'success',
-                'Access-Control-Allow-Origin': '*'
-            })
-        except:
-            return JsonResponse({
-                'message': 'error',
-                'Access-Control-Allow-Origin': '*'
-            })
+            try:
+                post_object = Post.objects.get(pk=post_id)
+                post_object.Pass = False
+                post_object.save()
+                return JsonResponse({
+                    'message': 'success',
+                    'Access-Control-Allow-Origin': '*'
+                })
+            except:
+                return JsonResponse({
+                    'message': 'error',
+                    'Access-Control-Allow-Origin': '*'
+                })
+        if operation == 'UndoDeny':
+            try:
+                post_object = Post.objects.get(pk=post_id)
+                post_object.Pass = None
+                post_object.save()
+                return JsonResponse({
+                    'message': 'success',
+                    'Access-Control-Allow-Origin': '*'
+                })
+            except:
+                return JsonResponse({
+                    'message': 'error',
+                    'Access-Control-Allow-Origin': '*'
+                })
     except:
         return JsonResponse({
             'message': 'error',
