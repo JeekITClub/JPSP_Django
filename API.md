@@ -132,7 +132,36 @@ DATA:{
 ```
 OUTPUT
 ```
-
+{
+    'message': ('success' or 'error'),
+    'Access-Control-Allow-Origin': '*',
+    data:[
+        {
+            'Name':
+            'Region':
+            'ClubId':
+            'ClubName':
+            'Content':
+            'Date1':
+            'Date2':
+            'State':
+            'Type':
+            'Participants'
+        },
+        {
+            'ActivityName':
+            'Region':
+            'ClubId':
+            'ClubName':
+            'Content':
+            'Date1':
+            'Date2':
+            'State':
+            'Type':
+            'Participants'
+        }
+    ]
+}
 ```
 ### ClubList
 INPUT
@@ -335,8 +364,8 @@ INPUT
 Method: POST
 URL: /api/clubprofile/get
 DATA:{
-    ClubId
-    Token
+    ClubId:
+    Token:
 }
 ```
 OUTPUT
@@ -380,7 +409,7 @@ OUTPUT
     'Access-Control-Allow-Origin': '*',
     data:[
         {
-            'ActivityName':
+            'Name':
             'Region':
             'ClubId':
             'ClubName':
@@ -440,7 +469,34 @@ DATA:{
 OUTPUT
 ```
 {
-
+    'message': ('success' or 'error'),
+    'Access-Control-Allow-Origin': '*',
+    data:[
+        {
+            'Name':
+            'Region':
+            'ClubId':
+            'ClubName':
+            'Content':
+            'Date1':
+            'Date2':
+            'State':
+            'Type':
+            'Participants'
+        },
+        {
+            'ActivityName':
+            'Region':
+            'ClubId':
+            'ClubName':
+            'Content':
+            'Date1':
+            'Date2':
+            'State':
+            'Type':
+            'Participants'
+        }
+    ]
 }
 ```
 
