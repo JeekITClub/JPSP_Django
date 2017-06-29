@@ -6,7 +6,7 @@ import index from '@/pages/index/index.vue'
 import Login from '@/pages/index/Login.vue'
 import ClubIndex from '@/pages/index/ClubIndex'
 import ClubPost from '@/pages/index/ClubPost.vue'
-import ClubPostList from '@/pages/index/ClubPostList.vue'
+import PostList from '@/pages/index/PostList.vue'
 import ProfileEdit from '@/pages/index/ProfileEdit.vue'
 import ActivityList from '../pages/index/ActiviytList.vue'
 // import LostAndFound from '../pages/index/LostAndFound.vue'
@@ -23,22 +23,22 @@ export default new Router({
       component: Login
     },
     {
-      path: '/clubindex',
+      path: '/club',
       name: 'ClubIndex',
       component: ClubIndex
     },
     {
-      path: '/clubpostlist',
-      name: 'ClubPostList',
-      component: ClubPostList
+      path: '/postlist',
+      name: 'PostList',
+      component: PostList
     },
     {
-      path: '/clubpost',
+      path: '/post',
       name: 'ClubPost',
       component: ClubPost
     },
     {
-      path: '/list',
+      path: '/activitylist',
       name: 'ActivityList',
       component: ActivityList
     },
