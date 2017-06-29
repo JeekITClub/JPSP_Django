@@ -72,7 +72,7 @@ OUTPUT
 INPUT
 ```
 Method: 'POST'
-URL: api/index/laf/list
+URL: api/laf/list
 DATA:{
     Token:
 }
@@ -120,28 +120,14 @@ OUTPUT
 }
 ```
 
-### ClubList
-INPUT
-```
-Method: 'POST'
-URL: api/index/club/list
-DATA:{
-    Token:
-}
-```
-
-OUTPUT
-```
-
-```
-
 ### ActivityList
 INPUT
 ```
 Method: 'POST'
-URL: api/index/activity/list
+URL: api/activity/list
 DATA:{
     Token:
+    Type: 'index'
 }
 ```
 OUTPUT
@@ -298,7 +284,7 @@ OUTPUT
 INPUT
 ```
 Method: POST,
-URL: /api/club/event/add
+URL: /api/clubevent/add
 DATA:{
     ClubId:
     EventName:
@@ -320,7 +306,7 @@ OUTPUT
 INPUT
 ```
 Method: POST
-URL: /api/club/profile/edit
+URL: /api/clubprofile/form
 DATA:{
     ClubName
     ShezhangName
@@ -347,7 +333,7 @@ OUTPUT
 INPUT
 ```
 Method: POST
-URL: /api/club/establish
+URL: /api/clubprofile/get
 DATA:{
     ClubId
     Token
@@ -377,12 +363,13 @@ OUTPUT
 INPUT
 ```
 Method: POST
-URL: /api/club/activity/list
+URL: /api/activity/list
 DATA:{
-    ClubName
-    ClubId
-    Token
-    Type
+    ClubName:
+    ClubId:
+    Token:
+    User: 'Club'
+    Type: ('Past' or 'Happening' or 'Confirmed' or 'Denied')
 }
 ```
 
@@ -424,7 +411,7 @@ OUTPUT
 INPUT
 ```
 Method: 'POST'
-URL: api/index/activity/list
+URL: api/recruit/classroom/form
 DATA:{
     Token:
 }
@@ -443,17 +430,11 @@ OUTPUT
 INPUT
 ```
 Method: POST
-URL: /api/cd/activity/list
+URL: /api/activity/list
 DATA:{
-    ClubName
-    ShezhangName
-    ShezhangQQ
-    ShezhangGrade
-    ShezhangClass
-    Introduction,
-    IfRecruit,
-    QQGroup,
-    Email
+    Token:
+    User: 'CD'
+    Type: ('Unconfirmed' or 'Happening' or 'Past' or 'Confirmed' or 'All')
 }
 ```
 OUTPUT
@@ -467,9 +448,11 @@ OUTPUT
 INPUT
 ```
 Method: 'POST'
-URL: api/index/activity/list
+URL: api/club/list
 DATA:{
     Token:
+    User: 'CD'
+    Type: ('Established' or 'Unconfirmed')
 }
 ```
 OUTPUT
@@ -480,9 +463,11 @@ OUTPUT
 INPUT
 ```
 Method: POST
-URL: /api/cd/recruit/classroomlist
+URL: /api/recruit/classroom/list
 DATA:{
-    Token
+    Token:
+    User: 'CD'
+    Type: ('Confirmed' or 'Unconfirmed')
 }
 ```
 OUTPUT
@@ -501,6 +486,8 @@ Method: 'POST'
 URL: api/index/activity/list
 DATA:{
     Token:
+    User: 'CD'
+    Type: ('Unstared' or 'Stared' or 'All' or 'Denied')
 }
 ```
 OUTPUT
