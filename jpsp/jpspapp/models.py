@@ -125,7 +125,7 @@ class Activity(models.Model):
         ('2', '销售'),
     )
     Type = models.TextField(default='0', choices=type_choices)
-    Participants = models.TextField(default="")
+    Participants = models.ManyToManyField(UserProfile)
 
 
 class Classroom(models.Model):
@@ -148,3 +148,10 @@ class LostAndFound(models.Model):
     Importacne = models.BooleanField(default=False)
     Desc = models.TextField(default="")
     LostDateTime = models.DateTimeField()
+
+class Event(models.Model):
+    Name = models.CharField(max_length=30,default=None)
+    Date = models.DateTimeField()
+    Region =models.CharField(max_length=30,default=None)
+    Content = models.TextField(default=None)
+    Club = models.ForeignKey(Club)
