@@ -1,5 +1,5 @@
 <template>
-  <el-table :data=PostListTable>
+  <el-table :data=ActivityListTable>
     <el-table-column type="expand">
       <template scope="props">
         <el-form inline class="demo-table-expand">
@@ -30,10 +30,38 @@
     </el-table-column>
     <el-table-column prop="Region" label="活动地点">
     </el-table-column>
-    <el-table-column label="操作">
+    <el-table-column label="操作" v-if="user === 'Student'">
       <template scope="scope">
-        <el-button size="small" type="danger" @click="HandleDeleteSubmit(scope.row.pk)">
-          删除
+        <el-button size="small" type="danger" @click="AttendSubmit(scope.row.pk)">
+          加入活动
+        </el-button>
+      </template>
+    </el-table-column>
+    <el-table-column label="操作" v-if="user === 'Club'">
+      <template scope="scope">
+        <el-button size="small" type="danger" @click="CancelSubmit(scope.row.pk)">
+          取消活动
+        </el-button>
+      </template>
+    </el-table-column>
+    <el-table-column label="操作" v-if="user === 'CD' && type != 'Unconfirmed' ">
+      <template scope="scope">
+        <el-button size="small" type="danger" @click="DenySubmit(scope.row.pk)">
+          拒绝
+        </el-button>
+      </template>
+    </el-table-column>
+    <el-table-column label="操作" v-if="user === 'CD' && type == 'Unconfirmed' ">
+      <template scope="scope">
+        <el-button size="small" type="danger" @click="ConfirmSubmit(scope.row.pk)">
+          同意
+        </el-button>
+      </template>
+    </el-table-column>
+    <el-table-column label="操作" v-if="user === 'CD' && type != 'Unpassed' ">
+      <template scope="scope">
+        <el-button size="small" type="danger" @click="UndoDenySubmit(scope.row.pk)">
+          撤销拒绝
         </el-button>
       </template>
     </el-table-column>
@@ -45,7 +73,7 @@
   export default {
     data () {
       return {
-        PostListTable: []
+        ActivityListTable: []
       }
     },
     props: {
@@ -57,16 +85,96 @@
       }
     },
     methods: {
-      HandleDeleteSubmit (postid) {
+      DenySubmit (ActivityId) {
         axios({
           method: 'POST',
-          url: 'empty',
+          url: 'http://127.0.0.1/api/activity/operate',
           data: JSON.stringify({
-            // TODO: HandleTime
-            PostId: postid,
-            // TODO: PostId
-            Token: ''
-          })
+            ActivityId: ActivityId,
+            Token: this.GetToken,
+            Operation: 'Deny'
+          }.bind(this))
+        }).then(function (response) {
+          if (response.data.message === 'success') {
+            this.$notify({
+              title: '成功',
+              message: '成功拒绝活动' + ActivityId,
+              type: 'success'
+            })
+          } else if (response.data.message === 'error') {
+            this.$notify.error({
+              title: '错误',
+              message: '拒绝活动' + ActivityId + '失败'
+            })
+          }
+        }.bind(this))
+      },
+      UndoDenySubmit (ActivityId) {
+        axios({
+          method: 'POST',
+          url: 'http://127.0.0.1/api/activity/operate',
+          data: JSON.stringify({
+            ActivityId: ActivityId,
+            Token: this.GetToken,
+            Operation: 'UndoDeny'
+          }.bind(this))
+        }).then(function (response) {
+          if (response.data.message === 'success') {
+            this.$notify({
+              title: '成功',
+              message: '成功撤销拒绝活动' + ActivityId,
+              type: 'success'
+            })
+          } else if (response.data.message === 'error') {
+            this.$notify.error({
+              title: '错误',
+              message: '撤销拒绝活动' + ActivityId + '失败'
+            })
+          }
+        }.bind(this))
+      },
+      AttendSubmit (ActivityId) {
+        axios({
+          method: 'POST',
+          url: 'http://127.0.0.1/api/activity/attend',
+          data: JSON.stringify(({
+            ActivityId: ActivityId,
+            Token: this.GetToken,
+            StudentId: this.GetUserId
+          }.bind(this)))
+        }).then(function (response) {
+          if (response.data.message === 'success') {
+            this.$notify({
+              title: '成功',
+              message: '成功加入活动' + ActivityId,
+              type: 'success'
+            })
+          } else if (response.data.message === 'error') {
+            this.$notify.error({
+              title: '错误',
+              message: '加入活动' + ActivityId + '失败'
+            })
+          }
+        }.bind(this))
+      },
+      CancelSubmit (ActivityId) {
+        axios({
+          method: 'POST',
+          url: '',
+          data: JSON.stringify({
+            ActivityId: ActivityId,
+            Token: this.GetToken
+          }.bind(this))
+        })
+      },
+      ConfirmSubmit (ActivityId) {
+        axios({
+          method: 'POST',
+          url: '',
+          data: JSON.stringify({
+            ActivityId: ActivityId,
+            Token: this.GetToken
+          }.bind(this))
         })
       }
     },
@@ -79,6 +187,9 @@
       },
       GetToken () {
         return this.$store.state.Token
+      },
+      GetUserId () {
+        return this.$store.state.UserId
       }
     },
     mounted: function () {
@@ -89,15 +200,16 @@
           Type: this.type,
           Token: this.GetToken
         })
-      })
-        .then(function (response) {
-          if (response.data.message === 'success') {
-            this.PostListTable = JSON.parse(response.data.data)
-            console.log('success')
-          } else {
-            console.log('error')
-          }
-        }.bind(this))
+      }).then(function (response) {
+        if (response.data.message === 'success') {
+          this.PostListTable = JSON.parse(response.data.data)
+        } else {
+          this.$notify.error({
+            title: '错误',
+            message: '无法获得数据'
+          })
+        }
+      }.bind(this))
     }
   }
 </script>

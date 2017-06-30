@@ -1,13 +1,19 @@
 <template>
   <div>
-    <el-row class="tac">
-      <el-col :span="4">
-        <cd_aside></cd_aside>
-      </el-col>
-      <el-col :span="20" offset="4">
-        <cd_activity_list></cd_activity_list>
-      </el-col>
-    </el-row>
+    <el-tabs v-model="TabsValue" type="card">
+      <el-tab-pane label="未审核" name="Unconfirmed">
+        <cd_activity_list type="Unconfirmed" user="CD"></cd_activity_list>
+      </el-tab-pane>
+      <el-tab-pane label="已审核" name="Confirmd">
+        <cd_activity_list type="Confirmed" user="CD"></cd_activity_list>
+      </el-tab-pane>
+      <el-tab-pane label="未通过" name="Unpassed">
+        <cd_activity_list type="Unpassed" user="CD"></cd_activity_list>
+      </el-tab-pane>
+      <el-tab-pane label="所有" name="All">
+        <cd_activity_list type="All" user="CD"></cd_activity_list>
+      </el-tab-pane>
+    </el-tabs>
   </div>
 </template>
 <script>
@@ -19,7 +25,9 @@
       'cd_activity_list': ActivityList
     },
     data () {
-      return {}
+      return {
+        TabsValue: 'Unconfirmed'
+      }
     }
   }
 </script>

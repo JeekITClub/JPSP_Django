@@ -30,6 +30,9 @@ const UserVuexStore = new Vuex.Store({
     },
     ApplyToken (state, Token) {
       state.Token = Token
+    },
+    ApplyUserId (state, UserId) {
+      state.UserId = UserId
     }
   }
 })
