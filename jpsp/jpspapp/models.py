@@ -71,7 +71,8 @@ class Post(models.Model):
     Feeling = models.TextField(default="")
     Stars = models.FloatField(default=0.0)
     StarTime = models.DateTimeField(default=None)
-    Pass = models.BooleanField(default=False)
+    Pass = models.CharField(max_length=1,default='1')
+    # Pass中有3个选项，未审核为0，被拒绝为1，通过为2
 
 
 class Message(models.Model):

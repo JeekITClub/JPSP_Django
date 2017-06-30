@@ -47,10 +47,17 @@
         <el-rate v-on:change="StarSubmit(scope.row.pk, scope.row.Stars)" v-model="scope.row.Stars"></el-rate>
       </template>
     </el-table-column>
-    <el-table-column label="操作" v-if="user === 'CD' ">
+    <el-table-column label="操作" v-if="user === 'CD' && type != 'UnPassed'">
       <template scope="scope">
-        <el-button size="small" type="danger" @click="HandleDeleteSubmit(scope.$index,scope.row)">
-          删除
+        <el-button size="small" type="danger" @click="DenySubmit(scope.row.pk)">
+          拒绝
+        </el-button>
+      </template>
+    </el-table-column>
+    <el-table-column label="操作" v-if="user === 'CD' && type === 'UnPassed'">
+      <template scope="scope">
+        <el-button size="small" type="danger" @click="UndoDenySubmit(scope.row.pk)">
+          撤销拒绝
         </el-button>
       </template>
     </el-table-column>
@@ -70,7 +77,7 @@
         'default': 'UnStared'
       },
       user: {
-        'default': 'ClubId'
+        'default': 'Club'
       }
     },
     methods: {
@@ -81,18 +88,29 @@
           data: JSON.stringify({
             Stars: star,
             PostId: postid,
-            Token: ''
+            Token: this.GetToken
           })
         })
       },
-      HandleDeleteSubmit (postid) {
+      DenySubmit (postid) {
         axios({
           method: 'POST',
           url: 'http://127.0.0.1:8000/api/post/operate',
           data: JSON.stringify({
             PostId: postid,
             Token: this.GetToken,
-            Operate: 'Deny'
+            Operation: 'Deny'
+          })
+        })
+      },
+      UndoDenySubmit (postid) {
+        axios({
+          method: 'POST',
+          url: 'http://127.0.0.1:8000/api/post/operate',
+          data: JSON.stringify({
+            PostId: postid,
+            Token: this.GetToken,
+            Operation: 'UndoDeny'
           })
         })
       }

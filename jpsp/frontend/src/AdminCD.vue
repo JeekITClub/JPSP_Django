@@ -6,12 +6,16 @@
         <c-d-aside></c-d-aside>
       </el-col>
       <el-col :span=20>
-        <router-view></router-view>
+        <transition>
+          <router-view></router-view>
+        </transition>
       </el-col>
-  </el-row>
-  <el-row class="tac" v-if="Authenticate === null | false">
-      <router-view></router-view>
-  </el-row>
+    </el-row>
+    <el-row class="tac" v-if="Authenticate === null | false">
+      <transition>
+        <router-view></router-view>
+      </transition>
+    </el-row>
   </div>
 </template>
 

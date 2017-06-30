@@ -462,11 +462,10 @@ def post_star(request):
         token = body['Token']
         stars = body['Stars']
         post_id = body['PostId']
-        star_time = body['StarTime']
         try:
             post_object = Post.objects.get(pk=post_id)
             post_object.Stars = stars
-            post_object.IfPass = True
+            post_object.Pass = '2'
             post_object.save()
             return JsonResponse({
                 'message': 'success',
@@ -493,11 +492,11 @@ def post_list(request):
         response = []
         post_object = None
         if type == 'UnStared':
-            post_object = Post.objects.filter(Stars=0)
+            post_object = Post.objects.filter(Pass='0')
         elif type == "Stared":
-            post_object = Post.objects.exclude(Stars=0.0)
+            post_object = Post.objects.filter(Pass='2')
         elif type == "UnPassed":
-            post_object = Post.objects.filter(Pass=False)
+            post_object = Post.objects.filter(Pass='1')
         elif type == "All":
             post_object = Post.objects.all()
         for data in post_object:
@@ -536,7 +535,8 @@ def post_operate(request):
         if operation == 'Deny':
             try:
                 post_object = Post.objects.get(pk=post_id)
-                post_object.Pass = False
+                post_object.Pass = '1'
+                post_object.Stars = '0.0'
                 post_object.save()
                 return JsonResponse({
                     'message': 'success',
@@ -550,7 +550,8 @@ def post_operate(request):
         if operation == 'UndoDeny':
             try:
                 post_object = Post.objects.get(pk=post_id)
-                post_object.Pass = None
+                post_object.Pass = '0'
+                post_object.Stars = '0.0'
                 post_object.save()
                 return JsonResponse({
                     'message': 'success',
