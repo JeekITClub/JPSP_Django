@@ -111,7 +111,7 @@
     mounted: function () {
       axios({
         method: 'POST',
-        url: 'http://127.0.0.1:8000/api/cd/post/list',
+        url: 'http://127.0.0.1:8000/api/post/list',
         data: JSON.stringify({
           Type: this.type,
           Token: this.GetToken
@@ -120,7 +120,6 @@
         .then(function (response) {
           if (response.data.message === 'success') {
             this.PostListTable = JSON.parse(response.data.data)
-            console.log('success')
           } else {
             console.log('error')
           }

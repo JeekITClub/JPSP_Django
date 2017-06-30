@@ -743,3 +743,7 @@ def club_page(request):
 @require_http_methods(["POST"])
 def club_page_setting(request):
     pass
+
+@require_http_methods(["POST"])
+def message_list(request):
+    pass

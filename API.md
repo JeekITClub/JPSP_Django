@@ -116,7 +116,7 @@ OUTPUT
 INPUT
 ```
 Method: 'POST'
-URL: api/index/laf/submit
+URL: api/laf/submit
 DATA:{
     Token:
     LostOrFound:
@@ -187,7 +187,7 @@ OUTPUT
 INPUT
 ```
 Method: GET
-URL: /api/index/clublist
+URL: /api/club/list
 DATA:{
     'Token':
 }
@@ -238,7 +238,7 @@ OUTPUT
 INPUT
 ```
 Method: GET
-URL: /api/index/clubindex/clubid
+URL: /api/club/index
 PARAMETER:{
     clubid:
 }
@@ -253,7 +253,7 @@ OUTPUT(Undevelped yet)
 INPUT
 ```
 Method: POST
-URL: /api/club/post/edit/submit
+URL: /api/post/submit
 DATA:{
     'Token':
     'ClubId':
@@ -282,7 +282,7 @@ OUTPUT
 INPUT
 ```
 Method: POST
-URL: /api/club/activity/apply/
+URL: /api/activity/submit
 DATA:{
     ActivityName:
     Region:
@@ -332,7 +332,7 @@ OUTPUT
 INPUT
 ```
 Method: POST,
-URL: /api/clubevent/add
+URL: /api/event/submit
 DATA:{
     ClubId:
     EventName:
@@ -354,7 +354,7 @@ OUTPUT
 INPUT
 ```
 Method: POST
-URL: /api/clubprofile/form
+URL: /api/clubprofile/submit
 DATA:{
     ClubName:
     ShezhangName:
@@ -459,7 +459,7 @@ OUTPUT
 INPUT
 ```
 Method: 'POST'
-URL: api/recruit/classroom/form
+URL: api/recruit/classroom/submit
 DATA:{
     ClubId:
     ClubName:
@@ -563,7 +563,7 @@ data:{
 INPUT
 ```
 Method: 'POST'
-URL: api/index/activity/list
+URL: api/activity/list
 DATA:{
     Token:
     User: 'CD'
