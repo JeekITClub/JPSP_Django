@@ -497,6 +497,7 @@ OUTPUT
     'Access-Control-Allow-Origin': '*',
     data:[
         {
+            'ActivityId':
             'Name':
             'Region':
             'ClubId':
@@ -509,7 +510,8 @@ OUTPUT
             'Participants'
         },
         {
-            'ActivityName':
+            'ActivityId':
+            'Name':
             'Region':
             'ClubId':
             'ClubName':

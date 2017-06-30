@@ -14,38 +14,21 @@
                 <span>{{ props.row.Process }}</span>
               </el-form-item>
             </el-col>
-            <el-col :span="24">
-              <el-form-item label="活动评价">
-                <span>{{ props.row.Assessment }}</span>
-              </el-form-item>
-            </el-col>
-            <el-col :span="24">
-              <el-form-item label="感悟分析">
-                <span>{{ props.row.Feeling }}</span>
-              </el-form-item>
-            </el-col>
           </el-row>
         </el-form>
       </template>
     </el-table-column>
-    <el-table-column prop="pk" label="PostId">
+    <el-table-column prop="ActivityId" label="活动序号">
     </el-table-column>
-    <el-table-column prop="ClubName" label="活动名称">
+    <el-table-column prop="Name" label="活动名称">
     </el-table-column>
     <el-table-column prop="ClubName" label="负责社团">
     </el-table-column>
-    <el-table-column prop="LinkmanName" label="联系人">>
+    <el-table-column prop="Date1" label="开始日期">
     </el-table-column>
-    <el-table-column prop="Date1" label="社团活动日期">
-    </el-table-column>
-    <el-table-column prop="Date2" label="社团活动时间">
+    <el-table-column prop="Date2" label="结束时间">
     </el-table-column>
     <el-table-column prop="Region" label="活动地点">
-    </el-table-column>
-    <el-table-column label="评价">
-      <template scope="scope">
-        <el-rate v-on:change="StarSubmit(scope.row.pk, scope.row.Stars)" v-model="scope.row.Stars"></el-rate>
-      </template>
     </el-table-column>
     <el-table-column label="操作">
       <template scope="scope">
@@ -74,21 +57,6 @@
       }
     },
     methods: {
-      StarSubmit (postid, star) {
-        axios({
-          method: 'POST',
-          url: 'empty',
-          data: JSON.stringify({
-            Stars: star,
-            StarTime: '',
-            // TODO: star_time
-            PostId: postid,
-            // TODO: PostId
-            Token: '',
-            User: this.user
-          }.bind(this))
-        })
-      },
       HandleDeleteSubmit (postid) {
         axios({
           method: 'POST',
