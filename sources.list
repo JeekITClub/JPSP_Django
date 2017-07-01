@@ -1,13 +1,10 @@
-deb http://cn.archive.ubuntu.com/ubuntu/ xenial main restricted universe multiverse
-deb http://cn.archive.ubuntu.com/ubuntu/ xenial-security main restricted universe multiverse
-deb http://cn.archive.ubuntu.com/ubuntu/ xenial-updates main restricted universe multiverse
-deb http://cn.archive.ubuntu.com/ubuntu/ xenial-backports main restricted universe multiverse
-##测试版源
-deb http://cn.archive.ubuntu.com/ubuntu/ xenial-proposed main restricted universe multiverse
-# 源码
-deb-src http://cn.archive.ubuntu.com/ubuntu/ xenial main restricted universe multiverse
-deb-src http://cn.archive.ubuntu.com/ubuntu/ xenial-security main restricted universe multiverse
-deb-src http://cn.archive.ubuntu.com/ubuntu/ xenial-updates main restricted universe multiverse
-deb-src http://cn.archive.ubuntu.com/ubuntu/ xenial-backports main restricted universe multiverse
-##测试版源
-deb-src http://cn.archive.ubuntu.com/ubuntu/ xenial-proposed main restricted universe multiverse
+deb http://debian.ustc.edu.cn/ubuntu/ xenial main multiverse restricted universe
+deb http://debian.ustc.edu.cn/ubuntu/ xenial-backports main multiverse restricted universe
+deb http://debian.ustc.edu.cn/ubuntu/ xenial-proposed main multiverse restricted universe
+deb http://debian.ustc.edu.cn/ubuntu/ xenial-security main multiverse restricted universe
+deb http://debian.ustc.edu.cn/ubuntu/ xenial-updates main multiverse restricted universe
+deb-src http://debian.ustc.edu.cn/ubuntu/ xenial main multiverse restricted universe
+deb-src http://debian.ustc.edu.cn/ubuntu/ xenial-backports main multiverse restricted universe
+deb-src http://debian.ustc.edu.cn/ubuntu/ xenial-proposed main multiverse restricted universe
+deb-src http://debian.ustc.edu.cn/ubuntu/ xenial-security main multiverse restricted universe
+deb-src http://debian.ustc.edu.cn/ubuntu/ xenial-updates main multiverse restricted universe
