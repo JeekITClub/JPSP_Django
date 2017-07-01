@@ -12,14 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM ubuntu:16.04
+FROM ubuntu:17.04
 
 MAINTAINER Dockerfiles<qiushimao@hotmail.com>
 
 # Install required packages and remove the apt packages cache when done.
 
 RUN apt-get update && \
-    apt-get upgrade -y && \
     apt-get install -y \
 	git \
 	python3 \
