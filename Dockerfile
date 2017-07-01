@@ -18,8 +18,7 @@ MAINTAINER Dockerfiles<qiushimao@hotmail.com>
 
 # Install required packages and remove the apt packages cache when done.
 
-RUN apt-get update && \
-    apt-get upgrade -y && \
+RUN apt-get upgrade -y && \
     apt-get install -y \
 	git \
 	python3 \
