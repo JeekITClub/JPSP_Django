@@ -12,13 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM ubuntu:17.04
+FROM ubuntu:16.04
 
-MAINTAINER Dockerfiles<qiushimao@hotmail.com>
+MAINTAINER Dockerfiles
+
+RUN cp /etc/apt/sources.list /etc/apt/sources.list_backup
+
+COPY sources.list /etc/apt/sources.list
 
 # Install required packages and remove the apt packages cache when done.
 
 RUN apt-get update && \
+    apt-get upgrade -y && \ 	
     apt-get install -y \
 	git \
 	python3 \
@@ -26,7 +31,6 @@ RUN apt-get update && \
 	python3-setuptools \
 	python3-pip \
 	nginx \
-	curl \
 	supervisor \
 	sqlite3 && \
 	pip3 install -U pip setuptools && \
@@ -34,22 +38,20 @@ RUN apt-get update && \
 
 # install uwsgi now because it takes a little while
 RUN pip3 install uwsgi
-RUN pip3 install django
-RUN pip3 install django-cors-headers
+
 # setup all the configfiles
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
-
 COPY nginx-app.conf /etc/nginx/sites-available/default
 COPY supervisor-app.conf /etc/supervisor/conf.d/
-COPY . /home/docker/jpsp/
-RUN curl http://npmjs.org/install.sh | sh
-RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
-RUN cd /home/docker/jpsp/jpsp/frontend
-RUN cnpm install
-RUN npm build
-RUN python3 /home/docker/jpsp/jpsp/manage.py collectstatic
+
 # COPY requirements.txt and RUN pip install BEFORE adding the rest of your code, this will cause Docker's caching mechanism
 # to prevent re-installing (all your) dependencies when you made a change a line or two in your app.
+
+COPY app/requirements.txt /home/docker/code/app/
+RUN pip3 install -r /home/docker/code/jpsp/requirements.txt
+
+# add (the rest of) our code
+COPY . /home/docker/code/
 
 # install django, normally you would remove this step because your project would already
 # be installed in the code/app/ directory
