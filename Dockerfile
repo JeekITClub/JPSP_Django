@@ -31,6 +31,7 @@ RUN apt-get update && \
 	python3-setuptools \
 	python3-pip \
 	nginx \
+	curl \
 	supervisor \
 	sqlite3 && \
 	pip3 install -U pip setuptools && \
@@ -52,7 +53,11 @@ RUN pip3 install -r /home/docker/code/jpsp/requirements.txt
 
 # add (the rest of) our code
 COPY . /home/docker/code/
-
+RUN  curl http://npmjs.org/install.sh | sh
+RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
+RUN cd /home/docker/jpsp/jpsp/frontend
+RUN cnpm install
+RUN npm build
 # install django, normally you would remove this step because your project would already
 # be installed in the code/app/ directory
 
