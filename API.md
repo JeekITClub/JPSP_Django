@@ -477,6 +477,44 @@ OUTPUT
 }
 ```
 
+### RecruitClassroomList
+INPUT
+```
+Method: POST
+URL: /api/recruit/classroom/list
+DATA:{
+    Token:
+    User: 'Club'
+    Type: ('Confirmed' or 'Unconfirmed' or 'Denied' or 'All')
+}
+```
+OUTPUT
+```
+'message': ('success' or 'error'),
+'Access-Control-Allow-Origin': '*',
+data:[
+    {
+        'pk':
+        'ClubName'
+        'LinkmanName'
+        'Date1'
+        'Date2'
+        'Classroom'
+        'State':('0' or '1' '2') # 0为未处理，1为被拒绝，2为已确认并分配教室
+    },
+    {
+        'pk':
+        'ClubName'
+        'LinkmanName'
+        'Date1'
+        'Date2'
+        'Classroom'
+        'State':('0' or '1' '2') # 0为未处理，1为被拒绝，2为已确认并分配教室
+    }
+]
+```
+
+
 ## ADMIN_CD
 
 ### ActivityList
@@ -549,16 +587,33 @@ URL: /api/recruit/classroom/list
 DATA:{
     Token:
     User: 'CD'
-    Type: ('Confirmed' or 'Unconfirmed')
+    Type: ('Confirmed' or 'Unconfirmed' or 'Denied' or 'All')
 }
 ```
 OUTPUT
 ```
 'message': ('success' or 'error'),
 'Access-Control-Allow-Origin': '*',
-data:{
-
-}
+data:[
+    {
+        'pk':
+        'ClubName'
+        'LinkmanName'
+        'Date1'
+        'Date2'
+        'Classroom'
+        'State':('0' or '1' '2') # 0为未处理，1为被拒绝，2为已确认并分配教室
+    },
+    {
+        'pk':
+        'ClubName'
+        'LinkmanName'
+        'Date1'
+        'Date2'
+        'Classroom'
+        'State':('0' or '1' '2') # 0为未处理，1为被拒绝，2为已确认并分配教室
+    }
+]
 ```
 
 ### PostList
