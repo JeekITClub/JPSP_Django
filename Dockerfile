@@ -53,11 +53,6 @@ RUN pip3 install -r /home/docker/code/jpsp/requirements.txt
 
 # add (the rest of) our code
 COPY . /home/docker/code/
-RUN apt-get install nodejs
-RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
-RUN cd /home/docker/jpsp/jpsp/frontend
-RUN cnpm install
-RUN npm build
 # install django, normally you would remove this step because your project would already
 # be installed in the code/app/ directory
 
