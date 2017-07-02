@@ -53,7 +53,8 @@ RUN pip3 install -r /home/docker/code/jpsp/requirements.txt
 
 # add (the rest of) our code
 COPY . /home/docker/code/
-RUN  curl http://npmjs.org/install.sh | sh
+RUN apt install nodejs
+RUN apt all npm
 RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
 RUN cd /home/docker/jpsp/jpsp/frontend
 RUN cnpm install
