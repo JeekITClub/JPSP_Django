@@ -7,7 +7,7 @@
       <el-tab-pane label="已审核" name="Confirmd">
         <cd_activity_list type="Confirmed" user="CD"></cd_activity_list>
       </el-tab-pane>
-      <el-tab-pane label="未通过" name="Unpassed">
+      <el-tab-pane label="未通过" name="Denied">
         <cd_activity_list type="Unpassed" user="CD"></cd_activity_list>
       </el-tab-pane>
       <el-tab-pane label="所有" name="All">
@@ -26,7 +26,7 @@
     },
     data () {
       return {
-        TabsValue: 'Unconfirmed'
+        TabsValue: 'All'
       }
     }
   }

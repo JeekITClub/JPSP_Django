@@ -188,6 +188,7 @@ def recruit_classroom_operate(request):
             'Access-Control-Allow-Origin': '*'
         })
 
+
 @require_http_methods(['POST'])
 def recruit_classroom_list(request):
     pass
@@ -255,15 +256,37 @@ def activity_operate(request):
         body = json.loads(request.body)
         token = body['token']
         activity_id = body['ActivityId']
-        try:
-            activity_object = Activity.objects.get(pk=activity_id)
-            activity_object.state = '1'
-            activity_object.save()
-        except:
-            return JsonResponse({
-                'message': 'error',
-                'Access-Control-Allow-Origin': '*'
-            })
+        operation = body['Operation']
+        if operation == 'Confirm':
+            try:
+                activity_object = Activity.objects.get(pk=activity_id)
+                activity_object.State = 'Confirmed'
+                activity_object.save()
+            except:
+                return JsonResponse({
+                    'message': 'error',
+                    'Access-Control-Allow-Origin': '*'
+                })
+        elif operation == 'UndoDeny':
+            try:
+                activity_object = Activity.objects.get(pk=activity_id)
+                activity_object.State = 'Unconfirmed'
+                activity_object.save()
+            except:
+                return JsonResponse({
+                    'message': 'error',
+                    'Access-Control-Allow-Origin': '*'
+                })
+        elif operation == 'Deny':
+            try:
+                activity_object = Activity.objects.get(pk=activity_id)
+                activity_object.State = 'Denied'
+                activity_object.save()
+            except:
+                return JsonResponse({
+                    'message': 'error',
+                    'Access-Control-Allow-Origin': '*'
+                })
     except:
         return JsonResponse({
             'message': 'error',
@@ -287,17 +310,19 @@ def activity_list(request):
             activityList = Activity.objects.all()
         elif type == 'Future':
             activityList = Activity.objects.all()
-        elif type == 'Denied':
-            activityList = Activity.objects.all()
+        elif type == 'Unconfirmed':
+            activityList = Activity.objects.filter(State='Unconfirmed')
         elif type == 'Confirmed':
-            activityList = Activity.objects.all()
+            activityList = Activity.objects.filter(State='Confirmed')
+        elif type == 'Denied':
+            activityList = Activity.objects.filter(State='Denied')
         # TODO : token authenticate
         for data in activityList:
             response.append({
                 'ActivityId': data.pk,
-                'ActivityName': data.ActivityName,
+                'Name': data.Name,
                 'Region': data.Region,
-                'ClubId': data.ClubId,
+                # 'ClubId': data.ClubId,
                 'ClubName': data.ClubName,
                 'Content': data.Content,
                 'Date1': str(data.Date1),
@@ -748,6 +773,7 @@ def club_page(request):
 @require_http_methods(["POST"])
 def club_page_setting(request):
     pass
+
 
 @require_http_methods(["POST"])
 def message_list(request):

@@ -21,7 +21,7 @@
     },
     data () {
       return {
-        TabsValue: 'Future'
+        TabsValue: 'Now'
       }
     },
     methods: {}

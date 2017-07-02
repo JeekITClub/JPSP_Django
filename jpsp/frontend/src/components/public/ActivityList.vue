@@ -14,6 +14,11 @@
                 <span>{{ props.row.Process }}</span>
               </el-form-item>
             </el-col>
+            <el-col :span="24">
+              <el-form-item label="活动地点">
+                <span>{{ props.row.Region }}</span>
+              </el-form-item>
+            </el-col>
           </el-row>
         </el-form>
       </template>
@@ -28,7 +33,12 @@
     </el-table-column>
     <el-table-column prop="Date2" label="结束时间">
     </el-table-column>
-    <el-table-column prop="Region" label="活动地点">
+    <el-table-column prop="State" label="状态">
+      <template scope="scope">
+        <span v-if="scope.row.State === '0'">未确认</span>
+        <span v-if="scope.row.State === '1'" style="color: green">已确认</span>
+        <span v-if="scope.row.State === '2'" style="color: red">被拒绝</span>
+      </template>
     </el-table-column>
     <el-table-column label="操作" v-if="user === 'Student'">
       <template scope="scope">
@@ -58,7 +68,7 @@
         </el-button>
       </template>
     </el-table-column>
-    <el-table-column label="操作" v-if="user === 'CD' && type != 'Unpassed' ">
+    <el-table-column label="操作" v-if="user === 'CD' && type != 'Denied' ">
       <template scope="scope">
         <el-button size="small" type="danger" @click="UndoDenySubmit(scope.row.pk)">
           撤销拒绝
@@ -173,7 +183,8 @@
           url: '',
           data: JSON.stringify({
             ActivityId: ActivityId,
-            Token: this.GetToken
+            Token: this.GetToken,
+            Operation: 'Confirm'
           }.bind(this))
         })
       }
@@ -195,14 +206,14 @@
     mounted: function () {
       axios({
         method: 'POST',
-        url: 'http://127.0.0.1:8000/api/cd/post/list',
+        url: 'http://127.0.0.1:8000/api/activity/list',
         data: JSON.stringify({
           Type: this.type,
           Token: this.GetToken
         })
       }).then(function (response) {
         if (response.data.message === 'success') {
-          this.PostListTable = JSON.parse(response.data.data)
+          this.ActivityListTable = JSON.parse(response.data.data)
         } else {
           this.$notify.error({
             title: '错误',

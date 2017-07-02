@@ -14,14 +14,12 @@ class Settings(models.Model):
 class UserProfile(models.Model):
     UserObject = models.ForeignKey(User, default=None)
     UserName = models.CharField(max_length=12, default=None)
-    Grade = models.IntegerField()
     Class = models.IntegerField()
+    Grade = models.IntegerField()
     AttendYear = models.CharField(max_length=4, default="2016")
-    Lftlip = models.TextField(default="")
     QQ = models.CharField(max_length=12, default=None)
     Phone = models.CharField(max_length=12, default=None)
     Email = models.EmailField()
-    # lftlip ->last_five_loginin_time
 
 
 class CDUser(models.Model):
@@ -105,9 +103,9 @@ class Token(models.Model):
 
 
 class Activity(models.Model):
-    ActivityName = models.CharField(max_length=30, default="活动名称")
+    Name = models.CharField(max_length=30, default="活动名称")
     Region = models.CharField(max_length=30, default="活动地点")
-    ClubId = models.ForeignKey(Club)
+    # ClubId = models.ForeignKey(Club)
     ClubName = models.CharField(max_length=30, default="社团")
     Content = models.TextField(default="活动内容")
     Date1 = models.DateTimeField()
@@ -115,8 +113,8 @@ class Activity(models.Model):
     Date2 = models.DateTimeField()
     # Date2 is end datetime
     state_choices = (
-        ('0', 'Draft'),
-        ('1', 'Accepted'),
+        ('0', 'Unconfirmed'),
+        ('1', 'Confirmed'),
         ('2', 'Denied')
     )
     State = models.CharField(max_length=1, choices=state_choices, default='0')
@@ -126,7 +124,7 @@ class Activity(models.Model):
         ('2', '销售'),
     )
     Type = models.TextField(default='0', choices=type_choices)
-    Participants = models.ManyToManyField(UserProfile)
+    Participants = models.ManyToManyField(UserProfile,default=None)
 
 
 class Classroom(models.Model):

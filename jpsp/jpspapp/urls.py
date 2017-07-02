@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^post/operate', views.post_operate),
     url(r'^post/star', views.post_star),
     url(r'^post/submit', views.post_submit),
+    url(r'^activity/list', views.activity_list),
     url(r'^clubprofile/submit', views.clubprofile_submit),
     url(r'^clubprofile/get', views.clubprofile_get),
     url(r'^recruit/classroom/submit', views.recruit_classroom_apply),
