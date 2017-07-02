@@ -188,6 +188,10 @@ def recruit_classroom_operate(request):
             'Access-Control-Allow-Origin': '*'
         })
 
+@require_http_methods(['POST'])
+def recruit_classroom_list(request):
+    pass
+
 
 @require_http_methods(['POST'])
 def club_member_operate(request):
