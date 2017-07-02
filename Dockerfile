@@ -49,7 +49,9 @@ COPY supervisor-app.conf /etc/supervisor/conf.d/
 # to prevent re-installing (all your) dependencies when you made a change a line or two in your app.
 
 COPY jpsp/requirements.txt /home/docker/code/jpsp/
-RUN pip3 install -r /home/docker/code/jpsp/requirements.txt
+RUN pip3 install django
+RUN pip3 install django-cors-headers
+# RUN pip3 install -r /home/docker/code/jpsp/requirements.txt
 
 # add (the rest of) our code
 COPY . /home/docker/code/
