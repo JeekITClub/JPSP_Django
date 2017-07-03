@@ -9,7 +9,6 @@ import ClubPost from '@/pages/index/ClubPost.vue'
 import ClubPostList from '@/pages/index/ClubPostList.vue'
 import ProfileEdit from '@/pages/index/ProfileEdit.vue'
 import ActivityList from '../pages/index/ActiviytList.vue'
-import RecruitClassroomList from '../pages/index/RecruitClassroomList.vue'
 // import LostAndFound from '../pages/index/LostAndFound.vue'
 export default new Router({
   routes: [
@@ -47,11 +46,6 @@ export default new Router({
       path: '/profile',
       name: 'ProfileEdit',
       component: ProfileEdit
-    },
-    {
-      path: '/rlist',
-      name: 'RecruitClassroomList',
-      component: RecruitClassroomList
     }
   ]
 })
