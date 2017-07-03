@@ -17,7 +17,7 @@
     </el-table-column>
     <el-table-column v-if="user === 'CD' && type ==='Denied'" label="操作">
       <template scope="scope">
-        <el-button size="small" type="success" @click="UndoDenyRequest(scope.row.pk">撤销拒绝活动</el-button>
+        <el-button size="small" type="success" @click="UndoDenyRequest(scope.row.pk)">撤销拒绝活动</el-button>
       </template>
     </el-table-column>
     <el-table-column v-if="user === 'CD' && type ===' Unconfirmed' " label="操作">
