@@ -305,17 +305,17 @@ def activity_list(request):
         if type == 'All':
             activityList = Activity.objects.all()
         elif type == 'Past':
-            activityList = Activity.objects.all()
+            activityList = Activity.objects.filter(Date2__lt=datetime.datetime.now())
         elif type == 'Happening':
-            activityList = Activity.objects.all()
+            activityList = Activity.objects.filter(Date1__lte=datetime.datetime.now()).filter(Date2__gte=datetime.datetime.now())
         elif type == 'Future':
-            activityList = Activity.objects.all()
+            activityList = Activity.objects.filter(Date1__gt=datetime.datetime.now())
         elif type == 'Unconfirmed':
-            activityList = Activity.objects.filter(State='Unconfirmed')
+            activityList = Activity.objects.filter(State='0')
         elif type == 'Confirmed':
-            activityList = Activity.objects.filter(State='Confirmed')
+            activityList = Activity.objects.filter(State='1')
         elif type == 'Denied':
-            activityList = Activity.objects.filter(State='Denied')
+            activityList = Activity.objects.filter(State='2')
         # TODO : token authenticate
         for data in activityList:
             response.append({
@@ -778,3 +778,8 @@ def club_page_setting(request):
 @require_http_methods(["POST"])
 def message_list(request):
     pass
+
+def test(request):
+    activityList = Activity.objects.filter(Date1__lt=datetime.datetime.now())
+    for activity in activityList:
+        return JsonResponse({'message': str(activity.Date1)})

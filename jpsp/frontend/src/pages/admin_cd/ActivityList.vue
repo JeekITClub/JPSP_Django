@@ -8,10 +8,19 @@
         <cd_activity_list type="Confirmed" user="CD"></cd_activity_list>
       </el-tab-pane>
       <el-tab-pane label="未通过" name="Denied">
-        <cd_activity_list type="Unpassed" user="CD"></cd_activity_list>
+        <cd_activity_list type="Denied" user="CD"></cd_activity_list>
       </el-tab-pane>
       <el-tab-pane label="所有" name="All">
         <cd_activity_list type="All" user="CD"></cd_activity_list>
+      </el-tab-pane>
+      <el-tab-pane label="过期" name="Past">
+        <cd_activity_list type="Past" user="CD"></cd_activity_list>
+      </el-tab-pane>
+      <el-tab-pane label="进行中" name="Happening">
+        <cd_activity_list type="Happening" user="CD"></cd_activity_list>
+      </el-tab-pane>
+      <el-tab-pane label="未来" name="Future">
+        <cd_activity_list type="Future" user="CD"></cd_activity_list>
       </el-tab-pane>
     </el-tabs>
   </div>
