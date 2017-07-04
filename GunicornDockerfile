@@ -34,7 +34,7 @@ RUN apt-get update && \
 	pip3 install -U pip setuptools && \
    rm -rf /var/lib/apt/lists/*
 
-RUN pip install -i http://pypi.douban.com/simple/ django
+RUN pip3 install -i http://pypi.douban.com/simple/ django
 # COPY requirements.txt and RUN pip install BEFORE adding the rest of your code, this will cause Docker's caching mechanism
 # to prevent re-installing (all your) dependencies when you made a change a line or two in your app.
 
