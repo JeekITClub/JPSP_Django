@@ -1,28 +1,28 @@
 <template>
-<div class="main">
-<h1>学生登录</h1>
-<div class="login-form">
-	<div class="close"> </div>
-		<div class="head-info">
-			<label class="lbl-1"> </label>
-			<label class="lbl-2"> </label>
-			<label class="lbl-3"> </label>
-		</div>
-			<div class="clear"> </div>
-	<div class="avtar">
-		<img src="../../assets/index/images/avtar.png" />
-	</div>
-		<el-form>
-			<el-form-item label="学号">
-				<el-input type="text" v-model="LoginForm.UserId"></el-input>
-			</el-form-item>
-			<el-form-item label="密码">
-				<el-input type="password" v-model="LoginForm.Password"></el-input>
-			</el-form-item>
-			<el-button type="primary" @click="onSubmit">登陆</el-button>
-		</el-form>
-</div>
-</div>
+  <div class="main">
+    <h1>学生登录</h1>
+    <div class="login-form">
+      <div class="close"></div>
+      <div class="head-info">
+        <label class="lbl-1"> </label>
+        <label class="lbl-2"> </label>
+        <label class="lbl-3"> </label>
+      </div>
+      <div class="clear"></div>
+      <div class="avtar">
+        <img src="../../assets/index/images/avtar.png"/>
+      </div>
+      <el-form>
+        <el-form-item label="学号">
+          <el-input type="text" v-model="LoginForm.UserId"></el-input>
+        </el-form-item>
+        <el-form-item label="密码">
+          <el-input type="password" v-model="LoginForm.Password"></el-input>
+        </el-form-item>
+        <el-button type="primary" @click="onSubmit">登陆</el-button>
+      </el-form>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -40,7 +40,7 @@
       onSubmit () {
         axios({
           method: 'POST',
-          url: 'http://127.0.0.1/api/login',
+          url: 'http://127.0.0.1:8000/api/login',
           data: {
             UserId: this.LoginForm.UserId,
             Password: this.LoginForm.Password,

@@ -104,9 +104,12 @@
             Token: this.GetToken
           })
         }).then(function (response) {
-          // TODO: Actions after success
           if (response.data.message === 'success') {
-            console.log('success')
+            this.$notify({
+              title: '成功',
+              message: '成功创建社团'
+              type: 'success'
+            })
           }
           if (response.data.message === 'error') {
             console.log('error')
