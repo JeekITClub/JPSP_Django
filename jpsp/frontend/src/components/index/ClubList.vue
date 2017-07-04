@@ -1,4 +1,28 @@
 <template>
+  <div>
+   <el-table
+      :data="ClubListTable"
+      style="width: 100%">
+      <el-table-column
+        prop="ClubId"
+        label="社团ID"
+        width="300">
+      </el-table-column>
+      <el-table-column
+        prop="ClubName"
+        label="社团名称"
+        width="300">
+        <template scope="scope">
+        <router-link :to="{ name: 'ClubIndex', params: { ClubId: scope.row.ClubId }}">{{ scope.row.ClubName }}</router-link>
+          </template>
+      </el-table-column>
+      <el-table-column
+        prop="ShezhangName"
+        label="现任社长">
+      </el-table-column>
+    </el-table>
+    <br>
+  </div>
 </template>
 
 <script>
