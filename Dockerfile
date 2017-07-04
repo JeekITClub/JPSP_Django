@@ -46,4 +46,4 @@ COPY . /home/docker/code/
 
 EXPOSE 80
 RUN python3 /home/docker/code/jpsp/manage.py runserver 80
-CMD [“/bin/echo”, “this is a echo test ”]
+CMD ['/bin/echo', 'ad']
