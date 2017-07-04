@@ -35,8 +35,8 @@
     </el-table-column>
     <el-table-column prop="State" label="状态">
       <template scope="scope">
-        <span v-if="scope.row.State === '0'">未确认</span>
-        <span v-if="scope.row.State === '1'" style="color: green">已确认</span>
+        <span v-if="scope.row.State === '0'">未审核</span>
+        <span v-if="scope.row.State === '1'" style="color: green">已审核</span>
         <span v-if="scope.row.State === '2'" style="color: red">被拒绝</span>
       </template>
     </el-table-column>
@@ -63,14 +63,14 @@
     </el-table-column>
     <el-table-column label="操作" v-if="user === 'CD' && type == 'Unconfirmed' ">
       <template scope="scope">
-        <el-button size="small" type="danger" @click="ConfirmSubmit(scope.row.pk)">
+        <el-button size="small" type="success" @click="ConfirmSubmit(scope.row.pk)">
           同意
         </el-button>
       </template>
     </el-table-column>
-    <el-table-column label="操作" v-if="user === 'CD' && type != 'Denied' ">
+    <el-table-column label="操作" v-if="user === 'CD' && type != 'Denied' && type !='Unconfirmed'">
       <template scope="scope">
-        <el-button size="small" type="danger" @click="UndoDenySubmit(scope.row.pk)">
+        <el-button size="small" type="success" @click="UndoDenySubmit(scope.row.pk)">
           撤销拒绝
         </el-button>
       </template>
@@ -103,7 +103,7 @@
             ActivityId: ActivityId,
             Token: this.GetToken,
             Operation: 'Deny'
-          }.bind(this))
+          })
         }).then(function (response) {
           if (response.data.message === 'success') {
             this.$notify({
@@ -180,12 +180,12 @@
       ConfirmSubmit (ActivityId) {
         axios({
           method: 'POST',
-          url: '',
+          url: 'http://127.0.0.1:8000/api/activity/operate',
           data: JSON.stringify({
             ActivityId: ActivityId,
             Token: this.GetToken,
             Operation: 'Confirm'
-          }.bind(this))
+          })
         })
       }
     },
