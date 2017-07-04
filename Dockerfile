@@ -45,5 +45,4 @@ RUN pip3 install gunicorn
 COPY . /home/docker/code/
 
 EXPOSE 80
-RUN python3 /home/docker/code/jpsp/manage.py runserver 80
-CMD ['/bin/echo', 'ad']
+CMD ['python3', '/home/docker/code/jpsp/manage.py','runserver','80']
