@@ -1,4 +1,4 @@
-# Copyright 2013 Thatcher Peskens
+# Copyright 2014 Thatcher Peskens
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ COPY sources.list /etc/apt/sources.list
 # Install required packages and remove the apt packages cache when done.
 
 RUN apt-get update && \
-    apt-get upgrade -y && \ 	
+    apt-get upgrade -y && \
     apt-get install -y \
 	git \
 	python3 \
