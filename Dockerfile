@@ -30,33 +30,20 @@ RUN apt-get update && \
 	python3-dev \
 	python3-setuptools \
 	python3-pip \
-	nginx \
-	curl \
-	supervisor \
 	sqlite3 && \
 	pip3 install -U pip setuptools && \
    rm -rf /var/lib/apt/lists/*
 
-# install uwsgi now because it takes a little while
-RUN pip3 install uwsgi
-
-# setup all the configfiles
-RUN echo "daemon off;" >> /etc/nginx/nginx.conf
-COPY nginx-app.conf /etc/nginx/sites-available/default
-COPY supervisor-app.conf /etc/supervisor/conf.d/
-
+RUN pip3 install django
 # COPY requirements.txt and RUN pip install BEFORE adding the rest of your code, this will cause Docker's caching mechanism
 # to prevent re-installing (all your) dependencies when you made a change a line or two in your app.
 
 COPY jpsp/requirements.txt /home/docker/code/jpsp/
 RUN pip3 install django-cors-headers
-RUN pip3 install django
-# RUN pip3 install -r /home/docker/code/jpsp/requirements.txt
-
+RUN pip3 install gunicorn
 # add (the rest of) our code
 COPY . /home/docker/code/
-# install django, normally you would remove this step because your project would already
-# be installed in the code/app/ directory
 
 EXPOSE 80
-CMD ["supervisord", "-n"]
+RUN python3 /home/docker/code/jpsp/manage.py runserver 80
+CMD [“/bin/echo”, “this is a echo test ”]
