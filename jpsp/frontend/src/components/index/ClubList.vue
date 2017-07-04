@@ -13,7 +13,7 @@
         label="社团名称"
         width="300">
         <template scope="scope">
-        <router-link :to="{ name: 'ClubIndex', params: { ClubId: scope.row.ClubId }}">{{ scope.row.ClubName }}</router-link>
+        <router-link :to="{ name: 'ClubIndex', params: { ClubId:scope.row.ClubId, Club: scope.row }}">{{ scope.row.ClubName }}</router-link>
           </template>
       </el-table-column>
       <el-table-column
@@ -30,7 +30,13 @@
   export default {
     data () {
       return {
-        ClubListTable: []
+        ClubListTable: [
+          {
+            ClubId: '001',
+            ClubName: 'Jeek',
+            ShezhangName: 'Ncj'
+          }
+        ]
       }
     },
     mounted: function () {

@@ -1,24 +1,29 @@
 <template>
 <div>
-
+  <h1>这是{{ Club.ClubName }}社的主页</h1>
 </div>
 </template>
 <script>
+  // TODO: data will disappear after F5
   export default {
     data () {
       return {
+        Club: this.$route.params.Club
       }
     },
-    methods: {
+    computed: {
+      Authenticate () {
+        return this.$store.state.Authenticated
+      },
+      GetUserName () {
+        return this.$store.state.UserName
+      },
+      GetToken () {
+        return this.$store.state.Token
+      }
     }
   }
 </script>
 <style scoped>
   @import url("//unpkg.com/element-ui@1.3.2/lib/theme-default/index.css");
-  @import '../../assets/index/css/animate.css';
-  @import '../../assets/index/css/icomoon.css';
-  @import '../../assets/index/css/bootstrap.css';
-  @import '../../assets/index/css/magnific-popup.css';
-  @import '../../assets/index/css/flexslider.css';
-  @import '../../assets/index/css/style.css';
 </style>
