@@ -44,4 +44,5 @@ RUN pip3 install gunicorn
 COPY . /home/docker/code/
 
 EXPOSE 80
-RUN gunicorn /home/docker/code/jpsp/jpsp.wsgi:application
+RUN cd /home/docker/code/jpsp/
+RUN gunicorn jpsp.wsgi:application
