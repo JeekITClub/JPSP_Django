@@ -39,9 +39,9 @@ RUN apt-get update && \
 
 COPY jpsp/requirements.txt /home/docker/code/jpsp/
 RUN pip3 install django-cors-headers
-RUN pip3 install guicorn
+RUN pip3 install gunicorn
 # add (the rest of) our code
 COPY . /home/docker/code/
 
 EXPOSE 80
-CMD['guicorn','/home/docker/code/jpsp/jpsp/jpsp.wsgi']
+CMD['gunicorn /home/docker/code/jpsp/jpsp/jpsp.wsgi']
