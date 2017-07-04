@@ -45,4 +45,4 @@ COPY . /home/docker/code/
 
 EXPOSE 80
 RUN cd /home/docker/code/jpsp/
-RUN gunicorn jpsp.wsgi:application
+RUN python3 manage.py runserver 80
