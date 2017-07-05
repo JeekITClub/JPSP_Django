@@ -13,7 +13,7 @@
                 <li class="active"><a href="">首页</a></li>
                 <li class="has-dropdown"><a href="">社团</a>
                   <ul class="dropdown">
-                    <li><router-link to="/club/list">社团列表</router-link></li>
+                    <li><router-link to="/clublist">社团列表</router-link></li>
                     <li><router-link to="/club/event">社团动态</router-link></li>
                   </ul>
                 </li>
@@ -27,6 +27,7 @@
                   <router-link to="/lost">失物招领</router-link>
                 </li>
                 <li><a href="about.html">关于</a></li>
+                <li v-if="Authenticate===true">欢迎，{{ GetUserName }}</li>
                 <li class="btn-cta" v-if="Authenticate===false || Authenticate===null"><a href="#"><span>登录</span></a>
                 </li>
                 <li class="btn-cta" v-else><a href="#"><span>注销</span></a></li>
@@ -47,6 +48,9 @@
     computed: {
       Authenticate () {
         return this.$store.state.Authenticated
+      },
+      GetUserName () {
+        return this.$store.state.UserName
       }
     }
   }

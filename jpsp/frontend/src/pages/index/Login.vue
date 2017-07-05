@@ -41,11 +41,11 @@
         axios({
           method: 'POST',
           url: 'http://127.0.0.1:8000/api/login',
-          data: {
-            UserId: this.LoginForm.UserId,
+          data: JSON.stringify({
+            UserName: this.LoginForm.UserId,
             Password: this.LoginForm.Password,
             UserType: 'Student'
-          }
+          })
         })
           .then(function (response) {
             if (response.data.message === 'User Authenticated') {
@@ -53,7 +53,7 @@
               this.$store.commit('ApplyUserName', response.data.UserName)
               this.$store.commit('ApplyToken', response.data.Token)
             } else if (response.data.message === 'User Not Authenticated') {
-              console.log('Failed')
+              console.log('Login Failed')
             }
           }.bind(this))
           .catch(function (error) {
