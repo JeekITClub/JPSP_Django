@@ -27,11 +27,6 @@ export default new Router({
       component: ClubIndex
     },
     {
-      path: '/post',
-      name: 'PostList',
-      component: PostList
-    },
-    {
       path: '/activity',
       name: 'ActivityList',
       component: ActivityList

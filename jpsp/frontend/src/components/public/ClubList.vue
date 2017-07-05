@@ -33,7 +33,7 @@
       prop="ClubName"
       label="社团名称">
       <template scope="scope">
-        <router-link :to="{ name: 'ClubIndex', params: { ClubId:scope.row.ClubId, Club: scope.row }}">
+        <router-link :to="{ name: 'ClubIndex', params: { ClubId:scope.row.ClubId }}">
           {{ scope.row.ClubName }}
         </router-link>
       </template>
@@ -53,7 +53,12 @@
   export default {
     data () {
       return {
-        ClubListTable: []
+        ClubListTable: [
+          {
+            'ClubId': '12',
+            'ClubName': '233'
+          }
+        ]
       }
     },
     props: {

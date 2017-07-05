@@ -1,14 +1,14 @@
 <template>
-<div>
-  <h1>这是{{ Club.ClubName }}社的主页</h1>
-</div>
+  <div>
+    <h1>这是{{ ClubId }}社的主页</h1>
+  </div>
 </template>
 <script>
   // TODO: data will disappear after F5
   export default {
     data () {
       return {
-        Club: this.$route.params.Club
+        ClubId: this.$route.params.ClubId
       }
     },
     computed: {
