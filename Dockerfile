@@ -60,5 +60,5 @@ COPY . /home/docker/code/
 
 EXPOSE 80
 EXPOSE 8001
-RUN supervisord -c /etc/supervisor-app.conf
-CMD supervisorctl start app-uwsgi
+RUN supervisord -c /etc/supervisor/conf.d/supervisor-app.conf
+CMD supervisorctl start app-uwsgis
