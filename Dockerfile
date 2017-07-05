@@ -60,4 +60,4 @@ COPY . /home/docker/code/
 
 EXPOSE 80
 EXPOSE 8001
-CMD supervisord -h
+CMD supervisorctl -c /etc/supervisor/conf.d/supervisor-app.conf
