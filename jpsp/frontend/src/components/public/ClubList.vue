@@ -29,6 +29,16 @@
       </template>
     </el-table-column>
     <el-table-column prop="ClubId" label="社团Id"></el-table-column>
+    <el-table-column
+      prop="ClubName"
+      label="社团名称"
+      width="300">
+      <template scope="scope">
+        <router-link :to="{ name: 'ClubIndex', params: { ClubId:scope.row.ClubId, Club: scope.row }}">
+          {{ scope.row.ClubName }}
+        </router-link>
+      </template>
+    </el-table-column>
     <el-table-column prop="ShezhangName" label="社长姓名"></el-table-column>
     <el-table-column prop="ShezhangGrade" label="社长年级"></el-table-column>
     <el-table-column prop="ShezhangClass" label="社长班级"></el-table-column>
@@ -45,6 +55,14 @@
     data () {
       return {
         ClubListTable: []
+      }
+    },
+    props: {
+      user: {
+        'default': 'Student'
+      },
+      type: {
+        'default': 'Established'
       }
     },
     mounted: function () {

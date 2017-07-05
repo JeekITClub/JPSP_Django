@@ -3,13 +3,13 @@ import Router from 'vue-router'
 import index from '@/pages/admin_club/index'
 import PostEdit from '@/pages/admin_club/PostEdit'
 import ProfileEdit from '@/pages/admin_club/ProfileEdit'
-import ActivityApply from '@/pages/admin_club/ActivityApply'
 import ClubPageSettings from '@/pages/admin_club/ClubPageSettings'
 import MemberManagement from '@/pages/admin_club/MemberManagement'
 import RecruitClassroomEdit from '@/pages/admin_club/RecruitClassroomEdit'
 import RecruitMember from '@/pages/admin_club/RecruitMember.vue'
 import About from '@/pages/public/About.vue'
 import Contact from '@/pages/public/Contact.vue'
+import Establish from '@/pages/admin_club/Establish.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -30,16 +30,9 @@ export default new Router({
       component: ProfileEdit
     },
     {
-      path: '/activity',
-      name: 'Activity',
-      component: ActivityApply,
-      children: [
-        {
-          path: 'apply',
-          name: 'ActivityApply',
-          component: ActivityApply
-        }
-      ]
+      path: '/establish',
+      name: 'Establish',
+      component: Establish
     },
     {
       path: '/page',

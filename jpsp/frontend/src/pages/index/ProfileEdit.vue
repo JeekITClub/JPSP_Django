@@ -4,18 +4,18 @@
       <setting_aside></setting_aside>
     </el-col>
     <el-col :span=20>
-      <el-form ref="ProfileForm" :model="ProfileForm" labelPosition="Top">
-        <el-form-item prop="PostForm.Name" label="姓名">
+      <el-form ref="ProfileForm" :model="ProfileForm">
+        <el-form-item prop="Name" label="姓名" :required="true">
           <el-input v-model="ProfileForm.Name"></el-input>
         </el-form-item>
-        <el-form-item prop="PostForm.Grade" label="年级" :required="true">
+        <el-form-item prop="Grade" label="年级" :required="true">
           <el-select v-model="ProfileForm.Grade" value="">
             <el-option label="高一" value="1"></el-option>
             <el-option label="高二" value="2"></el-option>
             <el-option label="高三" value="3"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item prop="ProfileForm.Class" label="班级" :required="true">
+        <el-form-item prop="Class" label="班级" :required="true">
           <el-select v-model="ProfileForm.Class" value="">
             <el-option label="1" value="1"></el-option>
             <el-option label="2" value="2"></el-option>
@@ -35,14 +35,14 @@
         <el-form-item label="QQ" prop="QQ">
           <el-input v-model="ProfileForm.QQ"></el-input>
         </el-form-item>
-        <el-form-item label="Email" prop="Email">
+        <el-form-item label="电子邮箱" prop="Email">
           <el-input v-model="ProfileForm.Email"></el-input>
         </el-form-item>
-        <el-form-item label="Phone" prop="Phone">
+        <el-form-item label="手机号码" prop="Phone">
           <el-input v-model="ProfileForm.Phone"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="onSubmit">立即创建</el-button>
+          <el-button type="primary" @click="onSubmit()">更改</el-button>
           <el-button>取消</el-button>
         </el-form-item>
       </el-form>

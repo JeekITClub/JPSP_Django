@@ -6,17 +6,12 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-class Settings(models.Model):
-    name = models.CharField(max_length=10, default="settings")
-    clubid = models.IntegerField()
-
-
 class UserProfile(models.Model):
     UserObject = models.ForeignKey(User, default=None)
     UserName = models.CharField(max_length=12, default=None)
     Class = models.IntegerField()
     Grade = models.IntegerField()
-    AttendYear = models.CharField(max_length=4, default="2016")
+    AttendYear = models.CharField(max_length=4, default=None)
     QQ = models.CharField(max_length=12, default=None)
     Phone = models.CharField(max_length=12, default=None)
     Email = models.EmailField()
@@ -24,17 +19,17 @@ class UserProfile(models.Model):
 
 class CDUser(models.Model):
     user = models.ForeignKey(User)
-    username = models.CharField(max_length=30, default="社团部")
+    username = models.CharField(max_length=30, default=None)
 
 
 class Club(models.Model):
-    ClubName = models.CharField(max_length=30, default="社团")
-    # ClubObject = models.ForeignKey(User,default=User.objects.get(username=''))
+    ClubName = models.CharField(max_length=30, default=None)
+    ClubObject = models.ForeignKey(User, default=None)
     ClubId = models.CharField(max_length=4, default=None)
-    ShezhangName = models.CharField(max_length=8, default="")
-    ShezhangQq = models.CharField(max_length=20, default="")
-    ShezhangGrade = models.CharField(max_length=1, default="")
-    ShezhangClass = models.CharField(max_length=2, default="")
+    ShezhangName = models.CharField(max_length=8, default=None)
+    ShezhangQq = models.CharField(max_length=20, default=None)
+    ShezhangGrade = models.CharField(max_length=1, default=None)
+    ShezhangClass = models.CharField(max_length=2, default=None)
     # 社长的QQ
     IfRecruit = models.BooleanField()
     # 是否进行招新
@@ -42,14 +37,13 @@ class Club(models.Model):
     # 招新QQ群号
     Email = models.EmailField()
     Label = models.TextField(default="")
-    State = models.BooleanField()
+    State = models.BooleanField(default=False)
     # 该社团是否已成立
     Stars = models.IntegerField(default=0)
     Introduction = models.TextField(default="")
     # 社团介绍
     Achievements = models.TextField(default="")
-    Member = models.TextField(default="")
-    # TODO: Member many to many field?
+    Member = models.ManyToManyField(UserProfile)
 
 
 class Post(models.Model):
@@ -69,7 +63,7 @@ class Post(models.Model):
     Feeling = models.TextField(default="")
     Stars = models.FloatField(default=0.0)
     StarTime = models.DateTimeField(default=None)
-    Pass = models.CharField(max_length=1,default='1')
+    Pass = models.CharField(max_length=1, default='1')
     # Pass中有3个选项，未审核为0，被拒绝为1，通过为2
 
 
@@ -122,15 +116,15 @@ class Activity(models.Model):
         ('0', '普通'),
         ('1', '义卖'),
         ('2', '销售'),
+        ('3', '表演')
     )
-    Type = models.TextField(default='0', choices=type_choices)
-    Participants = models.ManyToManyField(UserProfile,default=None)
+    Type = models.CharField(max_length=10, default='0', choices=type_choices)
+    Participants = models.ManyToManyField(UserProfile, default=None)
 
 
 class Classroom(models.Model):
     ClassroomId = models.IntegerField()
-    ClubId = models.ForeignKey(Club)
-    ClubName = models.CharField(max_length=30, default="社团")
+    ClubObject = models.ForeignKey(Club)
     Date1 = models.DateTimeField()
     Date2 = models.DateTimeField()
 
@@ -139,18 +133,19 @@ class LostAndFound(models.Model):
     LostOrFound = models.CharField(max_length=4, default="丢失")
     LinkmanName = models.CharField(max_length=30, default="匿名")
     LinkmanGrade = models.CharField(max_length=1, default="0")
-    LinkmanClass= models.CharField(max_length=2, default="0")
+    LinkmanClass = models.CharField(max_length=2, default="0")
     LinkmanPhoneNumber = models.CharField(max_length=11, default="0000000000")
     LinkmanQq = models.CharField(max_length=20, default="0")
     LostObjectName = models.CharField(max_length=100, default="")
     LostPlace = models.CharField(max_length=30, default="")
-    Importacne = models.BooleanField(default=False)
+    Importance = models.BooleanField(default=False)
     Desc = models.TextField(default="")
     LostDateTime = models.DateTimeField()
 
+
 class Event(models.Model):
-    Name = models.CharField(max_length=30,default=None)
+    Name = models.CharField(max_length=30, default=None)
     Date = models.DateTimeField()
-    Region =models.CharField(max_length=30,default=None)
+    Region = models.CharField(max_length=30, default=None)
     Content = models.TextField(default=None)
-    Club = models.ForeignKey(Club)
+    ClubObject = models.ForeignKey(Club)

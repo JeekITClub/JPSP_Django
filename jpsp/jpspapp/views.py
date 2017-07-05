@@ -3,7 +3,7 @@ from django.http import JsonResponse, HttpResponse
 import json
 from django.contrib.auth.models import User
 from jpsp.shortcut import JPSPToken, JPSPTime
-from jpspapp.models import Club, Post, Settings, Token, Activity, Message, Classroom, LostAndFound, UserProfile
+from jpspapp.models import Club, Post, Token, Activity, Message, Classroom, LostAndFound, UserProfile
 from django.core import serializers
 from django.views.decorators.http import require_http_methods
 import datetime
@@ -112,8 +112,16 @@ def club_establish(request):
 @require_http_methods(["POST"])
 def club_list(request):
     try:
+        body = json.loads(request.body)
+        type = body['Type']
         response = []
-        club_object = Club.objects.all()
+        club_object = None
+        if type == 'Established':
+            club_object = Club.objects.filter(State=True)
+        elif type == 'Unestablished':
+            club_object = Club.objects.filter(State=False)
+        elif type == 'All':
+            club_object = Club.objects.all()
         for data in club_object:
             response.append({'ClubId': data.ClubId,
                              'ClubName': data.ClubName,
@@ -123,14 +131,11 @@ def club_list(request):
                              'ShezhangClassroom': data.ShezhangClass,
                              'IfRecruit': data.IfRecruit,
                              'EnrollGroupQQ': data.EnrollGroupQq,
-                             # 'Label':
-                             # TODO: LABEL
                              'Email': data.Email,
                              'State': data.State,
                              'Stars': data.Stars,
                              'Introduction': data.Introduction,
                              'Achievements': data.Achievements,
-                             # 'Member'
                              })
             return JsonResponse({'message': 'success', 'Access-Control-Allow-Origin': '*', data: json.dumps(response)},
                                 safe=False)
@@ -220,8 +225,7 @@ def activity_apply(request):
         body = json.loads(request.body)
         token = body['Token']
         club_id = body['ClubId']
-        club_name = body['ClubName']
-        activity_name = body['ActivityName']
+        activity_name = body['Name']
         region = body['Region']
         date1 = body['Date1']
         date2 = body['Date2']
@@ -231,13 +235,13 @@ def activity_apply(request):
             ActivityName=activity_name,
             Region=region,
             Clubid=Club.objects.get(clubid=User.objects.get(username=club_id)),
-            ClubName=club_name,
+            ClubName=Club.objects.get(clubid=User.objects.get(username=club_id)).ClubName,
             Content=content,
             Date1=date1,
             Date2=date2,
             State='0',
             Type=type,
-            Participants=''
+            Participants=None
         )
         return JsonResponse({
             'message': 'error',
@@ -307,7 +311,8 @@ def activity_list(request):
         elif type == 'Past':
             activityList = Activity.objects.filter(Date2__lt=datetime.datetime.now())
         elif type == 'Happening':
-            activityList = Activity.objects.filter(Date1__lte=datetime.datetime.now()).filter(Date2__gte=datetime.datetime.now())
+            activityList = Activity.objects.filter(Date1__lte=datetime.datetime.now()).filter(
+                Date2__gte=datetime.datetime.now())
         elif type == 'Future':
             activityList = Activity.objects.filter(Date1__gt=datetime.datetime.now())
         elif type == 'Unconfirmed':
@@ -778,6 +783,7 @@ def club_page_setting(request):
 @require_http_methods(["POST"])
 def message_list(request):
     pass
+
 
 def test(request):
     activityList = Activity.objects.filter(Date1__lt=datetime.datetime.now())

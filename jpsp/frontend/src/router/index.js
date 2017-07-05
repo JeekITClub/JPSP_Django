@@ -5,8 +5,6 @@ Vue.use(Router)
 import index from '@/pages/index/index.vue'
 import Login from '@/pages/index/Login.vue'
 import ClubIndex from '@/pages/index/ClubIndex'
-import ClubPost from '@/pages/index/ClubPost.vue'
-import PostList from '@/pages/index/PostList.vue'
 import ProfileEdit from '@/pages/index/ProfileEdit.vue'
 import ActivityList from '../pages/index/ActiviytList.vue'
 import ClubList from '@/pages/index/ClubList.vue'
@@ -29,17 +27,12 @@ export default new Router({
       component: ClubIndex
     },
     {
-      path: '/postlist',
+      path: '/post',
       name: 'PostList',
       component: PostList
     },
     {
-      path: '/post',
-      name: 'ClubPost',
-      component: ClubPost
-    },
-    {
-      path: '/activitylist',
+      path: '/activity',
       name: 'ActivityList',
       component: ActivityList
     },
@@ -49,7 +42,7 @@ export default new Router({
       component: ProfileEdit
     },
     {
-      path: '/clublist',
+      path: '/club',
       name: 'ClubList',
       component: ClubList
     }
