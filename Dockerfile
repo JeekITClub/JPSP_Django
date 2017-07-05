@@ -59,4 +59,5 @@ COPY . /home/docker/code/
 # be installed in the code/app/ directory
 
 EXPOSE 80
-CMD /usr/local/bin/uwsgi --ini /home/docker/code/jpsp/uwsgi.ini
+EXPOSE 8001
+CMD ["supervisord", "-n"]
