@@ -47,7 +47,7 @@
         </el-button>
       </template>
     </el-table-column>
-    <el-table-column label="操作" v-if="user === 'Club'">
+    <el-table-column label="操作" v-if="user === 'Club' && type === 'Future' || type === 'All">
       <template scope="scope">
         <el-button size="small" type="danger" @click="CancelSubmit(scope.row.pk)">
           取消活动
