@@ -32,7 +32,7 @@
     </el-table-column>
     <el-table-column prop="ClubName" label="社团名称">
     </el-table-column>
-    <el-table-column prop="LinkmanName" label="联系人">>
+    <el-table-column prop="LinkmanName" label="联系人">
     </el-table-column>
     <el-table-column prop="Date1" label="社团活动日期">
     </el-table-column>

@@ -30,6 +30,9 @@ const AdminClubVuexStore = new Vuex.Store({
     },
     ApplyToken (state, Token) {
       state.Token = Token
+    },
+    ApplyClubId (state, ClubId) {
+      state.ClubId = ClubId
     }
   }
 })

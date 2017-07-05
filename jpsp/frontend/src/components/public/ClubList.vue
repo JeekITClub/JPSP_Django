@@ -31,8 +31,7 @@
     <el-table-column prop="ClubId" label="社团Id"></el-table-column>
     <el-table-column
       prop="ClubName"
-      label="社团名称"
-      width="300">
+      label="社团名称">
       <template scope="scope">
         <router-link :to="{ name: 'ClubIndex', params: { ClubId:scope.row.ClubId, Club: scope.row }}">
           {{ scope.row.ClubName }}
@@ -95,5 +94,4 @@
   }
 </script>
 <style>
-  @import url("//unpkg.com/element-ui@1.3.2/lib/theme-default/index.css");
 </style>

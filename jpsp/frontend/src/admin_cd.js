@@ -18,6 +18,7 @@ Vue.use(Vuex)
 const AdminCDVuexStore = new Vuex.Store({
   state: {
     UserName: '用户名',
+    UserId: '',
     Token: '',
     Authenticated: null
   },
@@ -30,6 +31,9 @@ const AdminCDVuexStore = new Vuex.Store({
     },
     ApplyToken (state, Token) {
       state.Token = Token
+    },
+    ApplyUserId (state, UserId) {
+      state.UserId = UserId
     }
   }
 })

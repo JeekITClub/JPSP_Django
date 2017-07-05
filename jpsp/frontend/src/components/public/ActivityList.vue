@@ -104,7 +104,8 @@
             Token: this.GetToken,
             Operation: 'Deny'
           })
-        }).then(function (response) {
+        })
+          .then(function (response) {
           if (response.data.message === 'success') {
             this.$notify({
               title: '成功',

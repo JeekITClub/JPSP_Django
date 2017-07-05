@@ -44,7 +44,7 @@
       return {
         TabsValue: 'All'
       }
-    },
+    }
   }
 </script>
 <style>

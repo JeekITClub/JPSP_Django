@@ -24,7 +24,7 @@
       'recruit_classroom_list': RecruitClassroomList
     },
     data: {
-        TabsValue: 'Unconfirmed'
+      TabsValue: 'Unconfirmed'
     }
   }
 </script>
