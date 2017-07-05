@@ -60,4 +60,4 @@ COPY . /home/docker/code/
 
 EXPOSE 80
 EXPOSE 8001
-CMD ["supervisord", "-n"]
+CMD supervisorctl start app-uwsgi
