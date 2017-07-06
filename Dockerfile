@@ -60,4 +60,5 @@ COPY . /home/docker/code/
 
 EXPOSE 80
 EXPOSE 8001
-CMD ["/usr/bin/supervisord","-c","/etc/supervisor/conf.d/supervisor-app.conf"]
+RUN uwsgi --ini /home/docker/code/uwsgi.ini
+CMD service nginx start
