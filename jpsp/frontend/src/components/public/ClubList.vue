@@ -74,7 +74,8 @@
         method: 'POST',
         url: 'http://127.0.0.1:8000/api/public/club/list',
         data: JSON.stringify({
-          Token: this.GetToken
+          Token: this.GetToken,
+          Type: 'Established'
         })
       }).then(function (response) {
         if (response.data.message === 'success') {
