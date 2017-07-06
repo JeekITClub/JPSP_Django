@@ -1,10 +1,10 @@
 <template>
   <div>
-    <el-row class="tac">
+    <el-row class="tac" :gutter="20">
       <el-col :span="4">
         <club_aside></club_aside>
       </el-col>
-      <el-col :span="20" offset="4">
+      <el-col :span="20">
         <el-tabs v-model="TabsValue" type="card">
           <el-tab-pane label="所有" name="All">
             <activity_list type="All" user="Club"></activity_list>

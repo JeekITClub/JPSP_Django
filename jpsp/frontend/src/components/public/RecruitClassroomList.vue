@@ -1,6 +1,6 @@
 <template>
-  <el-table :data=RecruitClassroomList>
-    <el-table-column prop="pk" label="'Id">
+  <el-table :data="RecruitClassroomList">
+    <el-table-column prop="pk" label="请求序号">
     </el-table-column>
     <el-table-column prop="ClubName" label="社团名称">
     </el-table-column>
@@ -101,10 +101,9 @@
     },
     mounted: function () {
       axios({
-          method: 'POST',
-          url: 'http://127.0.0.1:8000/api/recruit/classroom/list'
-        }
-      ).then(function (response) {
+        method: 'POST',
+        url: 'http://127.0.0.1:8000/api/recruit/classroom/list'
+      }).then(function (response) {
         if (response.data.message === 'error') {
           this.$notify.error({
             title: '错误',
