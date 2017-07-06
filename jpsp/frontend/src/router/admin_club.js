@@ -6,10 +6,12 @@ import ProfileEdit from '@/pages/admin_club/ProfileEdit'
 import ClubPageSettings from '@/pages/admin_club/ClubPageSettings'
 import MemberManagement from '@/pages/admin_club/MemberManagement'
 import RecruitClassroomEdit from '@/pages/admin_club/RecruitClassroomEdit'
-import RecruitMember from '@/pages/admin_club/RecruitMember.vue'
+import RecruitClassroomList from '@/pages/admin_club/RecruitClassroomList.vue'
 import About from '@/pages/public/About.vue'
 import Contact from '@/pages/public/Contact.vue'
 import Establish from '@/pages/admin_club/Establish.vue'
+import ActivityApply from '@/pages/admin_club/ActivityApply.vue'
+import ActivityList from '@/pages/admin_club/ActivityList.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -40,21 +42,24 @@ export default new Router({
       component: ClubPageSettings
     },
     {
-      path: '/recruit',
-      name: 'Recruit',
-      component: RecruitClassroomEdit,
-      children: [
-        {
-          path: 'classroom',
-          name: 'RecruitClassroomApply',
-          component: RecruitClassroomEdit
-        },
-        {
-          path: 'member',
-          name: 'RecruitMember',
-          component: RecruitMember
-        }
-      ]
+      path: '/activity/apply',
+      name: 'ActivityApply',
+      component: ActivityApply
+    },
+    {
+      path: '/activity/list',
+      name: 'ActivityList',
+      component: ActivityList
+    },
+    {
+      path: '/recruit/classroom/apply',
+      name: 'RecruitClassroom',
+      component: RecruitClassroomEdit
+    },
+    {
+      path: '/recruit/classroom/list',
+      name: 'RecruitClassroomList',
+      component: RecruitClassroomList
     },
     {
       path: '/member',

@@ -18,14 +18,14 @@
               <p v-if="Authenticate===false">登陆失败</p>
             </el-form-item>
           </el-form>
-          <h1 v-if="Authenticate===true">已登录</h1>
+          <p class="lead" v-if="Authenticate===true">已登录</p>
         </el-col>
       </el-row>
-      <!--<el-row class="tac">-->
-      <!--<el-col :span="8" offset="8">-->
-      <!--<router-link to="EstablishClub">创建社团</router-link>-->
-      <!--</el-col>-->
-      <!--</el-row>-->
+      <el-row class="tac" v-if="Authenticate != true">
+        <el-col :span="8" offset="8">
+          <router-link to="/establish">创建社团</router-link>
+        </el-col>
+      </el-row>
     </div>
   </div>
 </template>
