@@ -1,6 +1,20 @@
 <template>
   <div>
-    <h1>这是{{ ClubId }}社的主页</h1>
+    <div class="container">
+      <div class="row clearfix">
+        <div class="col-md-12 column">
+          <div class="jumbotron">
+            <h1>
+             {{ Club.ClubName }}
+            </h1>
+            <p>
+             {{ Club.Introduction }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </template>
 <script>
