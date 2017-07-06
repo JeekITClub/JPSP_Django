@@ -61,4 +61,4 @@ COPY . /home/docker/code/
 EXPOSE 80
 EXPOSE 8001
 RUN uwsgi --ini /home/docker/code/uwsgi.ini
-CMD nginx start
+CMD start nginx
