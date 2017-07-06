@@ -1,0 +1,151 @@
+2017-07-06 09:31:55,937 CRIT Supervisor running as root (no user in config file)
+2017-07-06 09:31:55,952 INFO daemonizing the supervisord process
+2017-07-06 09:31:55,953 INFO supervisord started with pid 48071
+2017-07-06 09:31:56,955 INFO spawnerr: can't find command '/usr/local/bin/uwsgi'
+2017-07-06 09:31:57,956 INFO spawnerr: can't find command '/usr/local/bin/uwsgi'
+2017-07-06 09:31:59,959 INFO spawnerr: can't find command '/usr/local/bin/uwsgi'
+2017-07-06 09:32:02,963 INFO spawnerr: can't find command '/usr/local/bin/uwsgi'
+2017-07-06 09:32:02,963 INFO gave up: app-uwsgi entered FATAL state, too many start retries too quickly
+2017-07-06 09:33:37,316 CRIT Supervisor running as root (no user in config file)
+2017-07-06 09:33:37,324 INFO daemonizing the supervisord process
+2017-07-06 09:33:37,326 INFO supervisord started with pid 48097
+2017-07-06 09:33:38,327 INFO spawnerr: can't find command '/usr/local/bin/uwsgi'
+2017-07-06 09:33:39,328 INFO spawnerr: can't find command '/usr/local/bin/uwsgi'
+2017-07-06 09:33:41,331 INFO spawnerr: can't find command '/usr/local/bin/uwsgi'
+2017-07-06 09:33:44,335 INFO spawnerr: can't find command '/usr/local/bin/uwsgi'
+2017-07-06 09:33:44,335 INFO gave up: app-uwsgi entered FATAL state, too many start retries too quickly
+2017-07-06 09:39:16,228 CRIT Supervisor running as root (no user in config file)
+2017-07-06 09:39:16,236 INFO daemonizing the supervisord process
+2017-07-06 09:39:16,237 INFO supervisord started with pid 48124
+2017-07-06 09:39:17,239 INFO spawnerr: can't find command '/usr/local/bin/uwsgi'
+2017-07-06 09:39:18,240 INFO spawnerr: can't find command '/usr/local/bin/uwsgi'
+2017-07-06 09:39:20,243 INFO spawnerr: can't find command '/usr/local/bin/uwsgi'
+2017-07-06 09:39:23,247 INFO spawnerr: can't find command '/usr/local/bin/uwsgi'
+2017-07-06 09:39:23,247 INFO gave up: app-uwsgi entered FATAL state, too many start retries too quickly
+2017-07-06 09:40:19,766 CRIT Supervisor running as root (no user in config file)
+2017-07-06 09:40:19,774 INFO daemonizing the supervisord process
+2017-07-06 09:40:19,775 INFO supervisord started with pid 48133
+2017-07-06 09:40:20,777 INFO spawnerr: can't find command '/usr/local/bin/uwsgi'
+2017-07-06 09:40:21,778 INFO spawnerr: can't find command '/usr/local/bin/uwsgi'
+2017-07-06 09:40:23,781 INFO spawnerr: can't find command '/usr/local/bin/uwsgi'
+2017-07-06 09:40:26,785 INFO spawnerr: can't find command '/usr/local/bin/uwsgi'
+2017-07-06 09:40:26,785 INFO gave up: app-uwsgi entered FATAL state, too many start retries too quickly
+2017-07-06 09:41:51,206 CRIT Supervisor running as root (no user in config file)
+2017-07-06 09:43:06,608 CRIT Supervisor running as root (no user in config file)
+2017-07-06 09:44:57,041 WARN received SIGHUP indicating restart request
+2017-07-06 09:44:57,042 WARN received SIGHUP indicating restart request
+2017-07-06 09:44:57,044 CRIT Supervisor running as root (no user in config file)
+2017-07-06 09:44:57,066 CRIT Supervisor running as root (no user in config file)
+2017-07-06 09:44:57,278 WARN received SIGHUP indicating restart request
+2017-07-06 09:44:57,291 WARN received SIGHUP indicating restart request
+2017-07-06 09:44:57,300 CRIT Supervisor running as root (no user in config file)
+2017-07-06 09:44:57,310 CRIT Supervisor running as root (no user in config file)
+2017-07-06 09:44:57,437 INFO supervisord started with pid 48124
+2017-07-06 09:44:58,438 INFO spawnerr: can't find command '/usr/local/bin/uwsgi'
+2017-07-06 09:44:59,440 INFO spawnerr: can't find command '/usr/local/bin/uwsgi'
+2017-07-06 09:45:01,442 INFO spawnerr: can't find command '/usr/local/bin/uwsgi'
+2017-07-06 09:45:04,446 INFO spawnerr: can't find command '/usr/local/bin/uwsgi'
+2017-07-06 09:45:04,446 INFO gave up: app-uwsgi entered FATAL state, too many start retries too quickly
+2017-07-06 09:49:20,400 CRIT Supervisor running as root (no user in config file)
+2017-07-06 09:49:20,433 INFO daemonizing the supervisord process
+2017-07-06 09:49:20,434 INFO supervisord started with pid 4417
+2017-07-06 09:49:21,436 INFO spawnerr: can't find command '/usr/local/bin/uwsgi'
+2017-07-06 09:49:22,437 INFO spawnerr: can't find command '/usr/local/bin/uwsgi'
+2017-07-06 09:49:24,440 INFO spawnerr: can't find command '/usr/local/bin/uwsgi'
+2017-07-06 09:49:27,444 INFO spawnerr: can't find command '/usr/local/bin/uwsgi'
+2017-07-06 09:49:27,444 INFO gave up: app-uwsgi entered FATAL state, too many start retries too quickly
+2017-07-06 09:58:47,643 CRIT Supervisor running as root (no user in config file)
+2017-07-06 10:01:50,059 CRIT Supervisor running as root (no user in config file)
+2017-07-06 10:02:53,171 WARN received SIGTERM indicating exit request
+2017-07-06 10:10:23,422 CRIT Supervisor running as root (no user in config file)
+2017-07-06 10:10:23,448 INFO RPC interface 'supervisor' initialized
+2017-07-06 10:10:23,448 INFO daemonizing the supervisord process
+2017-07-06 10:10:23,449 INFO supervisord started with pid 5255
+2017-07-06 10:10:24,451 INFO spawned: 'app-uwsgi' with pid 5256
+2017-07-06 10:10:24,452 INFO spawned: 'nginx' with pid 5257
+2017-07-06 10:10:25,478 INFO success: app-uwsgi entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2017-07-06 10:10:25,478 INFO success: nginx entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2017-07-06 10:11:25,083 CRIT Supervisor running as root (no user in config file)
+2017-07-06 10:11:31,277 CRIT Supervisor running as root (no user in config file)
+2017-07-06 10:13:15,781 INFO waiting for nginx to stop
+2017-07-06 10:13:15,790 INFO stopped: nginx (exit status 0)
+2017-07-06 10:13:42,916 INFO waiting for app-uwsgi to stop
+2017-07-06 10:13:43,918 INFO stopped: app-uwsgi (exit status 0)
+2017-07-06 10:13:51,835 INFO spawned: 'nginx' with pid 5371
+2017-07-06 10:13:52,860 INFO success: nginx entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2017-07-06 10:14:03,009 INFO waiting for nginx to stop
+2017-07-06 10:14:03,011 INFO stopped: nginx (exit status 0)
+2017-07-06 10:20:07,008 CRIT Supervisor running as root (no user in config file)
+2017-07-06 10:20:19,251 INFO spawned: 'nginx' with pid 5438
+2017-07-06 10:20:20,269 INFO success: nginx entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2017-07-06 10:20:28,738 INFO spawned: 'app-uwsgi' with pid 5443
+2017-07-06 10:20:29,751 INFO success: app-uwsgi entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2017-07-06 10:22:31,638 INFO waiting for app-uwsgi to stop
+2017-07-06 10:22:32,639 INFO stopped: app-uwsgi (exit status 0)
+2017-07-06 10:22:38,859 INFO waiting for nginx to stop
+2017-07-06 10:22:38,861 INFO stopped: nginx (exit status 0)
+2017-07-06 10:22:56,094 INFO spawned: 'app-uwsgi' with pid 5472
+2017-07-06 10:22:57,116 INFO success: app-uwsgi entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2017-07-06 10:23:02,988 INFO spawned: 'nginx' with pid 5477
+2017-07-06 10:23:04,018 INFO success: nginx entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2017-07-06 10:58:58,926 INFO waiting for nginx to stop
+2017-07-06 10:58:58,934 INFO stopped: nginx (exit status 0)
+2017-07-06 10:59:05,062 INFO waiting for app-uwsgi to stop
+2017-07-06 10:59:06,065 INFO stopped: app-uwsgi (exit status 0)
+2017-07-06 10:59:10,664 INFO spawned: 'app-uwsgi' with pid 8966
+2017-07-06 10:59:11,677 INFO success: app-uwsgi entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2017-07-06 10:59:17,432 INFO spawned: 'nginx' with pid 8970
+2017-07-06 10:59:18,463 INFO success: nginx entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2017-07-06 11:09:49,369 INFO waiting for app-uwsgi to stop
+2017-07-06 11:09:50,373 INFO stopped: app-uwsgi (exit status 0)
+2017-07-06 11:09:56,435 INFO spawned: 'app-uwsgi' with pid 9045
+2017-07-06 11:09:56,448 INFO exited: app-uwsgi (exit status 0; not expected)
+2017-07-06 11:09:57,451 INFO spawned: 'app-uwsgi' with pid 9050
+2017-07-06 11:09:57,457 INFO exited: app-uwsgi (exit status 0; not expected)
+2017-07-06 11:09:59,462 INFO spawned: 'app-uwsgi' with pid 9053
+2017-07-06 11:09:59,467 INFO exited: app-uwsgi (exit status 0; not expected)
+2017-07-06 11:10:02,472 INFO spawned: 'app-uwsgi' with pid 9056
+2017-07-06 11:10:02,477 INFO exited: app-uwsgi (exit status 0; not expected)
+2017-07-06 11:10:02,478 INFO gave up: app-uwsgi entered FATAL state, too many start retries too quickly
+2017-07-06 11:10:45,531 INFO spawned: 'app-uwsgi' with pid 9067
+2017-07-06 11:10:45,549 INFO exited: app-uwsgi (exit status 0; not expected)
+2017-07-06 11:10:46,551 INFO spawned: 'app-uwsgi' with pid 9070
+2017-07-06 11:10:46,557 INFO exited: app-uwsgi (exit status 0; not expected)
+2017-07-06 11:10:48,561 INFO spawned: 'app-uwsgi' with pid 9073
+2017-07-06 11:10:48,572 INFO exited: app-uwsgi (exit status 0; not expected)
+2017-07-06 11:10:51,577 INFO spawned: 'app-uwsgi' with pid 9076
+2017-07-06 11:10:51,583 INFO exited: app-uwsgi (exit status 0; not expected)
+2017-07-06 11:10:51,583 INFO gave up: app-uwsgi entered FATAL state, too many start retries too quickly
+2017-07-06 11:14:31,142 WARN received SIGTERM indicating exit request
+2017-07-06 11:14:31,143 INFO waiting for nginx to die
+2017-07-06 11:14:31,149 WARN received SIGHUP indicating restart request
+2017-07-06 11:14:31,155 INFO stopped: nginx (exit status 0)
+2017-07-06 11:14:31,160 CRIT Supervisor running as root (no user in config file)
+2017-07-06 11:14:31,172 INFO RPC interface 'supervisor' initialized
+2017-07-06 11:14:31,172 INFO supervisord started with pid 5255
+2017-07-06 11:14:32,174 INFO spawned: 'app-uwsgi' with pid 9201
+2017-07-06 11:14:32,175 INFO spawned: 'nginx' with pid 9202
+2017-07-06 11:14:32,187 INFO exited: app-uwsgi (exit status 0; not expected)
+2017-07-06 11:14:33,201 INFO spawned: 'app-uwsgi' with pid 9208
+2017-07-06 11:14:33,201 INFO success: nginx entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2017-07-06 11:14:33,207 INFO exited: app-uwsgi (exit status 0; not expected)
+2017-07-06 11:14:35,210 INFO spawned: 'app-uwsgi' with pid 9212
+2017-07-06 11:14:35,221 INFO exited: app-uwsgi (exit status 0; not expected)
+2017-07-06 11:14:38,226 INFO spawned: 'app-uwsgi' with pid 9215
+2017-07-06 11:14:38,232 INFO exited: app-uwsgi (exit status 0; not expected)
+2017-07-06 11:14:38,232 INFO gave up: app-uwsgi entered FATAL state, too many start retries too quickly
+2017-07-06 11:34:32,756 CRIT Supervisor running as root (no user in config file)
+2017-07-06 11:34:32,783 INFO RPC interface 'supervisor' initialized
+2017-07-06 11:34:32,790 INFO daemonizing the supervisord process
+2017-07-06 11:34:32,791 INFO supervisord started with pid 7355
+2017-07-06 11:34:33,793 INFO spawned: 'app-uwsgi' with pid 7356
+2017-07-06 11:34:33,794 INFO spawned: 'nginx' with pid 7357
+2017-07-06 11:34:33,805 INFO exited: app-uwsgi (exit status 0; not expected)
+2017-07-06 11:34:34,824 INFO spawned: 'app-uwsgi' with pid 7363
+2017-07-06 11:34:34,824 INFO success: nginx entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2017-07-06 11:34:34,836 INFO exited: app-uwsgi (exit status 0; not expected)
+2017-07-06 11:34:36,840 INFO spawned: 'app-uwsgi' with pid 7366
+2017-07-06 11:34:36,846 INFO exited: app-uwsgi (exit status 0; not expected)
+2017-07-06 11:34:39,851 INFO spawned: 'app-uwsgi' with pid 7369
+2017-07-06 11:34:39,857 INFO exited: app-uwsgi (exit status 0; not expected)
+2017-07-06 11:34:39,857 INFO gave up: app-uwsgi entered FATAL state, too many start retries too quickly

@@ -25,7 +25,7 @@ SECRET_KEY = 'yv_xr$zykv1l%v)2b$ztov#fq2#9h(pz-0=m%3ut!nzf0=9_at'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [u'139.219.225.132']
 
 CORS_ORIGIN_ALLOW_ALL = True
 # Application definition
