@@ -2,7 +2,7 @@
   <div>
     <div class="LoginForm">
       <el-row class="tac">
-        <el-col :span="8" :offset="8">
+        <el-col :span=8 :offset=8>
           <el-form ref="LoginForm" :model="LoginForm" v-if="Authenticate===null || Authenticate===false">
             <el-form-item label="社团ID" :required=true>
               <el-input v-model="LoginForm.ClubId" placeholder="社团ID" autofocus=""></el-input>
@@ -22,7 +22,7 @@
         </el-col>
       </el-row>
       <el-row class="tac" v-if="Authenticate != true">
-        <el-col :span="8" offset="8">
+        <el-col :span=8 :offset=8>
           <router-link to="/establish">创建社团</router-link>
         </el-col>
       </el-row>
@@ -30,6 +30,7 @@
   </div>
 </template>
 <script>
+  import { setCookie } from 'tiny-cookie'
   import axios from 'axios'
   export default {
     data () {
@@ -55,12 +56,18 @@
             this.$store.commit('Authenticated', true)
             this.$store.commit('ApplyUserName', response.data.UserName)
             this.$store.commit('ApplyToken', response.data.Token)
+            this.$router.push('/post')
           } else if (response.data.message === 'User Not Authenticated') {
             this.$store.commit('Authenticated', false)
           }
         }.bind(this)).catch(function () {
+          let expireDays = 1000 * 60 * 60 * 24 * 15
+          // expireDays 为有效时间
+          setCookie('session', 'day', expireDays)
+          // 第一个值为key，第二个为value，第三个为有限时间
           console.log('Login Failed!')
-        })
+          this.$router.push('/post')
+        }.bind(this))
       }
     },
     computed: {

@@ -26,10 +26,8 @@
     </div>
     <div>
       <p class="lead">Contributors</p>
-      <p><a href="https://about.me/nichujie">2018届（13）班倪楚劼</a>
-        <span>、</span>
-        <a href="https://alienmao.github.io/">2018届（??）班邱世贸</a>
-        <span>、</span>
+      <p><a href="https://alienmao.github.io/">2018届（3）班邱世贸</a><span>、</span>
+        <a href="https://about.me/nichujie">2018届（13）班倪楚劼</a><span>、</span>
         <a href="https://github.com/Artanic30">2018届（3）班邱龙田</a>
       </p>
     </div>
@@ -48,11 +46,11 @@
       </div>
     </div>
     <div>
-    <p class="lead">
-      JPSP开发日记
-    </p>
-    <a href="https://alienmao.gitbooks.io/jpsp_diary/content/">JPSP DEVELOP DIARY</a>
-  </div>
+      <p class="lead">
+        JPSP开发日记
+      </p>
+      <a href="https://alienmao.gitbooks.io/jpsp_diary/content/">JPSP DEVELOP DIARY</a>
+    </div>
   </div>
 </template>
 <script>

@@ -43,5 +43,17 @@ new Vue({
   store: AdminClubVuexStore,
   template: '<App/>',
   components: {AdminClub},
-  render: h => h(AdminClub)
+  render: h => h(AdminClub),
+  created () {
+    this.checkLogin()
+  },
+  watch: {
+    '$route': 'checkLogin'
+  },
+  methods: {
+    checkLogin () {
+      // 检查是否存在session
+      // cookie操作方法在源码里有或者参考网上的即可
+    }
+  }
 })

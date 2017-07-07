@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import index from '@/pages/admin_club/index'
+import Login from '@/pages/admin_club/Login'
 import PostEdit from '@/pages/admin_club/PostEdit'
 import ProfileEdit from '@/pages/admin_club/ProfileEdit'
 import ClubPageSettings from '@/pages/admin_club/ClubPageSettings'
@@ -19,7 +19,12 @@ export default new Router({
     {
       path: '/',
       name: 'Index',
-      component: index
+      component: Login
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
     },
     {
       path: '/post',

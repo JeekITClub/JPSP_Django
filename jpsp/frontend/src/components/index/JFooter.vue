@@ -10,8 +10,7 @@
         <div class="col-md-4 col-md-push-1">
           <h4>Links</h4>
           <ul class="fh5co-footer-links">
-            <li><a href="http://jianping.com.cn">建平中学</a></li>
-            <li><a href="">About</a></li>
+            <li><a href="http://www.jianping.com.cn">建平中学</a></li>
           </ul>
         </div>
 
