@@ -10,14 +10,14 @@
             </div>
             <div class="col-xs-8 text-right menu-1">
               <ul>
-                <li class="active"><a href="">首页</a></li>
-                <li class="has-dropdown"><a href="">社团</a>
+                <li><a href="">首页</a></li>
+                <li class="has-dropdown"><router-link to="/club">社团</router-link>
                   <ul class="dropdown">
-                    <li><router-link to="/clublist">社团列表</router-link></li>
+                    <li><router-link to="/club/list">社团列表</router-link></li>
                     <li><router-link to="/club/event">社团动态</router-link></li>
                   </ul>
                 </li>
-                <li class="has-dropdown"><a href="">活动</a>
+                <li class="has-dropdown"><router-link to="/activity/list">活动</router-link>
                   <ul class="dropdown">
                     <li><router-link to="/activity/list">活动报名</router-link></li>
                     <li><router-link to="/activity/news">活动动态</router-link></li>
@@ -26,9 +26,9 @@
                 <li>
                   <router-link to="/lost">失物招领</router-link>
                 </li>
-                <li><a href="about.html">关于</a></li>
+                <li><router-link to="/about">关于</router-link></li>
                 <li v-if="Authenticate===true">欢迎，{{ GetUserName }}</li>
-                <li class="btn-cta" v-if="Authenticate===false || Authenticate===null"><a href="#"><span>登录</span></a>
+                <li class="btn-cta" v-if="Authenticate===false || Authenticate===null"><router-link to="/login"><span>登陆</span></router-link>
                 </li>
                 <li class="btn-cta" v-else><a href="#"><span>注销</span></a></li>
               </ul>
