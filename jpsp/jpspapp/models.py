@@ -5,6 +5,15 @@ from django.contrib.auth.models import User
 
 
 # Create your models here.
+class Cevent(models.Model):
+    cusername = models.CharField(max_length=30, default=None)
+    datetime1 = models.CharField(max_length=30, default=None)
+    datetime2 = models.CharField(max_length=30, default=None)
+    ctype= models.CharField(max_length=30, default=None)
+    content = models.TextField(default=None)
+
+    def __str__(self):
+        return self.username
 
 class UserProfile(models.Model):
     UserObject = models.ForeignKey(User, default=None)

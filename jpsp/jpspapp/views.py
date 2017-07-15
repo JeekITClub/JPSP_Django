@@ -3,12 +3,25 @@ from django.http import JsonResponse, HttpResponse
 import json
 from django.contrib.auth.models import User
 from jpsp.shortcut import JPSPToken, JPSPTime
-from jpspapp.models import Club, Post, Token, Activity, Message, Classroom, LostAndFound, UserProfile
+from jpspapp.models import Club, Post, Token, Activity, Message, Classroom, LostAndFound, UserProfile, Cevent
 from django.core import serializers
 from django.views.decorators.http import require_http_methods
 import datetime
 from django.contrib.auth import authenticate
 
+
+def cevent(request):
+    body = json.loads(request.body)
+    cusername = body['Username']
+    content = body['Content']
+    datetime1 = body['Datetime1']
+    datetime2 = body['Datetime2']
+    ctype = body['Type']
+    Cevent.objects.create(username=username,content=content,ctype=ctype,datetime1=datetime1,datetime2)
+    return JsonResponse({
+        'message': 'Success',
+        'Access-Control-Allow-Origin': '*'
+    })
 
 # Create your views here.
 @require_http_methods(['POST'])
