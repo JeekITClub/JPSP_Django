@@ -31,7 +31,6 @@ RUN apt-get update && \
 	python3-setuptools \
 	python3-pip \
 	nginx \
-	curl \
 	supervisor \
 	sqlite3 && \
 	pip3 install -U pip setuptools && \
@@ -39,7 +38,8 @@ RUN apt-get update && \
 
 # install uwsgi now because it takes a little while
 RUN pip3 install uwsgi
-
+RUN pip3 install itchat
+RUN apt-get update uwsgi-plugin-python
 # setup all the configfiles
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 COPY nginx-app.conf /etc/nginx/sites-available/default
@@ -59,5 +59,4 @@ COPY . /home/docker/code/
 # be installed in the code/app/ directory
 
 EXPOSE 80
-EXPOSE 8001
-RUN uwsgi --ini /home/docker/code/uwsgi.ini
+RUN superviosrd

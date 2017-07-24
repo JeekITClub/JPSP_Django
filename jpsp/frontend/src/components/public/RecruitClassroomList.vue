@@ -53,7 +53,6 @@
       type: {
         'default': 'Unconfirmed'
       }
-
     },
     methods: {
       ArrangeClassroom (classroom, pk) {

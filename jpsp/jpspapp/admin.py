@@ -1,16 +1,28 @@
 from django.contrib import admin
-from .models import Club, Activity, Classroom, Token, Message, Post, UserProfile, Cevent
+from .models import Club, Activity, Classroom, Token, Post, UserProfile
+
 
 # Register your models here.
-class CeventAdmin(admin.ModelAdmin):
-    list_display = ('cusername','datetime1','datetime2','ctype','content')
+class ClubAdmin(admin.ModelAdmin):
+    list_display = ('Type')
 
 
-admin.site.register(Club)
-admin.site.register(Activity)
+class ActivityAdmin(admin.ModelAdmin):
+    list_display = ('Region', 'Date1', 'Date2')
+
+
+class PostAdmin(admin.ModelAdmin):
+    #
+    pass
+
+
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ('Grade', 'Class', 'AttendYear')
+
+
+admin.site.register(Club, ClubAdmin)
+admin.site.register(Activity, ActivityAdmin)
 admin.site.register(Classroom)
 admin.site.register(Token)
-admin.site.register(Message)
-admin.site.register(Post)
-admin.site.register(UserProfile)
-admin.site.register(Cevent,CeventAdmin)
+admin.site.register(Post, PostAdmin)
+admin.site.register(UserProfile, UserProfileAdmin)
