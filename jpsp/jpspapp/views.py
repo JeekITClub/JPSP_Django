@@ -17,7 +17,7 @@ def cevent(request):
     datetime1 = body['Datetime1']
     datetime2 = body['Datetime2']
     ctype = body['Type']
-    Cevent.objects.create(username=username,content=content,ctype=ctype,datetime1=datetime1,datetime2)
+    Cevent.objects.create(cusername=cusername,content=content,ctype=ctype,datetime1=datetime1,datetime2=datetime2)
     return JsonResponse({
         'message': 'Success',
         'Access-Control-Allow-Origin': '*'
