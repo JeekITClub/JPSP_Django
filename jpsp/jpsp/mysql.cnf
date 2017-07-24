@@ -1,0 +1,5 @@
+[clinet]
+database = jpsp
+user = jpsp
+password = jpJeekjpsp
+default-character-set = utf-8
