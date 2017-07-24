@@ -9,14 +9,13 @@ alphabet = "abcdefghijklmnopqrstuvwxyz0123456789"
 
 
 class JPSPToken:
-    def __init__(self, username, usertype, token=""):
+    def __init__(self, username, token=""):
         self.token = ""
         if token != "":
             self.token = token
         else:
             pass
         self.username = username
-        self.usertype = usertype
         self.message = ''
 
     def generate(self, length=30):
@@ -26,7 +25,6 @@ class JPSPToken:
             Token.objects.create(
                 Token=self.token,
                 User=User.objects.get(username=self.username),
-                UserType=self.usertype
                 # start_time=datetime.datetime.now(),
                 # TODO:  datetime in python and SQL ??
                 # end_time =datetime.datetime.now(),
@@ -38,14 +36,14 @@ class JPSPToken:
 
     def remove(self):
         try:
-            token = Token.objects.get(UserName=self.username, UserType=self.usertype)
+            token = Token.objects.get(UserName=self.username)
             if token:
                 token.delete()
         except:
             return False
 
     def authenticate(self):
-        token = Token.objects.get(UserName=self.username, UserType=self.usertype).Token
+        token = Token.objects.get(UserName=self.username).Token
         if token:
             if self.token == token:
                 return True

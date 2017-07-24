@@ -44,10 +44,10 @@
                   <router-link to="/login">登陆</router-link>
                   <ul class="dropdown">
                     <li>
-                      <a href="">社长登陆</a>
+                      <a href="../admin_club.html">社长登陆</a>
                     </li>
                     <li>
-                      <a href="">社团部登陆</a>
+                      <a href="../admin_cd.html">社团部登陆</a>
                     </li>
                   </ul>
                 </li>

@@ -19,7 +19,7 @@ def login(request):
     usertype = body['UserType']
     user = authenticate(username=userid, password=password)
     if user is not None:
-        token_object = JPSPToken(username=userid, usertype=usertype)
+        token_object = JPSPToken(username=userid)
         if usertype == "student":
             return JsonResponse({
                 "UserName": UserProfile(User.objects.get(username=userid)).UserName,

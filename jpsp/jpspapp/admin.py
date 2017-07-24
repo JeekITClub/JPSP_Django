@@ -4,11 +4,11 @@ from .models import Club, Activity, Classroom, Token, Post, UserProfile
 
 # Register your models here.
 class ClubAdmin(admin.ModelAdmin):
-    list_display = ('Type')
+    list_display = ['Type']
 
 
 class ActivityAdmin(admin.ModelAdmin):
-    list_display = ('Region', 'Date1', 'Date2')
+    list_display = ['Region', 'Date1', 'Date2']
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -17,7 +17,7 @@ class PostAdmin(admin.ModelAdmin):
 
 
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ('Grade', 'Class', 'AttendYear')
+    list_display = ['Grade', 'Class', 'AttendYear']
 
 
 admin.site.register(Club, ClubAdmin)

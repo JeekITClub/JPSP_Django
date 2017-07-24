@@ -77,26 +77,23 @@ class Post(models.Model):
     Stars = models.FloatField(default=0.0)
     StarTime = models.DateTimeField(default=None)
     Pass = models.CharField(max_length=1, default='1')
+
     # Pass中有3个选项，未审核为0，被拒绝为1，通过为2
 
     def __str__(self):
         return self.ClubName + str(self.Date1)
 
+
 class Token(models.Model):
     Token = models.CharField(max_length=30, default="")
-    UserObject = models.ForeignKey(UserProfile)
-    usertype_choices = (
-        ('club', 'club'),
-        ('cd', 'club_department'),
-        ('s', 'student'),
-        ('t', 'teacher')
-    )
-    UserType = models.CharField(max_length=4, choices=usertype_choices, default=None)
+    UserObject = models.OneToOneField(UserProfile)
+
     # start_time = models.DateTimeField()
     # end_time = models.DateTimeField()
 
     def __str__(self):
         return self.UserObject.UserName
+
 
 class Activity(models.Model):
     Name = models.CharField(max_length=30, default="活动名称")
@@ -125,6 +122,7 @@ class Activity(models.Model):
     def __str__(self):
         return self.Name + 'by ' + self.ClubObject.ClubName
 
+
 class Classroom(models.Model):
     ClassroomId = models.IntegerField()
     ClubObject = models.ForeignKey(Club)
@@ -133,6 +131,7 @@ class Classroom(models.Model):
 
     def __str__(self):
         return self.ClubObject.ClubName
+
 
 class LostAndFound(models.Model):
     LostOrFound = models.CharField(max_length=4, default="丢失")
@@ -149,6 +148,7 @@ class LostAndFound(models.Model):
 
     def __str__(self):
         return self.LinkmanName
+
 
 class Event(models.Model):
     Name = models.CharField(max_length=30, default=None)
