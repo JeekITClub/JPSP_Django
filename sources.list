@@ -1,13 +1,3 @@
-deb http://debian.ustc.edu.cn/ubuntu/ xenial main multiverse restricted universe
-deb http://debian.ustc.edu.cn/ubuntu/ xenial-backports main multiverse restricted universe
-deb http://debian.ustc.edu.cn/ubuntu/ xenial-proposed main multiverse restricted universe
-deb http://debian.ustc.edu.cn/ubuntu/ xenial-security main multiverse restricted universe
-deb http://debian.ustc.edu.cn/ubuntu/ xenial-updates main multiverse restricted universe
-deb-src http://debian.ustc.edu.cn/ubuntu/ xenial main multiverse restricted universe
-deb-src http://debian.ustc.edu.cn/ubuntu/ xenial-backports main multiverse restricted universe
-deb-src http://debian.ustc.edu.cn/ubuntu/ xenial-proposed main multiverse restricted universe
-deb-src http://debian.ustc.edu.cn/ubuntu/ xenial-security main multiverse restricted universe
-deb-src http://debian.ustc.edu.cn/ubuntu/ xenial-updates main multiverse restricted universe
 deb-src http://archive.ubuntu.com/ubuntu xenial main restricted #Added by software-properties
 deb http://mirrors.aliyun.com/ubuntu/ xenial main restricted
 deb-src http://mirrors.aliyun.com/ubuntu/ xenial main restricted multiverse universe #Added by software-properties
