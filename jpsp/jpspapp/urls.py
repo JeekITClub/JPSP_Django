@@ -3,7 +3,6 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url(r'^cevent',views.cevent),
     url(r'^logout',views.logout),
     url(r'^login', views.login),
     url(r'^post/operate', views.post_operate),
@@ -21,8 +20,6 @@ urlpatterns = [
     url(r'^club/establish',views.club_establish),
     url(r'^clubpage',views.club_page),
     url(r'^clubpage/settings', views.club_page_setting),
-    url(r'^message/list', views.message_list),
     url(r'^post/list',views.post_list),
-    url(r'^clublist',views.club_list),
-    url(r'^test',views.test)
+    url(r'^clublist',views.club_list)
 ]

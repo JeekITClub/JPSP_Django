@@ -28,7 +28,7 @@
         </el-form>
       </template>
     </el-table-column>
-    <el-table-column prop="pk" label="PostId">
+    <el-table-column prop="pk" label="序号">
     </el-table-column>
     <el-table-column prop="ClubName" label="社团名称">
     </el-table-column>

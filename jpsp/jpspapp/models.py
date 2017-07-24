@@ -5,16 +5,6 @@ from django.contrib.auth.models import User
 
 
 # Create your models here.
-class Cevent(models.Model):
-    cusername = models.CharField(max_length=30, default=None)
-    datetime1 = models.DateTimeField()
-    datetime2 = models.DateTimeField()
-    ctype= models.CharField(max_length=30, default=None)
-    content = models.TextField(default=None)
-
-    def __str__(self):
-        return self.cusername + self.content
-
 class UserProfile(models.Model):
     UserObject = models.ForeignKey(User, default=None)
     UserName = models.CharField(max_length=12, default=None)
@@ -24,6 +14,9 @@ class UserProfile(models.Model):
     QQ = models.CharField(max_length=12, default=None)
     Phone = models.CharField(max_length=12, default=None)
     Email = models.EmailField()
+
+    def __str__(self):
+        return str(self.Grade) + str(self.Class) + self.UserName
 
 
 class CDUser(models.Model):
@@ -53,6 +46,17 @@ class Club(models.Model):
     # 社团介绍
     Achievements = models.TextField(default="")
     Member = models.ManyToManyField(UserProfile)
+    type_choices = (
+        ('1', '自理精神'),
+        ('2', '共生意识'),
+        ('3', '科学态度'),
+        ('4', '人文情怀'),
+        ('5', '领袖气质')
+    )
+    Type = models.CharField(max_length=10, choices=type_choices, default=None)
+
+    def __str__(self):
+        return self.ClubName
 
 
 class Post(models.Model):
@@ -73,43 +77,28 @@ class Post(models.Model):
     Stars = models.FloatField(default=0.0)
     StarTime = models.DateTimeField(default=None)
     Pass = models.CharField(max_length=1, default='1')
+
     # Pass中有3个选项，未审核为0，被拒绝为1，通过为2
 
-
-class Message(models.Model):
-    FromUser = models.ForeignKey(User)
-    SendTime = models.DateTimeField(auto_now=True)
-    ToUser = models.CharField(max_length=30)
-    ReadTime = models.DateTimeField(default=None)
-    message_type = (
-        ('cps', '需要进行社团活动进行打分'),
-        ('ca', '需要审核社团活动'),
-        ('ce', '需要审核社团建立'),
-        ('default', 'default')
-    )
-    Type = models.CharField(max_length=3, choices=message_type, default='default')
-    Content = models.TextField(default='')
+    def __str__(self):
+        return self.ClubName + str(self.Date1)
 
 
 class Token(models.Model):
     Token = models.CharField(max_length=30, default="")
-    UserName = models.ForeignKey(User)
-    usertype_choices = (
-        ('club', 'club'),
-        ('cd', 'club_department'),
-        ('s', 'student'),
-        ('t', 'teacher')
-    )
-    UserType = models.CharField(max_length=4, choices=usertype_choices, default=None)
+    UserObject = models.OneToOneField(UserProfile)
+
     # start_time = models.DateTimeField()
     # end_time = models.DateTimeField()
+
+    def __str__(self):
+        return self.UserObject.UserName
 
 
 class Activity(models.Model):
     Name = models.CharField(max_length=30, default="活动名称")
     Region = models.CharField(max_length=30, default="活动地点")
-    # ClubId = models.ForeignKey(Club)
-    ClubName = models.CharField(max_length=30, default="社团")
+    ClubObject = models.ForeignKey(Club)
     Content = models.TextField(default="活动内容")
     Date1 = models.DateTimeField()
     # Date1 is start datetime
@@ -130,12 +119,18 @@ class Activity(models.Model):
     Type = models.CharField(max_length=10, default='0', choices=type_choices)
     Participants = models.ManyToManyField(UserProfile, default=None)
 
+    def __str__(self):
+        return self.Name + 'by ' + self.ClubObject.ClubName
+
 
 class Classroom(models.Model):
     ClassroomId = models.IntegerField()
     ClubObject = models.ForeignKey(Club)
     Date1 = models.DateTimeField()
     Date2 = models.DateTimeField()
+
+    def __str__(self):
+        return self.ClubObject.ClubName
 
 
 class LostAndFound(models.Model):
@@ -151,6 +146,9 @@ class LostAndFound(models.Model):
     Desc = models.TextField(default="")
     LostDateTime = models.DateTimeField()
 
+    def __str__(self):
+        return self.LinkmanName
+
 
 class Event(models.Model):
     Name = models.CharField(max_length=30, default=None)
@@ -158,3 +156,6 @@ class Event(models.Model):
     Region = models.CharField(max_length=30, default=None)
     Content = models.TextField(default=None)
     ClubObject = models.ForeignKey(Club)
+
+    def __str__(self):
+        return self.Name

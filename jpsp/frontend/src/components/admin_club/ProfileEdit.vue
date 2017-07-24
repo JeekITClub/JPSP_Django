@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div>
     <el-form ref="PostForm" :model="PostForm" v-if="Authenticate===true">
       <el-form-item label="社团名称" :required="true">
         <el-input v-model="PostForm.ClubName"></el-input>
@@ -77,8 +77,7 @@
         :prop="'achievement.' + index + '.value'"
         :rules="{
       required: true, message: '不能为空', trigger: 'blur'
-    }"
-      >
+    }">
         <el-input v-model="achievements.value"></el-input>
         <el-button @click.prevent="removeAchievement(achievement)">删除</el-button>
       </el-form-item>

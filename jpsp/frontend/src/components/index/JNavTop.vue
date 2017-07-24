@@ -11,26 +11,47 @@
             <div class="col-xs-8 text-right menu-1">
               <ul>
                 <li><a href="">首页</a></li>
-                <li class="has-dropdown"><router-link to="/club">社团</router-link>
+                <li class="has-dropdown">
+                  <router-link to="/club">社团</router-link>
                   <ul class="dropdown">
-                    <li><router-link to="/club/list">社团列表</router-link></li>
-                    <li><router-link to="/club/event">社团动态</router-link></li>
+                    <li>
+                      <router-link to="/club/list">社团列表</router-link>
+                    </li>
+                    <li>
+                      <router-link to="/club/event">社团动态</router-link>
+                    </li>
                   </ul>
                 </li>
-                <li class="has-dropdown"><router-link to="/activity/list">活动</router-link>
+                <li class="has-dropdown">
+                  <router-link to="/activity/list">活动</router-link>
                   <ul class="dropdown">
-                    <li><router-link to="/activity/list">活动报名</router-link></li>
-                    <li><router-link to="/activity/news">活动动态</router-link></li>
+                    <li>
+                      <router-link to="/activity/list">活动报名</router-link>
+                    </li>
+                    <li>
+                      <router-link to="/activity/news">活动动态</router-link>
+                    </li>
                   </ul>
                 </li>
                 <li>
                   <router-link to="/lost">失物招领</router-link>
                 </li>
-                <li><router-link to="/about">关于</router-link></li>
-                <li v-if="Authenticate===true">欢迎，{{ GetUserName }}</li>
-                <li class="btn-cta" v-if="Authenticate===false || Authenticate===null"><router-link to="/login"><span>登陆</span></router-link>
+                <li>
+                  <router-link to="/about">关于</router-link>
                 </li>
-                <li class="btn-cta" v-else><a href="#"><span>注销</span></a></li>
+                <li v-if="Authenticate===true">欢迎，{{ GetUserName }}</li>
+                <li class="has-dropdown" v-if="Authenticated != true">
+                  <router-link to="/login">登陆</router-link>
+                  <ul class="dropdown">
+                    <li>
+                      <a href="../admin_club.html">社长登陆</a>
+                    </li>
+                    <li>
+                      <a href="../admin_cd.html">社团部登陆</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="btn-cta" v-if="Authenticated === true"><a href="#"><span>注销</span></a></li>
               </ul>
             </div>
           </div>
