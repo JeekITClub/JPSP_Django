@@ -26,10 +26,10 @@ RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y \
 	git \
-	python3 \
-	python3-dev \
-	python3-setuptools \
-	python3-pip \
+	python \
+	python-dev \
+	python-setuptools \
+	python-pip \
 	nginx \
 	supervisor \
 	sqlite3 && \
@@ -37,8 +37,8 @@ RUN apt-get update && \
    rm -rf /var/lib/apt/lists/*
 
 # install uwsgi now because it takes a little while
-RUN pip3 install uwsgi
-RUN pip3 install itchat
+RUN pip install uwsgi
+RUN pip install itchat
 RUN apt-get install uwsgi-plugin-python
 # setup all the configfiles
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
@@ -49,8 +49,8 @@ COPY supervisor-app.conf /etc/supervisor/conf.d/
 # to prevent re-installing (all your) dependencies when you made a change a line or two in your app.
 
 COPY jpsp/requirements.txt /home/docker/code/jpsp/
-RUN pip3 install django-cors-headers
-RUN pip3 install django
+RUN pip install django-cors-headers
+RUN pip install django
 # RUN pip3 install -r /home/docker/code/jpsp/requirements.txt
 
 # add (the rest of) our code
