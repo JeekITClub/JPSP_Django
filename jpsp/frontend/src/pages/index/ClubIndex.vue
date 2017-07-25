@@ -5,10 +5,12 @@
         <div class="col-md-12 column">
           <div class="jumbotron">
             <h1>
-             {{ Club.ClubName }}
+              Jeek信息社
+              {{ Club.ClubName }}
             </h1>
             <p>
-             {{ Club.Introduction }}
+              {{ Club.Introduction }}
+             我们是xxx社，我们的目标是。。。
             </p>
           </div>
         </div>
@@ -40,8 +42,7 @@
     mounted: function () {
       axios({
         method: 'POST',
-        url: 'http://127.0.0.1:8000/api/public/club/get',
-        // TODO: write views to get club
+        url: 'http://127.0.0.1:8000/api/clubprofile/get',
         data: JSON.stringify({
           Token: this.GetToken,
           ClubId: this.ClubId
@@ -58,5 +59,4 @@
   }
 </script>
 <style scoped>
-  @import url("//unpkg.com/element-ui@1.3.2/lib/theme-default/index.css");
 </style>

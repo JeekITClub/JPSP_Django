@@ -75,7 +75,7 @@
                 console.log(error)
               })
           } else {
-              alert('error')
+            alert('error')
           }
         })
       }

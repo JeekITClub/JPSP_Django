@@ -15,7 +15,7 @@
                   <router-link to="/club">社团</router-link>
                   <ul class="dropdown">
                     <li>
-                      <router-link to="/club/list">社团列表</router-link>
+                      <router-link to="/club">社团列表</router-link>
                     </li>
                     <li>
                       <router-link to="/club/event">社团动态</router-link>
