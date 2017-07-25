@@ -1,48 +1,16 @@
-## Note, this file is written by cloud-init on first boot of an instance
-## modifications made here will not survive a re-bundle.
-## if you wish to make changes you can:
-## a.) add 'apt_preserve_sources_list: true' to /etc/cloud/cloud.cfg
-##     or do the same in user-data
-## b.) add sources in /etc/apt/sources.list.d
-## c.) make changes to template file /etc/cloud/templates/sources.list.tmpl
-
-# See http://help.ubuntu.com/community/UpgradeNotes for how to upgrade to
-# newer versions of the distribution.
-deb http://azure.archive.ubuntu.com/ubuntu/ zesty main restricted
-deb-src http://azure.archive.ubuntu.com/ubuntu/ zesty main restricted
-
-## Major bug fix updates produced after the final release of the
-## distribution.
-deb http://azure.archive.ubuntu.com/ubuntu/ zesty-updates main restricted
-deb-src http://azure.archive.ubuntu.com/ubuntu/ zesty-updates main restricted
-
-## N.B. software from this repository is ENTIRELY UNSUPPORTED by the Ubuntu
-deb http://azure.archive.ubuntu.com/ubuntu/ zesty universe
-deb-src http://azure.archive.ubuntu.com/ubuntu/ zesty universe
-deb http://azure.archive.ubuntu.com/ubuntu/ zesty-updates universe
-deb-src http://azure.archive.ubuntu.com/ubuntu/ zesty-updates universe
-
-## N.B. software from this repository is ENTIRELY UNSUPPORTED by the Ubuntu
-## team, and may not be under a free licence. Please satisfy yourself as to
-## your rights to use the software. Also, please note that software in
-deb http://azure.archive.ubuntu.com/ubuntu/ zesty multiverse
-deb-src http://azure.archive.ubuntu.com/ubuntu/ zesty multiverse
-deb http://azure.archive.ubuntu.com/ubuntu/ zesty-updates multiverse
-deb-src http://azure.archive.ubuntu.com/ubuntu/ zesty-updates multiverse
-deb http://azure.archive.ubuntu.com/ubuntu/ zesty-backports main restricted uni$
-deb-src http://azure.archive.ubuntu.com/ubuntu/ zesty-backports main restricted$
-
-deb http://security.ubuntu.com/ubuntu zesty-security main restricted
-deb-src http://security.ubuntu.com/ubuntu zesty-security main restricted
-deb http://security.ubuntu.com/ubuntu zesty-security universe
-deb-src http://security.ubuntu.com/ubuntu zesty-security universe
-deb http://security.ubuntu.com/ubuntu zesty-security multiverse
-## Uncomment the following two lines to add software from Canonical's
-## 'partner' repository.
-## This software is not part of Ubuntu, but is offered by Canonical and the
-## respective vendors as a service to Ubuntu users.
-# deb http://archive.canonical.com/ubuntu zesty partner
-deb [arch=amd64] https://download.docker.com/linux/ubuntu zesty edge
-# deb-src [arch=amd64] https://download.docker.com/linux/ubuntu zesty edge
-# deb-src http://archive.canonical.com/ubuntu zesty partner
-
+deb http://cn.archive.ubuntu.com/ubuntu/ zesty main restricted universe multiverse
+deb http://cn.archive.ubuntu.com/ubuntu/ zesty-security main restricted universe multiverse
+deb http://cn.archive.ubuntu.com/ubuntu/ zesty-updates main restricted universe multiverse
+deb http://cn.archive.ubuntu.com/ubuntu/ zesty-backports main restricted universe multiverse
+##测试版源
+deb http://cn.archive.ubuntu.com/ubuntu/ zesty-proposed main restricted universe multiverse
+# 源码
+deb-src http://cn.archive.ubuntu.com/ubuntu/ zesty main restricted universe multiverse
+deb-src http://cn.archive.ubuntu.com/ubuntu/ zesty-security main restricted universe multiverse
+deb-src http://cn.archive.ubuntu.com/ubuntu/ zesty-updates main restricted universe multiverse
+deb-src http://cn.archive.ubuntu.com/ubuntu/ zesty-backports main restricted universe multiverse
+##测试版源
+deb-src http://cn.archive.ubuntu.com/ubuntu/ zesty-proposed main restricted universe multiverse
+# Canonical 合作伙伴和附加
+deb http://archive.canonical.com/ubuntu/ zesty partner
+deb http://extras.ubuntu.com/ubuntu/ zesty main
