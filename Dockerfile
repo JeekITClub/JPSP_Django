@@ -33,7 +33,7 @@ RUN apt-get update && \
 	nginx \
 	supervisor \
 	sqlite3 && \
-	pip3 install -U pip setuptools && \
+	pip install -U pip setuptools && \
    rm -rf /var/lib/apt/lists/*
 
 # install uwsgi now because it takes a little while
