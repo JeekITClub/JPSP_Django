@@ -47,7 +47,7 @@ class Club(models.Model):
     Achievements = models.TextField(default="")
     Member = models.ManyToManyField(UserProfile)
     type_choices = (
-        ('1', '自理精神'),
+        ('1', '自立精神'),
         ('2', '共生意识'),
         ('3', '科学态度'),
         ('4', '人文情怀'),
