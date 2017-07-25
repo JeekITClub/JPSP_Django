@@ -41,13 +41,13 @@
                 </li>
                 <li v-if="Authenticate===true">欢迎，{{ GetUserName }}</li>
                 <li class="has-dropdown" v-if="Authenticate != true">
-                  <router-link to="/login">登陆</router-link>
+                  <router-link to="/login">登录</router-link>
                   <ul class="dropdown">
                     <li>
-                      <a href="../admin_club.html">社长登陆</a>
+                      <a href="../admin_club.html">社长登录</a>
                     </li>
                     <li>
-                      <a href="../admin_cd.html">社团部登陆</a>
+                      <a href="../admin_cd.html">社团部登录</a>
                     </li>
                   </ul>
                 </li>

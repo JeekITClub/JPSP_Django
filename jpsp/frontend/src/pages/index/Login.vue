@@ -5,7 +5,7 @@
         <el-col :span=8 :offset=8>
           <h1 class="login-title">学生登录</h1>
           <div v-if="Authenticate === null || Authenticate===false">
-            <el-form ref="LoginForm" :model="LoginForm" :rules="Rules" class="demo-ruleForm">
+            <el-form ref="LoginForm" :model="LoginForm" :rules="Rules">
               <el-form-item label="用户名" prop="UserName">
                 <el-input v-model="LoginForm.UserName" placeholder="用户名" autofocus=""></el-input>
               </el-form-item>
@@ -15,11 +15,11 @@
               </el-form-item>
               <br>
               <el-form-item>
-                <el-button type="primary" @click="onSubmit" class="login-button">登陆</el-button>
+                <el-button type="primary" @click="onSubmit" class="login-button">登录</el-button>
               </el-form-item>
               <a href="http://baidu.com"><p style="text-align: right">忘记密码？</p></a>
               <el-form-item>
-                <p v-if="Authenticate === false">登陆失败</p>
+                <p v-if="Authenticate === false">登录失败</p>
               </el-form-item>
             </el-form>
           </div>
@@ -44,7 +44,7 @@
             {required: true, message: '请输入用户名', trigger: 'blur'}
           ],
           Password: [
-            {required: true, message: '请输入密码', trigger: 'change'}
+            {required: true, message: '请输入密码', trigger: 'blur'}
           ]
         }
       }
