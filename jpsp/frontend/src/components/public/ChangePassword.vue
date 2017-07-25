@@ -36,15 +36,25 @@
           data: {}
         }).then(function (response) {
           if (response.data.message === 'success') {
-            console.log('success')
+            this.$notify({
+              title: '成功',
+              message: '成功更改密码',
+              type: 'success'
+            })
           }
           if (response.data.message === 'error') {
-            console.log('error')
+            this.$notify.error({
+              'title': '错误',
+              'message': '无法更改密码'
+            })
           }
         }.bind(this)).catch(function () {
-          console.log('error')
+          this.$notify.error({
+            'title': '错误',
+            'message': '无法更改密码'
+          })
         })
-      },
+      }
     }
   }
 </script>

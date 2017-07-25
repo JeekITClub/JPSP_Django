@@ -1,15 +1,17 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import index from '@/pages/admin_club/index'
+import Login from '@/pages/admin_club/Login'
 import PostEdit from '@/pages/admin_club/PostEdit'
 import ProfileEdit from '@/pages/admin_club/ProfileEdit'
-import ActivityApply from '@/pages/admin_club/ActivityApply'
 import ClubPageSettings from '@/pages/admin_club/ClubPageSettings'
 import MemberManagement from '@/pages/admin_club/MemberManagement'
 import RecruitClassroomEdit from '@/pages/admin_club/RecruitClassroomEdit'
-import RecruitMember from '@/pages/admin_club/RecruitMember.vue'
+import RecruitClassroomList from '@/pages/admin_club/RecruitClassroomList.vue'
 import About from '@/pages/public/About.vue'
 import Contact from '@/pages/public/Contact.vue'
+import Establish from '@/pages/admin_club/Establish.vue'
+import ActivityApply from '@/pages/admin_club/ActivityApply.vue'
+import ActivityList from '@/pages/admin_club/ActivityList.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -17,7 +19,12 @@ export default new Router({
     {
       path: '/',
       name: 'Index',
-      component: index
+      component: Login
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
     },
     {
       path: '/post',
@@ -30,16 +37,9 @@ export default new Router({
       component: ProfileEdit
     },
     {
-      path: '/activity',
-      name: 'Activity',
-      component: ActivityApply,
-      children: [
-        {
-          path: 'apply',
-          name: 'ActivityApply',
-          component: ActivityApply
-        }
-      ]
+      path: '/establish',
+      name: 'Establish',
+      component: Establish
     },
     {
       path: '/page',
@@ -47,21 +47,24 @@ export default new Router({
       component: ClubPageSettings
     },
     {
-      path: '/recruit',
-      name: 'Recruit',
-      component: RecruitClassroomEdit,
-      children: [
-        {
-          path: 'classroom',
-          name: 'RecruitClassroomApply',
-          component: RecruitClassroomEdit
-        },
-        {
-          path: 'member',
-          name: 'RecruitMember',
-          component: RecruitMember
-        }
-      ]
+      path: '/activity/apply',
+      name: 'ActivityApply',
+      component: ActivityApply
+    },
+    {
+      path: '/activity/list',
+      name: 'ActivityList',
+      component: ActivityList
+    },
+    {
+      path: '/recruit/classroom/apply',
+      name: 'RecruitClassroom',
+      component: RecruitClassroomEdit
+    },
+    {
+      path: '/recruit/classroom/list',
+      name: 'RecruitClassroomList',
+      component: RecruitClassroomList
     },
     {
       path: '/member',

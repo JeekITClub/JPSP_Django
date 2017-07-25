@@ -14,6 +14,11 @@
                 <span>{{ props.row.Process }}</span>
               </el-form-item>
             </el-col>
+            <el-col :span="24">
+              <el-form-item label="活动地点">
+                <span>{{ props.row.Region }}</span>
+              </el-form-item>
+            </el-col>
           </el-row>
         </el-form>
       </template>
@@ -28,7 +33,12 @@
     </el-table-column>
     <el-table-column prop="Date2" label="结束时间">
     </el-table-column>
-    <el-table-column prop="Region" label="活动地点">
+    <el-table-column prop="State" label="状态">
+      <template scope="scope">
+        <span v-if="scope.row.State === '0'">未审核</span>
+        <span v-if="scope.row.State === '1'" style="color: green">已审核</span>
+        <span v-if="scope.row.State === '2'" style="color: red">被拒绝</span>
+      </template>
     </el-table-column>
     <el-table-column label="操作" v-if="user === 'Student'">
       <template scope="scope">
@@ -37,7 +47,7 @@
         </el-button>
       </template>
     </el-table-column>
-    <el-table-column label="操作" v-if="user === 'Club'">
+    <el-table-column label="操作" v-if="user === 'Club' && type === 'Future' || type === 'All'">
       <template scope="scope">
         <el-button size="small" type="danger" @click="CancelSubmit(scope.row.pk)">
           取消活动
@@ -53,14 +63,14 @@
     </el-table-column>
     <el-table-column label="操作" v-if="user === 'CD' && type == 'Unconfirmed' ">
       <template scope="scope">
-        <el-button size="small" type="danger" @click="ConfirmSubmit(scope.row.pk)">
+        <el-button size="small" type="success" @click="ConfirmSubmit(scope.row.pk)">
           同意
         </el-button>
       </template>
     </el-table-column>
-    <el-table-column label="操作" v-if="user === 'CD' && type != 'Unpassed' ">
+    <el-table-column label="操作" v-if="user === 'CD' && type != 'Denied' && type !='Unconfirmed'">
       <template scope="scope">
-        <el-button size="small" type="danger" @click="UndoDenySubmit(scope.row.pk)">
+        <el-button size="small" type="success" @click="UndoDenySubmit(scope.row.pk)">
           撤销拒绝
         </el-button>
       </template>
@@ -93,7 +103,7 @@
             ActivityId: ActivityId,
             Token: this.GetToken,
             Operation: 'Deny'
-          }.bind(this))
+          })
         }).then(function (response) {
           if (response.data.message === 'success') {
             this.$notify({
@@ -170,11 +180,12 @@
       ConfirmSubmit (ActivityId) {
         axios({
           method: 'POST',
-          url: '',
+          url: 'http://127.0.0.1:8000/api/activity/operate',
           data: JSON.stringify({
             ActivityId: ActivityId,
-            Token: this.GetToken
-          }.bind(this))
+            Token: this.GetToken,
+            Operation: 'Confirm'
+          })
         })
       }
     },
@@ -195,14 +206,14 @@
     mounted: function () {
       axios({
         method: 'POST',
-        url: 'http://127.0.0.1:8000/api/cd/post/list',
+        url: 'http://127.0.0.1:8000/api/activity/list',
         data: JSON.stringify({
           Type: this.type,
           Token: this.GetToken
         })
       }).then(function (response) {
         if (response.data.message === 'success') {
-          this.PostListTable = JSON.parse(response.data.data)
+          this.ActivityListTable = JSON.parse(response.data.data)
         } else {
           this.$notify.error({
             title: '错误',

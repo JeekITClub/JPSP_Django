@@ -1,48 +1,62 @@
 <template>
-<div>
+  <div>
+    <div class="container">
+      <div class="row clearfix">
+        <div class="col-md-12 column">
+          <div class="jumbotron">
+            <h1>
+             {{ Club.ClubName }}
+            </h1>
+            <p>
+             {{ Club.Introduction }}
+            </p>
+          </div>
+        </div>
+      </div>
 
-</div>
+    </div>
+  </div>
 </template>
 <script>
+  import axios from 'axios'
   export default {
     data () {
       return {
-        form: {
-          username: '',
-          password: '',
-          remember: false
-        }
+        ClubId: this.$route.params.ClubId,
+        Club: {}
       }
     },
-    methods: {
-      onSubmit () {
-        console.log('submit!')
+    computed: {
+      Authenticate () {
+        return this.$store.state.Authenticated
+      },
+      GetUserName () {
+        return this.$store.state.UserName
+      },
+      GetToken () {
+        return this.$store.state.Token
       }
+    },
+    mounted: function () {
+      axios({
+        method: 'POST',
+        url: 'http://127.0.0.1:8000/api/public/club/get',
+        // TODO: write views to get club
+        data: JSON.stringify({
+          Token: this.GetToken,
+          ClubId: this.ClubId
+        })
+      }).then(function (response) {
+        if (response.data.message === 'success') {
+          this.Club = JSON.parse(response.data.data)
+          console.log('success')
+        } else {
+          console.log('error')
+        }
+      }.bind(this))
     }
   }
 </script>
 <style scoped>
   @import url("//unpkg.com/element-ui@1.3.2/lib/theme-default/index.css");
-  @import '../../assets/index/css/animate.css';
-  @import '../../assets/index/css/icomoon.css';
-  @import '../../assets/index/css/bootstrap.css';
-  @import '../../assets/index/css/magnific-popup.css';
-  @import '../../assets/index/css/flexslider.css';
-  @import '../../assets/index/css/style.css';
-
-  .el-carousel__item h3 {
-    color: #475669;
-    font-size: 14px;
-    opacity: 0.75;
-    line-height: 150px;
-    margin: 0;
-  }
-
-  .el-carousel__item:nth-child(2n) {
-     background-color: #99a9bf;
-  }
-
-  .el-carousel__item:nth-child(2n+1) {
-     background-color: #d3dce6;
-  }
 </style>

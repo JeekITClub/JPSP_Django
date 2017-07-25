@@ -2,16 +2,25 @@
   <div>
     <el-tabs v-model="TabsValue" type="card">
       <el-tab-pane label="未审核" name="Unconfirmed">
-        <cd_activity_list type="Unconfirmed" user="CD"></cd_activity_list>
+        <activity_list type="Unconfirmed" user="CD"></activity_list>
       </el-tab-pane>
       <el-tab-pane label="已审核" name="Confirmd">
-        <cd_activity_list type="Confirmed" user="CD"></cd_activity_list>
+        <activity_list type="Confirmed" user="CD"></activity_list>
       </el-tab-pane>
-      <el-tab-pane label="未通过" name="Unpassed">
-        <cd_activity_list type="Unpassed" user="CD"></cd_activity_list>
+      <el-tab-pane label="未通过" name="Denied">
+        <activity_list type="Denied" user="CD"></activity_list>
       </el-tab-pane>
       <el-tab-pane label="所有" name="All">
-        <cd_activity_list type="All" user="CD"></cd_activity_list>
+        <activity_list type="All" user="CD"></activity_list>
+      </el-tab-pane>
+      <el-tab-pane label="过期" name="Past">
+        <activity_list type="Past" user="CD"></activity_list>
+      </el-tab-pane>
+      <el-tab-pane label="进行中" name="Happening">
+        <activity_list type="Happening" user="CD"></activity_list>
+      </el-tab-pane>
+      <el-tab-pane label="未来" name="Future">
+        <activity_list type="Future" user="CD"></activity_list>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -22,11 +31,11 @@
   export default {
     components: {
       'cd_aside': CDAside,
-      'cd_activity_list': ActivityList
+      'activity_list': ActivityList
     },
     data () {
       return {
-        TabsValue: 'Unconfirmed'
+        TabsValue: 'All'
       }
     }
   }

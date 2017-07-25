@@ -1,21 +1,21 @@
 <template>
   <div id="app">
-  <JNavTop></JNavTop>
+    <JNavTop></JNavTop>
     <router-view></router-view>
-  <JFooter></JFooter>
+    <JFooter></JFooter>
   </div>
 </template>
 
 <script>
-import JNavTop from './components/index/JNavTop.vue'
-import JFooter from './components/index/JFooter.vue'
-export default {
-  name: 'app',
-  components: {
-    JNavTop,
-    JFooter
+  import JNavTop from './components/index/JNavTop.vue'
+  import JFooter from './components/index/JFooter.vue'
+  export default {
+    name: 'app',
+    components: {
+      JNavTop,
+      JFooter
+    }
   }
-}
 </script>
 
 <style>

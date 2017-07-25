@@ -28,11 +28,11 @@
         </el-form>
       </template>
     </el-table-column>
-    <el-table-column prop="pk" label="PostId">
+    <el-table-column prop="pk" label="序号">
     </el-table-column>
     <el-table-column prop="ClubName" label="社团名称">
     </el-table-column>
-    <el-table-column prop="LinkmanName" label="联系人">>
+    <el-table-column prop="LinkmanName" label="联系人">
     </el-table-column>
     <el-table-column prop="Date1" label="社团活动日期">
     </el-table-column>
@@ -89,8 +89,21 @@
             Stars: star,
             PostId: postid,
             Token: this.GetToken
-          })
-        })
+          }.bind(this))
+        }).then(function (response) {
+          if (response.data.message === 'success') {
+            this.$notify({
+              title: '成功',
+              message: '成功评价社团活动 Id:' + postid,
+              type: 'success'
+            })
+          } else {
+            this.$notify.error({
+              title: '错误',
+              message: '无法评价社团活动'
+            })
+          }
+        }.bind(this))
       },
       DenySubmit (postid) {
         axios({
@@ -101,7 +114,20 @@
             Token: this.GetToken,
             Operation: 'Deny'
           })
-        })
+        }).then(function (response) {
+          if (response.data.message === 'success') {
+            this.$notify({
+              title: '成功',
+              message: '成功拒绝社团活动 Id:' + postid,
+              type: 'success'
+            })
+          } else {
+            this.$notify.error({
+              title: '错误',
+              message: '无法拒绝社团活动'
+            })
+          }
+        }.bind(this))
       },
       UndoDenySubmit (postid) {
         axios({
@@ -112,7 +138,20 @@
             Token: this.GetToken,
             Operation: 'UndoDeny'
           })
-        })
+        }).then(function (response) {
+          if (response.data.message === 'success') {
+            this.$notify({
+              title: '成功',
+              message: '成功撤销拒绝社团活动 Id:' + postid,
+              type: 'success'
+            })
+          } else {
+            this.$notify.error({
+              title: '错误',
+              message: '无法撤销拒绝社团活动'
+            })
+          }
+        }.bind(this))
       }
     },
     computed: {
@@ -134,14 +173,16 @@
           Type: this.type,
           Token: this.GetToken
         })
-      })
-        .then(function (response) {
-          if (response.data.message === 'success') {
-            this.PostListTable = JSON.parse(response.data.data)
-          } else {
-            console.log('error')
-          }
-        }.bind(this))
+      }).then(function (response) {
+        if (response.data.message === 'success') {
+          this.PostListTable = JSON.parse(response.data.data)
+        } else {
+          this.$notify.error({
+            title: '错误',
+            message: '无法获得数据'
+          })
+        }
+      }.bind(this))
     }
   }
 </script>

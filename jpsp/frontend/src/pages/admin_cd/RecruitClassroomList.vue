@@ -1,22 +1,30 @@
 <template>
   <div>
-    <el-row class="tac">
-      <el-col :span="4">
-        <cd_aside></cd_aside>
-      </el-col>
-      <el-col :span="20" offset="4">
-        <club_recruit_classroom_list></club_recruit_classroom_list>
-      </el-col>
-    </el-row>
+    <el-tabs v-model="TabsValue" type="card">
+      <el-tab-pane label="所有" name="All">
+        <recruit_classroom_list type="All" user="CD"></recruit_classroom_list>
+      </el-tab-pane>
+      <el-tab-pane label="已审核" name="Confirmed">
+        <recruit_classroom_list type="Confirmed" user="CD"></recruit_classroom_list>
+      </el-tab-pane>
+      <el-tab-pane label="未审核" name="Unconfirmed">
+        <recruit_classroom_list type="Unconfirmed" user="CD"></recruit_classroom_list>
+      </el-tab-pane>
+      <el-tab-pane label="已拒绝" name="Denied">
+        <recruit_classroom_list type="Denied" user="CD"></recruit_classroom_list>
+      </el-tab-pane>
+    </el-tabs>
+    <recruit_classroom_list></recruit_classroom_list>
   </div>
 </template>
 <script>
-  import CDAside from '../../components/admin_cd/CDAside.vue'
-  import RecruitClassroomList from '../../components/admin_cd/RecruitClassroomList.vue'
+  import RecruitClassroomList from '../../components/public/RecruitClassroomList.vue'
   export default {
     components: {
-      'cd_aside': CDAside,
-      'club_recruit_classroom_list': RecruitClassroomList
+      'recruit_classroom_list': RecruitClassroomList
+    },
+    data: {
+      TabsValue: 'Unconfirmed'
     }
   }
 </script>

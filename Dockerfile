@@ -1,4 +1,4 @@
-# Copyright 2013 Thatcher Peskens
+# Copyright 2014 Thatcher Peskens
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM ubuntu:16.04
+FROM ubuntu:17.04
 
 MAINTAINER Dockerfiles
 
@@ -23,23 +23,23 @@ COPY sources.list /etc/apt/sources.list
 # Install required packages and remove the apt packages cache when done.
 
 RUN apt-get update && \
-    apt-get upgrade -y && \ 	
+    apt-get upgrade -y && \
     apt-get install -y \
 	git \
-	python3 \
-	python3-dev \
-	python3-setuptools \
-	python3-pip \
+	python \
+	python-dev \
+	python-setuptools \
+	python-pip \
 	nginx \
-	curl \
 	supervisor \
 	sqlite3 && \
-	pip3 install -U pip setuptools && \
+	pip install -U pip setuptools && \
    rm -rf /var/lib/apt/lists/*
 
 # install uwsgi now because it takes a little while
-RUN pip3 install uwsgi
-
+RUN pip install uwsgi
+RUN pip install itchat
+RUN apt-get install uwsgi-plugin-python
 # setup all the configfiles
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 COPY nginx-app.conf /etc/nginx/sites-available/default
@@ -49,8 +49,8 @@ COPY supervisor-app.conf /etc/supervisor/conf.d/
 # to prevent re-installing (all your) dependencies when you made a change a line or two in your app.
 
 COPY jpsp/requirements.txt /home/docker/code/jpsp/
-RUN pip3 install django-cors-headers
-RUN pip3 install django==1.10.7
+RUN pip install django-cors-headers
+RUN pip install django
 # RUN pip3 install -r /home/docker/code/jpsp/requirements.txt
 
 # add (the rest of) our code
@@ -59,4 +59,4 @@ COPY . /home/docker/code/
 # be installed in the code/app/ directory
 
 EXPOSE 80
-CMD ["supervisord", "-n"]
+RUN superviosrd

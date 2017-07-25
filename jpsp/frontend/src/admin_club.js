@@ -19,7 +19,7 @@ const AdminClubVuexStore = new Vuex.Store({
     ClubId: '',
     UserName: '',
     Token: '',
-    Authenticated: true
+    Authenticated: null
   },
   mutations: {
     Authenticated (state, If) {
@@ -30,6 +30,9 @@ const AdminClubVuexStore = new Vuex.Store({
     },
     ApplyToken (state, Token) {
       state.Token = Token
+    },
+    ApplyClubId (state, ClubId) {
+      state.ClubId = ClubId
     }
   }
 })
@@ -40,5 +43,17 @@ new Vue({
   store: AdminClubVuexStore,
   template: '<App/>',
   components: {AdminClub},
-  render: h => h(AdminClub)
+  render: h => h(AdminClub),
+  created () {
+    this.checkLogin()
+  },
+  watch: {
+    '$route': 'checkLogin'
+  },
+  methods: {
+    checkLogin () {
+      // 检查是否存在session
+      // cookie操作方法在源码里有或者参考网上的即可
+    }
+  }
 })

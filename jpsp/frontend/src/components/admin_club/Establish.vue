@@ -1,11 +1,13 @@
 <template>
   <div>
-    <el-form ref="EstablishClubForm" :model="EstablishClubForm" :rule="">
-      <el-form-item label="社团名称">
+    <el-form ref="EstablishClubForm" :model="EstablishClubForm">
+      <el-form-item label="社团名称" required>
         <el-input v-model="EstablishClubForm.ClubName"></el-input>
       </el-form-item>
-      <el-form-item label="社长姓名"><el-input v-model="EstablishClubForm.ShezhangName"></el-input></el-form-item>
-      <el-form-item label="社长年级">
+      <el-form-item label="社长姓名" required>
+        <el-input v-model="EstablishClubForm.ShezhangName"></el-input>
+      </el-form-item>
+      <el-form-item label="社长年级" required>
         <el-select v-model="EstablishClubForm.ShezhangGrade" value="">
           <el-option label="高一" value="1"></el-option>
           <el-option label="高二" value="2"></el-option>
@@ -29,25 +31,25 @@
           <el-option label="13" value="13"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="社长QQ号">
+      <el-form-item label="社长QQ号" required>
         <el-input v-model="EstablishClubForm.ShezhangQQ"></el-input>
       </el-form-item>
-      <el-form-item label="是否进行招新">
+      <el-form-item label="是否进行招新" required>
         <el-radio-group v-model="EstablishClubForm.IfRecruit">
           <el-radio :label=true>招新</el-radio>
           <el-radio :label=false>不招新</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="招新QQ群">
+      <el-form-item label="招新QQ群" required>
         <el-input v-if="EstablishClubForm.IfRecruit" v-model="EstablishClubForm.QQGroup"></el-input>
       </el-form-item>
       <el-form-item label="社团邮箱">
         <el-input v-model="EstablishClubForm.Email"></el-input>
       </el-form-item>
-      <el-form-item label="社团介绍">
+      <el-form-item label="社团介绍" required>
         <el-input type="textarea" v-model="EstablishClubForm.Introduction"></el-input>
       </el-form-item>
-      <el-form-item label="社团类型">
+      <el-form-item label="社团类型" required>
         <el-checkbox-group v-model="EstablishClubForm.Label">
           <el-checkbox label="人文"></el-checkbox>
           <el-checkbox label="科技"></el-checkbox>
@@ -80,8 +82,7 @@
           IfRecruit: true,
           QQGroup: '',
           Email: ''
-        },
-        error: false
+        }
       }
     },
     methods: {
@@ -95,33 +96,31 @@
             Shezhang_QQ: this.EstablishClubForm.ShezhangQQ,
             Shezhang_Grade: this.EstablishClubForm.ShezhangGrade,
             Shezhang_Classroom: this.EstablishClubForm.ShezhangClassroom,
-            Label: this.Label,
-            // TODO: Label is stringified to a string not an array
             Introduction: this.EstablishClubForm.Introduction,
             IfRecruit: this.EstablishClubForm.IfRecruit,
             QQGroup: this.EstablishClubForm.QQGroup,
-            Email: this.EstablishClubForm.Email,
-            Token: this.GetToken
+            Email: this.EstablishClubForm.Email
           })
         }).then(function (response) {
-          // TODO: Actions after success
           if (response.data.message === 'success') {
-            console.log('success')
+            this.$notify({
+              title: '成功',
+              message: '成功创建社团',
+              type: 'success'
+            })
           }
           if (response.data.message === 'error') {
-            console.log('error')
+            this.$notify.error({
+              title: '错误',
+              message: '无法创建社团'
+            })
           }
         }.bind(this)).catch(function () {
-          console.log('error')
+          this.$notify.error({
+            title: '错误',
+            message: '无法创建社团'
+          })
         })
-      }
-    },
-    computed: {
-      GetClubName () {
-        return this.$store.state.UserName
-      },
-      GetToken () {
-        return this.$store.state.Token
       }
     }
   }

@@ -25,10 +25,12 @@ SECRET_KEY = 'yv_xr$zykv1l%v)2b$ztov#fq2#9h(pz-0=m%3ut!nzf0=9_at'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 CORS_ORIGIN_ALLOW_ALL = True
 # Application definition
+
+CORS_ORIGIN_WHITELIST = ()
 
 CORS_ALLOW_METHODS = (
 
@@ -55,6 +57,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'jpspapp',
     'corsheaders'
+    #,
+    #'guicorn'
 ]
 
 CORS_ALLOW_HEADERS = (
@@ -89,8 +93,7 @@ ROOT_URLCONF = 'jpsp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'frontend/dist')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'frontend/dist')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -108,12 +111,25 @@ WSGI_APPLICATION = 'jpsp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'jpsp',
+#         'USER': 'jpsp',
+#         'PASSWORD': 'jpJeekjpsp',
+#         'HOST': 'localhost',
+#         'PORT': '3006',
+#     }
+# }
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -138,13 +154,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/

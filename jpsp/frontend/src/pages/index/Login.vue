@@ -1,28 +1,33 @@
 <template>
-<div class="main">
-<h1>学生登录</h1>
-<div class="login-form">
-	<div class="close"> </div>
-		<div class="head-info">
-			<label class="lbl-1"> </label>
-			<label class="lbl-2"> </label>
-			<label class="lbl-3"> </label>
-		</div>
-			<div class="clear"> </div>
-	<div class="avtar">
-		<img src="../../assets/index/images/avtar.png" />
-	</div>
-		<el-form>
-			<el-form-item label="学号">
-				<el-input type="text" v-model="LoginForm.UserId"></el-input>
-			</el-form-item>
-			<el-form-item label="密码">
-				<el-input type="password" v-model="LoginForm.Password"></el-input>
-			</el-form-item>
-			<el-button type="primary" @click="onSubmit">登陆</el-button>
-		</el-form>
-</div>
-</div>
+  <div>
+    <div class="LoginForm">
+      <el-row class="tac">
+        <el-col :span=8 :offset=8>
+          <h1 class="login-title">学生登录</h1>
+          <div v-if="Authenticate === null || Authenticate===false">
+            <el-form ref="LoginForm" :model="LoginForm" :rules="Rules">
+              <el-form-item label="用户名" prop="UserName">
+                <el-input v-model="LoginForm.UserName" placeholder="用户名" autofocus=""></el-input>
+              </el-form-item>
+              <el-form-item label="密码" prop="Password">
+                <el-input type="password" v-model="LoginForm.Password" placeholder="密码">
+                </el-input>
+              </el-form-item>
+              <br>
+              <el-form-item>
+                <el-button type="primary" @click="onSubmit" class="login-button">登录</el-button>
+              </el-form-item>
+              <a href="http://baidu.com"><p style="text-align: right">忘记密码？</p></a>
+              <el-form-item>
+                <p v-if="Authenticate === false">登录失败</p>
+              </el-form-item>
+            </el-form>
+          </div>
+          <p class="lead" v-if="Authenticate === true">已登录</p>
+        </el-col>
+      </el-row>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -31,40 +36,70 @@
     data () {
       return {
         LoginForm: {
-          UserId: '',
+          UserName: '',
           Password: ''
+        },
+        Rules: {
+          UserName: [
+            {required: true, message: '请输入用户名', trigger: 'blur'}
+          ],
+          Password: [
+            {required: true, message: '请输入密码', trigger: 'blur'}
+          ]
         }
       }
     },
     methods: {
       onSubmit () {
-        axios({
-          method: 'POST',
-          url: 'http://127.0.0.1/api/login',
-          data: {
-            UserId: this.LoginForm.UserId,
-            Password: this.LoginForm.Password,
-            UserType: 'Student'
+        this.$refs['LoginForm'].validate((valid) => {
+          if (valid) {
+            axios({
+              method: 'POST',
+              url: 'http://127.0.0.1:8000/api/login',
+              data: JSON.stringify({
+                UserName: this.LoginForm.UserId,
+                Password: this.LoginForm.Password,
+                UserType: 'Student'
+              })
+            })
+              .then(function (response) {
+                if (response.data.message === 'User Authenticated') {
+                  this.$store.commit('Authenticated', true)
+                  this.$store.commit('ApplyUserName', response.data.UserName)
+                  this.$store.commit('ApplyToken', response.data.Token)
+                } else if (response.data.message === 'User Not Authenticated') {
+                  console.log('Login Failed')
+                }
+              }.bind(this))
+              .catch(function (error) {
+                console.log(error)
+              })
+          } else {
+              alert('error')
           }
         })
-          .then(function (response) {
-            if (response.data.message === 'User Authenticated') {
-              this.$store.commit('Authenticated', true)
-              this.$store.commit('ApplyUserName', response.data.UserName)
-              this.$store.commit('ApplyToken', response.data.Token)
-            } else if (response.data.message === 'User Not Authenticated') {
-              console.log('Failed')
-            }
-          }.bind(this))
-          .catch(function (error) {
-            console.log(error)
-          })
+      }
+    },
+    computed: {
+      Authenticate () {
+        return this.$store.state.Authenticated
       }
     }
   }
 </script>
 
 <style scoped>
-  @import '../../assets/index/css/bootstrap.css';
-  @import '../../assets/index/css/login.css';
+  .LoginForm {
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
+
+  .login-title {
+    text-align: center;
+  }
+
+  .login-button {
+    width: 100%;
+    height: 45px;
+  }
 </style>
