@@ -49,17 +49,6 @@
       <el-form-item label="社团介绍" required>
         <el-input type="textarea" v-model="EstablishClubForm.Introduction"></el-input>
       </el-form-item>
-      <el-form-item label="社团类型" required>
-        <el-checkbox-group v-model="EstablishClubForm.Label">
-          <el-checkbox label="人文"></el-checkbox>
-          <el-checkbox label="科技"></el-checkbox>
-          <el-checkbox label="计算机"></el-checkbox>
-          <el-checkbox label="摄影"></el-checkbox>
-          <el-checkbox label="体育"></el-checkbox>
-          <el-checkbox label="艺术"></el-checkbox>
-          <el-checkbox label="学科类"></el-checkbox>
-        </el-checkbox-group>
-      </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('EstablishForm')">立即创建</el-button>
       </el-form-item>
@@ -77,7 +66,6 @@
           ShezhangQQ: '',
           ShezhangGrade: '',
           ShezhangClassroom: '',
-          Label: [],
           Introduction: '',
           IfRecruit: true,
           QQGroup: '',

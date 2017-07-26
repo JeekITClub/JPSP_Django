@@ -2,7 +2,17 @@
   <div id="app_club">
     <JNavTop></JNavTop>
     <div class="container">
-      <router-view></router-view>
+      <el-row class="tac" :gutter="20" v-if="Authenticated === true">
+        <el-col :span="4">
+          <club-aside></club-aside>
+        </el-col>
+        <el-col :span="20">
+          <router-view></router-view>
+        </el-col>
+      </el-row>
+      <el-row class="tac" v-else>
+        <router-view></router-view>
+      </el-row>
     </div>
   </div>
 </template>

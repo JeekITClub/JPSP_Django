@@ -1,30 +1,33 @@
 <template>
-  <div v-if="Authenticate===true">
-    <el-row class="tac">
-      <el-col :span="4">
-        <club_aside></club_aside>
-      </el-col>
-      <el-col :span="4" offset="20">
+  <div>
+    <el-tabs v-model="TabsValue" type="card">
+      <el-tab-pane label="所有" name="All">
         <club_member_management></club_member_management>
-      </el-col>
-    </el-row>
-    <JFooter></JFooter>
+      </el-tab-pane>
+      <el-tab-pane label="成员" name="Confirmed">
+        <club_member_management></club_member_management>
+      </el-tab-pane>
+      <el-tab-pane label="未确认社员" name="Unconfirmed">
+        <club_member_management></club_member_management>
+      </el-tab-pane>
+    </el-tabs>
   </div>
 </template>
 <script>
-  import ClubAside from '../../components/admin_club/ClubAside.vue'
-  import JFooter from '../../components/admin_club/JFooter.vue'
-  import MemberManagement from '../../components/admin_club/MemberManagement.vue'
+  import MemberManagement from '@/pages/admin_club/MemberManagement.vue'
   export default {
     name: 'MemberManagement',
     components: {
-      'club_aside': ClubAside,
-      'club_member_management': MemberManagement,
-      'JFooter': JFooter
+      'club_member_management': MemberManagement
     },
     computed: {
       Authenticate () {
         return this.$store.state.Authenticated
+      }
+    },
+    data () {
+      return {
+        TabsValue: 'Confirmed'
       }
     }
   }

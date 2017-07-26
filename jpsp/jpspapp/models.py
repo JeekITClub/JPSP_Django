@@ -26,8 +26,8 @@ class CDUser(models.Model):
 
 class Club(models.Model):
     ClubName = models.CharField(max_length=30, default=None)
-    ClubObject = models.ForeignKey(User, default=None)
-    ClubId = models.CharField(max_length=4, default=None)
+    ClubObject = models.OneToOneField(User, default=None)
+    ClubId = models.IntegerField(default=None)
     ShezhangName = models.CharField(max_length=8, default=None)
     ShezhangQq = models.CharField(max_length=20, default=None)
     ShezhangGrade = models.CharField(max_length=1, default=None)
@@ -47,7 +47,7 @@ class Club(models.Model):
     Achievements = models.TextField(default="")
     Member = models.ManyToManyField(UserProfile)
     type_choices = (
-        ('1', '自理精神'),
+        ('1', '自立精神'),
         ('2', '共生意识'),
         ('3', '科学态度'),
         ('4', '人文情怀'),
@@ -86,7 +86,7 @@ class Post(models.Model):
 
 class Token(models.Model):
     Token = models.CharField(max_length=30, default="")
-    UserObject = models.OneToOneField(UserProfile)
+    UserObject = models.OneToOneField(UserProfile,default=None)
 
     # start_time = models.DateTimeField()
     # end_time = models.DateTimeField()
@@ -98,7 +98,7 @@ class Token(models.Model):
 class Activity(models.Model):
     Name = models.CharField(max_length=30, default="活动名称")
     Region = models.CharField(max_length=30, default="活动地点")
-    ClubObject = models.ForeignKey(Club)
+    ClubObject = models.ForeignKey(Club,default=None)
     Content = models.TextField(default="活动内容")
     Date1 = models.DateTimeField()
     # Date1 is start datetime

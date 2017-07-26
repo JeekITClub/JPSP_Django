@@ -12,12 +12,11 @@ import Contact from '@/pages/public/Contact.vue'
 import Establish from '@/pages/admin_club/Establish.vue'
 import ActivityApply from '@/pages/admin_club/ActivityApply.vue'
 import ActivityList from '@/pages/admin_club/ActivityList.vue'
-import ActivityForm from '@/pages/admin_club/ActivityForm.vue'
-import ClubProfile from '@/pages/admin_club/ClubProfile.vue'
 import EventForm from '@/pages/admin_club/EventForm.vue'
 import EventList from '@/pages/admin_club/EventList.vue'
 import PostForm from '@/pages/admin_club/PostForm.vue'
 import PostList from '@/pages/admin_club/PostList.vue'
+import DashBoard from '@/pages/admin_club/DashBoard.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -26,6 +25,11 @@ export default new Router({
       path: '/',
       name: 'Index',
       component: Login
+    },
+    {
+      path: '/dashboard',
+      name: 'Dashboard',
+      component: DashBoard
     },
     {
       path: '/login',

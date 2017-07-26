@@ -30,7 +30,7 @@
   </div>
 </template>
 <script>
-  import { setCookie } from 'tiny-cookie'
+  import {setCookie, getCookie} from 'tiny-cookie'
   import axios from 'axios'
   export default {
     data () {
@@ -53,26 +53,27 @@
           })
         }).then(function (response) {
           if (response.data.message === 'User Authenticated') {
-            this.$store.commit('Authenticated', true)
-            this.$store.commit('ApplyUserName', response.data.UserName)
-            this.$store.commit('ApplyToken', response.data.Token)
-            this.$router.push('/post')
-          } else if (response.data.message === 'User Not Authenticated') {
-            this.$store.commit('Authenticated', false)
+            let expireDays = 1000 * 60 * 60 * 24 * 15
+            // this.$store.commit('ApplyUserName', response.data.UserName)
+            setCookie('ClubId', this.LoginForm.ClubId, expireDays)
+            setCookie('Clubname', response.data.Clubname, expireDays)
+            // this.$store.commit('ApplyToken', response.data.Token)
+            setCookie('Token', response.data.Token, expireDays)
+            // expireDays 为有效时间
+            setCookie('ClubAuthenticated', true, expireDays)
+            // 第一个值为key，第二个为value，第三个为有限时间
+            this.$router.push('/dashboard')
+          } else {
+            console.log('error')
           }
         }.bind(this)).catch(function () {
-          let expireDays = 1000 * 60 * 60 * 24 * 15
-          // expireDays 为有效时间
-          setCookie('session', 'day', expireDays)
-          // 第一个值为key，第二个为value，第三个为有限时间
-          console.log('Login Failed!')
-          this.$router.push('/post')
-        }.bind(this))
+
+        })
       }
     },
     computed: {
       Authenticate () {
-        return this.$store.state.Authenticated
+        return getCookie('Authenticated')
       }
     }
   }

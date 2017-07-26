@@ -1,5 +1,5 @@
 <template>
-  <el-form ref="form" :model="ActivityApplyForm" label-width="80px">
+  <el-form ref="form" :model="ActivityApplyForm">
     <el-form-item label="活动名称">
       <el-input v-model="ActivityApplyForm.ActivityName" placeholder="请输入活动名称"></el-input>
     </el-form-item>
@@ -9,21 +9,25 @@
     </el-form-item>
     <el-form-item label="活动时间">
       <el-row>
-        <el-col :span="8">
+        <el-col :span="6">
           <el-date-picker type="date" placeholder="选择日期" v-model="ActivityApplyForm.Date1"
-                          style="width: 100%;"></el-date-picker>
+                          style=""></el-date-picker>
         </el-col>
-        <el-col :span="7" :offset=1>
+        <el-col :span="6" :offset=1>
           <el-time-picker type="fixed-time" placeholder="选择开始时间" v-model="ActivityApplyForm.Date2"
-                          style="width: 100%;"></el-time-picker>
+                          style=""></el-time-picker>
         </el-col>
-        <el-col :span=7 :offset=1>
+        <el-col :span=6 :offset=1>
           <el-time-picker type="fixed-time" placeholoder="选择结束时间" v-model="ActivityApplyForm.Date3"
-                          style="width: 100%;"></el-time-picker>
+                          style=""></el-time-picker>
         </el-col>
       </el-row>
     </el-form-item>
     <el-form-item label="活动类型">
+      <el-select placeholder="请选择活动类型">
+        <el-option :key=""></el-option>
+        <!--TODO: define the type-->
+      </el-select>
     </el-form-item>
     <el-form-item label="活动内容">
       <el-input type="textarea" v-model="ActivityApplyForm.Content"></el-input>
@@ -47,7 +51,7 @@
           Date1: '',
           Date2: '',
           Date3: '',
-          Type: [],
+          Type: '',
           Content: ''
         }
       }

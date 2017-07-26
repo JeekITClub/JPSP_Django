@@ -683,7 +683,7 @@ def clubprofile_get(request):
         body = json.loads(request.body)
         token = body['Token']
         clubid = body['ClubId']
-        profile = Club.objects.get()
+        profile = Club.objects.get(ClubId=clubid)
         # TODO: get profile object
         response = {
             'ClubName': profile.ClubName,
@@ -730,8 +730,8 @@ def clubprofile_submit(request):
         introduction = body['introduction']
         achievements = body['achievements']
         try:
-            club_object = Club.objects.get(clubid=clubid)
-            club_object.Clubname = clubname
+            club_object = Club.objects.get(ClubId=clubid)
+            club_object.ClubName = clubname
             club_object.ShezhangName = shezhang_name
             club_object.ShezhangGrade = shezhang_grade
             club_object.ShezhangClassroom = shezhang_class

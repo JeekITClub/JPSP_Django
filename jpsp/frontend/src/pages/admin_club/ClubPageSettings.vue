@@ -1,18 +1,6 @@
 <template>
   <div>
-    <div v-if="Authenticate===true">
-      <el-row class="tac">
-        <el-col :span="4">
-          <club_aside></club_aside>
-        </el-col>
-        <el-col :span="20" offset="4">
-          <club_page_settings></club_page_settings>
-        </el-col>
-      </el-row>
-    </div>
-    <div v-if="Authenticate===false || Authenticate===null">
-      <p>未登陆</p>
-    </div>
+
   </div>
 </template>
 <script>

@@ -49,7 +49,7 @@
       <p class="lead">
         JPSP开发日记
       </p>
-      <a href="https://alienmao.gitbooks.io/jpsp_diary/content/">JPSP DEVELOP DIARY</a>
+      <a href="https://alienmao.gitbooks.io/jpsp_diary/content/">JPSP DEVELOP DIARY（常年拖更）</a>
     </div>
   </div>
 </template>

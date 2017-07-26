@@ -1,10 +1,6 @@
 <template>
   <div>
-    <el-row class="tac">
-      <el-col :span="24">
-        <club_establish></club_establish>
-      </el-col>
-    </el-row>
+    <club_establish></club_establish>
   </div>
 </template>
 <script>
