@@ -61,20 +61,19 @@
                 Password: this.LoginForm.Password,
                 UserType: 'Student'
               })
-            })
-              .then(function (response) {
-                if (response.data.message === 'User Authenticated') {
-                  this.$store.commit('Authenticated', true)
-                  this.$store.commit('ApplyUserName', response.data.UserName)
-                  this.$store.commit('ApplyToken', response.data.Token)
-                  // TODO:   this.router.push() to redirect
-                } else if (response.data.message === 'User Not Authenticated') {
-                  this.$notify.error({
-                    title: '错误',
-                    message: '登陆失败'
-                  })
-                }
-              }.bind(this))
+            }).then(function (response) {
+              if (response.data.message === 'User Authenticated') {
+                this.$store.commit('Authenticated', true)
+                this.$store.commit('ApplyUserName', response.data.UserName)
+                this.$store.commit('ApplyToken', response.data.Token)
+                // TODO:   this.router.push() to redirect
+              } else if (response.data.message === 'User Not Authenticated') {
+                this.$notify.error({
+                  title: '错误',
+                  message: '登陆失败'
+                })
+              }
+            }.bind(this))
           } else {
             alert('error')
           }

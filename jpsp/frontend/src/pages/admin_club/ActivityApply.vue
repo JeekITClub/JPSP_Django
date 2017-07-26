@@ -7,11 +7,6 @@
     name: 'ActivityApply',
     components: {
       'club_activity_apply': ActivityApply
-    },
-    computed: {
-      Authenticate () {
-        return this.$store.state.Authenticated
-      }
     }
   }
 </script>
