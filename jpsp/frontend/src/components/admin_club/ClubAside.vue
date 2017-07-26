@@ -1,4 +1,3 @@
-<!---component dashboard aside-->
 <template>
   <el-menu>
     <el-menu-item index="1" disabled="">仪表盘</el-menu-item>
@@ -34,16 +33,6 @@
   </el-menu>
 </template>
 <script>
-  export default {
-    methods: {
-
-    },
-    computed: {
-      Authenticate () {
-        return this.$store.state.Authenticated
-      }
-    }
-  }
 </script>
 <style>
 </style>

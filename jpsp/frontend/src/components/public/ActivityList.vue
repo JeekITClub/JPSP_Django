@@ -1,5 +1,5 @@
 <template>
-  <el-table :data=ActivityListTable>
+  <el-table :data="ActivityListTable">
     <el-table-column type="expand">
       <template scope="props">
         <el-form inline class="demo-table-expand">
@@ -79,6 +79,7 @@
 </template>
 
 <script>
+  import {getCookie} from 'tiny-cookie'
   import axios from 'axios'
   export default {
     data () {
@@ -190,17 +191,12 @@
       }
     },
     computed: {
-      Authenticate () {
-        return this.$store.state.Authenticated
-      },
-      GetUserName () {
-        return this.$store.state.UserName
-      },
+      // 针对多个页面的处理 computed应该不同
       GetToken () {
-        return this.$store.state.Token
+        return getCookie('Token')
       },
       GetUserId () {
-        return this.$store.state.UserId
+        return getCookie('UserId')
       }
     },
     mounted: function () {

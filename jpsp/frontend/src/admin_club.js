@@ -6,12 +6,12 @@ import router from './router/admin_club.js'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import 'bootstrap/dist/css/bootstrap.css'
-import Vuex from 'vuex'
+// import Vuex from 'vuex'
 import axios from 'axios'
 Vue.config.productionTip = false
 Vue.prototype.$ajax = axios
 Vue.use(ElementUI)
-Vue.use(Vuex)
+// Vue.use(Vuex)
 import { getCookie } from 'tiny-cookie'
 /* eslint-disable no-new */
 // const AdminClubVuexStore = new Vuex.Store({
@@ -52,7 +52,7 @@ new Vue({
   },
   methods: {
     checkLogin () {
-      if (getCookie('Authentiacated') === true) {
+      if (getCookie('ClubAuthentiacated') === true) {
         this.$router.push('/dashboard')
       } else {
         this.$router.push('/login')
