@@ -12,6 +12,10 @@ import Contact from '@/pages/public/Contact.vue'
 import Establish from '@/pages/admin_club/Establish.vue'
 import ActivityApply from '@/pages/admin_club/ActivityApply.vue'
 import ActivityList from '@/pages/admin_club/ActivityList.vue'
+import EventForm from '@/pages/admin_club/EventForm.vue'
+import EventList from '@/pages/admin_club/EventList.vue'
+import PostForm from '@/pages/admin_club/PostForm.vue'
+import PostList from '@/pages/admin_club/PostList.vue'
 import DashBoard from '@/pages/admin_club/DashBoard.vue'
 Vue.use(Router)
 
@@ -86,6 +90,36 @@ export default new Router({
       path: '/contact',
       name: 'Contact',
       component: Contact
+    },
+    {
+      path: '/aform',
+      name: 'ActivityForm',
+      component: ActivityForm
+    },
+    {
+      path: '/cprofile',
+      name: 'ClubProfile',
+      component: ClubProfile
+    },
+    {
+      path: '/eform',
+      name: 'EventForm',
+      component: EventForm
+    },
+    {
+      path: '/elist',
+      name: 'EventList',
+      component: EventList
+    },
+    {
+      path: '/pform',
+      name: 'PostForm',
+      component: PostForm
+    },
+    {
+      path: '/plist',
+      name: 'PostList',
+      component: PostList
     }
   ]
 })
