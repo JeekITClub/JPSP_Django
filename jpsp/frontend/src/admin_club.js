@@ -12,35 +12,35 @@ Vue.config.productionTip = false
 Vue.prototype.$ajax = axios
 Vue.use(ElementUI)
 Vue.use(Vuex)
+import { getCookie } from 'tiny-cookie'
 /* eslint-disable no-new */
-
-const AdminClubVuexStore = new Vuex.Store({
-  state: {
-    ClubId: '',
-    UserName: '',
-    Token: '',
-    Authenticated: null
-  },
-  mutations: {
-    Authenticated (state, If) {
-      state.Authenticated = If
-    },
-    ApplyUserName (state, UserName) {
-      state.UserName = UserName
-    },
-    ApplyToken (state, Token) {
-      state.Token = Token
-    },
-    ApplyClubId (state, ClubId) {
-      state.ClubId = ClubId
-    }
-  }
-})
+// const AdminClubVuexStore = new Vuex.Store({
+//   state: {
+//     ClubId: '',
+//     UserName: '',
+//     Token: '',
+//     Authenticated: null
+//   },
+//   mutations: {
+//     Authenticated (state, If) {
+//       state.Authenticated = If
+//     },
+//     ApplyUserName (state, UserName) {
+//       state.UserName = UserName
+//     },
+//     ApplyToken (state, Token) {
+//       state.Token = Token
+//     },
+//     ApplyClubId (state, ClubId) {
+//       state.ClubId = ClubId
+//     }
+//   }
+// })
 
 new Vue({
   el: '#app_club',
   router,
-  store: AdminClubVuexStore,
+  // store: AdminClubVuexStore,
   template: '<App/>',
   components: {AdminClub},
   render: h => h(AdminClub),
@@ -52,8 +52,11 @@ new Vue({
   },
   methods: {
     checkLogin () {
-      // 检查是否存在session
-      // cookie操作方法在源码里有或者参考网上的即可
+      if (getCookie('Authentiacated') === true) {
+        this.$router.push('/dashboard')
+      } else {
+        this.$router.push('/login')
+      }
     }
   }
 })

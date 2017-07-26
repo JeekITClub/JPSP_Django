@@ -12,6 +12,7 @@ import Contact from '@/pages/public/Contact.vue'
 import Establish from '@/pages/admin_club/Establish.vue'
 import ActivityApply from '@/pages/admin_club/ActivityApply.vue'
 import ActivityList from '@/pages/admin_club/ActivityList.vue'
+import DashBoard from '@/pages/admin_club/DashBoard.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -20,6 +21,11 @@ export default new Router({
       path: '/',
       name: 'Index',
       component: Login
+    },
+    {
+      path: '/dashboard',
+      name: 'Dashboard',
+      component: DashBoard
     },
     {
       path: '/login',

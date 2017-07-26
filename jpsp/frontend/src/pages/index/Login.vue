@@ -57,7 +57,7 @@
               method: 'POST',
               url: 'http://127.0.0.1:8000/api/login',
               data: JSON.stringify({
-                UserName: this.LoginForm.UserId,
+                UserName: this.LoginForm.UserName,
                 Password: this.LoginForm.Password,
                 UserType: 'Student'
               })
@@ -67,13 +67,14 @@
                   this.$store.commit('Authenticated', true)
                   this.$store.commit('ApplyUserName', response.data.UserName)
                   this.$store.commit('ApplyToken', response.data.Token)
+                  // TODO:   this.router.push() to redirect
                 } else if (response.data.message === 'User Not Authenticated') {
-                  console.log('Login Failed')
+                  this.$notify.error({
+                    title: '错误',
+                    message: '登陆失败'
+                  })
                 }
               }.bind(this))
-              .catch(function (error) {
-                console.log(error)
-              })
           } else {
             alert('error')
           }
