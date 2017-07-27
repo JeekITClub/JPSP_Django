@@ -1,93 +1,108 @@
 <template>
-  <el-table :data=ActivityFormTable>
-    <el-table-column type="expand">
-      <template scope="props">
-        <el-form inline class="demo-table-expand">
-          <el-row class="tac">
-            <el-col :span="24">
-              <el-form-item label="活动内容">
-                <span>{{ props.row.Content }}</span>
-              </el-form-item>
-            </el-col>
-            <el-col :span="24">
-              <el-form-item label="活动过程">
-                <span>{{ props.row.Process }}</span>
-              </el-form-item>
-            </el-col>
-            <el-col :span="24">
-              <el-form-item label="活动地点">
-                <span>{{ props.row.Region }}</span>
-              </el-form-item>
-            </el-col>
-          </el-row>
-        </el-form>
-      </template>
-    </el-table-column>
-    <el-table-column prop="ActivityId" label="活动序号">
-    </el-table-column>
-    <el-table-column prop="Name" label="活动名称">
-    </el-table-column>
-    <el-table-column prop="ClubName" label="负责社团">
-    </el-table-column>
-    <el-table-column prop="Date1" label="开始日期">
-    </el-table-column>
-    <el-table-column prop="Date2" label="结束时间">
-    </el-table-column>
-    <el-table-column prop="State" label="状态">
-      <template scope="scope">
-        <span v-if="scope.row.State === '0'">未审核</span>
-        <span v-if="scope.row.State === '1'" style="color: green">已审核</span>
-        <span v-if="scope.row.State === '2'" style="color: red">被拒绝</span>
-      </template>
-    </el-table-column>
-  </el-table>
+  <el-form ref="form" :model="ActivityApplyForm">
+    <el-form-item label="活动名称">
+      <el-input v-model="ActivityApplyForm.ActivityName" placeholder="请输入活动名称"></el-input>
+    </el-form-item>
+    <el-form-item label="活动地点">
+      <el-input v-model="ActivityApplyForm.Region" placeholder="请输入活动地点">
+      </el-input>
+    </el-form-item>
+    <el-form-item label="活动时间">
+      <el-row>
+        <el-col :span="6">
+          <el-date-picker type="date" placeholder="选择日期" v-model="ActivityApplyForm.Date1"
+                          style=""></el-date-picker>
+        </el-col>
+        <el-col :span="6" :offset=1>
+          <el-time-picker type="fixed-time" placeholder="选择开始时间" v-model="ActivityApplyForm.Date2"
+                          style=""></el-time-picker>
+        </el-col>
+        <el-col :span=6 :offset=1>
+          <el-time-picker type="fixed-time" placeholoder="选择结束时间" v-model="ActivityApplyForm.Date3"
+                          style=""></el-time-picker>
+        </el-col>
+      </el-row>
+    </el-form-item>
+    <el-form-item label="活动类型">
+      <el-select placeholder="请选择活动类型">
+        <el-option :key=""></el-option>
+        <!--TODO: define the type-->
+      </el-select>
+    </el-form-item>
+    <el-form-item label="活动内容">
+      <el-input type="textarea" v-model="ActivityApplyForm.Content"></el-input>
+    </el-form-item>
+    <el-form-item>
+      <el-button type="primary" @click="submitForm">立即申请</el-button>
+      <el-button>取消</el-button>
+    </el-form-item>
+  </el-form>
 </template>
-
 <script>
+  // 活动申请组件
   import axios from 'axios'
   export default {
     data () {
       return {
-        ActivityFormTable: [656, 89898]
+        ActivityApplyForm: {
+          ClubName: this.GetClubName,
+          ActivityName: '',
+          Region: '',
+          Date1: '',
+          Date2: '',
+          Date3: '',
+          Type: '',
+          Content: ''
+        }
       }
     },
-    props: {
-      user: {
-        'default': 'Student'
+    methods: {
+      submitForm () {
+        axios({
+          method: 'POST',
+          url: '',
+          data: JSON.stringify({
+            ClubId: this.GetClubId,
+            ClubName: this.GetClubName,
+            ActivityName: this.ActivityApplyForm.ActivityName,
+            Region: this.ActivityApplyForm.Region,
+            Date1: this.ActivityApplyForm.Date1,
+            Date2: this.ActivityApplyForm.Date2,
+            Date3: this.ActivityApplyForm.Date3,
+            Content: this.ActivityApplyForm.Content,
+            Type: this.Type,
+            Token: this.GetToken
+          })
+        }).then(function (response) {
+          if (response.data.message === 'success') {
+            console.log('success')
+          }
+          if (response.data.message === 'error') {
+            console.log('error')
+          }
+        }).catch(function () {
+          alert('error: ActivityApply')
+        })
+      },
+      resetForm (formName) {
+        this.$refs[formName].resetFields()
       }
     },
     computed: {
-      Authenticate () {
-        return this.$store.state.Authenticated
-      },
-      GetUserName () {
+      GetClubName () {
         return this.$store.state.UserName
+      },
+      GetClubId () {
+        return this.$store.state.ClubId
       },
       GetToken () {
         return this.$store.state.Token
       },
-      GetUserId () {
-        return this.$store.state.UserId
+      Authenticate () {
+        return this.$store.state.Authenticated
       }
-    },
-    mounted: function () {
-      axios({
-        method: 'POST',
-        url: 'http://127.0.0.1:8000/api/activity/list',
-        data: JSON.stringify({
-          Type: this.type,
-          Token: this.GetToken
-        })
-      }).then(function (response) {
-        if (response.data.message === 'success') {
-          this.ActivityFormTable = JSON.parse(response.data.data)
-        } else {
-          this.$notify.error({
-            title: '错误',
-            message: '无法获得数据'
-          })
-        }
-      }.bind(this))
     }
   }
 </script>
+<style>
+</style>

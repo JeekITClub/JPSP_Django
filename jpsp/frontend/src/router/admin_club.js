@@ -10,14 +10,13 @@ import RecruitClassroomList from '@/pages/admin_club/RecruitClassroomList.vue'
 import About from '@/pages/public/About.vue'
 import Contact from '@/pages/public/Contact.vue'
 import Establish from '@/pages/admin_club/Establish.vue'
-import ActivityApply from '@/pages/admin_club/ActivityApply.vue'
+import ActivityForm from '@/pages/admin_club/ActivityForm.vue'
 import ActivityList from '@/pages/admin_club/ActivityList.vue'
 import EventForm from '@/pages/admin_club/EventForm.vue'
 import EventList from '@/pages/admin_club/EventList.vue'
 import PostForm from '@/pages/admin_club/PostForm.vue'
 import PostList from '@/pages/admin_club/PostList.vue'
 import DashBoard from '@/pages/admin_club/DashBoard.vue'
-import ActivityForm from '@/pages/admin_club/ActivityForm.vue'
 import ClubProfile from '@/pages/admin_club/ClubProfile.vue'
 import ChangePassword from '@/pages/admin_club/ChangePassword.vue'
 Vue.use(Router)
@@ -62,7 +61,7 @@ export default new Router({
     {
       path: '/activity/apply',
       name: 'ActivityApply',
-      component: ActivityApply
+      component: ActivityForm
     },
     {
       path: '/activity/list',
@@ -94,38 +93,38 @@ export default new Router({
       name: 'Contact',
       component: Contact
     },
-    // {
-    //   path: '/aform',
-    //   name: 'ActivityForm',
-    //   component: ActivityForm
-    // },
-    // {
-    //   path: '/cprofile',
-    //   name: 'ClubProfile',
-    //   component: ClubProfile
-    // },
     {
-      path: '/eform',
+      path: '/aform',
+      name: 'ActivityForm',
+      component: ActivityForm
+    },
+    {
+      path: '/cprofile',
+      name: 'ClubProfile',
+      component: ClubProfile
+    },
+    {
+      path: '/event/form',
       name: 'EventForm',
       component: EventForm
     },
     {
-      path: '/elist',
+      path: '/event/list',
       name: 'EventList',
       component: EventList
     },
     {
-      path: '/pform',
+      path: '/post/form',
       name: 'PostForm',
       component: PostForm
     },
     {
-      path: '/plist',
+      path: '/post/list',
       name: 'PostList',
       component: PostList
     },
     {
-      path: '/change',
+      path: '/password',
       name: 'ChangePassword',
       component: ChangePassword
     }

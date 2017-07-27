@@ -39,8 +39,8 @@
                 <li>
                   <router-link to="/about">关于</router-link>
                 </li>
-                <li v-if="Authenticate===true">欢迎，{{ GetUserName }}</li>
-                <li class="has-dropdown" v-if="Authenticate != true">
+                <li v-if="Authenticated === true">欢迎，{{ GetUserName }}</li>
+                <li class="has-dropdown" v-if="Authenticated != true">
                   <router-link to="/login">登录</router-link>
                   <ul class="dropdown">
                     <li>
@@ -51,7 +51,7 @@
                     </li>
                   </ul>
                 </li>
-                <li class="btn-cta" v-if="Authenticate === true"><a href="#"><span>注销</span></a></li>
+                <li class="btn-cta" v-if="Authenticated === true"><a href="#"><span>注销</span></a></li>
               </ul>
             </div>
           </div>
@@ -61,17 +61,18 @@
   </div>
 </template>
 <script>
+  import {getCookie} from 'tiny-cookie'
   export default {
     data () {
       return {}
     },
     methods: {},
     computed: {
-      Authenticate () {
-        return this.$store.state.Authenticated
+      Authenticated () {
+        return getCookie('IndexAuthenticated')
       },
       GetUserName () {
-        return this.$store.state.UserName
+        return getCookie('UserName')
       }
     }
   }

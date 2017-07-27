@@ -52,7 +52,7 @@ new Vue({
   },
   methods: {
     checkLogin () {
-      if (getCookie('ClubAuthentiacated') === true) {
+      if (getCookie('ClubAuthenticated') === true) {
         this.$router.push('/dashboard')
       } else {
         this.$router.push('/login')

@@ -13,33 +13,33 @@ Vue.use(ElementUI)
 Vue.use(Vuex)
 /* eslint-disable no-new */
 
-const UserVuexStore = new Vuex.Store({
-  state: {
-    UserId: '用户名',
-    UserName: '',
-    Token: '',
-    Authenticated: null
-  },
-  mutations: {
-    Authenticated (state, If) {
-      state.Authenticated = If
-    },
-    ApplyUserName (state, UserName) {
-      state.UserName = UserName
-    },
-    ApplyToken (state, Token) {
-      state.Token = Token
-    },
-    ApplyUserId (state, UserId) {
-      state.UserId = UserId
-    }
-  }
-})
+// const UserVuexStore = new Vuex.Store({
+//   state: {
+//     UserId: '用户名',
+//     UserName: '',
+//     Token: '',
+//     Authenticated: null
+//   },
+//   mutations: {
+//     Authenticated (state, If) {
+//       state.Authenticated = If
+//     },
+//     ApplyUserName (state, UserName) {
+//       state.UserName = UserName
+//     },
+//     ApplyToken (state, Token) {
+//       state.Token = Token
+//     },
+//     ApplyUserId (state, UserId) {
+//       state.UserId = UserId
+//     }
+//   }
+// })
 
 new Vue({
   el: '#app',
   router,
-  store: UserVuexStore,
+  // store: UserVuexStore,
   template: '<App/>',
   components: {index},
   render: h => h(index)
