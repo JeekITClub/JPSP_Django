@@ -16,7 +16,7 @@ class UserProfile(models.Model):
     Email = models.EmailField()
 
     def __str__(self):
-        return str(self.Grade) + str(self.Class) + self.UserName
+        return '年级'+ str(self.Grade) + '班级' +str(self.Class) + '姓名' +self.UserName
 
 
 class CDUser(models.Model):
@@ -85,14 +85,11 @@ class Post(models.Model):
 
 
 class Token(models.Model):
-    Token = models.CharField(max_length=30, default="")
-    UserObject = models.OneToOneField(UserProfile,default=None)
-
-    # start_time = models.DateTimeField()
-    # end_time = models.DateTimeField()
+    Token = models.CharField(max_length=30, default=None)
+    UserName = models.CharField(max_length=12,default=None)
 
     def __str__(self):
-        return self.UserObject.UserName
+        return self.UserName
 
 
 class Activity(models.Model):

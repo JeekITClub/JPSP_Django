@@ -22,7 +22,7 @@ def login(request):
         token_object = JPSPToken(username=userid)
         if usertype == "Student":
             return JsonResponse({
-                "UserName": UserProfile(User.objects.get(username=userid)).UserName,
+                "UserName": UserProfile(User.objects.get(username=userid)).UserObject.UserName,
                 "message": "User Authenticated",
                 "Token": token_object.generate(),
                 "Access-Control-Allow-Origin": '*'
@@ -31,14 +31,14 @@ def login(request):
             return JsonResponse({
                 "UserName": Club(User.objects.get(username=userid)).ClubName,
                 "message": "User Authenticated",
-                "Token": token_object.generate(),
+                # "Token": token_object.generate(),
                 "Access-Control-Allow-Origin": '*'
             })
         elif usertype == "Club Department":
             return JsonResponse({
                 "UserName": CDUser(User.objects.get(username=userid)).username,
                 "message": "User Authenticated",
-                "Token": token_object.generate(),
+                # "Token": token_object.generate(),
                 "Access-Control-Allow-Origin": '*'
             })
     else:
@@ -53,8 +53,7 @@ def logout(request):
     try:
         body = json.loads(request)
         username = body['UserName']
-        usertype = body['UserType']
-        token_object = JPSPToken(username=username, usertype=usertype)
+        token_object = JPSPToken(username=username)
         token_object.remove()
         return JsonResponse({
             'message': 'success',
@@ -452,7 +451,7 @@ def post_submit(request):
         feeling = body['Feeling']
         token = body['Token']
         try:
-            token_object = JPSPToken(username=clubid, usertype="club", token=token)
+            token_object = JPSPToken(username=clubid, token=token)
             # TODO: how to authenticate
             if token_object.authenticate():
                 Post.objects.create(

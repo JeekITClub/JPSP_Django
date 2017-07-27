@@ -21,7 +21,7 @@
   </div>
 </template>
 <script>
-  import {setCookie} from 'tiny-cookie'
+  import { setCookie } from 'tiny-cookie'
   import axios from 'axios'
   export default {
     data () {

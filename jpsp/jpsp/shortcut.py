@@ -24,15 +24,14 @@ class JPSPToken:
         try:
             Token.objects.create(
                 Token=self.token,
-                User=User.objects.get(username=self.username),
-                # start_time=datetime.datetime.now(),
-                # TODO:  datetime in python and SQL ??
-                # end_time =datetime.datetime.now(),
+                UserName=self.username
             )
-            self.message = 'Message'
-            return self.token
         except:
-            self.message = 'error'
+            token_object = Token.objects.get(UserName=self.username)
+            token_object.Token = self.token
+            token_object.save()
+        finally:
+            return self.token
 
     def remove(self):
         try:

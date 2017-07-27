@@ -91,16 +91,16 @@ export default new Router({
       name: 'Contact',
       component: Contact
     },
-    {
-      path: '/aform',
-      name: 'ActivityForm',
-      component: ActivityForm
-    },
-    {
-      path: '/cprofile',
-      name: 'ClubProfile',
-      component: ClubProfile
-    },
+    // {
+    //   path: '/aform',
+    //   name: 'ActivityForm',
+    //   component: ActivityForm
+    // },
+    // {
+    //   path: '/cprofile',
+    //   name: 'ClubProfile',
+    //   component: ClubProfile
+    // },
     {
       path: '/eform',
       name: 'EventForm',
