@@ -20,14 +20,15 @@
 <script>
   import ClubAside from '@/components/admin_club/ClubAside.vue'
   import JNavTop from '@/components/admin_club/JNavTop.vue'
+  import {getCookie} from 'tiny-cookie'
   export default {
     components: {
       'ClubAside': ClubAside,
       'JNavTop': JNavTop
     },
     computed: {
-      Authenticate () {
-        return this.$store.state.Authenticated
+      Authenticated () {
+        return getCookie('ClubAuthenticated')
       }
     },
     name: 'app_club'

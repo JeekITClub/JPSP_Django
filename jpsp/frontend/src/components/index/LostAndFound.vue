@@ -126,7 +126,7 @@
           } else if (response.data.message === 'success') {
             console.log('success')
           }
-        }.bind(this)).catch(function () {
+        }).catch(function () {
           alert('error: PostEdit')
         })
       }

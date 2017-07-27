@@ -17,7 +17,6 @@ import EventList from '@/pages/admin_club/EventList.vue'
 import PostForm from '@/pages/admin_club/PostForm.vue'
 import PostList from '@/pages/admin_club/PostList.vue'
 import DashBoard from '@/pages/admin_club/DashBoard.vue'
-import ClubProfile from '@/pages/admin_club/ClubProfile.vue'
 import ChangePassword from '@/pages/admin_club/ChangePassword.vue'
 Vue.use(Router)
 
@@ -97,11 +96,6 @@ export default new Router({
       path: '/aform',
       name: 'ActivityForm',
       component: ActivityForm
-    },
-    {
-      path: '/cprofile',
-      name: 'ClubProfile',
-      component: ClubProfile
     },
     {
       path: '/event/form',
