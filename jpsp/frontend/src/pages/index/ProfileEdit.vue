@@ -114,5 +114,4 @@
   }
 </script>
 <style scoped>
-  @import url("//unpkg.com/element-ui@1.3.2/lib/theme-default/index.css");
 </style>
