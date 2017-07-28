@@ -8,10 +8,12 @@ import 'element-ui/lib/theme-default/index.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import Vuex from 'vuex'
 import axios from 'axios'
+import VueQuillEditor from 'vue-quill-editor'
 Vue.config.productionTip = false
 Vue.prototype.$ajax = axios
 Vue.use(ElementUI)
 Vue.use(Vuex)
+Vue.use(VueQuillEditor)
 import { getCookie } from 'tiny-cookie'
 /* eslint-disable no-new */
 const AdminClubVuexStore = new Vuex.Store({
@@ -41,12 +43,12 @@ new Vue({
   template: '<App/>',
   components: {AdminClub},
   render: h => h(AdminClub),
-  created () {
-    this.checkLogin()
-  },
-  watch: {
-    '$route': 'checkLogin'
-  },
+  // created () {
+  //   this.checkLogin()
+  // },
+  // watch: {
+  //   '$route': 'checkLogin'
+  // },
   methods: {
     checkLogin () {
       if (getCookie('ClubAuthenticated') === true) {

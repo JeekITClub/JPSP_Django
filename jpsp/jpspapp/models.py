@@ -30,9 +30,9 @@ class Club(models.Model):
     ClubId = models.IntegerField(default=None)
     ShezhangName = models.CharField(max_length=8, default=None)
     ShezhangQq = models.CharField(max_length=20, default=None)
+    # 社长的QQ
     ShezhangGrade = models.CharField(max_length=1, default=None)
     ShezhangClass = models.CharField(max_length=2, default=None)
-    # 社长的QQ
     IfRecruit = models.BooleanField()
     # 是否进行招新
     EnrollGroupQq = models.CharField(max_length=20, default="")
@@ -68,7 +68,7 @@ class Post(models.Model):
     CludId = models.ForeignKey(Club, default=None)
     LinkmanGrade = models.CharField(max_length=1, default="1")
     LinkmanClass = models.CharField(max_length=2, default="1")
-    LinkmanName = models.CharField(max_length=8, default="")
+    LinkmanName = models.CharField(max_length=8, default="联系人")
     LinkmanPhoneNumber = models.CharField(max_length=11, default="00000000000")
     LinkmanQq = models.CharField(max_length=20, default="00000000")
     Region = models.CharField(max_length=30, default="00000")
@@ -118,7 +118,7 @@ class Activity(models.Model):
         ('3', '表演')
     )
     Type = models.CharField(max_length=10, default='0', choices=type_choices)
-    Participants = models.ManyToManyField(UserProfile, default=None,through='ActivityParticipantShip',through_fields='Activity','Participant')
+    Participants = models.ManyToManyField(UserProfile, default=None,through='ActivityParticipantShip',through_fields=('Activity','Participant'))
 
     def __str__(self):
         return self.Name + 'by ' + self.ClubObject.ClubName

@@ -3,13 +3,17 @@
     <el-form-item>
       <el-input v-model="EventForm.Name" placeholder="事件名称"></el-input>
     </el-form-item>
+    <el-form-item label="" class="EditorItem">
+      <quill-editor v-model="EventForm.Content" ref="myQillEditor" class="Editor">
+      </quill-editor>
+    </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="submitForm">提交</el-button>
+      <el-button type="primary" @click="submitForm" size="large">提交</el-button>
     </el-form-item>
   </el-form>
 </template>
 <script>
-  import {getCookie} from 'tiny-cookie'
+  import { getCookie } from 'tiny-cookie'
   import axios from 'axios'
   export default {
     data () {
@@ -51,5 +55,16 @@
     }
   }
 </script>
-<style>
+<style scoped>
+  .Editor {
+    height: 550px;
+    min-height: 500px;
+    max-height: 600px;
+  }
+  .EditorItem {
+    margin-bottom: 2%;
+    height: 640px;
+    min-height: 590px;
+    max-height: 690px;
+  }
 </style>
