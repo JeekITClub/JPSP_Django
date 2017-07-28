@@ -38,10 +38,10 @@
         活动
       </template>
       <el-menu-item-group>
-        <el-menu-item index="4-1" disabled=""><
+        <el-menu-item index="4-1" disabled="">
           <router-link to="/activity/list">列表</router-link>
         </el-menu-item>
-        <el-menu-item index="4-2" disabled=""><
+        <el-menu-item index="4-2" disabled="">
           <router-link to="/activity/form">申请</router-link>
         </el-menu-item>
       </el-menu-item-group>
@@ -54,7 +54,7 @@
         <el-menu-item index="5-1">
           <router-link to="/event/list/">列表</router-link>
         </el-menu-item>
-        <el-menu-item index="5-2"><
+        <el-menu-item index="5-2">
           <router-link to="/event/form/">表单</router-link>
         </el-menu-item>
       </el-menu-item-group>
