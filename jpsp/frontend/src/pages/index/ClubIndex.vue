@@ -20,29 +20,49 @@
       </div>
       <div class="col-md-2 col-xs-3 col-sm-2 col-lg-2 Join">
         <figure></figure>
-        <button type="button" class="primary">加入该社团</button>
+        <button type="button" class="primary" @click="AttendClub">加入该社团</button>
       </div>
     </div>
   </div>
 </template>
 <script>
   import axios from 'axios'
+  import {getCookie} from 'tiny-cookie'
   export default {
     data () {
       return {
         ClubId: this.$route.params.ClubId,
         Club: {
           ClubName: 'Jeek',
-          Introduction: 'DaAsASASDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD'
+          Introduction: '2333333'
         }
+      }
+    },
+    methods: {
+      AttendClub () {
+        axios({
+          method: 'POST',
+          url: '',
+          // TODO: url
+          data: JSON.stringify({
+            ClubId: this.ClubId,
+            UserName: this.GetUserName
+          })
+        }).then(function (response) {
+          if (response.data.message === 'success') {
+            console.log('success')
+          } else {
+            console.log('error')
+          }
+        })
       }
     },
     computed: {
       Authenticate () {
-        return this.$store.state.Authenticated
+        return getCookie('IndexAuthenticated')
       },
       GetUserName () {
-        return this.$store.state.UserName
+        return getCookie('UserName')
       },
       GetToken () {
         return this.$store.state.Token
@@ -72,7 +92,7 @@
     color: #475669;
     font-size: 18px;
     opacity: 0.75;
-    line-height: 300px;
+    line-height: 900px;
     margin: 0;
   }
 
