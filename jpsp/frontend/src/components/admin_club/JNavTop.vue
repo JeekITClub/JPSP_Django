@@ -18,9 +18,6 @@
         </ul>
         <ul class="nav navbar-nav navbar-right" v-if="Authenticated === true">
           <li>{{ ClubName }}</li>
-          <li>
-            <router-link to="profile">资料修改</router-link>
-          </li>
           <li><a @click="logout()">注销</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right" v-if="Authenticated != true">
@@ -33,7 +30,7 @@
   </nav>
 </template>
 <script>
-  import {getCookie, removeCookie} from 'tiny-cookie'
+  import { getCookie, removeCookie } from 'tiny-cookie'
   export default {
     data () {
       return {}

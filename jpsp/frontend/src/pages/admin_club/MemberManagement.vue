@@ -16,14 +16,8 @@
 <script>
   import MemberManagement from '@/pages/admin_club/MemberManagement.vue'
   export default {
-    name: 'MemberManagement',
     components: {
       'club_member_management': MemberManagement
-    },
-    computed: {
-      Authenticate () {
-        return this.$store.state.Authenticated
-      }
     },
     data () {
       return {

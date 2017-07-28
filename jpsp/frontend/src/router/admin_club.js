@@ -1,11 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/pages/admin_club/Login'
-import PostEdit from '@/pages/admin_club/PostEdit'
 import ProfileEdit from '@/pages/admin_club/ProfileEdit'
 import ClubPageSettings from '@/pages/admin_club/ClubPageSettings'
 import MemberManagement from '@/pages/admin_club/MemberManagement'
-import RecruitClassroomEdit from '@/pages/admin_club/RecruitClassroomEdit'
+import RecruitClassroomForm from '@/pages/admin_club/RecruitClassroomForm.vue'
 import RecruitClassroomList from '@/pages/admin_club/RecruitClassroomList.vue'
 import About from '@/pages/public/About.vue'
 import Contact from '@/pages/public/Contact.vue'
@@ -38,9 +37,14 @@ export default new Router({
       component: Login
     },
     {
-      path: '/post',
-      name: 'Post',
-      component: PostEdit
+      path: '/post/form',
+      name: 'PostForm',
+      component: PostForm
+    },
+    {
+      path: '/post/list',
+      name: 'PostList',
+      component: PostList
     },
     {
       path: '/profile',
@@ -58,8 +62,8 @@ export default new Router({
       component: ClubPageSettings
     },
     {
-      path: '/activity/apply',
-      name: 'ActivityApply',
+      path: '/activity/form',
+      name: 'ActivityForm',
       component: ActivityForm
     },
     {
@@ -70,7 +74,7 @@ export default new Router({
     {
       path: '/recruit/classroom/apply',
       name: 'RecruitClassroom',
-      component: RecruitClassroomEdit
+      component: RecruitClassroomForm
     },
     {
       path: '/recruit/classroom/list',
@@ -93,11 +97,6 @@ export default new Router({
       component: Contact
     },
     {
-      path: '/aform',
-      name: 'ActivityForm',
-      component: ActivityForm
-    },
-    {
       path: '/event/form',
       name: 'EventForm',
       component: EventForm
@@ -106,16 +105,6 @@ export default new Router({
       path: '/event/list',
       name: 'EventList',
       component: EventList
-    },
-    {
-      path: '/post/form',
-      name: 'PostForm',
-      component: PostForm
-    },
-    {
-      path: '/post/list',
-      name: 'PostList',
-      component: PostList
     },
     {
       path: '/password',
