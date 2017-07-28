@@ -19,7 +19,8 @@
     data () {
       return {
         EventForm: {
-          Name: ''
+          Name: '',
+          Content: ''
         }
       }
     },
