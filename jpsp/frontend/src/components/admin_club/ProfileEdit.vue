@@ -1,32 +1,28 @@
 <template>
   <div>
-    <el-form ref="PostForm" :model="PostForm" v-if="Authenticate===true">
-      <el-form-item label="社团名称" :required="true">
+    <el-form ref="PostForm" :model="PostForm">
+      <el-form-item label="社团名称" :required="true" prop="ClubName">
         <el-input v-model="PostForm.ClubName"></el-input>
       </el-form-item>
-      <el-form-item label="社团头像">
-        <el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/"
-                   :show-file-list="false"
-                   :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+      <el-form-item label="社团头像" prop="">
+        <el-upload class="avatar-uploader" action="" :show-file-list="false" :thumbnail-mode="true">
         </el-upload>
         <img v-if="imageUrl" :src="imageUrl" class="avatar">
-        <i v-else class="avatar-uploader-icon
-        el-icon-document"></i>
       </el-form-item>
-      <el-form-item label="社长姓名" :required="true">
+      <el-form-item label="社长姓名" :required="true" prop="ShezhangName">
         <el-input v-model="PostForm.ShezhangName"></el-input>
       </el-form-item>
-      <el-form-item label="社长QQ" :required="true">
+      <el-form-item label="社长QQ" :required="true" prop="ShezhangQQ">
         <el-input v-model="PostForm.ShezhangQQ"></el-input>
       </el-form-item>
-      <el-form-item prop="PostForm.ShezhangGrade" label="社长年级" :required="true">
+      <el-form-item prop="ShezhangGrade" label="社长年级" :required="true">
         <el-select v-model="PostForm.ShezhangGrade" value="">
           <el-option label="高一" value="1"></el-option>
           <el-option label="高二" value="2"></el-option>
           <el-option label="高三" value="3"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item prop="PostForm.ShezhangClass" label="社长班级" :required="true">
+      <el-form-item prop="ShezhangClass" label="社长班级" :required="true">
         <el-select v-model="PostForm.ShezhangClass" value="">
           <el-option label="1" value="1"></el-option>
           <el-option label="2" value="2"></el-option>
@@ -69,24 +65,8 @@
           <el-checkbox label="学科类"></el-checkbox>
         </el-checkbox-group>
       </el-form-item>
-      <el-form-item
-        label="社团成就"
-        v-for="(achievement, index) in PostForm.achievements"
-        :label="'成就' + index"
-        :key="achievements.key"
-        :prop="'achievement.' + index + '.value'"
-        :rules="{
-      required: true, message: '不能为空', trigger: 'blur'
-    }">
-        <el-input v-model="achievements.value"></el-input>
-        <el-button @click.prevent="removeAchievement(achievement)">删除</el-button>
-      </el-form-item>
-      <el-form-item>
-        <el-button @click="addAchievement">新增成就</el-button>
-      </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm">提交修改</el-button>
-        <el-button>取消</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -113,23 +93,10 @@
           ShezhangGrade: '',
           ShezhangClass: ''
         },
-        error: false,
         imageUrl: ''
       }
     },
     methods: {
-      removeAchievement (item) {
-        const index = this.PostForm.achievements.indexOf(item)
-        if (index !== -1) {
-          this.PostForm.achievements.splice(index, 1)
-        }
-      },
-      addAchievement () {
-        this.PostForm.ahievements.push({
-          value: '',
-          key: Date.now()
-        })
-      },
       submitForm () {
         axios({
           method: 'POST',
@@ -174,20 +141,6 @@
           this.$message.error('上传头像图片大小不能超过 2MB!')
         }
         return isJPG && isLt2M
-      }
-    },
-    computed: {
-      GetClubName () {
-        return this.$store.state.UserName
-      },
-      GetClubId () {
-        return this.$store.state.ClubId
-      },
-      GetToken () {
-        return this.$store.state.Token
-      },
-      Authenticate () {
-        return this.$store.state.Authenticated
       }
     },
     mounted: function () {
