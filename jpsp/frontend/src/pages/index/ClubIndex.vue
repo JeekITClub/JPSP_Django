@@ -8,9 +8,12 @@
       </div>
     </div>
     <div class="row">
-      <el-carousel :interval="5000" arrow="never">
-        <el-carousel-item v-for="item in 4" :key="item">
-          <h3>{{ item }}</h3>
+      <el-carousel :interval="5000" arrow="" class="carousel">
+        <el-carousel-item>
+          <img src="../../assets/1.jpg">
+        </el-carousel-item>
+        <el-carousel-item>
+          <img src="../../assets/2.jpg">
         </el-carousel-item>
       </el-carousel>
     </div>
@@ -33,8 +36,9 @@
         ClubId: this.$route.params.ClubId,
         Club: {
           ClubName: 'Jeek',
-          Introduction: 'DaAsASASDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD'
-        }
+          Introduction: 'DaAsASAS'
+        },
+        ImgItems: ['../../assets/1.jpg', '../../assets/2.jpg', '../../assets/3.jpg', '../../assets/4.jpg']
       }
     },
     computed: {
@@ -68,29 +72,18 @@
   }
 </script>
 <style scoped>
-  .el-carousel__item h3 {
-    color: #475669;
-    font-size: 18px;
-    opacity: 0.75;
-    line-height: 300px;
-    margin: 0;
-  }
-
-  .el-carousel__item:nth-child(2n) {
-    background-color: #99a9bf;
-  }
-
-  .el-carousel__item:nth-child(2n+1) {
-    background-color: #d3dce6;
-  }
-
   .Introduction {
     margin-top: 3%;
-    margin-button: 3%
+    margin-bottom: 3%;
   }
 
   .Join {
     margin-top: 3%;
-    margin-button: 3%;
+    margin-bottom: 3%;
+  }
+
+  .carousel {
+    width: 100%;
+    height: 100%;
   }
 </style>
