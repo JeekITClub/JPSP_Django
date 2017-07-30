@@ -1,9 +1,24 @@
 <template>
   <el-row :gutter="20">
     <el-col :span=4>
-      <setting_aside></setting_aside>
+      <el-menu mode="vertical" class="el-menu-vertical-demo" :default-active=activeIndex @select="handleSelect">
+    <el-menu-item-group title="个人中心">
+      <el-menu-item index="1">用户信息</el-menu-item>
+      <el-menu-item index="2">更改密码</el-menu-item>
+    </el-menu-item-group>
+    <el-menu-item-group title="活动">
+      <el-menu-item index="3">已加入活动</el-menu-item>
+      <el-menu-item index="4">参加过的活动</el-menu-item>
+    </el-menu-item-group>
+    <el-menu-item-group title="社团">
+      <el-menu-item index="5">已加入社团</el-menu-item>
+    </el-menu-item-group>
+  </el-menu>
     </el-col>
-    <el-col :span=20>
+
+    <!-- 用户信息 -->
+    <div v-if="activeIndex==='1'">
+    <el-col :span=8 :offset=2>
       <el-form ref="ProfileForm" :model="ProfileForm">
         <el-form-item prop="Name" label="姓名" :required="true">
           <el-input v-model="ProfileForm.Name"></el-input>
@@ -47,37 +62,46 @@
         </el-form-item>
       </el-form>
     </el-col>
+      </div>
+
+    <!-- 更改密码 -->
+    <div v-if="activeIndex==='2'">
+      <h1>更改密码</h1>
+    </div>
+
+    <!-- 已加入活动 -->
+    <div v-if="activeIndex==='3'">
+      <h1>已加入活动</h1>
+    </div>
+
+    <!-- 参加过的活动 -->
+    <div v-if="activeIndex==='4'">
+      <h1>参加过的活动</h1>
+    </div>
+
+    <!-- 已加入社团 -->
+    <div v-if="activeIndex==='5'">
+      <h1>已加入社团</h1>
+    </div>
   </el-row>
 </template>
 <script>
-  import SettingAside from '../../components/index/SettingAside.vue'
   import axios from 'axios'
   export default {
-    components: {
-      'setting_aside': SettingAside
-    },
     data () {
       return {
         ProfileForm: {
-          Name: '',
+          Name: 'shit',
           Grade: '',
           Class: '',
           QQ: '',
           Email: '',
           Phone: ''
-        }
+        },
+        activeIndex: '1'
       }
     },
     computed: {
-      Authenticate () {
-        return this.$store.state.Authenticated
-      },
-      GetToken () {
-        return this.$store.state.Token
-      },
-      GetUserName () {
-        return this.$store.state.UserName
-      }
     },
     methods: {
       onSubmit () {
@@ -93,12 +117,18 @@
             'Phone': this.ProfileForm.Phone
           })
         })
+      },
+      handleSelect (key) {
+        this.activeIndex = key
       }
     },
     mounted: function () {
       axios({
         method: 'GET',
-        url: 'http://127.0.0.1:8000/api/userprofile/get'
+        url: 'http://127.0.0.1:8000/api/userprofile/get',
+        data: JSON.stringify({
+          UserName: '233'
+        })
       })
         .then(function (response) {
           if (response.data.message === 'success') {
