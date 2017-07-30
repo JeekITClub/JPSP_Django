@@ -30,9 +30,9 @@ class Club(models.Model):
     ClubId = models.IntegerField(default=None)
     ShezhangName = models.CharField(max_length=8, default=None)
     ShezhangQq = models.CharField(max_length=20, default=None)
+    # 社长的QQ
     ShezhangGrade = models.CharField(max_length=1, default=None)
     ShezhangClass = models.CharField(max_length=2, default=None)
-    # 社长的QQ
     IfRecruit = models.BooleanField()
     # 是否进行招新
     EnrollGroupQq = models.CharField(max_length=20, default="")
@@ -45,7 +45,7 @@ class Club(models.Model):
     Introduction = models.TextField(default="")
     # 社团介绍
     Achievements = models.TextField(default="")
-    Member = models.ManyToManyField(UserProfile)
+    Member = models.ManyToManyField(UserProfile,through='ClubMemberShip',through_fields=('Club','Member'))
     type_choices = (
         ('1', '自立精神'),
         ('2', '共生意识'),
@@ -58,13 +58,17 @@ class Club(models.Model):
     def __str__(self):
         return self.ClubName
 
+class ClubMemberShip(models.Model):
+    Club = models.ForeignKey(Club,on_delete = models.CASCADE)
+    Member = models.ForeignKey(UserProfile,on_delete = models.CASCADE)
+    JoinDateTime = models.DateTimeField(auto_now_add = True)
 
 class Post(models.Model):
     ClubName = models.CharField(max_length=30, default="社团")
     CludId = models.ForeignKey(Club, default=None)
     LinkmanGrade = models.CharField(max_length=1, default="1")
     LinkmanClass = models.CharField(max_length=2, default="1")
-    LinkmanName = models.CharField(max_length=8, default="")
+    LinkmanName = models.CharField(max_length=8, default="联系人")
     LinkmanPhoneNumber = models.CharField(max_length=11, default="00000000000")
     LinkmanQq = models.CharField(max_length=20, default="00000000")
     Region = models.CharField(max_length=30, default="00000")
@@ -114,11 +118,16 @@ class Activity(models.Model):
         ('3', '表演')
     )
     Type = models.CharField(max_length=10, default='0', choices=type_choices)
-    Participants = models.ManyToManyField(UserProfile, default=None)
+    Participants = models.ManyToManyField(UserProfile, default=None,through='ActivityParticipantShip',through_fields=('Activity','Participant'))
 
     def __str__(self):
         return self.Name + 'by ' + self.ClubObject.ClubName
 
+
+class ActivityParticipantShip(models.Model):
+    Activity = models.ForeignKey(Activity,on_delete=models.CASCADE)
+    Participant = models.ForeignKey(UserProfile,on_delete=models.CASCADE)
+    AttendDateTime = models.DateTimeField(auto_now_add=True)
 
 class Classroom(models.Model):
     ClassroomId = models.IntegerField()
@@ -149,7 +158,7 @@ class LostAndFound(models.Model):
 
 class Event(models.Model):
     Name = models.CharField(max_length=30, default=None)
-    Date = models.DateTimeField()
+    DateTime = models.DateTimeField()
     Region = models.CharField(max_length=30, default=None)
     Content = models.TextField(default=None)
     ClubObject = models.ForeignKey(Club)

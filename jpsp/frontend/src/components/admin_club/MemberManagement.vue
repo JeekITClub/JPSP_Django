@@ -1,5 +1,5 @@
 <template>
-  <el-table :data="members" stripe style="width: 100%">
+  <el-table :data="Members" stripe>
     <el-table-column prop="MemberName" label="社员姓名" width="">
     </el-table-column>
     <el-table-column prop="MemberGrade" label="社员年级" width="">
@@ -7,23 +7,18 @@
     <el-table-column prop="MemberClass" label="社员班级" width="">
     </el-table-column>
     <el-table-column>
+      <template>
       <el-button @click.prevent="deleteMember(Member)" type="primary"></el-button>
+      </template>
     </el-table-column>
   </el-table>
 </template>
 <script>
+  import {getCookie} from 'tiny-cookie'
   export default {
     data () {
       return {
-        members: [
-          {
-            Member: {
-              Name: '',
-              Grade: '',
-              Class: ''
-            }
-          }
-        ]
+        Members: []
       }
     },
     methods: {
@@ -36,16 +31,13 @@
     },
     computed: {
       GetClubName () {
-        return this.$store.state.UserName
+        return getCookie('ClubName')
       },
       GetClubId () {
-        return this.$store.state.ClubId
+        return getCookie('ClubId')
       },
       GetToken () {
-        return this.$store.state.Token
-      },
-      Authenticate () {
-        return this.$store.state.Authenticated
+        return getCookie('ClubToken')
       }
     }
   }

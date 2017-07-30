@@ -4,7 +4,7 @@
       <el-row class="tac">
         <el-col :span=8 :offset=8>
           <h1 class="login-title">学生登录</h1>
-          <div v-if="Authenticate === null || Authenticate===false">
+          <div v-if="Authenticated != true">
             <el-form ref="LoginForm" :model="LoginForm" :rules="Rules">
               <el-form-item label="用户名" prop="UserName">
                 <el-input v-model="LoginForm.UserName" placeholder="用户名" autofocus=""></el-input>
@@ -17,13 +17,9 @@
               <el-form-item>
                 <el-button type="primary" @click="onSubmit" class="login-button">登录</el-button>
               </el-form-item>
-              <a href="http://baidu.com"><p style="text-align: right">忘记密码？</p></a>
-              <el-form-item>
-                <p v-if="Authenticate === false">登录失败</p>
-              </el-form-item>
+              <p style="text-align: right;"><router-link to="/contact">忘记密码？</router-link></p>
             </el-form>
           </div>
-          <p class="lead" v-if="Authenticate === true">已登录</p>
         </el-col>
       </el-row>
     </div>
@@ -31,6 +27,7 @@
 </template>
 
 <script>
+  import {getCookie, setCookie} from 'tiny-cookie'
   import axios from 'axios'
   export default {
     data () {
@@ -63,10 +60,17 @@
               })
             }).then(function (response) {
               if (response.data.message === 'User Authenticated') {
-                this.$store.commit('Authenticated', true)
-                this.$store.commit('ApplyUserName', response.data.UserName)
-                this.$store.commit('ApplyToken', response.data.Token)
-                // TODO:   this.router.push() to redirect
+                let expireDays = 1000 * 60 * 60 * 24 * 3
+                setCookie('UserId', this.LoginForm.UserName, expireDays)
+                setCookie('UserName', response.data.Username, expireDays)
+                setCookie('Token', response.data.Token, expireDays)
+                // expireDays 为有效时间
+                setCookie('IndexAuthenticated', true, expireDays)
+                // 第一个值为key，第二个为value，第三个为有限时间
+                this.$router.push('/')
+//                this.$store.commit('Authenticated', true)
+//                this.$store.commit('ApplyUserName', response.data.UserName)
+//                this.$store.commit('ApplyToken', response.data.Token)
               } else if (response.data.message === 'User Not Authenticated') {
                 this.$notify.error({
                   title: '错误',
@@ -78,12 +82,22 @@
             alert('error')
           }
         })
+      },
+      checkLogin () {
+        if (getCookie('IndexAuthenticated' === true)) {
+          this.$router.push('/')
+        } else {
+          this.$router.push('/login')
+        }
       }
     },
     computed: {
-      Authenticate () {
-        return this.$store.state.Authenticated
+      Authenticated () {
+        return getCookie('IndexAuthenticated')
       }
+    },
+    created () {
+      this.checkLogin()
     }
   }
 </script>

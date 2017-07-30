@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <club_establish></club_establish>
-  </div>
+  <club_establish></club_establish>
 </template>
 <script>
   import EstablishClub from '../../components/admin_club/Establish.vue'

@@ -1,21 +1,27 @@
 <template>
-  <div>
-    <div class="container">
-      <div class="row clearfix">
-        <div class="col-md-12 column">
-          <div class="jumbotron">
-            <h1>
-              Jeek信息社
-              {{ Club.ClubName }}
-            </h1>
-            <p>
-              {{ Club.Introduction }}
-             我们是xxx社，我们的目标是。。。
-            </p>
-          </div>
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-lg-12">
+        <h2>
+          {{ Club.ClubName }}
+        </h2>
       </div>
-
+    </div>
+    <div class="row">
+      <el-carousel :interval="5000" arrow="never">
+        <el-carousel-item v-for="item in 4" :key="item">
+          <h3>{{ item }}</h3>
+        </el-carousel-item>
+      </el-carousel>
+    </div>
+    <div class="row">
+      <div class="col-md-10 col-xs-15 col-sm-10 col-lg-10 Introduction">
+        <p>{{ Club.Introduction }}</p>
+      </div>
+      <div class="col-md-2 col-xs-3 col-sm-2 col-lg-2 Join">
+        <figure></figure>
+        <button type="button" class="primary">加入该社团</button>
+      </div>
     </div>
   </div>
 </template>
@@ -25,7 +31,10 @@
     data () {
       return {
         ClubId: this.$route.params.ClubId,
-        Club: {}
+        Club: {
+          ClubName: 'Jeek',
+          Introduction: 'DaAsASASDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD'
+        }
       }
     },
     computed: {
@@ -59,4 +68,29 @@
   }
 </script>
 <style scoped>
+  .el-carousel__item h3 {
+    color: #475669;
+    font-size: 18px;
+    opacity: 0.75;
+    line-height: 300px;
+    margin: 0;
+  }
+
+  .el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+  }
+
+  .el-carousel__item:nth-child(2n+1) {
+    background-color: #d3dce6;
+  }
+
+  .Introduction {
+    margin-top: 3%;
+    margin-button: 3%
+  }
+
+  .Join {
+    margin-top: 3%;
+    margin-button: 3%;
+  }
 </style>
