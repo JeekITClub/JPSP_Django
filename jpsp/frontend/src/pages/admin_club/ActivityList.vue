@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div align="right">
+      <el-button @click="GoToActivityForm" type="primary" size="big">申请活动</el-button>
+    </div>
     <el-tabs v-model="TabsValue" type="card">
       <el-tab-pane label="所有" name="All">
         <activity_list type="All" user="Club"></activity_list>
@@ -27,15 +30,18 @@
 </template>
 <script>
   import ActivityList from '../../components/public/ActivityList.vue'
-  import JAside from '../../components/admin_club/ClubAside.vue'
   export default {
     components: {
-      'club_aside': JAside,
       'activity_list': ActivityList
     },
     data () {
       return {
-        TabsValue: 'All'
+        TabsValue: 'Now'
+      }
+    },
+    methods: {
+      GoToActivityForm () {
+        this.$router.push('/activity/form')
       }
     }
   }

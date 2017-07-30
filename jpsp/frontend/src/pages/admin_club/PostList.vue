@@ -1,5 +1,8 @@
 <template>
    <div>
+     <div align="right">
+       <el-button @click="GoToPostForm()" type="primary" size="big">添加社团记录</el-button>
+     </div>
     <el-tabs v-model="TabsValue" type="card">
       <el-tab-pane label="未审核" name="UnStared">
         <club_postlist type="UnStared" user="CD"></club_postlist>
@@ -25,6 +28,11 @@
     data () {
       return {
         TabsValue: 'Stared'
+      }
+    },
+    methods: {
+      GoToPostForm () {
+        this.$router.push('/post/form')
       }
     }
   }

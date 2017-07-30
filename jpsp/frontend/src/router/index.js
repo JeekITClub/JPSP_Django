@@ -10,6 +10,7 @@ import ActivityList from '../pages/index/ActiviytList.vue'
 import ClubList from '@/pages/index/ClubList.vue'
 import EventList from '../pages/index/EventList.vue'
 import Contact from '@/pages/public/Contact.vue'
+import EstablishClub from '@/pages/index/EstablishClub.vue'
 // import LostAndFound from '../pages/index/LostAndFound.vue'
 export default new Router({
   routes: [
@@ -37,6 +38,11 @@ export default new Router({
       path: '/profile',
       name: 'ProfileEdit',
       component: ProfileEdit
+    },
+    {
+      path: '/club/establish',
+      name: 'EstablishClub',
+      component: EstablishClub
     },
     {
       path: '/club',

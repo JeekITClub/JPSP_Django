@@ -8,7 +8,6 @@ import RecruitClassroomForm from '@/pages/admin_club/RecruitClassroomForm.vue'
 import RecruitClassroomList from '@/pages/admin_club/RecruitClassroomList.vue'
 import About from '@/pages/public/About.vue'
 import Contact from '@/pages/public/Contact.vue'
-import Establish from '@/pages/admin_club/Establish.vue'
 import ActivityForm from '@/pages/admin_club/ActivityForm.vue'
 import ActivityList from '@/pages/admin_club/ActivityList.vue'
 import EventForm from '@/pages/admin_club/EventForm.vue'
@@ -50,11 +49,6 @@ export default new Router({
       path: '/profile',
       name: 'Profile',
       component: ProfileEdit
-    },
-    {
-      path: '/establish',
-      name: 'Establish',
-      component: Establish
     },
     {
       path: '/page',

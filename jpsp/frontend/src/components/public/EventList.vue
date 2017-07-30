@@ -33,7 +33,7 @@
         return getCookie('UserId')
       },
       GetAPI () {
-          return this.$store.state.API
+        return this.$store.state.API
       }
     },
     methods: {},

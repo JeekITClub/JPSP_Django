@@ -23,12 +23,12 @@
         </el-col>
       </el-row>
     </el-form-item>
-    <el-form-item label="活动类型">
-      <el-select placeholder="请选择活动类型">
-        <el-option :key=""></el-option>
-        <!--TODO: define the type-->
-      </el-select>
-    </el-form-item>
+    <!--<el-form-item label="活动类型">-->
+      <!--<el-select placeholder="请选择活动类型">-->
+        <!--<el-option :key=""></el-option>-->
+        <!--&lt;!&ndash;TODO: define the type&ndash;&gt;-->
+      <!--</el-select>-->
+    <!--</el-form-item>-->
     <el-form-item label="活动内容">
       <el-input type="textarea" v-model="ActivityApplyForm.Content"></el-input>
     </el-form-item>

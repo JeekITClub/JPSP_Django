@@ -2,7 +2,7 @@
   <club_establish></club_establish>
 </template>
 <script>
-  import EstablishClub from '../../components/admin_club/Establish.vue'
+  import EstablishClub from '../../components/index/Establish.vue'
   export default {
     components: {
       'club_establish': EstablishClub
