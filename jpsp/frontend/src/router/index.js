@@ -7,7 +7,7 @@ import Login from '@/pages/index/Login.vue'
 import ClubIndex from '@/pages/index/ClubIndex'
 import ProfileEdit from '@/pages/index/ProfileEdit.vue'
 import ActivityList from '../pages/index/ActiviytList.vue'
-import ClubList from '@/pages/index/ClubList.vue'
+import ClubShow from '@/pages/index/ClubShow.vue'
 import EventList from '../pages/index/EventList.vue'
 import Contact from '@/pages/public/Contact.vue'
 import EstablishClub from '@/pages/index/EstablishClub.vue'
@@ -46,8 +46,8 @@ export default new Router({
     },
     {
       path: '/club',
-      name: 'ClubList',
-      component: ClubList
+      name: 'ClubShow',
+      component: ClubShow
     },
     {
       path: '/event/list',

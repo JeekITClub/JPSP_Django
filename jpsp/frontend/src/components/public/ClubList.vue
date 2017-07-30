@@ -49,6 +49,7 @@
 </template>
 
 <script>
+  import {getCookie} from 'tiny-cookie'
   import axios from 'axios'
   export default {
     data () {
@@ -87,14 +88,14 @@
       }.bind(this))
     },
     computed: {
-      Authenticate () {
-        return this.$store.state.Authenticated
-      },
       GetUserName () {
-        return this.$store.state.UserName
+        return getCookie('UserName')
       },
-      GetToken () {
-        return this.$store.state.Token
+      GetIndexToken () {
+        return getCookie('IndexToken')
+      },
+      GetCDToken () {
+        return getCookie('CDToken')
       }
     }
   }

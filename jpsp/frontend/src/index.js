@@ -13,13 +13,14 @@ Vue.use(ElementUI)
 Vue.use(Vuex)
 /* eslint-disable no-new */
 
-// const UserVuexStore = new Vuex.Store({
-//   state: {
+const UserVuexStore = new Vuex.Store({
+  state: {
+    Api: 'http://127.0.0.1:8000/api/'
+  }
 //     UserId: '用户名',
 //     UserName: '',
 //     Token: '',
 //     Authenticated: null
-//   },
 //   mutations: {
 //     Authenticated (state, If) {
 //       state.Authenticated = If
@@ -34,12 +35,12 @@ Vue.use(Vuex)
 //       state.UserId = UserId
 //     }
 //   }
-// })
+})
 
 new Vue({
   el: '#app',
   router,
-  // store: UserVuexStore,
+  store: UserVuexStore,
   template: '<App/>',
   components: {index},
   render: h => h(index)
