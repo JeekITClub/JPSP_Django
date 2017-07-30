@@ -14,6 +14,13 @@
   </el-menu>
 </template>
 <script>
+  export default {
+    data () {
+      return {
+        activeIndex: '1'
+      }
+    }
+  }
 </script>
 <style>
 </style>
