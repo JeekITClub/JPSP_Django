@@ -21,32 +21,32 @@
           {
             ClubId: '12',
             ClubName: 'Jeek',
-            Introduction: 'dadsadasdasdasdsaa'
+            Introduction: '这是Jeek社'
+          },
+          {
+            ClubId: '12',
+            ClubName: 'JTV',
+            Introduction: '这是JTV社'
           },
           {
             ClubId: '12',
             ClubName: 'Jeek',
-            Introduction: 'dadsadasdasdasdsaa'
+            Introduction: '这是Jeek社'
           },
           {
             ClubId: '12',
             ClubName: 'Jeek',
-            Introduction: 'dadsadasdasdasdsaa'
+            Introduction: '这是Jeek社'
           },
           {
             ClubId: '12',
             ClubName: 'Jeek',
-            Introduction: 'dadsadasdasdasdsaa'
+            Introduction: '这是Jeek社'
           },
           {
             ClubId: '12',
             ClubName: 'Jeek',
-            Introduction: 'dadsadasdasdasdsaa'
-          },
-          {
-            ClubId: '12',
-            ClubName: 'Jeek',
-            Introduction: 'dadsadasdasdasdsaa'
+            Introduction: '这是Jeek社'
           }
         ]
       }
@@ -77,5 +77,4 @@
   }
 </script>
 <style scoped>
-  @import '../../assets/index/css/bootstrap/bootstrap.min.css';
 </style>
