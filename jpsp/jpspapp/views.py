@@ -253,6 +253,25 @@ def activity_apply(request):
 
 
 @require_http_methods(['POST'])
+def activity_detail(request):
+    try:
+        body = json.loads(request.body)
+        activity_id = body['ActivityId']
+        activity = Activity.objects.get(pk=activity_id)
+        return JsonResponse({
+            'message': 'success',
+            'Access-Control-Allow-Origin': '*',
+            'data':{
+                # TODO: data
+            }
+        })
+    except:
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
+
+@require_http_methods(['POST'])
 def activity_operate(request):
     try:
         body = json.loads(request.body)
@@ -264,6 +283,10 @@ def activity_operate(request):
                 activity_object = Activity.objects.get(pk=activity_id)
                 activity_object.State = 'Confirmed'
                 activity_object.save()
+                return JsonResponse({
+                    'message': 'success',
+                    'Access-Control-Allow-Origin': '*'
+                })
             except:
                 return JsonResponse({
                     'message': 'error',
