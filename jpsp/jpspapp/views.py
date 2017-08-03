@@ -10,6 +10,7 @@ import datetime
 from django.contrib.auth import authenticate
 import itchat
 
+
 # Create your views here.
 @require_http_methods(['POST'])
 def login(request):
@@ -79,8 +80,6 @@ def club_establish(request):
         if_recruit = body['IfRecruit']
         qq_group = body['QQGroup']
         email = body['Email']
-        #
-        # settings = Settings.objects.filter(name="settings")
         Club.objects.create(
             Clubname=clubname,
             # TODO: ClubId
