@@ -3,7 +3,8 @@ from django.http import JsonResponse, HttpResponse
 import json
 from django.contrib.auth.models import User
 from jpsp.shortcut import JPSPToken, JPSPTime
-from jpspapp.models import Club, Post, Token, Activity, Classroom, LostAndFound, UserProfile, CDUser
+from jpspapp.models import Club, Post, Token, Activity, Classroom, LostAndFound, UserProfile, CDUser, \
+    ActivityParticipantShip, ClubMemberShip
 from django.core import serializers
 from django.views.decorators.http import require_http_methods
 import datetime
@@ -205,9 +206,10 @@ def club_member_operate(request):
         club_id = body['ClubId']
         userid = body['userid']
         club_object = Club.objects.get(Club)
+
         # userid 为学生账号 为学号  数字
         return JsonResponse({
-            'message': 'error',
+            'message': 'success',
             'Access-Control-Allow-Origin': '*'
         })
     except:
@@ -238,11 +240,31 @@ def activity_apply(request):
             Date1=date1,
             Date2=date2,
             State='0',
-            Type=type,
-            Participants=None
+            Type=type
         )
         return JsonResponse({
+            'message': 'success',
+            'Access-Control-Allow-Origin': '*'
+        })
+    except:
+        return JsonResponse({
             'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
+
+
+@require_http_methods(['POST'])
+def activity_attend(requset):
+    try:
+        body = json.loads(requset.body)
+        token = body['Token']
+        activity_id = body['ActivityId']
+        user_id = body['UserId']
+        ActivityParticipantShip.objects.create(Activity=Activity.objects.get(pk=activity_id),
+                                               Participant=UserProfile.objects.get(
+                                                   UserObject=User.objects.get(username=user_id)))
+        return JsonResponse({
+            'message': 'success',
             'Access-Control-Allow-Origin': '*'
         })
     except:
@@ -261,8 +283,13 @@ def activity_detail(request):
         return JsonResponse({
             'message': 'success',
             'Access-Control-Allow-Origin': '*',
-            'data':{
-                # TODO: data
+            'data': {
+                'Name': activity.Name,
+                'Region': activity.Region,
+                # 'Clubid' = Club.objects.get(clubid=User.objects.get(username=club_id)),
+                'Content': activity.Content,
+                'Date1': activity.Date1,
+                'Date2': activity.Date2,
             }
         })
     except:
@@ -270,6 +297,7 @@ def activity_detail(request):
             'message': 'error',
             'Access-Control-Allow-Origin': '*'
         })
+
 
 @require_http_methods(['POST'])
 def activity_operate(request):
