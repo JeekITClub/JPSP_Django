@@ -8,12 +8,12 @@ python:
 env:
   - DJANGO_VERSION=1.10.7
   - DJANGO_VERSION=1.11.1
-services: 
-  - docker
+#services:
+#  - docker
 # command to install dependencies
 # install: "pip install -r requirements.txt"
 #before_install:
-#  - docker build -t 
+#  - docker build -t
 #  - docker run -d -p 
 #  - docker ps -a
 #  - docker run 
@@ -23,3 +23,4 @@ install:
 # command to run tests
 script: 
   - cd jpsp
+  - python3 manage.py runserver
