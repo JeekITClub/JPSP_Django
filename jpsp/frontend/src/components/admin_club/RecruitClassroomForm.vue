@@ -15,18 +15,17 @@
   </el-form>
 </template>
 <script>
+  // TODO: 公共教室两个时间的验证 后一个时间不能比前一个早 而且不能超过一天的周期
+  import { getCookie } from 'tiny-cookie'
   import axios from 'axios'
   export default {
     name: 'RecruitClassroomApply',
     data () {
       return {
         RecruitClassroomApplyForm: {
-          ClubName: this.GetClubName,
           Date1: '',
-          Date2: '',
-          Date3: ''
-        },
-        error: false
+          Date2: ''
+        }
       }
     },
     methods: {
@@ -36,18 +35,22 @@
           url: '',
           data: JSON.stringify({
             ClubId: this.GetClubId,
-            ClubName: this.GetClubName,
             Date1: this.RecruitClassroomApplyForm.Date1,
             Date2: this.RecruitClassroomApplyForm.Date2,
-            Date3: this.RecruitClassroomApplyForm.Date3,
-            Token: this.GetToken
+            Token: this.GetClubToken
           })
         }).then(function (response) {
           if (response.data.message === 'success') {
-            console.log('success')
-          }
-          if (response.data.message === 'error') {
-            console.log('error')
+            this.$notify({
+              'title': '成功',
+              'message': '成功申请公共教室',
+              'type': 'success'
+            })
+          } else if (response.data.message === 'error') {
+            this.$notify.error({
+              'title': '错误',
+              'message': '申请公共教室发生错误'
+            })
           }
         }).catch(function () {
           console.log('error')
@@ -55,17 +58,11 @@
       }
     },
     computed: {
-      GetClubName () {
-        return this.$store.state.UserName
-      },
       GetClubId () {
-        return this.$store.state.ClubId
+        return getCookie('ClubId')
       },
-      GetToken () {
-        return this.$store.state.Token
-      },
-      Authenticate () {
-        return this.$store.state.Authenticated
+      GetClubToken () {
+        return getCookie('ClubToken')
       }
     }
   }

@@ -108,7 +108,7 @@ def club_establish(request):
         })
 
 
-@require_http_methods(["POST"])
+@require_http_methods(['POST'])
 def club_list(request):
     try:
         body = json.loads(request.body)
@@ -144,6 +144,23 @@ def club_list(request):
             'Access-Control-Allow-Origin': '*'
         })
 
+
+@require_http_methods(['POST'])
+def club_attend(request):
+    try:
+        body = json.loads(request.body)
+        token = body['Token']
+        club_id = body['ClubId']
+        user_id = body['UserId']
+        return JsonResponse({
+            'message': 'success',
+            'Access-Control-Allow-Origin': '*'
+        })
+    except:
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
 
 @require_http_methods(['POST'])
 def recruit_classroom_apply(request):
