@@ -52,7 +52,7 @@
           if (valid) {
             axios({
               method: 'POST',
-              url: 'http://127.0.0.1:8000/api/login',
+              url: this.GetApi + 'login',
               data: JSON.stringify({
                 UserName: this.LoginForm.UserName,
                 Password: this.LoginForm.Password,
@@ -94,6 +94,12 @@
     computed: {
       Authenticated () {
         return getCookie('IndexAuthenticated')
+      },
+      /**
+       * @return {string}
+       */
+      GetApi () {
+        return this.$store.state.Api
       }
     },
     created () {

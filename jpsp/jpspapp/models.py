@@ -20,8 +20,8 @@ class UserProfile(models.Model):
 
 
 class CDUser(models.Model):
-    user = models.ForeignKey(User)
-    username = models.CharField(max_length=30, default=None)
+    UserObject = models.OneToOneField(User,default=None)
+    UserName = models.CharField(max_length=30, default=None)
 
 
 class Club(models.Model):
