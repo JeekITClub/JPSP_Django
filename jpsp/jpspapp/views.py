@@ -15,39 +15,46 @@ import itchat
 # Create your views here.
 @require_http_methods(['POST'])
 def login(request):
-    body = json.loads(request.body)
-    userid = body['UserName']
-    password = body['Password']
-    usertype = body['UserType']
-    user = authenticate(username=userid, password=password)
-    if user is not None:
-        token_object = JPSPToken(username=userid)
-        if usertype == "Student":
-            return JsonResponse({
-                "UserName": UserProfile(User.objects.get(username=userid)).UserObject.UserName,
-                "message": "User Authenticated",
-                "Token": token_object.generate(),
-                "Access-Control-Allow-Origin": '*'
-            })
-        elif usertype == "Club":
-            return JsonResponse({
-                "UserName": Club(User.objects.get(username=userid)).ClubName,
-                "message": "User Authenticated",
-                # "Token": token_object.generate(),
-                "Access-Control-Allow-Origin": '*'
-            })
-        elif usertype == "Club Department":
-            return JsonResponse({
-                "UserName": CDUser(User.objects.get(username=userid)).username,
-                "message": "User Authenticated",
-                # "Token": token_object.generate(),
-                "Access-Control-Allow-Origin": '*'
-            })
-    else:
+    global object
+    try:
+        body = json.loads(request.body)
+        userid = body['UserName']
+        password = body['Password']
+        usertype = body['UserType']
+        user = authenticate(username=userid, password=password)
+        if user is not None:
+            token_object = JPSPToken(username=userid)
+            if usertype == "Student":
+                object = UserProfile.objects.get(UserObject=User.objects.get(username=userid))
+                return JsonResponse({
+                    "UserName": object.UserName,
+                    "message": "User Authenticated",
+                    "Token": token_object.generate(),
+                    "Access-Control-Allow-Origin": '*'
+                })
+            elif usertype == "Club":
+                object = Club.objects.get(ClubObject=User.objects.get(username=userid))
+                return JsonResponse({
+                    "UserName": object.ClubName,
+                    "message": "User Authenticated",
+                    "Token": token_object.generate(),
+                    "Access-Control-Allow-Origin": '*'
+                })
+            elif usertype == "CD":
+                object = CDUser.objects.get()
+                return JsonResponse({
+                    "UserName": CDUser(User.objects.get(username=userid)).UserName,
+                    "message": "User Authenticated",
+                    "Token": token_object.generate(),
+                    "Access-Control-Allow-Origin": '*'
+                })
+    except:
         return JsonResponse({
             "message": "User Not Authenticated",
             "Access-Control-Allow-Origin": '*',
         })
+    finally:
+        object.delete()
 
 
 @require_http_methods(['POST'])
@@ -149,18 +156,26 @@ def club_list(request):
 def club_attend(request):
     try:
         body = json.loads(request.body)
-        token = body['Token']
+        token = body['IndexToken']
         club_id = body['ClubId']
         user_id = body['UserId']
-        return JsonResponse({
-            'message': 'success',
-            'Access-Control-Allow-Origin': '*'
-        })
+        token_object = JPSPToken(username=user_id)
+        if (token_object.authenticate()):
+            return JsonResponse({
+                'message': 'success',
+                'Access-Control-Allow-Origin': '*'
+            })
+        else:
+            return JsonResponse({
+                'message': 'error',
+                'Access-Control-Allow-Origin': '*'
+            })
     except:
         return JsonResponse({
             'message': 'error',
             'Access-Control-Allow-Origin': '*'
         })
+
 
 @require_http_methods(['POST'])
 def recruit_classroom_apply(request):
@@ -559,7 +574,7 @@ def post_submit(request):
 def post_star(request):
     try:
         body = json.loads(request.body)
-        token = body['Token']
+        token = body['CDToken']
         stars = body['Stars']
         post_id = body['PostId']
         try:
