@@ -10,16 +10,13 @@
     <el-form-item label="活动时间">
       <el-row>
         <el-col :span="6">
-          <el-date-picker type="date" placeholder="选择日期" v-model="ActivityApplyForm.Date1"
-                          style=""></el-date-picker>
+          <el-date-picker type="date" placeholder="选择日期" v-model="ActivityApplyForm.Date1"></el-date-picker>
         </el-col>
-        <el-col :span="6" :offset=1>
-          <el-time-picker type="fixed-time" placeholder="选择开始时间" v-model="ActivityApplyForm.Date2"
-                          style=""></el-time-picker>
+        <el-col :span="6" :offset="1">
+          <el-time-picker type="" placeholder="选择开始时间" v-model="ActivityApplyForm.Date2"></el-time-picker>
         </el-col>
-        <el-col :span=6 :offset=1>
-          <el-time-picker type="fixed-time" placeholoder="选择结束时间" v-model="ActivityApplyForm.Date3"
-                          style=""></el-time-picker>
+        <el-col :span="6" :offset="1">
+          <el-time-picker type="" placeholoder="选择结束时间" v-model="ActivityApplyForm.Date3"></el-time-picker>
         </el-col>
       </el-row>
     </el-form-item>
@@ -30,7 +27,7 @@
       <!--</el-select>-->
     <!--</el-form-item>-->
     <el-form-item label="活动内容">
-      <el-input type="textarea" v-model="ActivityApplyForm.Content"></el-input>
+      <el-input type="textarea" v-model="ActivityApplyForm.Content" placeholder="请输入活动内容"></el-input>
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="submitForm">立即申请</el-button>
