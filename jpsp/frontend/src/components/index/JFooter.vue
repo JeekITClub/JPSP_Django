@@ -7,14 +7,14 @@
           <h4>JPSP</h4>
           <p>全称Jianping Student's Platform 。<br>是一个方便建平学生进行日常学校活动的平台，加强校内管理部门（如团委、学生会、自管会、社团部等）与学生的互动，利于发布和获取实时资讯。</p>
         </div>
-        <div class="col-md-4 col-md-push-1">
+        <div class="col-md-4">
           <h4>Links</h4>
           <ul class="fh5co-footer-links">
             <li><a href="http://www.jianping.com.cn">建平中学</a></li>
           </ul>
         </div>
 
-        <div class="col-md-4 col-md-push-1">
+        <div class="col-md-4">
           <h4>Contact Information</h4>
           <ul class="fh5co-footer-links">
             <li>地址：浦东崮山路517号、385号(北校区)<br>电话：021-58851542</li>
