@@ -2,18 +2,15 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 col-lg-12">
-        <h2>
+        <h1>
           {{ Club.ClubName }}
-        </h2>
+        </h1>
       </div>
     </div>
     <div class="row">
       <el-carousel :interval="5000" arrow="" class="carousel">
-        <el-carousel-item>
-          <img src="../../assets/1.jpg">
-        </el-carousel-item>
-        <el-carousel-item>
-          <img src="../../assets/2.jpg">
+        <el-carousel-item v-for="item in ImgItems" :key="item">
+          <img src="item">
         </el-carousel-item>
       </el-carousel>
     </div>
@@ -22,8 +19,7 @@
         <p>{{ Club.Introduction }}</p>
       </div>
       <div class="col-md-2 col-xs-3 col-sm-2 col-lg-2 Join">
-        <figure></figure>
-        <button type="button" class="primary" @click="AttendClub">加入该社团</button>
+        <button class="btn btn-primary" type="button" @click="AttendClub">加入该社团</button>
       </div>
     </div>
   </div>
@@ -34,12 +30,8 @@
   export default {
     data () {
       return {
-        ClubId: this.$route.params.ClubId,
-        Club: {
-          ClubName: 'Jeek',
-          Introduction: 'DaAsASAS'
-        },
-        ImgItems: ['../../assets/1.jpg', '../../assets/2.jpg', '../../assets/3.jpg', '../../assets/4.jpg']
+        ImgItems: ['../../assets/1.jpg', '../../assets/2.jpg', '../../assets/3.jpg', '../../assets/4.jpg'],
+        Club: this.$route.params.Club
       }
     },
     methods: {
