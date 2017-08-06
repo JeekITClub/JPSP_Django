@@ -534,6 +534,21 @@ def laf_list(request):
 
 
 @require_http_methods(["POST"])
+def post_detail(request):
+    try:
+        body = json.loads(request.body)
+        return JsonResponse({
+            'message': 'success',
+            'Access-Control-Allow-Origin': '*'
+        })
+    except:
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
+
+
+@require_http_methods(["POST"])
 def post_submit(request):
     try:
         body = json.loads(request.body)
