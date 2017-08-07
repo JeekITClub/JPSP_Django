@@ -213,20 +213,30 @@
   </div>
 </template>
 <script>
+  import {getCookie} from 'tiny-cookie'
   export default {
     data () {
       return {}
     },
     methods: {},
     computed: {
-      Authenticate () {
-        return this.$store.state.Authenticated
+      GetUserId () {
+        return getCookie('UserId')
       },
       GetToken () {
-        return this.$store.state.Token
+        return getCookie('Token')
       },
       GetUserName () {
-        return this.$store.state.UserName
+        return getCookie('UserName')
+      },
+      Authenticated () {
+        return getCookie('IndexAuthenticated')
+      },
+      /**
+       * @return {string}
+       */
+      GetApi () {
+        return this.$store.state.Api
       }
     }
   }

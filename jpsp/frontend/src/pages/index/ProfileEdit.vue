@@ -20,8 +20,8 @@
     <div v-if="activeIndex==='1'">
     <el-col :span=8 :offset=2>
       <el-form ref="ProfileForm" :model="ProfileForm">
-        <el-form-item prop="Name" label="姓名" :required="true">
-          <el-input v-model="ProfileForm.Name"></el-input>
+        <el-form-item prop="Name" label="用户名" :required="true">
+          <el-input v-model="ProfileForm.UserName"></el-input>
         </el-form-item>
         <el-form-item prop="Grade" label="年级" :required="true">
           <el-select v-model="ProfileForm.Grade" value="">
@@ -66,7 +66,7 @@
 
     <!-- 更改密码 -->
     <div v-if="activeIndex==='2'">
-      <h1>更改密码</h1>
+      <h1>不准改</h1>
     </div>
 
     <!-- 已加入活动 -->
@@ -82,39 +82,56 @@
     <!-- 已加入社团 -->
     <div v-if="activeIndex==='5'">
       <h1>已加入社团</h1>
+      <h2 v-for="club in ProfileForm.club_set">{{ club.ClubName }}</h2>
     </div>
   </el-row>
 </template>
 <script>
+  import {getCookie} from 'tiny-cookie'
   import axios from 'axios'
   export default {
     data () {
       return {
         ProfileForm: {
-          Name: 'shit',
-          Grade: '',
-          Class: '',
-          QQ: '',
-          Email: '',
-          Phone: ''
         },
         activeIndex: '1'
       }
     },
     computed: {
+      GetUserId () {
+        return getCookie('UserId')
+      },
+      GetToken () {
+        return getCookie('Token')
+      },
+      GetUserName () {
+        return getCookie('UserName')
+      },
+      Authenticated () {
+        return getCookie('IndexAuthenticated')
+      },
+      /**
+       * @return {string}
+       */
+      GetApi () {
+        return this.$store.state.Api
+      }
     },
     methods: {
       onSubmit () {
         axios({
           method: 'POST',
-          url: '',
+          url: this.GetApi + 'userprofile/submit',
           data: JSON.stringify({
-            'Name': this.ProfileForm.Name,
+            'UserId': this.GetUserId,
+            'Token': this.GetToken,
+            'UserName': this.ProfileForm.UserName,
             'Grade': this.ProfileForm.Grade,
             'Class': this.ProfileForm.Class,
             'QQ': this.ProfileForm.QQ,
             'Email': this.ProfileForm.Email,
-            'Phone': this.ProfileForm.Phone
+            'Phone': this.ProfileForm.Phone,
+            'AttendClubList': this.ProfileForm.AttendClubList
           })
         })
       },
@@ -125,9 +142,10 @@
     mounted: function () {
       axios({
         method: 'GET',
-        url: 'http://127.0.0.1:8000/api/userprofile/get',
+        url: this.GetApi + 'userprofile/get',
         data: JSON.stringify({
-          UserName: '233'
+          UserId: this.GetUserId,
+          Token: this.GetToken
         })
       })
         .then(function (response) {
