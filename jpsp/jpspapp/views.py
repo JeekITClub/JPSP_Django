@@ -289,12 +289,14 @@ def activity_apply(request):
 def activity_attend(requset):
     try:
         body = json.loads(requset.body)
-        token = body['Token']
+
+        # token = body['Token']
+        # activity_id -> int
         activity_id = body['ActivityId']
+        # user_id -> str
         user_id = body['UserId']
         ActivityParticipantShip.objects.create(Activity=Activity.objects.get(pk=activity_id),
-                                               Participant=UserProfile.objects.get(
-                                                   UserObject=User.objects.get(username=user_id)))
+                                               Participant=UserProfile.objects.get(UserObject=User.objects.get(username=user_id)))
         return JsonResponse({
             'message': 'success',
             'Access-Control-Allow-Origin': '*'
@@ -310,18 +312,19 @@ def activity_attend(requset):
 def activity_detail(request):
     try:
         body = json.loads(request.body)
+        # activity_id -> int
         activity_id = body['ActivityId']
-        activity = Activity.objects.get(pk=activity_id)
+        activity = Activity.objects.get(pk=1)
         return JsonResponse({
             'message': 'success',
             'Access-Control-Allow-Origin': '*',
             'data': {
                 'Name': activity.Name,
                 'Region': activity.Region,
-                # 'Clubid' = Club.objects.get(clubid=User.objects.get(username=club_id)),
+                'ClubName': activity.ClubObject.ClubName,
                 'Content': activity.Content,
-                'Date1': activity.Date1,
-                'Date2': activity.Date2,
+                'Date1': str(activity.Date1),
+                'Date2': str(activity.Date2),
             }
         })
     except:
@@ -330,25 +333,6 @@ def activity_detail(request):
             'Access-Control-Allow-Origin': '*'
         })
 
-
-@require_http_methods(['POST'])
-def activity_detail(request):
-    try:
-        body = json.loads(request.body)
-        activity_id = body['ActivityId']
-        activity = Activity.objects.get(pk=activity_id)
-        return JsonResponse({
-            'message': 'success',
-            'Access-Control-Allow-Origin': '*',
-            'data':{
-                # TODO: data
-            }
-        })
-    except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
 
 @require_http_methods(['POST'])
 def activity_operate(request):
