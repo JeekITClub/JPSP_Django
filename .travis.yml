@@ -24,4 +24,4 @@ install:
 # command to run tests
 script:
   - cd jpsp
-  - python3 manage.py runserver
+  - python3 manage.py test
