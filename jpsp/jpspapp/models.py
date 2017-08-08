@@ -61,7 +61,10 @@ class Club(models.Model):
 class ClubMemberShip(models.Model):
     Club = models.ForeignKey(Club,on_delete = models.CASCADE)
     Member = models.ForeignKey(UserProfile,on_delete = models.CASCADE)
-    JoinDateTime = models.DateTimeField(auto_now_add = True)
+    AttendDateTime = models.DateTimeField(auto_now_add = True)
+    State = models.IntegerField()
+    # State: 0 is a unconfirmed clubmembership and 1 is a confirmed one.
+    AttendReason = models.TextField()
 
 class Post(models.Model):
     ClubName = models.CharField(max_length=30, default="社团")
@@ -90,10 +93,10 @@ class Post(models.Model):
 
 class Token(models.Model):
     Token = models.CharField(max_length=30, default=None)
-    UserName = models.CharField(max_length=12,default=None)
+    UserObject = models.OneToOneField(User,default=None)
 
     def __str__(self):
-        return self.UserName
+        return self.UserObject.username
 
 
 class Activity(models.Model):

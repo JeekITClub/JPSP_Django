@@ -15,7 +15,7 @@ import itchat
 # Create your views here.
 @require_http_methods(['POST'])
 def login(request):
-    global object
+    global token_object
     try:
         body = json.loads(request.body)
         userid = body['UserName']
@@ -53,8 +53,9 @@ def login(request):
             "message": "User Not Authenticated",
             "Access-Control-Allow-Origin": '*',
         })
-    finally:
-        object.delete()
+        # finally:
+        #     # token_object.__del__()
+        #     pass
 
 
 @require_http_methods(['POST'])
@@ -729,9 +730,26 @@ def userprofile_get(request):
     try:
         body = json.loads(request.body)
         token = body['Token']
-        userid = body['UserId']
-        profile = UserProfile.objects.get()
-        # TODO: get profile object
+        user_id = body['UserId']
+        profile = UserProfile.objects.get(UserObject=User.objects.get(username=user_id))
+        club_set = profile.club_set()
+        activity_set = profile.activity_set()
+        club_tuple = []
+        if club_set is not None:
+            for club in club_set:
+                club_tuple.append(club.ClubName)
+        act_future_set = []
+        act_past_set = []
+        act_now_set = []
+        now = datetime.datetime.now()
+        if activity_set is not None:
+            for activity in activity_set:
+                if activity.Date2 <= now:
+                    act_past_set.append(activity.Name)
+                elif activity.Date1 >= now:
+                    act_future_set.append(activity.Name)
+                elif activity.Date1 <= now and activity.Date2 >= now:
+                    act_now_set.append(activity.Name)
         response = {
             'UserName': profile.UserName,
             'Grade': profile.Grade,
@@ -739,11 +757,18 @@ def userprofile_get(request):
             'AttendYear': profile.AttendYear,
             'QQ': profile.QQ,
             'Phone': profile.Phone,
-            'Email': profile.Email
+            'Email': profile.Email,
+            'Club': club_tuple,
+            'ActNow': act_now_set,
+            'ActPast': act_past_set,
+            'ActFuture': act_future_set
         }
         response_json = json.dumps(response)
-        return JsonResponse({'message': 'success', 'Access-Control-Allow-Origin': '*', 'data': response_json},
-                            safe=False)
+        return JsonResponse({
+            'message': 'success',
+            'Access-Control-Allow-Origin': '*',
+            'data': response_json
+        }, safe=False)
     except:
         return JsonResponse({
             'message': 'error',
@@ -755,21 +780,29 @@ def userprofile_get(request):
 def userprofile_submit(request):
     try:
         body = json.loads(request.body)
-        token = body['token']
-        classroom = body['Classroom']
+        # token = body['token']
+        userid = body['UserId']
+        username = body['UserName']
+        classroom = body['Class']
+        # 不能使用class 因为是关键字
         grade = body['Grade']
-        attend_year = body['AttendYear']
-        try:
-            user_profile_object = UserProfile.objects.get()
-            return JsonResponse({
-                'message': 'success',
-                'Access-Control-Allow-Origin': '*'
-            })
-        except:
-            return JsonResponse({
-                'message': 'error',
-                'Access-Control-Allow-Origin': '*'
-            })
+        # attend_year = body['AttendYear']
+        qq = body['QQ']
+        email = body['Email']
+        phone = body['Phone']
+        # upo -> user profile object
+        upo = UserProfile.objects.get(UserObject=User.objects.get(username=userid))
+        upo.UserName = username
+        upo.Class = classroom
+        upo.Grade = grade
+        upo.QQ = qq
+        upo.email = email
+        upo.phone = phone
+        upo.save()
+        return JsonResponse({
+            'message': 'success',
+            'Access-Control-Allow-Origin': '*'
+        })
     except:
         return JsonResponse({
             'message': 'error',
