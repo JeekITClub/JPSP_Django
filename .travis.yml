@@ -14,13 +14,14 @@ env:
 # install: "pip install -r requirements.txt"
 #before_install:
 #  - docker build -t
-#  - docker run -d -p 
+#  - docker run -d -p
 #  - docker ps -a
-#  - docker run 
+#  - docker run
 install:
   - pip install -q Django==$DJANGO_VERSION
   - pip install django-cors-headers
+  - pip install itchat
 # command to run tests
-script: 
+script:
   - cd jpsp
   - python3 manage.py runserver
