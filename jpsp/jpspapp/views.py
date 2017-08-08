@@ -296,7 +296,8 @@ def activity_attend(requset):
         # user_id -> str
         user_id = body['UserId']
         ActivityParticipantShip.objects.create(Activity=Activity.objects.get(pk=activity_id),
-                                               Participant=UserProfile.objects.get(UserObject=User.objects.get(username=user_id)))
+                                               Participant=UserProfile.objects.get(
+                                                   UserObject=User.objects.get(username=user_id)))
         return JsonResponse({
             'message': 'success',
             'Access-Control-Allow-Origin': '*'

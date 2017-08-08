@@ -17,7 +17,9 @@
               <el-form-item>
                 <el-button type="primary" @click="onSubmit" class="login-button">登录</el-button>
               </el-form-item>
-              <p style="text-align: right;"><router-link to="/contact">忘记密码？</router-link></p>
+              <p style="text-align: right;">
+                <router-link to="/contact">忘记密码？</router-link>
+              </p>
             </el-form>
           </div>
         </el-col>
@@ -27,7 +29,7 @@
 </template>
 
 <script>
-  import {getCookie, setCookie} from 'tiny-cookie'
+  import { getCookie, setCookie } from 'tiny-cookie'
   import axios from 'axios'
   export default {
     data () {
@@ -58,26 +60,27 @@
                 Password: this.LoginForm.Password,
                 UserType: 'Student'
               })
-            }).then(function (response) {
-              if (response.data.message === 'User Authenticated') {
-                let expireDays = 1000 * 60 * 60 * 24 * 3
-                setCookie('UserId', this.LoginForm.UserName, expireDays)
-                setCookie('UserName', response.data.Username, expireDays)
-                setCookie('Token', response.data.Token, expireDays)
-                // expireDays 为有效时间
-                setCookie('IndexAuthenticated', true, expireDays)
-                // 第一个值为key，第二个为value，第三个为有限时间
-                this.$router.push('/')
+            })
+              .then(function (response) {
+                if (response.data.message === 'User Authenticated') {
+                  let expireDays = 1000 * 60 * 60 * 24 * 3
+                  setCookie('UserId', this.LoginForm.UserName, expireDays)
+                  setCookie('UserName', response.data.Username, expireDays)
+                  setCookie('Token', response.data.Token, expireDays)
+                  // expireDays 为有效时间
+                  setCookie('IndexAuthenticated', true, expireDays)
+                  // 第一个值为key，第二个为value，第三个为有限时间
+                  this.$router.push('/')
 //                this.$store.commit('Authenticated', true)
 //                this.$store.commit('ApplyUserName', response.data.UserName)
 //                this.$store.commit('ApplyToken', response.data.Token)
-              } else if (response.data.message === 'User Not Authenticated') {
-                this.$notify.error({
-                  title: '错误',
-                  message: '登陆失败'
-                })
-              }
-            }.bind(this))
+                } else if (response.data.message === 'User Not Authenticated') {
+                  this.$notify.error({
+                    title: '错误',
+                    message: '登陆失败'
+                  })
+                }
+              }.bind(this))
           } else {
             alert('error')
           }

@@ -57,8 +57,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'jpspapp',
     'corsheaders'
-    #,
-    #'guicorn'
 ]
 
 CORS_ALLOW_HEADERS = (
