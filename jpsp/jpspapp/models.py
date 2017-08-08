@@ -62,9 +62,9 @@ class ClubMemberShip(models.Model):
     Club = models.ForeignKey(Club,on_delete = models.CASCADE)
     Member = models.ForeignKey(UserProfile,on_delete = models.CASCADE)
     AttendDateTime = models.DateTimeField(auto_now_add = True)
-    State = models.IntegerField()
+    State = models.IntegerField(default=0)
     # State: 0 is a unconfirmed clubmembership and 1 is a confirmed one.
-    AttendReason = models.TextField()
+    AttendReason = models.TextField(default="我想加入啊！")
 
 class Post(models.Model):
     ClubName = models.CharField(max_length=30, default="社团")
