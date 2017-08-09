@@ -179,6 +179,91 @@ def club_attend(request):
 
 
 @require_http_methods(['POST'])
+def club_member_add(request):
+    try:
+        body = json.loads(request.body)
+        # club_id -> example: '303'
+        club_id = body['ClubId']
+        token = body['Token']
+        # username -> example: 'S320150181'
+        username = body['UserName']
+        ClubMemberShip.objects.create(Member=UserProfile.objects.get(UserObject=User.objects.get(username=username)),
+                                      Club=Club.objects.get(ClubId=club_id))
+        return JsonResponse({
+            'message': 'success',
+            'Access-Control-Allow-Origin': '*'
+        })
+    except:
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
+
+
+@require_http_methods(['POST'])
+def club_confirmed_member_list(request):
+    try:
+        # TODO: how to identify confirmed and unconfirmed
+        body = json.loads(request.body)
+        token = body['Token']
+        # club_id -> example: '303'
+        club_id = body['ClubId']
+        membership_set = ClubMemberShip.objects.filter(Club=Club.objects.get(ClubId=club_id)).filter(State=1)
+        response = []
+        for membership in membership_set:
+            response.append({
+                'UserName': membership.Member.UserName,
+                'Class': membership.Member.Class,
+                'Grade': membership.Member.Grade,
+                'AttendYear': membership.Member.AttendYear,
+                'Phone': membership.Member.Phone,
+                'QQ': membership.Member.QQ
+            })
+        response_json = json.dumps(response)
+        return JsonResponse({
+            'message': 'success',
+            'Access-Control-Allow-Origin': '*',
+            'data': response_json
+        }, safe=False)
+    except:
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
+
+
+@require_http_methods(['POST'])
+def club_unconfirmed_member_list(request):
+    try:
+        body = json.loads(request.body)
+        token = body['Token']
+        # club_id -> example: '303'
+        club_id = body['ClubId']
+        membership_set = ClubMemberShip.objects.filter(Club=Club.objects.get(ClubId=club_id)).filter(State=0)
+        response = []
+        for membership in membership_set:
+            response.append({
+                'UserName': membership.Member.UserName,
+                'Class': membership.Member.Class,
+                'Grade': membership.Member.Grade,
+                'AttendYear': membership.Member.AttendYear,
+                'Phone': membership.Member.Phone,
+                'QQ': membership.Member.QQ
+            })
+        response_json = json.dumps(response)
+        return JsonResponse({
+            'message': 'success',
+            'Access-Control-Allow-Origin': '*',
+            'data': response_json
+        }, safe=False)
+    except:
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
+
+
+@require_http_methods(['POST'])
 def recruit_classroom_apply(request):
     try:
         body = json.loads(request.body)
@@ -194,7 +279,6 @@ def recruit_classroom_apply(request):
             ClubName=club_name,
             Date1=date1,
             Date2=date2
-            # TODO: deal with date
         )
         return JsonResponse({
             'message': 'success',
@@ -228,19 +312,45 @@ def recruit_classroom_operate(request):
 
 @require_http_methods(['POST'])
 def recruit_classroom_list(request):
-    pass
+    try:
+        body = json.loads(request.body)
+        token = body['Token']
+        type = body['Type']
+        response =[]
+        if type == 'Confirmed':
+            pass
+        elif type == 'Denied':
+            pass
+        elif type == 'Unconfirmed':
+            pass
+        elif type == 'All':
+            classroom_objects_set = Classroom.objects.all()
+            for classroom in classroom_objects_set:
+                response.append({})
+        response_json = json.dumps(response)
+        return JsonResponse({
+            'message': 'success',
+            'Access-Control-Allow-Origin': '*',
+            'data': response_json
+        },safe=False)
 
+    except:
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
 
 @require_http_methods(['POST'])
-def club_member_operate(request):
+def club_member_remove(request):
     try:
         body = json.loads(request.body)
         token = body['token']
+        # club_id -> example: '303'
         club_id = body['ClubId']
-        userid = body['userid']
-        club_object = Club.objects.get(Club)
-
-        # userid 为学生账号 为学号  数字
+        # username -> example: 'S320150181'
+        user_id = body['UserId']
+        ClubMemberShip.objects.get(Club=Club.objects.get(ClubId=club_id), Member=UserProfile.objects.get(
+            UserObject=User.objects.get(username=user_id))).delete()
         return JsonResponse({
             'message': 'success',
             'Access-Control-Allow-Origin': '*'
@@ -520,21 +630,6 @@ def laf_list(request):
 
 
 @require_http_methods(["POST"])
-def post_detail(request):
-    try:
-        body = json.loads(request.body)
-        return JsonResponse({
-            'message': 'success',
-            'Access-Control-Allow-Origin': '*'
-        })
-    except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
-
-
-@require_http_methods(["POST"])
 def post_submit(request):
     try:
         body = json.loads(request.body)
@@ -790,14 +885,16 @@ def userprofile_submit(request):
         qq = body['QQ']
         email = body['Email']
         phone = body['Phone']
+        attend_year = body['AttendYear']
         # upo -> user profile object
         upo = UserProfile.objects.get(UserObject=User.objects.get(username=userid))
         upo.UserName = username
         upo.Class = classroom
         upo.Grade = grade
         upo.QQ = qq
-        upo.email = email
-        upo.phone = phone
+        upo.Email = email
+        upo.Phone = phone
+        upo.AttendYear = attend_year
         upo.save()
         return JsonResponse({
             'message': 'success',
