@@ -13,6 +13,15 @@ class ClubTestCase(TestCase):
                             ShezhangName="社长", ShezhangQq="12345678", ShezhangGrade='1', ShezhangClass='1',
                             IfRecruit=True, EnrollGroupQq='12345678')
 
+    def test_club_update(self):
+        club = Club.objects.get(ClubName="测试社团")
+        club.ShezhangName = "社长姓名"
+        club.save()
+        self.assertEqual(club.ShezhangName,"社长姓名")
+
+    def test_club_del(selfs):
+        club = Club.objects.get(ClubName="测试社团")
+        club.delete()
 
 class ActivityModelTest(TestCase):
     def setUp(self):
@@ -48,7 +57,7 @@ class UserModelTest(TestCase):
 
 
 class PostModelTest(TestCase):
-    def create(self):
+    def test(self):
         pass
 
     def update(selfs):

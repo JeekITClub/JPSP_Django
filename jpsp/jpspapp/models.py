@@ -37,7 +37,7 @@ class Club(models.Model):
     # 是否进行招新
     EnrollGroupQq = models.CharField(max_length=20, default="")
     # 招新QQ群号
-    Email = models.EmailField()
+    Email = models.EmailField(default="123@123.com")
     Label = models.TextField(default="")
     State = models.BooleanField(default=False)
     # 该社团是否已成立
