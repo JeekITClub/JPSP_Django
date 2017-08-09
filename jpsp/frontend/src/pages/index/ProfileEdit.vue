@@ -1,5 +1,5 @@
 <template>
-  <el-row :gutter="20">
+  <el-row>
     <el-col :span="4">
       <el-menu mode="vertical" class="el-menu-vertical-demo" :default-active=activeIndex @select="handleSelect">
         <el-menu-item-group title="个人中心">
@@ -20,7 +20,7 @@
       <div v-if="activeIndex==='1'">
         <el-col :span=8 :offset=2>
           <el-form ref="ProfileForm" :model="ProfileForm">
-            <el-form-item prop="Name" label="用户名" :required="true">
+            <el-form-item prop="UserName" label="用户名" :required="true">
               <el-input v-model="ProfileForm.UserName"></el-input>
             </el-form-item>
             <el-form-item prop="Grade" label="年级" :required="true">
@@ -47,6 +47,9 @@
                 <el-option label="13" value="13"></el-option>
               </el-select>
             </el-form-item>
+            <el-form-item prop="AttendYear" label="入学年份" :required="true">
+              <el-input v-model="ProfileForm.AttendYear"></el-input>
+            </el-form-item>
             <el-form-item label="QQ" prop="QQ">
               <el-input v-model="ProfileForm.QQ"></el-input>
             </el-form-item>
@@ -66,29 +69,38 @@
 
       <!-- 更改密码 -->
       <div v-else-if="activeIndex==='2'">
-        <h1>不准改</h1>
+        <h1 class="select-title">不准改</h1>
       </div>
 
       <!-- 已加入活动 -->
       <div v-else-if="activeIndex==='3'">
-        <h1>已加入活动</h1>
+        <h1 class="select-title">已加入活动</h1>
       </div>
 
       <!-- 参加过的活动 -->
       <div v-else-if="activeIndex==='4'">
-        <h1>参加过的活动</h1>
+        <h1 class="select-title">参加过的活动</h1>
       </div>
 
       <!-- 已加入社团 -->
       <div v-else-if="activeIndex==='5'">
-        <h1>已加入社团</h1>
-        <h2 v-for="club in ProfileForm.club_set">{{ club.ClubName }}</h2>
+        <h1 class="select-title">已加入社团</h1>
+        <div class="container">
+          <div class="col-sm-6 col-md-4" v-for="club in ProfileForm.Club" :key="club">
+            <div class="thumbnail">
+              <div class="caption">
+                <h3 class="name">{{ club }}</h3>
+                    <button class="btn btn-danger" type="button" @click="deleteClub(club)">我要退出</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </el-col>
   </el-row>
 </template>
 <script>
-  import { getCookie } from 'tiny-cookie'
+  import {getCookie} from 'tiny-cookie'
   import axios from 'axios'
   export default {
     data () {
@@ -100,7 +112,29 @@
           QQ: '',
           Email: '',
           Phone: '',
-          Club: '',
+          Club: [
+            {
+              ClubId: '1',
+              ClubName: 'Jeek',
+              Introduction: '233333333'
+            },
+            {
+              ClubId: '2',
+              ClubName: 'JTV',
+              Introduction: '23333333333'
+            },
+            {
+              ClubId: '3',
+              ClubName: '???',
+              Introduction: '2333333333333'
+            },
+            {
+              ClubId: '3',
+              ClubName: '???',
+              Introduction: '2333333333333'
+            }
+          ],
+          AttendYear: '',
           Activity: [
             [],
             []
@@ -143,12 +177,49 @@
             'QQ': this.ProfileForm.QQ,
             'Email': this.ProfileForm.Email,
             'Phone': this.ProfileForm.Phone,
-            'AttendClubList': this.ProfileForm.AttendClubList
+            'Club': this.ProfileForm.Club
           })
-        })
+        }).then(function (response) {
+          if (response.data.message === 'success') {
+            this.ProfileForm = JSON.parse(response.data.data)
+          } else {
+            this.$notify.error({
+              title: '错误',
+              message: '无法获得数据'
+            })
+          }
+        }.bind(this))
       },
       handleSelect (key) {
         this.activeIndex = key
+      },
+      deleteClub (clubname) {
+        // TODO: delete club from tuple(Club)
+        console.log(this.Club)
+        axios({
+          method: 'POST',
+          url: this.GetApi + 'userprofile/submit',
+          data: JSON.stringify({
+            'UserId': this.GetUserId,
+            'Token': this.GetToken,
+            'UserName': this.ProfileForm.UserName,
+            'Grade': this.ProfileForm.Grade,
+            'Class': this.ProfileForm.Class,
+            'QQ': this.ProfileForm.QQ,
+            'Email': this.ProfileForm.Email,
+            'Phone': this.ProfileForm.Phone,
+            'Club': this.ProfileForm.Club
+          })
+        }).then(function (response) {
+          if (response.data.message === 'success') {
+            this.ProfileForm = JSON.parse(response.data.data)
+          } else {
+            this.$notify.error({
+              title: '错误',
+              message: '无法获得数据'
+            })
+          }
+        }.bind(this))
       }
     },
     mounted: function () {
@@ -174,4 +245,7 @@
   }
 </script>
 <style scoped>
+  .select-title {
+    padding-left: 20px;
+  }
 </style>

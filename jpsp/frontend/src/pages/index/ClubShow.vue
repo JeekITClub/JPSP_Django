@@ -1,11 +1,10 @@
 <template>
   <div>
     <div class="container">
-      <div class="col-sm-6 col-md-4" v-for="Club in ClubList">
-        <club-show :club=Club></club-show>
+      <div class="col-sm-6 col-md-4" v-for="club in ClubList">
+        <club-show :club=club></club-show>
       </div>
   </div>
-
   </div>
 </template>
 <script>
