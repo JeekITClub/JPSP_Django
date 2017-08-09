@@ -1,24 +1,21 @@
 from django.test import TestCase, Client
-from jpspapp.models import Token
+from jpspapp.models import Token, Club
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 
 
 # Create your tests here.
 
-class ClubModelTest(TestCase):
-    def create(self):
-        pass
-
-    def update(selfs):
-        pass
-
-    def delete(self):
-        pass
+class ClubTestCase(TestCase):
+    def setUp(self):
+        User.objects.create_user(username='clubtest', email='123@123.com', password='jp123456')
+        Club.objects.create(ClubObject=User.objects.get(username='clubtest'), ClubName="测试社团", ClubId=601, Type='1',
+                            ShezhangName="社长", ShezhangQq="12345678", ShezhangGrade='1', ShezhangClass='1',
+                            IfRecruit=True, EnrollGroupQq='12345678')
 
 
 class ActivityModelTest(TestCase):
-    def create(self):
+    def setUp(self):
         pass
 
     def update(selfs):
@@ -58,57 +55,4 @@ class PostModelTest(TestCase):
         pass
 
     def delete(self):
-        pass
-
-
-class LogTest(TestCase):
-    # 登入、登出测试
-    def login(self):
-        # c = Client()
-        pass
-
-    def logout(self):
-        pass
-
-
-class PostOperationTest(TestCase):
-    def submit(self):
-        pass
-
-    def list(self):
-        pass
-
-    def confirm(self):
-        pass
-
-    def deny(self):
-        pass
-
-    def undo(self):
-        pass
-
-
-class ActivityOperationTest(TestCase):
-    def apply(self):
-        pass
-
-    def list(self):
-        pass
-
-    def attend(self):
-        pass
-
-    def cancel(self):
-        pass
-
-    def confirm(self):
-        pass
-
-    def deny(self):
-        pass
-
-    def undo(self):
-        pass
-
-    def undo_attend(self):
         pass
