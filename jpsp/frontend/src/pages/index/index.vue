@@ -11,8 +11,7 @@
                   <div class="col-md-6 col-md-offset-3 col-md-pull-3 js-fullheight slider-text slider-text-bg">
                     <div class="slider-text-inner">
                       <h1>我们回来了</h1>
-                      <h2></h2>
-                      <p class="ct"><a href="#">了解更多<i class="icon-arrow-right"></i></a></p>
+                      <h2>还记得当年立下的flag吗？</h2>
                     </div>
                   </div>
                 </div>
@@ -24,9 +23,9 @@
                 <div class="row">
                   <div class="col-md-6 col-md-offset-3 col-md-pull-3 js-fullheight slider-text slider-text-bg">
                     <div class="slider-text-inner">
-                      <h1>我们回来了</h1>
-                      <h2></h2>
-                      <p class="ct"><a href="#">了解更多<i class="icon-arrow-right"></i></a></p>
+                      <h1>互联网时代的社团</h1>
+                      <h2>赶快体验一把</h2>
+                      <p class="ct"><router-link to="Login">了解更多<i class="icon-arrow-right"></i></router-link></p>
                     </div>
                   </div>
                 </div>
@@ -38,9 +37,9 @@
                 <div class="row">
                   <div class="col-md-6 col-md-offset-3 col-md-pull-3 js-fullheight slider-text slider-text-bg">
                     <div class="slider-text-inner">
-                      <h1>我们回来了</h1>
-                      <h2></h2>
-                      <p class="ct"><a href="#">了解更多<i class="icon-arrow-right"></i></a></p>
+                      <h1>想了解这个网站的怎么诞生的？</h1>
+                      <h2>欢迎加入网站维护团队</h2>
+                      <p class="ct"><router-link to="About">了解更多<i class="icon-arrow-right"></i></router-link></p>
                     </div>
                   </div>
                 </div>
@@ -204,7 +203,7 @@
               <p>
                 JPSP是一个由三个高中生建立并维护的网站项目，但由于时间、资金有限，我们需要更多有志之士的帮助。如果你觉得这个网站还不错，并且有维护网站的兴趣和决心，请联系我们！<br>我们欢迎任何人的加入！<br><br>
               </p>
-              <p><a href="#" class="btn btn-default btn-lg">Contact Us</a></p>
+              <p><a href="https://github.com/AlienStudio" class="btn btn-default btn-lg">Contact Us</a></p>
             </div>
           </div>
         </div>

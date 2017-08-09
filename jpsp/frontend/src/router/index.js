@@ -10,6 +10,7 @@ import ActivityList from '../pages/index/ActiviytList.vue'
 import ClubShow from '@/pages/index/ClubShow.vue'
 import EventList from '../pages/index/EventList.vue'
 import Contact from '@/pages/public/Contact.vue'
+import About from '@/pages/public/About.vue'
 import EstablishClub from '@/pages/index/EstablishClub.vue'
 // import LostAndFound from '../pages/index/LostAndFound.vue'
 export default new Router({
@@ -58,6 +59,11 @@ export default new Router({
       path: '/contact',
       name: 'Contact',
       component: Contact
+    },
+    {
+      path: '/about',
+      name: 'About',
+      component: About
     }
   ]
 })
