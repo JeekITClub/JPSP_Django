@@ -86,3 +86,17 @@ class PostModelTest(TestCase):
 
     def delete(self):
         pass
+
+
+class FileModelTest(TestCase):
+    def setUp(self):
+        pass
+
+    def test_upload(self):
+        pass
+
+    def test_download(self):
+        pass
+
+    def test_delete(self):
+        pass

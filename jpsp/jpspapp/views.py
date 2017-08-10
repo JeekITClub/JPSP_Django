@@ -1000,11 +1000,59 @@ def event_list(request):
     pass
 
 
-@require_http_methods(["GET"])
+@require_http_methods(["POST"])
 def club_page(request):
     pass
 
 
 @require_http_methods(["POST"])
 def club_page_setting(request):
+    pass
+
+
+@require_http_methods(['POST'])
+def cd_file_upload(request):
+    try:
+        file = request.FILES
+        body = json.loads(request.body)
+        token = body['CDToken']
+
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
+    except:
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
+
+
+@require_http_methods(['POST'])
+def club_file_upload(request):
+    try:
+        file = request.FILES
+        body = json.loads(request.body)
+        token = body['CDToken']
+
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
+    except:
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
+
+
+@require_http_methods(['POST'])
+def club_file_download(request):
+    try:
+        pass
+    except:
+        pass
+
+@require_http_methods(['POST'])
+def cd_file_download(request):
     pass

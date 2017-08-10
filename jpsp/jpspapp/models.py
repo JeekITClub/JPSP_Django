@@ -168,3 +168,15 @@ class Event(models.Model):
 
     def __str__(self):
         return self.Name
+
+
+class File(models.Model):
+    Name = models.CharField(max_length=30,default="文件名",unique=True)
+    UserObject = models.ForeignKey(User,default=None)
+    Datetime = models.DateTimeField(auto_now_add=True)
+    File = models.FileField(upload_to='../upload')
+
+    # TODO: FILE path!
+
+    def __str__(self):
+        return self.Name + 'uploaded by' + self.UserObject.username
