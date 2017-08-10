@@ -49,13 +49,15 @@
     </el-submenu>
     <el-submenu index="6">
       <template slot="title">
-        XXX
+        文件
       </template>
       <el-menu-item-group>
-        <el-menu-item index="6-1">概览</el-menu-item>
-        <el-menu-item index="6-2">A</el-menu-item>
-        <el-menu-item index="6-3">B</el-menu-item>
-        <el-menu-item index="6-4">C</el-menu-item>
+        <el-menu-item index="6-1">
+          <router-link to="/file/upload">上传</router-link>
+        </el-menu-item>
+        <el-menu-item index="6-2">
+          <router-link to="/file/download">下载</router-link>
+        </el-menu-item>
       </el-menu-item-group>
     </el-submenu>
     <el-menu-item index="7">导航三</el-menu-item>

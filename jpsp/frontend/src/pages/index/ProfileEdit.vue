@@ -193,7 +193,7 @@
       handleSelect (key) {
         this.activeIndex = key
       },
-      deleteClub (clubname) {
+      deleteClub (ClubId) {
         // TODO: delete club from tuple(Club)
         console.log(this.Club)
         axios({
@@ -201,18 +201,11 @@
           url: this.GetApi + 'userprofile/submit',
           data: JSON.stringify({
             'UserId': this.GetUserId,
-            'Token': this.GetToken,
-            'UserName': this.ProfileForm.UserName,
-            'Grade': this.ProfileForm.Grade,
-            'Class': this.ProfileForm.Class,
-            'QQ': this.ProfileForm.QQ,
-            'Email': this.ProfileForm.Email,
-            'Phone': this.ProfileForm.Phone,
-            'Club': this.ProfileForm.Club
+            'Token': this.GetToken
           })
         }).then(function (response) {
           if (response.data.message === 'success') {
-            this.ProfileForm = JSON.parse(response.data.data)
+            console.log(response.data.message)
           } else {
             this.$notify.error({
               title: '错误',

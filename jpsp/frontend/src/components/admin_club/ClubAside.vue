@@ -59,6 +59,19 @@
         </el-menu-item>
       </el-menu-item-group>
     </el-submenu>
+    <el-submenu index="6">
+      <template slot="title">
+        文件
+      </template>
+      <el-menu-item-group>
+        <el-menu-item index="" route="" disabled="">
+          <router-link to="/file/upload">文件上传</router-link>
+        </el-menu-item>
+        <el-menu-item index="" route="" disabled="">
+          <router-link to="/file/download">文件下载</router-link>
+        </el-menu-item>
+      </el-menu-item-group>
+    </el-submenu>
   </el-menu>
 </template>
 <script>

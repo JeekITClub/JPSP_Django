@@ -16,6 +16,8 @@ import PostForm from '@/pages/admin_club/PostForm.vue'
 import PostList from '@/pages/admin_club/PostList.vue'
 import DashBoard from '@/pages/admin_club/DashBoard.vue'
 import ChangePassword from '@/pages/admin_club/ChangePassword.vue'
+import FileUpload from '@/pages/admin_club/FileUpload.vue'
+import FileDownload from '@/pages/admin_club/FileDownload.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -104,6 +106,16 @@ export default new Router({
       path: '/password',
       name: 'ChangePassword',
       component: ChangePassword
+    },
+    {
+      path: '/file/upload',
+      name: 'FileUpload',
+      component: FileUpload
+    },
+    {
+      path: '/file/download',
+      name: 'FileDownload',
+      component: FileDownload
     }
   ]
 })

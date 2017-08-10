@@ -10,44 +10,50 @@ import Contact from '../pages/public/Contact.vue'
 import About from '../pages/public/About.vue'
 import ClubList from '../pages/admin_cd/ClubList.vue'
 import Dashboard from '../pages/admin_cd/Dashboard.vue'
+import FileUpload from '../pages/admin_cd/FileUpload.vue'
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
       path: '/',
-      name: 'index',
+      name: 'Index',
       component: Dashboard
     },
     {
       path: '/login',
-      name: 'login',
+      name: 'Login',
       component: Login
     },
     {
       path: '/activity',
-      name: 'activity',
+      name: 'Activity',
       component: ActivityList
     },
     {
       path: '/post',
-      name: 'post',
+      name: 'Post',
       component: PostList
     },
     {
       path: '/contact',
-      name: 'contact',
+      name: 'Contact',
       component: Contact
     },
     {
       path: '/about',
-      name: 'about',
+      name: 'About',
       component: About
     },
     {
       path: '/club',
-      name: 'club',
+      name: 'ClubList',
       component: ClubList
+    },
+    {
+      path: '/file/upload',
+      name: 'FileUpload',
+      component: FileUpload
     }
   ]
 })

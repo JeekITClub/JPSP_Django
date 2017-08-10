@@ -25,7 +25,7 @@
                     <div class="slider-text-inner">
                       <h1>互联网时代的社团</h1>
                       <h2>赶快体验一把</h2>
-                      <p class="ct"><router-link to="Login">了解更多<i class="icon-arrow-right"></i></router-link></p>
+                      <p class="ct"><router-link to="/login">了解更多<i class="icon-arrow-right"></i></router-link></p>
                     </div>
                   </div>
                 </div>
@@ -39,7 +39,7 @@
                     <div class="slider-text-inner">
                       <h1>想了解这个网站的怎么诞生的？</h1>
                       <h2>欢迎加入网站维护团队</h2>
-                      <p class="ct"><router-link to="About">了解更多<i class="icon-arrow-right"></i></router-link></p>
+                      <p class="ct"><router-link to="/About">了解更多<i class="icon-arrow-right"></i></router-link></p>
                     </div>
                   </div>
                 </div>
@@ -54,16 +54,13 @@
         </div>
         <div class="choose">
           <div class="fh5co-heading">
-            <h2>Why Choose Us?</h2>
-            <p>
-              Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+            <h2>关于建平中学学生平台</h2>
+            <p>全称Jianping Student's Platform 。</p>
           </div>
           <ul class="list-nav">
-            <li><i class="icon-check2"></i>Far far away, behind the word mountains, far from the countries Vokalia</li>
-            <li><i class="icon-check2"></i>There live the blind texts far from the countries Vokalia and Consonantia, there live the blind texts.
-            </li>
-            <li><i class="icon-check2"></i>Separated they live in bookmarksgrove there live the blind texts far from the countries
-            </li>
+            <li><i class="icon-check2"></i>方便建平学生进行日常学校活动</li>
+            <li><i class="icon-check2"></i>加强校内管理部门（如团委、学生会、自管会、社团部等）与学生的互动</li>
+            <li><i class="icon-check2"></i>发布和获取实时资讯</li>
           </ul>
         </div>
       </div>
@@ -72,10 +69,10 @@
         <div class="container">
           <div class="row">
             <div class="col-md-6 col-md-offset-3 text-center">
-              <h2>Mission</h2>
+              <h2>我们的使命</h2>
               <blockquote>
                 <p>
-                  Quos quia provident consequuntur culpa facere ratione maxime commodi voluptates id repellat velit eaque aspernatur expedita. Possimus itaque adipisci rem dolorem nesciunt perferendis quae amet deserunt eum labore quidem minima.</p>
+                  打造</p>
               </blockquote>
             </div>
           </div>
@@ -92,9 +89,10 @@
               <i class="icon-command"></i>
             </span>
                 <div class="desc">
-                  <h3><a href="#">Brand Identity</a></h3>
+                  <h3><a href="#">幕后团队</a></h3>
                   <p>
-                    Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
+                    建平中学学生平台最初由3名成员进行开发及维护。
+                  </p>
                 </div>
               </div>
             </div>
@@ -104,9 +102,10 @@
               <i class="icon-drop2"></i>
             </span>
                 <div class="desc">
-                  <h3><a href="#">Web Design &amp; UI</a></h3>
+                  <h3><a href="#">网页设计 & UI</a></h3>
                   <p>
-                    Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
+                    使用BootStrap+Element UI
+                  </p>
                 </div>
               </div>
             </div>
@@ -116,9 +115,9 @@
               <i class="icon-anchor"></i>
             </span>
                 <div class="desc">
-                  <h3><a href="#">Web Development</a></h3>
+                  <h3><a href="#">网页开发</a></h3>
                   <p>
-                    Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
+                    建平中学学生平台采用Django+Vue.js 前后端分离架构。</p>
                 </div>
               </div>
             </div>
