@@ -4,20 +4,21 @@ import Login from '@/pages/admin_club/Login'
 import ProfileEdit from '@/pages/admin_club/ProfileEdit'
 import ClubPageSettings from '@/pages/admin_club/ClubPageSettings'
 import MemberManagement from '@/pages/admin_club/MemberManagement'
-import RecruitClassroomForm from '@/pages/admin_club/RecruitClassroomForm.vue'
-import RecruitClassroomList from '@/pages/admin_club/RecruitClassroomList.vue'
+// import RecruitClassroomForm from '@/pages/admin_club/RecruitClassroomForm.vue'
+// import RecruitClassroomList from '@/pages/admin_club/RecruitClassroomList.vue'
 import About from '@/pages/public/About.vue'
 import Contact from '@/pages/public/Contact.vue'
-import ActivityForm from '@/pages/admin_club/ActivityForm.vue'
-import ActivityList from '@/pages/admin_club/ActivityList.vue'
-import EventForm from '@/pages/admin_club/EventForm.vue'
-import EventList from '@/pages/admin_club/EventList.vue'
+// import ActivityForm from '@/pages/admin_club/ActivityForm.vue'
+// import ActivityList from '@/pages/admin_club/ActivityList.vue'
+// import EventForm from '@/pages/admin_club/EventForm.vue'
+// import EventList from '@/pages/admin_club/EventList.vue'
 import PostForm from '@/pages/admin_club/PostForm.vue'
 import PostList from '@/pages/admin_club/PostList.vue'
 import DashBoard from '@/pages/admin_club/DashBoard.vue'
 import ChangePassword from '@/pages/admin_club/ChangePassword.vue'
 import FileUpload from '@/pages/admin_club/FileUpload.vue'
-import FileDownload from '@/pages/admin_club/FileDownload.vue'
+// import FileDownload from '@/pages/admin_club/FileDownload.vue'
+import Future from '@/components/public/Future.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -60,22 +61,22 @@ export default new Router({
     {
       path: '/activity/form',
       name: 'ActivityForm',
-      component: ActivityForm
+      component: Future
     },
     {
       path: '/activity/list',
       name: 'ActivityList',
-      component: ActivityList
+      component: Future
     },
     {
       path: '/recruit/classroom/apply',
       name: 'RecruitClassroom',
-      component: RecruitClassroomForm
+      component: Future
     },
     {
       path: '/recruit/classroom/list',
       name: 'RecruitClassroomList',
-      component: RecruitClassroomList
+      component: Future
     },
     {
       path: '/member',
@@ -95,12 +96,12 @@ export default new Router({
     {
       path: '/event/form',
       name: 'EventForm',
-      component: EventForm
+      component: Future
     },
     {
       path: '/event/list',
       name: 'EventList',
-      component: EventList
+      component: Future
     },
     {
       path: '/password',
@@ -115,7 +116,7 @@ export default new Router({
     {
       path: '/file/download',
       name: 'FileDownload',
-      component: FileDownload
+      component: Future
     }
   ]
 })

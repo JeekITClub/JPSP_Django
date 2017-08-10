@@ -6,12 +6,13 @@ import Index from '@/pages/index/index.vue'
 import Login from '@/pages/index/Login.vue'
 import ClubIndex from '@/pages/index/ClubIndex'
 import ProfileEdit from '@/pages/index/ProfileEdit.vue'
-import ActivityList from '../pages/index/ActiviytList.vue'
+// import ActivityList from '../pages/index/ActiviytList.vue'
 import ClubShow from '@/pages/index/ClubShow.vue'
-import EventList from '../pages/index/EventList.vue'
+// import EventList from '../pages/index/EventList.vue'
 import Contact from '@/pages/public/Contact.vue'
 import About from '@/pages/public/About.vue'
 import EstablishClub from '@/pages/index/EstablishClub.vue'
+import Future from '@/components/public/Future.vue'
 // import LostAndFound from '../pages/index/LostAndFound.vue'
 export default new Router({
   routes: [
@@ -31,9 +32,14 @@ export default new Router({
       component: ClubIndex
     },
     {
-      path: '/activity',
+      path: '/activity/list',
       name: 'ActivityList',
-      component: ActivityList
+      component: Future
+    },
+    {
+      path: '/activity/news',
+      name: 'ActivityNews',
+      component: Future
     },
     {
       path: '/profile',
@@ -53,7 +59,7 @@ export default new Router({
     {
       path: '/event/list',
       name: 'EventList',
-      component: EventList
+      component: Future
     },
     {
       path: '/contact',
@@ -64,6 +70,11 @@ export default new Router({
       path: '/about',
       name: 'About',
       component: About
+    },
+    {
+      path: '/lost',
+      name: 'LostAndFound',
+      component: Future
     }
   ]
 })

@@ -4,7 +4,7 @@
       <div class="col-sm-6 col-md-4" v-for="club in ClubList">
         <club-show :club=club></club-show>
       </div>
-  </div>
+    </div>
   </div>
 </template>
 <script>
@@ -15,30 +15,14 @@
       return {
         Type: '',
         Page: '1',
-        ClubList: [
-          {
-            ClubId: '1',
-            ClubName: 'Jeek',
-            Introduction: '233333333'
-          },
-          {
-            ClubId: '2',
-            ClubName: 'JTV',
-            Introduction: '23333333333'
-          },
-          {
-            ClubId: '3',
-            ClubName: '???',
-            Introduction: '2333333333333'
-          }
-        ]
+        ClubList: []
       }
     },
     components: {
       'ClubShow': ClubShow
     },
     computed: {
-        /**
+      /**
        * @return {string}
        */
       GetApi () {
@@ -47,19 +31,19 @@
     },
     mounted: function () {
       axios({
-        method: 'POST',
-        url: this.GetApi + 'clublist',
-        data: JSON.stringify({
-          Token: '',
-          Type: 'Established'
-        })
-      }).then(function (response) {
-        if (response.data.message === 'success') {
-          this.ClubList = JSON.parse(response.data.data)
-        } else {
-          console.log('get club list error')
-        }
-      }.bind(this))
+        method: 'GET',
+        url: this.GetApi + 'club/show'
+      })
+        .then(function (response) {
+          if (response.data.message === 'success') {
+            this.ClubList = JSON.parse(response.data.data)
+          } else {
+            this.$notify.error({
+              'message': '无法获得社团列表',
+              'title': 'Error'
+            })
+          }
+        }.bind(this))
     }
   }
 </script>

@@ -9,8 +9,8 @@
                 <span>{{ props.row.QQ }}</span>
               </el-form-item>
             </el-col>
-            <el-col :span="24" v-if="this.Type === 'Unconfirmed' ">
-              <el-form-item>
+            <el-col :span="24" v-if="this.Type == 'Unconfirmed'">
+              <el-form-item label="加入理由">
                 <!--加入社团的理由-->
                 <span>{{ props.row.Reason }}</span>
               </el-form-item>
@@ -41,12 +41,7 @@
 <script>
   import axios from 'axios'
   import { getCookie } from 'tiny-cookie'
-  import ElFormItem from '../../../node_modules/element-ui/packages/form/src/form-item'
-  import ElForm from '../../../node_modules/element-ui/packages/form/src/form'
   export default {
-    components: {
-      ElForm,
-      ElFormItem},
     data () {
       return {
         Members: [
@@ -55,7 +50,8 @@
             Name: 'NCJ',
             Grade: '1',
             Class: '1',
-            State: 'Confirmed'
+            State: 'Confirmed',
+            Reason: 'a'
           }
         ]
       }

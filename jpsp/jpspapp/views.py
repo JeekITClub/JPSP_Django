@@ -153,6 +153,33 @@ def club_list(request):
         })
 
 
+@require_http_methods(['GET'])
+def club_show(request):
+    try:
+        response = []
+        club_object = Club.objects.filter(State=True)
+        for data in club_object:
+            if data.IfRecruit == False:
+                response.append({'ClubId': data.ClubId,
+                                 'ClubName': data.ClubName,
+                                 'Type': data.Type,
+                                 'IfRecruit': 'False',
+                                 })
+            elif data.IfRecruit == True:
+                response.append({'ClubId': str(data.ClubId),
+                                 'ClubName': str(data.ClubName),
+                                 'Type': data.Type,
+                                 'IfRecruit': 'True',
+                                 })
+        return JsonResponse({'message': 'success', 'Access-Control-Allow-Origin': '*', 'data': json.dumps(response)},
+                            safe=False)
+    except:
+        return JsonResponse({
+            'message': 'error',
+            'Access-Control-Allow-Origin': '*'
+        })
+
+
 @require_http_methods(['POST'])
 def club_attend(request):
     try:
@@ -316,7 +343,7 @@ def recruit_classroom_list(request):
         body = json.loads(request.body)
         token = body['Token']
         type = body['Type']
-        response =[]
+        response = []
         if type == 'Confirmed':
             pass
         elif type == 'Denied':
@@ -332,13 +359,14 @@ def recruit_classroom_list(request):
             'message': 'success',
             'Access-Control-Allow-Origin': '*',
             'data': response_json
-        },safe=False)
+        }, safe=False)
 
     except:
         return JsonResponse({
             'message': 'error',
             'Access-Control-Allow-Origin': '*'
         })
+
 
 @require_http_methods(['POST'])
 def club_member_remove(request):
@@ -908,29 +936,44 @@ def userprofile_submit(request):
 
 
 @require_http_methods(['POST'])
-def clubprofile_get(request):
+def club_profile_get(request):
     try:
         body = json.loads(request.body)
-        token = body['Token']
         clubid = body['ClubId']
         profile = Club.objects.get(ClubId=clubid)
-        # TODO: get profile object
-        response = {
-            'ClubName': profile.ClubName,
-            'ShezhangName': profile.ShezhangName,
-            'ShezhangQq': profile.ShezhangQq,
-            'ShezhangGrade': profile.ShezhangGrade,
-            'ShezhangClass': profile.ShezhangClass,
-            'IfRecruit': profile.IfRecruit,
-            'EnrollGroupQq': profile.EnrollGroupQq,
-            'Email': profile.Email,
-            'Label': profile.Label,
-            'State': profile.State,
-            'Stars': profile.Stars,
-            'Introduction': profile.Introduction,
-            'Achievements': profile.Achievements,
-            'Member': profile.Member
-        }
+        response = None
+        if profile.IfRecruit == True:
+            response = {
+                'ClubName': profile.ClubName,
+                'ShezhangName': profile.ShezhangName,
+                'ShezhangQq': profile.ShezhangQq,
+                'ShezhangGrade': profile.ShezhangGrade,
+                'ShezhangClass': profile.ShezhangClass,
+                'IfRecruit': 'False',
+                'EnrollGroupQq': profile.EnrollGroupQq,
+                'Email': profile.Email,
+                'Label': profile.Label,
+                'State': profile.State,
+                'Stars': profile.Stars,
+                'Introduction': profile.Introduction,
+                'Achievements': profile.Achievements,
+            }
+        elif profile.IfRecruit == False:
+            response = {
+                'ClubName': profile.ClubName,
+                'ShezhangName': profile.ShezhangName,
+                'ShezhangQq': profile.ShezhangQq,
+                'ShezhangGrade': profile.ShezhangGrade,
+                'ShezhangClass': profile.ShezhangClass,
+                'IfRecruit': 'False',
+                'EnrollGroupQq': profile.EnrollGroupQq,
+                'Email': profile.Email,
+                'Label': profile.Label,
+                'State': profile.State,
+                'Stars': profile.Stars,
+                'Introduction': profile.Introduction,
+                'Achievements': profile.Achievements,
+            }
         response_json = json.dumps(response)
         return JsonResponse({'message': 'success', 'Access-Control-Allow-Origin': '*', 'data': response_json},
                             safe=False)
@@ -942,7 +985,7 @@ def clubprofile_get(request):
 
 
 @require_http_methods(["POST"])
-def clubprofile_submit(request):
+def club_profile_submit(request):
     try:
         body = json.loads(request.body)
         token = body['Token']
@@ -1052,6 +1095,7 @@ def club_file_download(request):
         pass
     except:
         pass
+
 
 @require_http_methods(['POST'])
 def cd_file_download(request):
