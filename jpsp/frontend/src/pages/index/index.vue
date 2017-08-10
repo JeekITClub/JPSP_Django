@@ -55,7 +55,7 @@
         <div class="choose">
           <div class="fh5co-heading">
             <h2>关于建平中学学生平台</h2>
-            <p>全称Jianping Student's Platform 。</p>
+            <p>全称Jianping Student's Platform </p>
           </div>
           <ul class="list-nav">
             <li><i class="icon-check2"></i>方便建平学生进行日常学校活动</li>
@@ -72,7 +72,7 @@
               <h2>我们的使命</h2>
               <blockquote>
                 <p>
-                  打造</p>
+                  打造校内互联网办公</p>
               </blockquote>
             </div>
           </div>
@@ -91,7 +91,7 @@
                 <div class="desc">
                   <h3><a href="#">幕后团队</a></h3>
                   <p>
-                    建平中学学生平台最初由3名成员进行开发及维护。
+                    建平中学学生平台最初由3名成员进行开发及维护
                   </p>
                 </div>
               </div>
@@ -104,7 +104,7 @@
                 <div class="desc">
                   <h3><a href="#">网页设计 & UI</a></h3>
                   <p>
-                    使用BootStrap+Element UI
+                    使用BootStrap + Element UI
                   </p>
                 </div>
               </div>
@@ -117,7 +117,7 @@
                 <div class="desc">
                   <h3><a href="#">网页开发</a></h3>
                   <p>
-                    建平中学学生平台采用Django+Vue.js 前后端分离架构。</p>
+                    建平中学学生平台采用Django + Vue.js 前后端分离架构</p>
                 </div>
               </div>
             </div>

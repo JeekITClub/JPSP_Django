@@ -44,6 +44,9 @@
                   <router-link to="/login">登录</router-link>
                   <ul class="dropdown">
                     <li>
+                      <router-link to="/login">学生登录</router-link>
+                    </li>
+                    <li>
                       <a href="../admin_club.html">社长登录</a>
                     </li>
                     <li>

@@ -112,28 +112,7 @@
           QQ: '',
           Email: '',
           Phone: '',
-          Club: [
-            {
-              ClubId: '1',
-              ClubName: 'Jeek',
-              Introduction: '233333333'
-            },
-            {
-              ClubId: '2',
-              ClubName: 'JTV',
-              Introduction: '23333333333'
-            },
-            {
-              ClubId: '3',
-              ClubName: '???',
-              Introduction: '2333333333333'
-            },
-            {
-              ClubId: '3',
-              ClubName: '???',
-              Introduction: '2333333333333'
-            }
-          ],
+          Club: [],
           AttendYear: '',
           Activity: [
             [],

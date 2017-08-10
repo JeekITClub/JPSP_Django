@@ -19,8 +19,8 @@
           <ul class="fh5co-footer-links">
             <li>地址：浦东崮山路517号、385号(北校区)<br>电话：021-58851542</li>
             <li>传真：021-38821698</li>
-            <li><a href="tel://1234567920">邮箱：jpzxxzyx2016@163.com</a></li>
-            <li><a href="mailto:info@yoursite.com">版权所有：Jeek信息社</a></li>
+            <li><a href="mailto:jpzxxzyx2016@163.com">邮箱：jpzxxzyx2016@163.com</a></li>
+            <li><a href="mailto:ncj19991213@126.com">版权所有：Jeek信息社</a></li>
           </ul>
         </div>
 
@@ -28,14 +28,12 @@
 
       <div class="row copyright">
         <div class="col-md-12 text-center">
-          <p>
             <ul class="fh5co-social-icons">
-              <li><a href="#"><i class="icon-twitter"></i></a></li>
-              <li><a href="#"><i class="icon-facebook"></i></a></li>
-              <li><a href="#"><i class="icon-linkedin"></i></a></li>
-              <li><a href="#"><i class="icon-dribbble"></i></a></li>
+              <li><a href="https://github.com/AlienStudio"><i class="icon-github"></i></a></li>
+              <li><a href="https://www.gitbook.com/book/nichujie/jeek-origin"><i class="icon-book"></i></a></li>
+              <li><a href="https://www.linkedin.com/in/%E6%A5%9A%E5%8A%BC-%E5%80%AA-a74762147/"><i class="icon-linkedin"></i></a></li>
+              <li><a href="https://space.bilibili.com/14459561#!/"><i class="icon-video2"></i></a></li>
             </ul>
-          </p>
         </div>
       </div>
 
