@@ -18,7 +18,7 @@
     <el-col :span="20">
       <!-- 用户信息 -->
       <div v-if="activeIndex==='1'">
-        <el-col :span=8 :offset=2>
+        <el-col :span="8" :offset="2">
           <el-form ref="ProfileForm" :model="ProfileForm">
             <el-form-item prop="UserName" label="用户名" :required="true">
               <el-input v-model="ProfileForm.UserName"></el-input>
@@ -126,8 +126,8 @@
       GetUserId () {
         return getCookie('UserId')
       },
-      GetToken () {
-        return getCookie('Token')
+      GetIndexToken () {
+        return getCookie('IndexToken')
       },
       /**
        * @return {string}
@@ -140,10 +140,10 @@
       onSubmit () {
         axios({
           method: 'POST',
-          url: this.GetApi + 'userprofile/submit',
+          url: this.GetApi + 'user/profile/submit',
           data: JSON.stringify({
             'UserId': this.GetUserId,
-            'Token': this.GetToken,
+            'Token': this.GetIndexToken,
             'UserName': this.ProfileForm.UserName,
             'Grade': this.ProfileForm.Grade,
             'Class': this.ProfileForm.Class,
@@ -199,7 +199,7 @@
         url: this.GetApi + 'user/profile/get',
         data: JSON.stringify({
           UserId: this.GetUserId,
-          Token: this.GetToken
+          Token: this.GetIndexToken
         })
       })
         .then(function (response) {

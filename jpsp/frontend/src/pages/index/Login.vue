@@ -65,8 +65,8 @@
                 if (response.data.message === 'User Authenticated') {
                   let expireDays = 1000 * 60 * 60 * 24 * 3
                   setCookie('UserId', this.LoginForm.UserName, expireDays)
-                  setCookie('UserName', response.data.Username, expireDays)
-                  setCookie('Token', response.data.Token, expireDays)
+                  setCookie('UserName', response.data.UserName, expireDays)
+                  setCookie('IndexToken', response.data.Token, expireDays)
                   // expireDays 为有效时间
                   setCookie('IndexAuthenticated', true, expireDays)
                   // 第一个值为key，第二个为value，第三个为有限时间

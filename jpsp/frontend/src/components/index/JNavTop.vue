@@ -39,8 +39,8 @@
                 <li>
                   <router-link to="/about">关于</router-link>
                 </li>
-                <li v-if="Authenticated === true">欢迎，{{ GetUserName }}</li>
-                <li class="has-dropdown" v-if="Authenticated != true">
+                <li v-if="GetAuthenticated === true">欢迎，{{ GetUserName }}</li>
+                <li class="has-dropdown" v-if="GetAuthenticated != true">
                   <router-link to="/login">登录</router-link>
                   <ul class="dropdown">
                     <li>
@@ -54,7 +54,7 @@
                     </li>
                   </ul>
                 </li>
-                <li class="btn-cta" v-if="Authenticated === true"><a href="#"><span>注销</span></a></li>
+                <li class="btn-cta" v-if="GetAuthenticated === true"><a href="#"><span>注销</span></a></li>
               </ul>
             </div>
           </div>
@@ -71,7 +71,7 @@
     },
     methods: {},
     computed: {
-      Authenticated () {
+      GetAuthenticated () {
         return getCookie('IndexAuthenticated')
       },
       GetUserName () {
