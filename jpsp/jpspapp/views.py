@@ -991,7 +991,7 @@ def userprofile_get(request):
 def userprofile_submit(request):
     try:
         body = json.loads(request.body)
-        token = body['token']
+        token = body['Token']
         user_id = body['UserId']
         if(token_authenticate(user_id=user_id,token=token)):
             username = body['UserName']

@@ -71,7 +71,8 @@
             url: this.GetApi + 'club/attend',
             data: JSON.stringify({
               ClubId: this.ClubId,
-              UserName: this.GetUserName
+              UserId: this.GetUserId,
+              IndexToken: this.GetIndexToken
             })
           })
             .then(function (response) {
@@ -100,6 +101,9 @@
       },
       GetIndexToken () {
         return getCookie('IndexToken')
+      },
+      GetUserId () {
+        return getCookie('UserId')
       },
       /**
        * @return {string}

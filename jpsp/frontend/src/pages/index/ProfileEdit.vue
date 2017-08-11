@@ -181,9 +181,9 @@
           method: 'POST',
           url: this.GetApi + 'club/quit',
           data: JSON.stringify({
-            'UserId': this.GetUserId,
-            'Token': this.GetIndexToken,
-            'ClubId': ClubId
+            UserId: this.GetUserId,
+            IndexToken: this.GetIndexToken,
+            ClubId: ClubId
           })
         })
           .then(function (response) {
