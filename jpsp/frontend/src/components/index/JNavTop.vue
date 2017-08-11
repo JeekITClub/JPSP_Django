@@ -40,7 +40,7 @@
                   <router-link to="/about">关于</router-link>
                 </li>
                 <li v-if="GetAuthenticated === true">欢迎，{{ GetUserName }}</li>
-                <li class="has-dropdown" v-if="GetAuthenticated != true">
+                <li class="has-dropdown" v-if="GetAuthenticated !== true">
                   <router-link to="/login">登录</router-link>
                   <ul class="dropdown">
                     <li>

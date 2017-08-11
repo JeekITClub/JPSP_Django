@@ -1,45 +1,61 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 col-lg-12">
-        <p class="lead">
-          {{ Club.ClubName }}
-        </p>
-      </div>
-    </div>
-    <!--<div class="row">-->
-      <!--<el-carousel :interval="5000" arrow="" class="carousel">-->
+  <div>
+    <el-row class="club-head">
+      <el-row class="container">
+        <!--<div class="row">-->
+        <!--<el-carousel :interval="5000" arrow="" class="carousel">-->
         <!--<el-carousel-item v-for="item in ImgItems" :key="item">-->
-          <!--<img :src="item">-->
+        <!--<img :src="item">-->
         <!--</el-carousel-item>-->
-      <!--</el-carousel>-->
-    <!--</div>-->
-    <div class="row">
-      <div class="col-md-10 col-xs-15 col-sm-10 col-lg-10 Introduction">
-        <p>{{ Club.Introduction }}</p>
-      </div>
-      <div class="col-md-2 col-xs-3 col-sm-2 col-lg-2 Join">
-        <button class="btn btn-primary" type="button" @click="AttendClub" v-if>加入该社团</button>
+        <!--</el-carousel>-->
+        <!--</div>-->
+        <el-row>
+          <el-col :span=3 class="club-logo">
+            <img src="../../assets/dp.jpg">
+          </el-col>
+          <el-col :span=9 class="club-info">
+            <p class="club-name">{{ Club.ClubName }}</p>
+            <ul>
+              <li>社团QQ群: {{ Club.EnrollGroupQq }}</li>
+              <li>社团邮箱: {{ Club.Email }}</li>
+              <li>社团标签: {{ Club.Label }}</li>
+            </ul>
+            <div class="col-md-2 col-xs-3 col-sm-2 col-lg-2 Join">
+              <!-- TODO: 验证是否已加入 -->
+              <button class="btn btn-primary" type="button" @click="AttendClub" v-if="1===1">加入该社团</button>
+              <p v-else>已加入该社团</p>
+            </div>
+          </el-col>
+        </el-row>
 
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-10 col-xs-15 col-sm-10 col-lg-10">
-        <p>{{ Club.Achievements }}</p>
-      </div>
-    </div>
+      </el-row>
+    </el-row>
+    <el-row class="container club-detail">
+      <el-row>
+          <h3>社团介绍</h3>
+          <p>{{ Club.Introduction }}</p>
+      </el-row>
+      <el-row>
+          <h3>社团成就</h3>
+          <p>{{ Club.Achievements }}</p>
+      </el-row>
+    </el-row>
+    <!--<div class="col-md-10 col-xs-15 col-sm-10 col-lg-10 Introduction">-->
+    <!--<p>{{ Club.Introduction }}</p>-->
+    <!--</div>-->
+
   </div>
 </template>
 <script>
   import axios from 'axios'
-  import { getCookie } from 'tiny-cookie'
+  import {getCookie} from 'tiny-cookie'
   export default {
     data () {
       return {
         ImgItems: ['../../assets/1.jpg', '../../assets/2.jpg', '../../assets/3.jpg', '../../assets/4.jpg'],
         ClubId: this.$route.params.ClubId,
         Club: {
-          Introduction: 'hello',
+          Introduction: 'hellohellohellohellohellohellllohellohellohellohellohellohellohellohellohellohello',
           ClubName: 'Jeek信息社',
           Achievements: '开发JPSP!'
         }
@@ -76,15 +92,15 @@
       }
     },
     computed: {
-      Authenticated () {
+      GetIndexAuthenticated () {
         return getCookie('IndexAuthenticated')
       },
       GetUserName () {
         return getCookie('UserName')
       },
-//      GetToken () {
-//        return this.$store.state.Token
-//      },
+      GetIndexToken () {
+        return getCookie('IndexToken')
+      },
       /**
        * @return {string}
        */
@@ -109,6 +125,45 @@
   }
 </script>
 <style scoped>
+  .club-head {
+    padding-top: 50px;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 1%;
+    border-bottom: 1px solid #eee;
+    background-color: #fafbfc;
+  }
+
+  .club-name {
+    font-size: 2em;
+  }
+
+  .club-info {
+    padding-left: 5%;
+  }
+
+  .club-logo {
+    width: 200px;
+    height: 200px;
+  }
+
+  .club-logo img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .club-detail {
+    padding-top: 4%;
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+
   .Introduction {
     margin-top: 3%;
     margin-bottom: 3%;

@@ -1,5 +1,5 @@
 <template>
-  <el-row>
+  <el-row v-if="GetIndexAuthenticated===true">
     <el-col :span="4">
       <el-menu mode="vertical" class="el-menu-vertical-demo" :default-active=activeIndex @select="handleSelect">
         <el-menu-item-group title="个人中心">
@@ -98,6 +98,9 @@
       </div>
     </el-col>
   </el-row>
+  <el-row v-else>
+    <h1 style="text-align: center">您还未登录，请返回登录！</h1>
+  </el-row>
 </template>
 <script>
   import { getCookie } from 'tiny-cookie'
@@ -128,6 +131,12 @@
       },
       GetIndexToken () {
         return getCookie('IndexToken')
+      },
+      GetIndexAuthenticated () {
+        return getCookie('IndexAuthenticated')
+      },
+      GetUserName () {
+        return getCookie('UserName')
       },
       /**
        * @return {string}
@@ -173,7 +182,7 @@
           url: this.GetApi + 'club/quit',
           data: JSON.stringify({
             'UserId': this.GetUserId,
-            'Token': this.GetToken,
+            'Token': this.GetIndexToken,
             'ClubId': ClubId
           })
         })
@@ -181,7 +190,7 @@
             if (response.data.message === 'success') {
               this.$notify({
                 'title': '成功',
-                'message': '成功推出社团',
+                'message': '成功退出社团',
                 'type': 'success'
               })
             } else {

@@ -225,13 +225,13 @@
       GetUserId () {
         return getCookie('UserId')
       },
-      GetToken () {
-        return getCookie('Token')
+      GetIndexToken () {
+        return getCookie('IndexToken')
       },
       GetUserName () {
         return getCookie('UserName')
       },
-      Authenticated () {
+      GetIndexAuthenticated () {
         return getCookie('IndexAuthenticated')
       },
       /**
