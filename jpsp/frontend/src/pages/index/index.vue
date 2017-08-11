@@ -25,7 +25,9 @@
                     <div class="slider-text-inner">
                       <h1>互联网时代的社团</h1>
                       <h2>赶快体验一把</h2>
-                      <p class="ct"><router-link to="/login">了解更多<i class="icon-arrow-right"></i></router-link></p>
+                      <p class="ct">
+                        <router-link to="/login">了解更多<i class="icon-arrow-right"></i></router-link>
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -39,7 +41,9 @@
                     <div class="slider-text-inner">
                       <h1>想了解这个网站的怎么诞生的？</h1>
                       <h2>欢迎加入网站维护团队</h2>
-                      <p class="ct"><router-link to="/About">了解更多<i class="icon-arrow-right"></i></router-link></p>
+                      <p class="ct">
+                        <router-link to="/About">了解更多<i class="icon-arrow-right"></i></router-link>
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -78,8 +82,6 @@
           </div>
         </div>
       </div>
-      <div class="copyrights">Collect from <a href="#" title="网站模板">网站模板</a></div>
-
       <div id="fh5co-services">
         <div class="container">
           <div class="row">
@@ -145,7 +147,9 @@
                   <p>JPSP前端、后端工程师、架构师<br>曾经的2018届金苹果电视台台长。放弃视频后改行编程。</p>
                   <br>
                   <blockquote>
-                    <p>多读文档、多读源码就能变强。<footer>邱世贸</footer></p>
+                    <p>多读文档、多读源码就能变强。
+                      <footer>邱世贸</footer>
+                    </p>
                   </blockquote>
                 </div>
               </div>
@@ -211,7 +215,7 @@
   </div>
 </template>
 <script>
-  import {getCookie} from 'tiny-cookie'
+  import { getCookie } from 'tiny-cookie'
   export default {
     data () {
       return {}
@@ -262,23 +266,23 @@
     background-image: url(../../assets/5.jpg);
   }
 
-  .bi5{
+  .bi5 {
     background-image: url(../../assets/9.jpg);
   }
 
-  .qsm{
+  .qsm {
     background-image: url(../../assets/Contributors/qsm.jpg);
   }
 
-  .ncj{
+  .ncj {
     background-image: url(../../assets/Contributors/ncj.jpg);
   }
 
-  .qlt{
+  .qlt {
     background-image: url(../../assets/Contributors/qlt.jpg);
   }
 
-  .sms{
+  .sms {
     background-image: url(../../assets/Contributors/sms.jpg);
   }
 </style>

@@ -90,7 +90,7 @@
             <div class="thumbnail">
               <div class="caption">
                 <h3 class="name">{{ club }}</h3>
-                    <button class="btn btn-danger" type="button" @click="deleteClub(club)">我要退出</button>
+                <button class="btn btn-danger" type="button" @click="quitClub(club.id)">我要退出</button>
               </div>
             </div>
           </div>
@@ -100,7 +100,7 @@
   </el-row>
 </template>
 <script>
-  import {getCookie} from 'tiny-cookie'
+  import { getCookie } from 'tiny-cookie'
   import axios from 'axios'
   export default {
     data () {
@@ -113,11 +113,11 @@
           Email: '',
           Phone: '',
           Club: [],
-          AttendYear: '',
-          Activity: [
-            [],
-            []
-          ]
+          AttendYear: ''
+//          Activity: [
+//            [],
+//            []
+//          ]
         },
         activeIndex: '1'
       }
@@ -128,12 +128,6 @@
       },
       GetToken () {
         return getCookie('Token')
-      },
-      GetUserName () {
-        return getCookie('UserName')
-      },
-      Authenticated () {
-        return getCookie('IndexAuthenticated')
       },
       /**
        * @return {string}
@@ -172,32 +166,37 @@
       handleSelect (key) {
         this.activeIndex = key
       },
-      deleteClub (ClubId) {
+      quitClub (ClubId) {
         // TODO: delete club from tuple(Club)
-        console.log(this.Club)
         axios({
           method: 'POST',
-          url: this.GetApi + 'userprofile/submit',
+          url: this.GetApi + 'club/quit',
           data: JSON.stringify({
             'UserId': this.GetUserId,
-            'Token': this.GetToken
+            'Token': this.GetToken,
+            'ClubId': ClubId
           })
-        }).then(function (response) {
-          if (response.data.message === 'success') {
-            console.log(response.data.message)
-          } else {
-            this.$notify.error({
-              title: '错误',
-              message: '无法获得数据'
-            })
-          }
-        }.bind(this))
+        })
+          .then(function (response) {
+            if (response.data.message === 'success') {
+              this.$notify({
+                'title': '成功',
+                'message': '成功推出社团',
+                'type': 'success'
+              })
+            } else {
+              this.$notify.error({
+                title: '错误',
+                message: '无法获得数据'
+              })
+            }
+          }.bind(this))
       }
     },
     mounted: function () {
       axios({
-        method: 'GET',
-        url: this.GetApi + 'userprofile/get',
+        method: 'POST',
+        url: this.GetApi + 'user/profile/get',
         data: JSON.stringify({
           UserId: this.GetUserId,
           Token: this.GetToken

@@ -1,8 +1,7 @@
 # coding=utf-8
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 import json
 from django.contrib.auth.models import User
-from jpsp.shortcut import JPSPToken, JPSPTime
 from jpspapp.models import Club, Post, Token, Activity, Classroom, LostAndFound, UserProfile, CDUser, \
     ActivityParticipantShip, ClubMemberShip
 from django.core import serializers
@@ -10,42 +9,82 @@ from django.views.decorators.http import require_http_methods
 import datetime
 from django.contrib.auth import authenticate
 import itchat
+import random
+
+alphabet = "abcdefghijklmnopqrstuvwxyz0123456789"
+
+
+def token_generate(user_id):
+    token = ""
+    for i in range(30):
+        token += alphabet[random.randint(0, len(alphabet) - 1)]
+    try:
+        Token.objects.create(
+            Token=token,
+            UserObject=User.objects.get(username=user_id)
+        )
+    except:
+        token_object = Token.objects.get(UserObject=User.objects.get(username=user_id))
+        token_object.Token = token
+        token_object.save()
+    finally:
+        return token
+
+
+def token_authenticate(user_id, token):
+    try:
+        token_objects = Token.objects.get(UserObject=User.objects.get(username=user_id))
+        if token_objects.Token == token:
+            return True
+        else:
+            return False
+    except:
+        return False
+
+
+def token_remove(user_id):
+    try:
+        Token.objects.get(UserObject=User.objects.get(username=user_id)).delete()
+        return True
+    except:
+        return False
 
 
 # Create your views here.
+
 @require_http_methods(['POST'])
 def login(request):
     global token_object
     try:
         body = json.loads(request.body)
-        userid = body['UserName']
+        user_id = body['UserName']
         password = body['Password']
         usertype = body['UserType']
-        user = authenticate(username=userid, password=password)
+        user = authenticate(username=user_id, password=password)
         if user is not None:
-            token_object = JPSPToken(username=userid)
             if usertype == "Student":
-                object = UserProfile.objects.get(UserObject=User.objects.get(username=userid))
+                object = UserProfile.objects.get(UserObject=User.objects.get(username=user_id))
                 return JsonResponse({
                     "UserName": object.UserName,
                     "message": "User Authenticated",
-                    "Token": token_object.generate(),
+                    "Token": token_generate(user_id=user_id),
                     "Access-Control-Allow-Origin": '*'
                 })
             elif usertype == "Club":
-                object = Club.objects.get(ClubObject=User.objects.get(username=userid))
+                object = Club.objects.get(ClubObject=User.objects.get(username=user_id))
                 return JsonResponse({
                     "UserName": object.ClubName,
                     "message": "User Authenticated",
-                    "Token": token_object.generate(),
+                    "Token": token_generate(user_id=user_id),
                     "Access-Control-Allow-Origin": '*'
                 })
             elif usertype == "CD":
+                # TODO: CDUser
                 object = CDUser.objects.get()
                 return JsonResponse({
-                    "UserName": CDUser(User.objects.get(username=userid)).UserName,
+                    "UserName": CDUser(User.objects.get(username=user_id)).UserName,
                     "message": "User Authenticated",
-                    "Token": token_object.generate(),
+                    "Token": token_generate(user_id=user_id),
                     "Access-Control-Allow-Origin": '*'
                 })
     except:
@@ -53,22 +92,23 @@ def login(request):
             "message": "User Not Authenticated",
             "Access-Control-Allow-Origin": '*',
         })
-        # finally:
-        #     # token_object.__del__()
-        #     pass
 
 
 @require_http_methods(['POST'])
 def logout(request):
     try:
         body = json.loads(request)
-        username = body['UserName']
-        token_object = JPSPToken(username=username)
-        token_object.remove()
-        return JsonResponse({
-            'message': 'success',
-            'Access-Control-Allow-Origin': '*'
-        })
+        user_id = body['UserId']
+        if token_remove(user_id):
+            return JsonResponse({
+                'message': 'success',
+                'Access-Control-Allow-Origin': '*'
+            })
+        else:
+            return JsonResponse({
+                'message': 'error',
+                'Access-Control-Allow-Origin': '*'
+            })
     except:
         return JsonResponse({
             'message': 'error',
@@ -116,11 +156,14 @@ def club_establish(request):
         })
 
 
+# 社团部访问接口
 @require_http_methods(['POST'])
 def club_list(request):
     try:
         body = json.loads(request.body)
         type = body['Type']
+        token = body['Token']
+        # TODO: !!
         response = []
         club_object = None
         if type == 'Established':
@@ -152,20 +195,19 @@ def club_list(request):
             'Access-Control-Allow-Origin': '*'
         })
 
-
 @require_http_methods(['GET'])
 def club_show(request):
     try:
         response = []
         club_object = Club.objects.filter(State=True)
         for data in club_object:
-            if data.IfRecruit == False:
+            if not data.IfRecruit:
                 response.append({'ClubId': data.ClubId,
                                  'ClubName': data.ClubName,
                                  'Type': data.Type,
                                  'IfRecruit': 'False',
                                  })
-            elif data.IfRecruit == True:
+            elif data.IfRecruit:
                 response.append({'ClubId': str(data.ClubId),
                                  'ClubName': str(data.ClubName),
                                  'Type': data.Type,
@@ -187,8 +229,7 @@ def club_attend(request):
         token = body['IndexToken']
         club_id = body['ClubId']
         user_id = body['UserId']
-        token_object = JPSPToken(username=user_id)
-        if (token_object.authenticate()):
+        if (token_authenticate(user_id=user_id,token=token)):
             return JsonResponse({
                 'message': 'success',
                 'Access-Control-Allow-Origin': '*'
@@ -206,6 +247,20 @@ def club_attend(request):
 
 
 @require_http_methods(['POST'])
+def club_quit(request):
+    try:
+        body = json.loads(request.body)
+        token = body['IndexToken']
+        user_id = body['UserId']
+        club_id = body['ClubId']
+        if(token_authenticate(user_id=user_id,token=token)):
+            ClubMemberShip.objects.get(Member=UserProfile.objects.get(UserObject=User.objects.get(username=user_id)),Club=Club.objects.get(ClubId=club_id)).delete()
+        return True
+    except:
+        return False
+
+
+@require_http_methods(['POST'])
 def club_member_add(request):
     try:
         body = json.loads(request.body)
@@ -214,12 +269,17 @@ def club_member_add(request):
         token = body['Token']
         # username -> example: 'S320150181'
         username = body['UserName']
-        ClubMemberShip.objects.create(Member=UserProfile.objects.get(UserObject=User.objects.get(username=username)),
-                                      Club=Club.objects.get(ClubId=club_id))
-        return JsonResponse({
-            'message': 'success',
-            'Access-Control-Allow-Origin': '*'
-        })
+        if(token_authenticate(user_id=club_id,token=token)):
+            ClubMemberShip.objects.create(Member=UserProfile.objects.get(UserObject=User.objects.get(username=username)),Club=Club.objects.get(ClubId=club_id))
+            return JsonResponse({
+                'message': 'success',
+                'Access-Control-Allow-Origin': '*'
+            })
+        else:
+            return JsonResponse({
+                'message': 'error',
+                'Access-Control-Allow-Origin': '*'
+            })
     except:
         return JsonResponse({
             'message': 'error',
@@ -235,23 +295,29 @@ def club_confirmed_member_list(request):
         token = body['Token']
         # club_id -> example: '303'
         club_id = body['ClubId']
-        membership_set = ClubMemberShip.objects.filter(Club=Club.objects.get(ClubId=club_id)).filter(State=1)
-        response = []
-        for membership in membership_set:
-            response.append({
-                'UserName': membership.Member.UserName,
-                'Class': membership.Member.Class,
-                'Grade': membership.Member.Grade,
-                'AttendYear': membership.Member.AttendYear,
-                'Phone': membership.Member.Phone,
-                'QQ': membership.Member.QQ
+        if (token_authenticate(user_id=club_id,token=token)):
+            membership_set = ClubMemberShip.objects.filter(Club=Club.objects.get(ClubId=club_id)).filter(State=1)
+            response = []
+            for membership in membership_set:
+                response.append({
+                    'UserName': membership.Member.UserName,
+                    'Class': membership.Member.Class,
+                    'Grade': membership.Member.Grade,
+                    'AttendYear': membership.Member.AttendYear,
+                    'Phone': membership.Member.Phone,
+                    'QQ': membership.Member.QQ
+                })
+            response_json = json.dumps(response)
+            return JsonResponse({
+                'message': 'success',
+                'Access-Control-Allow-Origin': '*',
+                'data': response_json
+            }, safe=False)
+        else:
+            return JsonResponse({
+                'message': 'error',
+                'Access-Control-Allow-Origin': '*'
             })
-        response_json = json.dumps(response)
-        return JsonResponse({
-            'message': 'success',
-            'Access-Control-Allow-Origin': '*',
-            'data': response_json
-        }, safe=False)
     except:
         return JsonResponse({
             'message': 'error',
@@ -266,23 +332,30 @@ def club_unconfirmed_member_list(request):
         token = body['Token']
         # club_id -> example: '303'
         club_id = body['ClubId']
-        membership_set = ClubMemberShip.objects.filter(Club=Club.objects.get(ClubId=club_id)).filter(State=0)
-        response = []
-        for membership in membership_set:
-            response.append({
-                'UserName': membership.Member.UserName,
-                'Class': membership.Member.Class,
-                'Grade': membership.Member.Grade,
-                'AttendYear': membership.Member.AttendYear,
-                'Phone': membership.Member.Phone,
-                'QQ': membership.Member.QQ
+        if (token_authenticate(user_id=club_id,token=token)):
+            membership_set = ClubMemberShip.objects.filter(Club=Club.objects.get(ClubId=club_id)).filter(State=0)
+            response = []
+            for membership in membership_set:
+                response.append({
+                    'UserName': membership.Member.UserName,
+                    'Class': membership.Member.Class,
+                    'Grade': membership.Member.Grade,
+                    'AttendYear': membership.Member.AttendYear,
+                    'Phone': membership.Member.Phone,
+                    'QQ': membership.Member.QQ
+                })
+            response_json = json.dumps(response)
+            return JsonResponse({
+                'message': 'success',
+                'Access-Control-Allow-Origin': '*',
+                'data': response_json
+            }, safe=False)
+        else:
+            return JsonResponse({
+                'message': 'error',
+                'Access-Control-Allow-Origin': '*'
             })
-        response_json = json.dumps(response)
-        return JsonResponse({
-            'message': 'success',
-            'Access-Control-Allow-Origin': '*',
-            'data': response_json
-        }, safe=False)
+
     except:
         return JsonResponse({
             'message': 'error',
@@ -352,6 +425,7 @@ def recruit_classroom_list(request):
             pass
         elif type == 'All':
             classroom_objects_set = Classroom.objects.all()
+            # TODO: !!!!!!!
             for classroom in classroom_objects_set:
                 response.append({})
         response_json = json.dumps(response)
@@ -377,12 +451,19 @@ def club_member_remove(request):
         club_id = body['ClubId']
         # username -> example: 'S320150181'
         user_id = body['UserId']
-        ClubMemberShip.objects.get(Club=Club.objects.get(ClubId=club_id), Member=UserProfile.objects.get(
-            UserObject=User.objects.get(username=user_id))).delete()
-        return JsonResponse({
-            'message': 'success',
-            'Access-Control-Allow-Origin': '*'
-        })
+        if(token_authenticate(user_id=club_id,token=token)):
+            ClubMemberShip.objects.get(Club=Club.objects.get(ClubId=club_id), Member=UserProfile.objects.get(
+                UserObject=User.objects.get(username=user_id))).delete()
+            return JsonResponse({
+                'message': 'success',
+                'Access-Control-Allow-Origin': '*'
+            })
+        else:
+            return JsonResponse({
+                'message': 'error',
+                'Access-Control-Allow-Origin': '*'
+            })
+
     except:
         return JsonResponse({
             'message': 'error',
@@ -871,7 +952,7 @@ def userprofile_get(request):
                     act_past_set.append(activity.Name)
                 elif activity.Date1 >= now:
                     act_future_set.append(activity.Name)
-                elif activity.Date1 <= now and activity.Date2 >= now:
+                elif activity.Date1 <= now <= activity.Date2:
                     act_now_set.append(activity.Name)
         response = {
             'UserName': profile.UserName,
@@ -899,35 +980,42 @@ def userprofile_get(request):
         })
 
 
+# noinspection PyBroadException
 @require_http_methods(['POST'])
 def userprofile_submit(request):
     try:
         body = json.loads(request.body)
-        # token = body['token']
-        userid = body['UserId']
-        username = body['UserName']
-        classroom = body['Class']
-        # 不能使用class 因为是关键字
-        grade = body['Grade']
-        # attend_year = body['AttendYear']
-        qq = body['QQ']
-        email = body['Email']
-        phone = body['Phone']
-        attend_year = body['AttendYear']
-        # upo -> user profile object
-        upo = UserProfile.objects.get(UserObject=User.objects.get(username=userid))
-        upo.UserName = username
-        upo.Class = classroom
-        upo.Grade = grade
-        upo.QQ = qq
-        upo.Email = email
-        upo.Phone = phone
-        upo.AttendYear = attend_year
-        upo.save()
-        return JsonResponse({
-            'message': 'success',
-            'Access-Control-Allow-Origin': '*'
-        })
+        token = body['token']
+        user_id = body['UserId']
+        if(token_authenticate(user_id=user_id,token=token)):
+            username = body['UserName']
+            classroom = body['Class']
+            # 不能使用class 因为是关键字
+            grade = body['Grade']
+            # attend_year = body['AttendYear']
+            qq = body['QQ']
+            email = body['Email']
+            phone = body['Phone']
+            attend_year = body['AttendYear']
+            # upo -> user profile object
+            upo = UserProfile.objects.get(UserObject=User.objects.get(username=user_id))
+            upo.UserName = username
+            upo.Class = classroom
+            upo.Grade = grade
+            upo.QQ = qq
+            upo.Email = email
+            upo.Phone = phone
+            upo.AttendYear = attend_year
+            upo.save()
+            return JsonResponse({
+                'message': 'success',
+                'Access-Control-Allow-Origin': '*'
+            })
+        else:
+            return JsonResponse({
+                'message': 'error',
+                'Access-Control-Allow-Origin': '*'
+            })
     except:
         return JsonResponse({
             'message': 'error',
@@ -935,14 +1023,14 @@ def userprofile_submit(request):
         })
 
 
-@require_http_methods(['POST'])
+@require_http_methods(['GET'])
 def club_profile_get(request):
     try:
         body = json.loads(request.body)
         clubid = body['ClubId']
         profile = Club.objects.get(ClubId=clubid)
         response = None
-        if profile.IfRecruit == True:
+        if profile.IfRecruit:
             response = {
                 'ClubName': profile.ClubName,
                 'ShezhangName': profile.ShezhangName,
@@ -958,7 +1046,7 @@ def club_profile_get(request):
                 'Introduction': profile.Introduction,
                 'Achievements': profile.Achievements,
             }
-        elif profile.IfRecruit == False:
+        elif not profile.IfRecruit:
             response = {
                 'ClubName': profile.ClubName,
                 'ShezhangName': profile.ShezhangName,
@@ -990,38 +1078,44 @@ def club_profile_submit(request):
         body = json.loads(request.body)
         token = body['Token']
         clubid = body['clubid']
-        clubname = body['clubname']
-        shezhang_name = body['shezhang_name']
-        shezhang_qq = body['shezhang_qq']
-        shezhang_grade = body['shezhang_grade']
-        shezhang_class = body['shezhang_class']
-        if_recruit = body['if_recruit']
-        enroll_group_qq = body['enroll_group_qq']
-        email = body['email']
-        label = body['label']
-        state = body['state']
-        introduction = body['introduction']
-        achievements = body['achievements']
-        try:
-            club_object = Club.objects.get(ClubId=clubid)
-            club_object.ClubName = clubname
-            club_object.ShezhangName = shezhang_name
-            club_object.ShezhangGrade = shezhang_grade
-            club_object.ShezhangClassroom = shezhang_class
-            club_object.ShezhangQq = shezhang_qq
-            club_object.IfRecruit = if_recruit
-            club_object.EnrollGroupQq = enroll_group_qq
-            club_object.Email = email
-            club_object.Label = label
-            club_object.State = state
-            club_object.Introduction = introduction
-            club_object.Achievements = achievements
-            club_object.save()
-            return JsonResponse({
-                'message': 'success',
-                'Access-Control-Allow-Origin': '*'
-            })
-        except:
+        if(token_authenticate(user_id=clubid,token=token)):
+            clubname = body['clubname']
+            shezhang_name = body['shezhang_name']
+            shezhang_qq = body['shezhang_qq']
+            shezhang_grade = body['shezhang_grade']
+            shezhang_class = body['shezhang_class']
+            if_recruit = body['if_recruit']
+            enroll_group_qq = body['enroll_group_qq']
+            email = body['email']
+            label = body['label']
+            state = body['state']
+            introduction = body['introduction']
+            achievements = body['achievements']
+            try:
+                club_object = Club.objects.get(ClubId=clubid)
+                club_object.ClubName = clubname
+                club_object.ShezhangName = shezhang_name
+                club_object.ShezhangGrade = shezhang_grade
+                club_object.ShezhangClassroom = shezhang_class
+                club_object.ShezhangQq = shezhang_qq
+                club_object.IfRecruit = if_recruit
+                club_object.EnrollGroupQq = enroll_group_qq
+                club_object.Email = email
+                club_object.Label = label
+                club_object.State = state
+                club_object.Introduction = introduction
+                club_object.Achievements = achievements
+                club_object.save()
+                return JsonResponse({
+                    'message': 'success',
+                    'Access-Control-Allow-Origin': '*'
+                })
+            except:
+                return JsonResponse({
+                    'message': 'error',
+                    'Access-Control-Allow-Origin': '*'
+                })
+        else:
             return JsonResponse({
                 'message': 'error',
                 'Access-Control-Allow-Origin': '*'
