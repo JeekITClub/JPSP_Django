@@ -1,7 +1,7 @@
 <template>
   <div>
-    <el-row class="club-head">
-      <el-row class="container">
+    <div class="club-head">
+      <div class="container">
         <!--<div class="row">-->
         <!--<el-carousel :interval="5000" arrow="" class="carousel">-->
         <!--<el-carousel-item v-for="item in ImgItems" :key="item">-->
@@ -9,11 +9,11 @@
         <!--</el-carousel-item>-->
         <!--</el-carousel>-->
         <!--</div>-->
-        <el-row>
-          <el-col :span=3 class="club-logo">
+        <div>
+          <div  class="club-logo col-md-4">
             <img src="../../assets/dp.jpg">
-          </el-col>
-          <el-col :span=9 class="club-info">
+          </div>
+          <div class="club-info col-md-8">
             <p class="club-name">{{ Club.ClubName }}</p>
             <ul>
               <li>社团QQ群: {{ Club.EnrollGroupQq }}</li>
@@ -25,21 +25,21 @@
               <button class="btn btn-primary" type="button" @click="AttendClub" v-if="1===1">加入该社团</button>
               <p v-else>已加入该社团</p>
             </div>
-          </el-col>
-        </el-row>
+          </div>
+        </div>
 
-      </el-row>
-    </el-row>
-    <el-row class="container club-detail">
-      <el-row>
+      </div>
+    </div>
+    <div class="container club-detail">
+      <div>
           <h3>社团介绍</h3>
           <p>{{ Club.Introduction }}</p>
-      </el-row>
-      <el-row>
+      </div>
+      <div>
           <h3>社团成就</h3>
           <p>{{ Club.Achievements }}</p>
-      </el-row>
-    </el-row>
+      </div>
+    </div>
     <!--<div class="col-md-10 col-xs-15 col-sm-10 col-lg-10 Introduction">-->
     <!--<p>{{ Club.Introduction }}</p>-->
     <!--</div>-->

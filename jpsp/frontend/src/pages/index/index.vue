@@ -25,9 +25,7 @@
                     <div class="slider-text-inner">
                       <h1>互联网时代的社团</h1>
                       <h2>赶快体验一把</h2>
-                      <p class="ct">
-                        <router-link to="/login">了解更多<i class="icon-arrow-right"></i></router-link>
-                      </p>
+                      <p class="ct"><router-link to="Login">了解更多<i class="icon-arrow-right"></i></router-link></p>
                     </div>
                   </div>
                 </div>
@@ -41,9 +39,7 @@
                     <div class="slider-text-inner">
                       <h1>想了解这个网站的怎么诞生的？</h1>
                       <h2>欢迎加入网站维护团队</h2>
-                      <p class="ct">
-                        <router-link to="/About">了解更多<i class="icon-arrow-right"></i></router-link>
-                      </p>
+                      <p class="ct"><router-link to="About">了解更多<i class="icon-arrow-right"></i></router-link></p>
                     </div>
                   </div>
                 </div>
