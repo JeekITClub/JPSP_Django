@@ -87,7 +87,7 @@
         })
       },
       checkLogin () {
-        if (getCookie('IndexAuthenticated' === true)) {
+        if (getCookie('IndexAuthenticated') === 'true') {
           this.$router.push('/')
         } else {
           this.$router.push('/login')

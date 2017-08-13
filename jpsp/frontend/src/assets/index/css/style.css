@@ -7,7 +7,7 @@
 }
 /* =======================================================
 *
-* 	Template Style 
+* 	Template Style
 *
 * ======================================================= */
 body {
@@ -85,17 +85,6 @@ h1, h2, h3, h4, h5, h6, figure {
 .fh5co-nav .top-menu {
   padding: 28px 0;
 }
-.fh5co-nav #fh5co-logo {
-  font-size: 24px;
-  margin: 0;
-  padding: 0;
-  text-transform: uppercase;
-  font-weight: 700;
-  font-family: "Space Mono", Arial, serif;
-}
-.fh5co-nav #fh5co-logo a span {
-  color: #317AE1;
-}
 .copyrights{
 	text-indent:-9999px;
 	height:0;
@@ -117,16 +106,18 @@ h1, h2, h3, h4, h5, h6, figure {
   margin: 5px 0 0 0;
 }
 .fh5co-nav ul li {
-  padding: 0;
   margin: 0;
   list-style: none;
   display: inline;
   text-transform: uppercase;
   letter-spacing: 2px;
+  padding-top: 30px;
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-bottom: 30px;
 }
 .fh5co-nav ul li a {
-  font-size: 16px;
-  padding: 30px 15px;
+  font-size: 22px;
   color: rgba(0, 0, 0, 0.7);
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
