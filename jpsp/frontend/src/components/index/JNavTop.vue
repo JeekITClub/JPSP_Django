@@ -6,7 +6,9 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-xs-4">
-              <div id="fh5co-logo"><a href="" class="title">建平中学学生平台</a></div>
+              <div>
+                <img src="../../assets/ICON.png" style="width:80%;height: 80%">
+              </div>
             </div>
             <div class="col-xs-8 text-right menu-1">
               <ul>
@@ -39,8 +41,9 @@
                 <li>
                   <router-link to="/about">关于</router-link>
                 </li>
-                <li v-if="GetAuthenticated === true">欢迎，{{ GetUserName }}</li>
-                <li class="has-dropdown" v-if="GetAuthenticated !== true">
+                <li v-if="GetAuthenticated === 'true'">欢迎，{{ GetUserName }}</li>
+                <li v-if="GetAuthenticated === 'true'"><router-link to="/profile">资料修改</router-link></li>
+                <li class="has-dropdown" v-if="GetAuthenticated !== 'true'">
                   <router-link to="/login">登录</router-link>
                   <ul class="dropdown">
                     <li>
@@ -54,7 +57,7 @@
                     </li>
                   </ul>
                 </li>
-                <li class="btn-cta" v-if="GetAuthenticated === true"><a href="#"><span>注销</span></a></li>
+                <li class="btn-cta" v-if="GetAuthenticated === 'true'"><a href="#"><span>注销</span></a></li>
               </ul>
             </div>
           </div>

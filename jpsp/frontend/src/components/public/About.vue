@@ -20,6 +20,7 @@
         <a href="https://www.daocloud.io/" target="_blank">DaoCloud</a>、
         <a href="http://webpack.github.io/" target="_blank">WebPack</a>、
         <a href="https://www.npmjs.com/" target="_blank">NPM</a>
+        <a href="https://www.npmjs.com/package/tiny-cookie" target="_blank">tiny-cookie</a>
         等各项技术
       </p>
       <p>特别感谢<a href="" target="_blank">Github</a>以及<a href="" target="_blank">JetBrains</a></p>
@@ -41,7 +42,7 @@
           前端
         </p>
         <p>
-          前端采用了Vue.js框架，使用axios进行与后端交互，使用Vuex进行状态管理。
+          前端采用了Vue.js框架，使用axios进行与后端交互，使用Vuex进行状态管理,使用tiny-cookie进行数据持久化。
         </p>
       </div>
     </div>

@@ -1,5 +1,5 @@
 <template>
-  <el-row v-if="GetIndexAuthenticated===true">
+  <el-row>
     <el-col :span="4">
       <el-menu mode="vertical" class="el-menu-vertical-demo" :default-active=activeIndex @select="handleSelect">
         <el-menu-item-group title="个人中心">
@@ -97,9 +97,6 @@
         </div>
       </div>
     </el-col>
-  </el-row>
-  <el-row v-else>
-    <h1 style="text-align: center">您还未登录，请返回登录！</h1>
   </el-row>
 </template>
 <script>
@@ -200,6 +197,11 @@
               })
             }
           }.bind(this))
+      },
+      checkLogin () {
+        if (getCookie('IndexAuthenticated') !== true) {
+          this.$router.push('/login')
+        }
       }
     },
     mounted: function () {
@@ -221,6 +223,9 @@
             })
           }
         }.bind(this))
+    },
+    created () {
+      this.checkLogin()
     }
   }
 </script>
