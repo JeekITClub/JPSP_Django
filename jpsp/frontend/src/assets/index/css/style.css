@@ -111,10 +111,10 @@ h1, h2, h3, h4, h5, h6, figure {
   display: inline;
   text-transform: uppercase;
   letter-spacing: 2px;
-  padding-top: 30px;
+  padding-top: 10px;
   padding-right: 15px;
   padding-left: 15px;
-  padding-bottom: 30px;
+  padding-bottom: 10px;
 }
 .fh5co-nav ul li a {
   font-size: 22px;
@@ -142,7 +142,7 @@ h1, h2, h3, h4, h5, h6, figure {
   left: 0;
   text-align: left;
   background: #000;
-  padding: 20px;
+  padding: 15px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
@@ -177,7 +177,7 @@ h1, h2, h3, h4, h5, h6, figure {
   color: #999999;
   line-height: 1.2;
   text-transform: none;
-  font-size: 13px;
+  font-size: 15px;
   letter-spacing: 0;
 }
 .fh5co-nav ul li.has-dropdown .dropdown li a:hover {
