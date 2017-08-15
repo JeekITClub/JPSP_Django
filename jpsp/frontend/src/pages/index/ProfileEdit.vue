@@ -199,7 +199,7 @@
           }.bind(this))
       },
       checkLogin () {
-        if (getCookie('IndexAuthenticated') !== true) {
+        if (getCookie('IndexAuthenticated') !== 'true') {
           this.$router.push('/login')
         }
       }
