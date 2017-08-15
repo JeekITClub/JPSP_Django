@@ -7,7 +7,12 @@
       </div>
       </div>
       <div class="row">
-        <!-- TODO: 饿了么的分页毫无显示 -->
+        <el-pagination
+    layout="prev, pager, next"
+    :total="50">
+  </el-pagination>
+      </div>
+      <div class="row">
         <nav aria-label="Page navigation">
         <ul class="pagination">
           <li>
@@ -28,6 +33,7 @@
         </ul>
       </nav>
       </div>
+
     </div>
   </div>
 </template>
@@ -43,7 +49,7 @@
         ClubList: [
           {
             ClubName: 'jeek',
-            ClubId: '233',
+            ClubId: '303',
             IfRecruit: 'True'
           },
           {
