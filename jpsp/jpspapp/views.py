@@ -232,6 +232,7 @@ def club_attend(request):
         token = body['IndexToken']
         club_id = body['ClubId']
         user_id = body['UserId']
+        # TODO: !!!
         if (token_authenticate(user_id=user_id,token=token)):
             return JsonResponse({
                 'message': 'success',

@@ -6,10 +6,12 @@ import router from './router/index.js'
 import ElementUI from 'element-ui'
 import Vuex from 'vuex'
 import axios from 'axios'
+var VueCookie = require('vue-cookie')
 Vue.config.productionTip = false
 Vue.prototype.$ajax = axios
 Vue.use(ElementUI)
 Vue.use(Vuex)
+Vue.use(VueCookie)
 /* eslint-disable no-new */
 
 const UserVuexStore = new Vuex.Store({

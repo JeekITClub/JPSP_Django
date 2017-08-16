@@ -29,7 +29,6 @@
 </template>
 
 <script>
-  import { getCookie, setCookie } from 'tiny-cookie'
   import axios from 'axios'
   export default {
     data () {
@@ -63,17 +62,11 @@
             })
               .then(function (response) {
                 if (response.data.message === 'User Authenticated') {
-                  let expireDays = 1000 * 60 * 60 * 24 * 3
-                  setCookie('UserId', this.LoginForm.UserName, expireDays)
-                  setCookie('UserName', response.data.UserName, expireDays)
-                  setCookie('IndexToken', response.data.Token, expireDays)
-                  // expireDays 为有效时间
-                  setCookie('IndexAuthenticated', true, expireDays)
-                  // 第一个值为key，第二个为value，第三个为有限时间
+                  this.$cookie.set('UserId', this.LoginForm.UserName, 1)
+                  this.$cookie.set('UserName', response.data.UserName, 1)
+                  this.$cookie.set('IndexToken', response.data.Token, 1)
+                  this.$cookie.set('IndexAuthenticated', true, 1)
                   this.$router.push('/')
-//                this.$store.commit('Authenticated', true)
-//                this.$store.commit('ApplyUserName', response.data.UserName)
-//                this.$store.commit('ApplyToken', response.data.Token)
                 } else if (response.data.message === 'User Not Authenticated') {
                   this.$notify.error({
                     title: '错误',
@@ -85,18 +78,11 @@
             alert('error')
           }
         })
-      },
-      checkLogin () {
-        if (getCookie('IndexAuthenticated') === 'true') {
-          this.$router.push('/')
-        } else {
-          this.$router.push('/login')
-        }
       }
     },
     computed: {
       Authenticated () {
-        return getCookie('IndexAuthenticated')
+        return this.$cookie.get('IndexAuthenticated')
       },
       /**
        * @return {string}
@@ -105,8 +91,10 @@
         return this.$store.state.Api
       }
     },
-    created () {
-      this.checkLogin()
+    created: function () {
+      if (this.$cookie.get('IndexAuthenticated') === 'true') {
+        this.$router.push('/')
+      }
     }
   }
 </script>
