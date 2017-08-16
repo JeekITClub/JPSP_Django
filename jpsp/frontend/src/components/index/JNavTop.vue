@@ -14,7 +14,7 @@
               <ul>
                 <li><a href="">首页</a></li>
                 <li class="has-dropdown">
-                  <router-link to="/club">社团</router-link>
+                  <a>社团</a>
                   <ul class="dropdown">
                     <li>
                       <router-link to="/club">社团列表</router-link>
@@ -25,7 +25,7 @@
                   </ul>
                 </li>
                 <li class="has-dropdown">
-                  <router-link to="/activity/list">活动</router-link>
+                  <a>活动</a>
                   <ul class="dropdown">
                     <li>
                       <router-link to="/activity/list">活动报名</router-link>
@@ -44,7 +44,7 @@
                 <li v-if="GetAuthenticated === 'true'">欢迎，{{ GetUserName }}</li>
                 <li v-if="GetAuthenticated === 'true'"><router-link to="/profile">资料修改</router-link></li>
                 <li class="has-dropdown" v-if="GetAuthenticated !== 'true'">
-                  <router-link to="/login">登录</router-link>
+                  <a>登录</a>
                   <ul class="dropdown">
                     <li>
                       <router-link to="/login">学生登录</router-link>
