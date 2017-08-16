@@ -134,7 +134,7 @@
           <div class="row">
             <div class="member">
               <div class="col-md-6 nopadding">
-                <div class="author qsm img-rounded"></div>
+                <div class="author qsm"></div>
               </div>
               <div class="col-md-6 nopadding">
                 <div class="desc">
@@ -152,7 +152,7 @@
             </div>
             <div class="member">
               <div class="col-md-6 nopadding col-md-push-6">
-                <div class="author ncj img-rounded"></div>
+                <div class="author ncj"></div>
               </div>
               <div class="col-md-6 nopadding col-md-pull-6">
                 <div class="desc">
@@ -165,7 +165,7 @@
             </div>
             <div class="member">
               <div class="col-md-6 nopadding">
-                <div class="author qlt img-rounded"></div>
+                <div class="author qlt"></div>
               </div>
               <div class="col-md-6 nopadding">
                 <div class="desc">
@@ -177,7 +177,7 @@
             </div>
             <div class="member">
               <div class="col-md-6 no adding col-md-push-6">
-                <div class="author sms img-rounded"></div>
+                <div class="author sms"></div>
               </div>
               <div class="col-md-6 nopadding col-md-pull-6">
                 <div class="desc">
