@@ -83,7 +83,7 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 
 .fh5co-nav .top-menu {
-  padding: 28px 0;
+  padding: 18px 0;
 }
 .copyrights{
 	text-indent:-9999px;
@@ -117,7 +117,7 @@ h1, h2, h3, h4, h5, h6, figure {
   padding-bottom: 10px;
 }
 .fh5co-nav ul li a {
-  font-size: 22px;
+  font-size: 20px;
   color: rgba(0, 0, 0, 0.7);
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
@@ -478,7 +478,7 @@ h1, h2, h3, h4, h5, h6, figure {
 #fh5co-product,
 #fh5co-blog,
 #fh5co-footer {
-  padding: 6em 0;
+  padding: 4em 0;
   clear: both;
   border-bottom: 2px solid rgba(49, 122, 225, 0.1);
 }

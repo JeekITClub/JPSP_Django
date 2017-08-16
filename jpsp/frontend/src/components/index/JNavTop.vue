@@ -7,7 +7,7 @@
           <div class="row">
             <div class="col-xs-4">
               <div>
-                <img src="../../assets/ICON.png" style="width:80%;height: 80%">
+                <img src="../../assets/ICON.png" style="width:60%;height: 60%">
               </div>
             </div>
             <div class="col-xs-8 text-right menu-1">
@@ -41,8 +41,17 @@
                 <li>
                   <router-link to="/about">关于</router-link>
                 </li>
-                <li v-if="GetAuthenticated === 'true'">欢迎，{{ GetUserName }}</li>
-                <li v-if="GetAuthenticated === 'true'"><router-link to="/profile">资料修改</router-link></li>
+                <li v-if="GetAuthenticated === 'true'" class="has-dropdown">欢迎，{{ GetUserName }}<i class="icon-user"></i>
+                  <ul class="dropdown">
+                    <li>
+                      <router-link to="/profile">个人中心</router-link>
+                    </li>
+                    <li>
+                      <a @click="Logout">注销</a>
+                    </li>
+                  </ul>
+
+                </li>
                 <li class="has-dropdown" v-if="GetAuthenticated !== 'true'">
                   <a>登录</a>
                   <ul class="dropdown">
@@ -57,7 +66,6 @@
                     </li>
                   </ul>
                 </li>
-                <li class="btn-cta" v-if="GetAuthenticated === 'true'"><a href="#"><span>注销</span></a></li>
               </ul>
             </div>
           </div>
@@ -72,7 +80,12 @@
     data () {
       return {}
     },
-    methods: {},
+    methods: {
+      Logout () {
+        // TODO: 注销
+        console.log('谁点谁傻逼')
+      }
+    },
     computed: {
       GetAuthenticated () {
         return getCookie('IndexAuthenticated')

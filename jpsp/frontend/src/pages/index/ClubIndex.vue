@@ -22,7 +22,7 @@
             </ul>
             <div class="col-md-2 col-xs-3 col-sm-2 col-lg-2 Join">
               <!-- TODO: 验证是否已加入 -->
-              <button class="btn btn-primary" type="button" @click="AttendClub" v-if="1===1">加入该社团</button>
+              <button class="btn btn-primary" type="button" @click="AttendClub" v-if="Club.IfRecruit === 'true'">加入该社团</button>
               <p v-else>已加入该社团</p>
             </div>
           </div>
