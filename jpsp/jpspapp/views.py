@@ -10,7 +10,7 @@ import datetime
 from django.contrib.auth import authenticate
 import itchat
 import random
-
+from django.core.paginator import Paginator
 alphabet = "abcdefghijklmnopqrstuvwxyz0123456789"
 
 
@@ -200,7 +200,10 @@ def club_show(request):
     try:
         response = []
         club_object = Club.objects.filter(State=True)
-        for data in club_object:
+        paginator = Paginator(club_object,1)
+        page = request.GET.get('Page')
+        club_object_page = paginator.page(page)
+        for data in club_object_page:
             if not data.IfRecruit:
                 response.append({'ClubId': data.ClubId,
                                  'ClubName': data.ClubName,
