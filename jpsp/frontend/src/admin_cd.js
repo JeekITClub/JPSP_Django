@@ -3,16 +3,26 @@
 import Vue from 'vue'
 import AdminCD from './AdminCD.vue'
 import router from './router/admin_cd'
-import ElementUI from 'element-ui'
+import { Pagination, Table, TableColumn, DatePicker, TimeSelecter, TimePicker, Notification, Tabs, TabPane } from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
-// import Vuex from 'vuex'
-import 'bootstrap/dist/css/bootstrap.css'
+// TODO； ele .css
+import 'bulma/css/bulma.css'
+import Vuex from 'vuex'
 import axios from 'axios'
+var VueCookie = require('vue-cookie')
 Vue.config.productionTip = false
 Vue.prototype.$ajax = axios
-Vue.config.productionTip = false
-Vue.use(ElementUI)
-import { getCookie } from 'tiny-cookie'
+Vue.use(Pagination)
+Vue.use(TableColumn)
+Vue.use(Table)
+Vue.use(DatePicker)
+Vue.use(TimeSelecter)
+Vue.use(TimePicker)
+Vue.use(Tabs)
+Vue.use(TabPane)
+Vue.use(Vuex)
+Vue.use(VueCookie)
+Vue.prototype.$notify = Notification
 // Vue.use(Vuex)
 /* eslint-disable no-new */
 
@@ -54,7 +64,7 @@ new Vue({
   },
   methods: {
     checkLogin () {
-      if (getCookie('CDAuthentiacated') === true) {
+      if (this.$cookie.get('CDAuthentiacated') === true) {
         this.$router.push('/dashboard')
       } else {
         this.$router.push('/login')

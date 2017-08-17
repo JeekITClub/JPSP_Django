@@ -3,18 +3,27 @@
 import Vue from 'vue'
 import AdminClub from './AdminClub.vue'
 import router from './router/admin_club.js'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-default/index.css'
-import 'bootstrap/dist/css/bootstrap.css'
+import { Pagination, Table, TableColumn, DatePicker, TimePicker, Notification, Tabs, TabPane, FormItem } from 'element-ui'
+// TODO； ele .css
+import 'bulma/css/bulma.css'
 import Vuex from 'vuex'
 import axios from 'axios'
 import VueQuillEditor from 'vue-quill-editor'
+var VueCookie = require('vue-cookie')
 Vue.config.productionTip = false
 Vue.prototype.$ajax = axios
-Vue.use(ElementUI)
+Vue.use(Pagination)
+Vue.use(TableColumn)
+Vue.use(Table)
+Vue.use(DatePicker)
+Vue.use(TimePicker)
+Vue.use(Tabs)
+Vue.use(FormItem)
+Vue.use(TabPane)
 Vue.use(Vuex)
 Vue.use(VueQuillEditor)
-import { getCookie } from 'tiny-cookie'
+Vue.use(VueCookie)
+Vue.prototype.$notify = Notification
 /* eslint-disable no-new */
 const AdminClubVuexStore = new Vuex.Store({
   state: {
@@ -49,9 +58,10 @@ new Vue({
   // watch: {
   //   '$route': 'checkLogin'
   // },
+  // TODO: 最后上面的要取消注释
   methods: {
     checkLogin () {
-      if (getCookie('ClubAuthenticated') === true) {
+      if (this.$cookie.get('ClubAuthenticated') === true) {
         this.$router.push('/dashboard')
       } else {
         this.$router.push('/login')

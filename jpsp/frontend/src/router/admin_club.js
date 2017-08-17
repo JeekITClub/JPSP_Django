@@ -94,8 +94,8 @@ export default new Router({
       component: Contact
     },
     {
-      path: '/event/form',
-      name: 'EventForm',
+      path: '/activity/record',
+      name: 'ActivityRecord',
       component: Future
     },
     {

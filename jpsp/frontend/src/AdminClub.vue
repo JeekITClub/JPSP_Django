@@ -1,19 +1,16 @@
 <template>
   <div id="app_club">
     <JNavTop></JNavTop>
-    <div class="container">
-      <!-- <el-row class="tac" :gutter="20" v-if="Authenticated === true"> -->
-      <el-row class="tac" :gutter="20">
-        <el-col :span="4">
-          <club-aside></club-aside>
-        </el-col>
-        <el-col :span="20">
-          <router-view></router-view>
-        </el-col>
-      </el-row>
-      <!-- <el-row class="tac" v-else>
+    <div class="columns" v-if="Authenticated !== true">
+      <div class="column is-1 club-aside">
+        <club-aside></club-aside>
+      </div>
+      <div class="column">
         <router-view></router-view>
-      </el-row> -->
+      </div>
+    </div>
+    <div class="columns" v-else>
+      <router-view></router-view>
     </div>
   </div>
 </template>
@@ -37,10 +34,7 @@
 </script>
 
 <style>
-
-  #app_club .container {
-    margin-right: auto;
-    margin-left: auto;
-    width: 100%;
+  .club-aside {
+    margin-left: 2%;
   }
 </style>
