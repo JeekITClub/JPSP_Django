@@ -15,6 +15,7 @@
           :total="1000" align="center">
         </el-pagination>
       </div>
+
     </div>
   </div>
 </template>
@@ -30,7 +31,7 @@
         ClubList: [
           {
             ClubName: 'jeek',
-            ClubId: '233',
+            ClubId: '303',
             IfRecruit: 'True'
           },
           {
