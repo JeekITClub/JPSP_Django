@@ -16,7 +16,6 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.views.generic import TemplateView
-
 urlpatterns = [
     url(r'^admin_club', TemplateView.as_view(template_name="admin_club.html")),
     url(r'^admin_cd', TemplateView.as_view(template_name="admin_cd.html")),

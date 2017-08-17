@@ -139,8 +139,8 @@
               <div class="col-md-6 nopadding">
                 <div class="desc">
                   <h3>邱世贸 Harvey Qiu</h3>
-                  <span>2015届3班 JEEK信息社 副社长</span>
-                  <p>JPSP前端、后端工程师、架构师<br>曾经的2018届金苹果电视台台长。放弃视频后改行编程。</p>
+                  <span>2015级3班 JEEK信息社副社长</span>
+                  <p>JPSP前端、后端工程师、架构师<br>2015级金苹果电视台台长。卸任后改行编程。</p>
                   <br>
                   <blockquote>
                     <p>多读文档、多读源码就能变强。
@@ -157,7 +157,7 @@
               <div class="col-md-6 nopadding col-md-pull-6">
                 <div class="desc">
                   <h3>倪楚劼 Cheney Ni</h3>
-                  <span>2015届13班 JEEK信息社 社长</span>
+                  <span>2015级13班 JEEK信息社社长</span>
                   <p>
                     JPSP前端、后端工程师<br>编程爱好者，在担任班级电管员期间自学了C++，JAVA，安卓，python，Web开发，略懂算法和数据结构。</p>
                 </div>
@@ -170,7 +170,7 @@
               <div class="col-md-6 nopadding">
                 <div class="desc">
                   <h3>邱龙田 Artanic Qiu</h3>
-                  <span>2015届3班</span>
+                  <span>2015级3班</span>
                   <p>JPSP前端工程师</p>
                 </div>
               </div>
@@ -182,7 +182,7 @@
               <div class="col-md-6 nopadding col-md-pull-6">
                 <div class="desc">
                   <h3>苏孟帅 Monsell Su</h3>
-                  <span>2015届11班 原JTV摄制组组长</span>
+                  <span>2015级11班 2015级JTV摄制组组长</span>
                   <p>
                     JPSP特邀摄影师<br>
                     热爱摄影，摄影技术高超，兼具轻微PS技能，是美化网站、居家必备的人才。</p>
