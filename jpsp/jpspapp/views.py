@@ -11,6 +11,7 @@ from django.contrib.auth import authenticate
 import itchat
 import random
 from django.core.paginator import Paginator
+
 alphabet = "abcdefghijklmnopqrstuvwxyz0123456789"
 
 
@@ -161,46 +162,72 @@ def club_establish(request):
 def club_list(request):
     try:
         body = json.loads(request.body)
+        user_id = body['UserId']
         type = body['Type']
         token = body['Token']
-        # TODO: !!
-        response = []
-        club_object = None
-        if type == 'Established':
-            club_object = Club.objects.filter(State=True)
-        elif type == 'Unestablished':
-            club_object = Club.objects.filter(State=False)
-        elif type == 'All':
-            club_object = Club.objects.all()
-        for data in club_object:
-            response.append({'ClubId': data.ClubId,
-                             'ClubName': data.ClubName,
-                             'ShezhangName': data.ShezhangName,
-                             'ShezhangQQ': data.ShezhangQq,
-                             'ShezhangGrade': data.ShezhangGrade,
-                             'ShezhangClassroom': data.ShezhangClass,
-                             'IfRecruit': data.IfRecruit,
-                             'EnrollGroupQQ': data.EnrollGroupQq,
-                             'Email': data.Email,
-                             'State': data.State,
-                             'Stars': data.Stars,
-                             'Introduction': data.Introduction,
-                             'Achievements': data.Achievements,
-                             })
+        if (token_authenticate(user_id=user_id, token=token)):
+            page = body['Page']
+            response = []
+            club_object = None
+            if type == 'Established':
+                club_object = Club.objects.filter(State=True)
+            elif type == 'Unestablished':
+                club_object = Club.objects.filter(State=False)
+            elif type == 'All':
+                club_object = Club.objects.all()
+            paginator = Paginator(club_object, 12)
+            club_object_page = paginator.page(page)
+            for data in club_object_page:
+                if not data.IfRecruit:
+                    response.append({'ClubId': data.ClubId,
+                                     'ClubName': data.ClubName,
+                                     'ShezhangName': data.ShezhangName,
+                                     'ShezhangQQ': data.ShezhangQq,
+                                     'ShezhangGrade': data.ShezhangGrade,
+                                     'ShezhangClassroom': data.ShezhangClass,
+                                     'IfRecruit': 'False',
+                                     'EnrollGroupQQ': data.EnrollGroupQq,
+                                     'Email': data.Email,
+                                     'State': data.State,
+                                     'Stars': data.Stars,
+                                     'Introduction': data.Introduction,
+                                     'Achievements': data.Achievements,
+                                     })
+                else:
+                    response.append({'ClubId': data.ClubId,
+                                     'ClubName': data.ClubName,
+                                     'ShezhangName': data.ShezhangName,
+                                     'ShezhangQQ': data.ShezhangQq,
+                                     'ShezhangGrade': data.ShezhangGrade,
+                                     'ShezhangClassroom': data.ShezhangClass,
+                                     'IfRecruit': 'False',
+                                     'EnrollGroupQQ': data.EnrollGroupQq,
+                                     'Email': data.Email,
+                                     'State': data.State,
+                                     'Stars': data.Stars,
+                                     'Introduction': data.Introduction,
+                                     'Achievements': data.Achievements,
+                                     })
             return JsonResponse({'message': 'success', 'Access-Control-Allow-Origin': '*', data: json.dumps(response)},
                                 safe=False)
+        else:
+            return JsonResponse({
+                'message': 'error',
+                'Access-Control-Allow-Origin': '*'
+            })
     except:
         return JsonResponse({
             'message': 'error',
             'Access-Control-Allow-Origin': '*'
         })
 
+
 @require_http_methods(['GET'])
 def club_show(request):
     try:
         response = []
         club_object = Club.objects.filter(State=True)
-        paginator = Paginator(club_object,1)
+        paginator = Paginator(club_object, 12)
         page = request.GET.get('Page')
         club_object_page = paginator.page(page)
         for data in club_object_page:
@@ -233,7 +260,7 @@ def club_attend(request):
         club_id = body['ClubId']
         user_id = body['UserId']
         # TODO: !!!
-        if (token_authenticate(user_id=user_id,token=token)):
+        if (token_authenticate(user_id=user_id, token=token)):
             return JsonResponse({
                 'message': 'success',
                 'Access-Control-Allow-Origin': '*'
@@ -257,8 +284,9 @@ def club_quit(request):
         token = body['IndexToken']
         user_id = body['UserId']
         club_id = body['ClubId']
-        if(token_authenticate(user_id=user_id,token=token)):
-            ClubMemberShip.objects.get(Member=UserProfile.objects.get(UserObject=User.objects.get(username=user_id)),Club=Club.objects.get(ClubId=club_id)).delete()
+        if (token_authenticate(user_id=user_id, token=token)):
+            ClubMemberShip.objects.get(Member=UserProfile.objects.get(UserObject=User.objects.get(username=user_id)),
+                                       Club=Club.objects.get(ClubId=club_id)).delete()
         return True
     except:
         return False
@@ -273,8 +301,10 @@ def club_member_add(request):
         token = body['Token']
         # username -> example: 'S320150181'
         username = body['UserName']
-        if(token_authenticate(user_id=club_id,token=token)):
-            ClubMemberShip.objects.create(Member=UserProfile.objects.get(UserObject=User.objects.get(username=username)),Club=Club.objects.get(ClubId=club_id))
+        if (token_authenticate(user_id=club_id, token=token)):
+            ClubMemberShip.objects.create(
+                Member=UserProfile.objects.get(UserObject=User.objects.get(username=username)),
+                Club=Club.objects.get(ClubId=club_id))
             return JsonResponse({
                 'message': 'success',
                 'Access-Control-Allow-Origin': '*'
@@ -297,12 +327,15 @@ def club_confirmed_member_list(request):
         # TODO: how to identify confirmed and unconfirmed
         body = json.loads(request.body)
         token = body['Token']
+        page = body['Page']
         # club_id -> example: '303'
         club_id = body['ClubId']
-        if (token_authenticate(user_id=club_id,token=token)):
+        if (token_authenticate(user_id=club_id, token=token)):
             membership_set = ClubMemberShip.objects.filter(Club=Club.objects.get(ClubId=club_id)).filter(State=1)
             response = []
-            for membership in membership_set:
+            paginator = Paginator(membership_set,10)
+            membership_set_page = paginator.page(page)
+            for membership in membership_set_page:
                 response.append({
                     'UserName': membership.Member.UserName,
                     'Class': membership.Member.Class,
@@ -335,11 +368,14 @@ def club_unconfirmed_member_list(request):
         body = json.loads(request.body)
         token = body['Token']
         # club_id -> example: '303'
+        page = body['Page']
         club_id = body['ClubId']
-        if (token_authenticate(user_id=club_id,token=token)):
+        if (token_authenticate(user_id=club_id, token=token)):
             membership_set = ClubMemberShip.objects.filter(Club=Club.objects.get(ClubId=club_id)).filter(State=0)
             response = []
-            for membership in membership_set:
+            paginator = Paginator(membership_set, 10)
+            membership_set_page = paginator.page(page)
+            for membership in membership_set_page:
                 response.append({
                     'UserName': membership.Member.UserName,
                     'Class': membership.Member.Class,
@@ -455,7 +491,7 @@ def club_member_remove(request):
         club_id = body['ClubId']
         # username -> example: 'S320150181'
         user_id = body['UserId']
-        if(token_authenticate(user_id=club_id,token=token)):
+        if (token_authenticate(user_id=club_id, token=token)):
             ClubMemberShip.objects.get(Club=Club.objects.get(ClubId=club_id), Member=UserProfile.objects.get(
                 UserObject=User.objects.get(username=user_id))).delete()
             return JsonResponse({
@@ -832,6 +868,7 @@ def post_list(request):
         body = json.loads(request.body)
         token = body['Token']
         type = body['Type']
+        page = body['Page']
         response = []
         post_object = None
         if type == 'UnStared':
@@ -842,7 +879,9 @@ def post_list(request):
             post_object = Post.objects.filter(Pass='1')
         elif type == "All":
             post_object = Post.objects.all()
-        for data in post_object:
+        paginator = Paginator(post_object,10)
+        post_object_page = paginator.page(page)
+        for data in post_object_page:
             response.append({'pk': data.pk,
                              'ClubName': data.ClubName,
                              'LinkmanGrade': data.LinkmanGrade,
@@ -951,7 +990,7 @@ def userprofile_get(request):
             act_past_set = []
             act_now_set = []
             now = datetime.datetime.now()
-            if activity_set.count() >0:
+            if activity_set.count() > 0:
                 for activity in activity_set:
                     if activity.Date2 <= now:
                         act_past_set.append(activity.Name)
@@ -997,7 +1036,7 @@ def userprofile_submit(request):
         body = json.loads(request.body)
         token = body['Token']
         user_id = body['UserId']
-        if(token_authenticate(user_id=user_id,token=token)):
+        if (token_authenticate(user_id=user_id, token=token)):
             username = body['UserName']
             classroom = body['Class']
             # 不能使用class 因为是关键字
@@ -1088,7 +1127,7 @@ def club_profile_submit(request):
         body = json.loads(request.body)
         token = body['Token']
         clubid = body['clubid']
-        if(token_authenticate(user_id=clubid,token=token)):
+        if (token_authenticate(user_id=clubid, token=token)):
             clubname = body['clubname']
             shezhang_name = body['shezhang_name']
             shezhang_qq = body['shezhang_qq']

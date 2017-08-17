@@ -6,6 +6,7 @@ import router from './router/index.js'
 import ElementUI from 'element-ui'
 import Vuex from 'vuex'
 import axios from 'axios'
+import 'bulma/css/bulma.css'
 var VueCookie = require('vue-cookie')
 Vue.config.productionTip = false
 Vue.prototype.$ajax = axios
