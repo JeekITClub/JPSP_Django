@@ -11,8 +11,8 @@
       </div>
       <footer class="card-footer">
         <router-link :to="{ name: 'ClubIndex', params: { ClubId:Club.ClubId, Club:Club }}" class="attend-club">
-          <div class="button is-primary" v-if="Club.IfRecruit === 'True'">我想加入</div>
-          <div class="button is-primary" v-else-if="Club.IfRecruit === 'False'">查看该社团</div>
+          <a class="button is-primary" v-if="Club.IfRecruit === 'True'">我想加入</a>
+          <a class="button is-primary" v-else-if="Club.IfRecruit === 'False'">查看该社团</a>
         </router-link>
       </footer>
     </div>

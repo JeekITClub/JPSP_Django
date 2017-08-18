@@ -5,55 +5,71 @@
       <canvas></canvas>
     </div>
     <div v-else>
-      <div class="club-head">
-        <div class="container">
-          <!--<div class="row">-->
-          <!--<el-carousel :interval="5000" arrow="" class="carousel">-->
-          <!--<el-carousel-item v-for="item in ImgItems" :key="item">-->
-          <!--<img :src="item">-->
-          <!--</el-carousel-item>-->
-          <!--</el-carousel>-->
-          <!--</div>-->
-          <div>
-            <div class="club-logo col-md-4">
-              <img src="../../assets/dp.jpg">
-            </div>
-            <div class="club-info col-md-8">
-              <p class="club-name">{{ Club.ClubName }}</p>
-              <ul>
-                <li>社团QQ群: {{ Club.EnrollGroupQq }}</li>
-                <li>社团邮箱: {{ Club.Email }}</li>
-                <li>社团标签: {{ Club.Label }}</li>
-              </ul>
-              <div class="col-md-2 col-xs-3 col-sm-2 col-lg-2 Join">
-                <!-- TODO: 验证是否已加入 -->
-                <button class="btn btn-primary" type="button" @click="AttendClub" v-if="1===1">加入该社团</button>
-                <p v-else>已加入该社团</p>
+      <div class="hero is-primary">
+        <div class="hero-body">
+          <div class="container">
+            <div class="colmuns">
+              <div class="column">
+                <p class="title">{{ Club.ClubName }}</p>
+                <p class="subtitle">{{ Club.BriefIntro }}</p>
+                <div class="content">
+                  <p>社团QQ群: {{ Club.EnrollGroupQq }}</p>
+                  <p>社团邮箱: {{ Club.Email }}</p>
+                </div>
               </div>
             </div>
           </div>
-
+        </div>
+        <div class="hero-foot">
+          <div class="container">
+            <nav class="tabs is-boxed">
+              <ul>
+                <li>
+                  <a href="/">活动</a>
+                </li>
+                <li>
+                  <a href="">杰出成员</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
         </div>
       </div>
-      <div class="container club-detail">
-        <div>
-          <h3>社团介绍</h3>
-          <p>{{ Club.Introduction }}</p>
-        </div>
-        <div>
-          <h3>社团成就</h3>
-          <p>{{ Club.Achievements }}</p>
+      <div class="section">
+        <div class="container">
+          <div class="columns">
+            <div class="column is-three-quarters">
+              <section class="section">
+                <div class="container">
+                  <h1 class="title">社团介绍</h1>
+                  <div class="content">
+                    <p>{{ Club.Introduction }}</p>
+                  </div>
+                </div>
+              </section>
+              <section class="section">
+                <div class="container">
+                  <h1 class="title">社团成就</h1>
+                  <div class="content">
+                    <p>{{ Club.Achievements }}</p>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="column">
+              <section class="section">
+                <a class="button is-info is-large" @click="AttendClub" v-if="1===1">加入该社团</a>
+              </section>
+            </div>
+          </div>
         </div>
       </div>
-      <!--<div class="col-md-10 col-xs-15 col-sm-10 col-lg-10 Introduction">-->
-      <!--<p>{{ Club.Introduction }}</p>-->
-      <!--</div>-->
     </div>
   </div>
 </template>
 <script>
   import axios from 'axios'
-  import {getCookie} from 'tiny-cookie'
+  import { getCookie } from 'tiny-cookie'
 
   export default {
     data () {
@@ -61,6 +77,7 @@
         ImgItems: ['../../assets/1.jpg', '../../assets/2.jpg', '../../assets/3.jpg', '../../assets/4.jpg'],
         ClubId: this.$route.params.ClubId,
         Club: {
+          BriefIntro: '牛逼',
           Introduction: 'hellohellohellohellohellohellllohellohellohellohellohellohellohellohellohellohello',
           ClubName: 'Jeek信息社',
           Achievements: '开发JPSP!'
@@ -140,22 +157,6 @@
   }
 </script>
 <style scoped>
-  .club-head {
-    padding-top: 50px;
-    padding-left: 10%;
-    padding-right: 10%;
-    padding-bottom: 1%;
-    border-bottom: 1px solid #eee;
-    background-color: #fafbfc;
-  }
-
-  .club-name {
-    font-size: 2em;
-  }
-
-  .club-info {
-    padding-left: 5%;
-  }
 
   .club-logo {
     width: 200px;
@@ -187,11 +188,6 @@
   .Join {
     margin-top: 3%;
     margin-bottom: 3%;
-  }
-
-  .carousel {
-    width: 100%;
-    height: 100%;
   }
 
   .draw {

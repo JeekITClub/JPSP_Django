@@ -1,77 +1,65 @@
 <template>
   <div>
-    <div align="left">
-      <p class="lead">社团活动记录</p>
-    </div>
-    <br>
     <el-form :model="PostForm" :rules="rules" class="" labelPosition="right">
-      <el-form-item label="活动联系人">
-        <el-col :span=4>
-          <el-form-item>
-            <el-select v-model="PostForm.LinkmanGrade" placeholder="请选择年级" value="">
-              <el-option label="高一" value="1"></el-option>
-              <el-option label="高二" value="2"></el-option>
-              <el-option label="高三" value="3"></el-option>
-            </el-select>
+      <el-form-item label="活动联系人" :required=true>
+        <div class="select">
+          <select v-model="PostForm.LinkmanGrade">
+            <option label="高一" value="1"></option>
+            <option label="高二" value="2"></option>
+            <option label="高三" value="3"></option>
+          </select>
+        </div>
+        </el-form-item>
+      <el-form-item label="联系人班级" :required=true>
+          <div class="select">
+            <select v-model="PostForm.LinkmanClass">
+              <option label="1" value="1"></option>
+              <option label="2" value="2"></option>
+              <option label="3" value="3"></option>
+              <option label="4" value="4"></option>
+              <option label="5" value="5"></option>
+              <option label="6" value="6"></option>
+              <option label="7" value="7"></option>
+              <option label="8" value="8"></option>
+              <option label="9" value="9"></option>
+              <option label="10" value="10"></option>
+              <option label="11" value="11"></option>
+              <option label="12" value="12"></option>
+              <option label="13" value="13"></option>
+            </select>
+          </div>
+        </el-form-item>
+      <el-form-item label="联系人姓名" :required=true>
+            <input class="input" v-model="PostForm.LinkmanName" placeholder="">
           </el-form-item>
-        </el-col>
-        <el-col :span=4>
-          <el-form-item>
-            <el-select v-model="PostForm.LinkmanClass" placeholder="请选择班级" value="">
-              <el-option label="1" value="1"></el-option>
-              <el-option label="2" value="2"></el-option>
-              <el-option label="3" value="3"></el-option>
-              <el-option label="4" value="4"></el-option>
-              <el-option label="5" value="5"></el-option>
-              <el-option label="6" value="6"></el-option>
-              <el-option label="7" value="7"></el-option>
-              <el-option label="8" value="8"></el-option>
-              <el-option label="9" value="9"></el-option>
-              <el-option label="10" value="10"></el-option>
-              <el-option label="11" value="11"></el-option>
-              <el-option label="12" value="12"></el-option>
-              <el-option label="13" value="13"></el-option>
-            </el-select>
+      <el-form-item :required=true label="联系电话">
+            <input v-model="PostForm.LinkmanPhoneNumber" class="input">
           </el-form-item>
-        </el-col>
-        <el-col :span=4>
-          <el-form-item>
-            <el-input v-model="PostForm.LinkmanName" placeholder="请填写姓名"></el-input>
+      <el-form-item :required=true label="QQ">
+            <input v-model="PostForm.LinkmanQq" class="input">
           </el-form-item>
-        </el-col>
-        <el-col :span=4>
-          <el-form-item :required=true>
-            <el-input v-model="PostForm.LinkmanPhoneNumber" placeholder="请填写联系电话"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span=4>
-          <el-form-item :required=true>
-            <el-input v-model="PostForm.LinkmanQq" placeholder="请填写QQ"></el-input>
-          </el-form-item>
-        </el-col>
+      <el-form-item label="活动地点" :required=true>
+        <textarea v-model="PostForm.Region" class="textarea" placeholder="请输入活动地点"></textarea>
       </el-form-item>
-      <el-form-item label="活动地点">
-        <el-input v-model="PostForm.Region" type="textarea" placeholder="请输入活动地点"></el-input>
-      </el-form-item>
-      <el-form-item label="活动时间">
+      <el-form-item label="活动时间" :required=true>
         <el-form-item>
           <el-date-picker v-model="PostForm.Date1" placeholder="请选择日期时间"></el-date-picker>
         </el-form-item>
       </el-form-item>
-      <el-form-item label="活动内容">
-        <el-input type="textarea" v-model="PostForm.Content" placeholder="请输入活动内容"></el-input>
+      <el-form-item label="活动内容" :required=true>
+        <textarea v-model="PostForm.Content" class="textarea" placeholder=""></textarea>
       </el-form-item>
-      <el-form-item label="学习过程">
-        <el-input type="textarea" v-model="PostForm.Process" placeholder="请输入学习过程"></el-input>
+      <el-form-item label="学习过程" :required=true>
+        <textarea v-model="PostForm.Process" class="textarea" placeholder=""></textarea>
       </el-form-item>
-      <el-form-item label="分析评估">
-        <el-input type="textarea" v-model="PostForm.Assessment" placeholder="请输入分析评估"></el-input>
+      <el-form-item label="分析评估" :required=true>
+        <textarea v-model="PostForm.Assessment" class="textarea" placeholder=""></textarea>
       </el-form-item>
-      <el-form-item label="活动感悟">
-        <el-input type="textarea" v-model="PostForm.Feeling" placeholder="请输入活动感悟"></el-input>
+      <el-form-item label="活动感悟" :required=true>
+        <textarea v-model="PostForm.Feeling" class="textarea" placeholder=""></textarea>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm">立即提交</el-button>
+        <a class="button is-info" @click="submitForm">立即提交</a>
       </el-form-item>
     </el-form>
   </div>

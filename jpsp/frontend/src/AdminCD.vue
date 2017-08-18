@@ -18,7 +18,6 @@
 <script>
   import JNavTop from '@/components/admin_cd/JNavTop.vue'
   import CDAside from '@/components/admin_cd/CDAside.vue'
-  import {getCookie} from 'tiny-cookie'
   export default {
     components: {
       'JNavTop': JNavTop,
@@ -27,14 +26,15 @@
     name: 'app_cd',
     computed: {
       Authenticated () {
-        return getCookie('CDAuthentiacated')
+        return this.$cookie.get('CDAuthentiacated')
       }
     }
   }
 </script>
 
 <style>
-  .cd-aside {
+  #app_cd {
     margin-left: 2%;
+    margin-right: 2%;
   }
 </style>

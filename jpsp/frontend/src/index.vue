@@ -19,5 +19,4 @@
 </script>
 
 <style>
-  @import 'assets/element-ui/index.css';
 </style>

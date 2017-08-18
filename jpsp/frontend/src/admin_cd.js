@@ -3,10 +3,9 @@
 import Vue from 'vue'
 import AdminCD from './AdminCD.vue'
 import router from './router/admin_cd'
-import { Pagination, Table, TableColumn, DatePicker, TimeSelecter, TimePicker, Notification, Tabs, TabPane } from 'element-ui'
-import 'element-ui/lib/theme-default/index.css'
+import { Pagination, Table, TableColumn, DatePicker, TimePicker, Notification, Tabs, TabPane, FormItem, Form } from 'element-ui'
 // TODO； ele .css
-import 'bulma/css/bulma.css'
+import './assets/index/css/bulma.css'
 import Vuex from 'vuex'
 import axios from 'axios'
 var VueCookie = require('vue-cookie')
@@ -16,9 +15,10 @@ Vue.use(Pagination)
 Vue.use(TableColumn)
 Vue.use(Table)
 Vue.use(DatePicker)
-Vue.use(TimeSelecter)
 Vue.use(TimePicker)
 Vue.use(Tabs)
+Vue.use(Form)
+Vue.use(FormItem)
 Vue.use(TabPane)
 Vue.use(Vuex)
 Vue.use(VueCookie)
@@ -64,8 +64,8 @@ new Vue({
   },
   methods: {
     checkLogin () {
-      if (this.$cookie.get('CDAuthentiacated') === true) {
-        this.$router.push('/dashboard')
+      if (this.$cookie.get('CDAuthentiacated') !== true) {
+        this.$router.push('/')
       } else {
         this.$router.push('/login')
       }
