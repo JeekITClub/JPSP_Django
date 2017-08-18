@@ -58,7 +58,9 @@
             </div>
             <div class="column">
               <section class="section">
-                <a class="button is-info is-large" @click="AttendClub" v-if="1===1">加入该社团</a>
+                <a class="button is-danger is-large" v-if="GetIndexAuthenticated === 'true'">未登陆</a>
+                <a class="button is-warning is-large" v-else-if="Club.IfRecruit !== 'True'">社团未招新</a>
+                <a class="button is-info is-large" @click="AttendClub" v-else>加入该社团</a>
               </section>
             </div>
           </div>
@@ -69,7 +71,6 @@
 </template>
 <script>
   import axios from 'axios'
-  import { getCookie } from 'tiny-cookie'
 
   export default {
     data () {
@@ -80,15 +81,16 @@
           BriefIntro: '牛逼',
           Introduction: 'hellohellohellohellohellohellllohellohellohellohellohellohellohellohellohellohello',
           ClubName: 'Jeek信息社',
-          Achievements: '开发JPSP!'
+          Achievements: '开发JPSP!',
+          IfRecruit: 'True'
         }
       }
     },
     methods: {
       AttendClub () {
-        if (this.Authenticated !== true) {
+        if (this.GetIndexAuthenticated !== 'true') {
           this.$router.push('/login')
-        } else if (this.Authenticated === true) {
+        } else if (this.GetIndexAuthenticated === 'true') {
           axios({
             method: 'POST',
             url: this.GetApi + 'club/attend',
@@ -116,17 +118,17 @@
       }
     },
     computed: {
-      GetIndexAuthenticated () {
-        return getCookie('IndexAuthenticated')
-      },
-      GetUserName () {
-        return getCookie('UserName')
+      GetUserId () {
+        return this.$cookie.get('UserId')
       },
       GetIndexToken () {
-        return getCookie('IndexToken')
+        return this.$cookie.get('IndexToken')
       },
-      GetUserId () {
-        return getCookie('UserId')
+      GetUserName () {
+        return this.$cookie.get('UserName')
+      },
+      GetIndexAuthenticated () {
+        return this.$cookie.get('IndexAuthenticated')
       },
       /**
        * @return {string}

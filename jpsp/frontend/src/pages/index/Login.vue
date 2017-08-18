@@ -4,7 +4,7 @@
       <el-row class="tac">
         <el-col :span=8 :offset=8>
           <h1 class="login-title">学生登录</h1>
-          <div v-if="Authenticated != true">
+          <div v-if="GetIndexAuthenticated !== 'true'">
             <el-form ref="LoginForm" :model="LoginForm" :rules="Rules">
               <el-form-item label="用户名" prop="UserName">
                 <el-input v-model="LoginForm.UserName" placeholder="用户名" autofocus=""></el-input>
@@ -81,7 +81,16 @@
       }
     },
     computed: {
-      Authenticated () {
+      GetUserId () {
+        return this.$cookie.get('UserId')
+      },
+      GetIndexToken () {
+        return this.$cookie.get('IndexToken')
+      },
+      GetUserName () {
+        return this.$cookie.get('UserName')
+      },
+      GetIndexAuthenticated () {
         return this.$cookie.get('IndexAuthenticated')
       },
       /**

@@ -15,7 +15,6 @@
   </el-table>
 </template>
 <script>
-  import { getCookie } from 'tiny-cookie'
   import axios from 'axios'
   export default {
     data () {
@@ -30,10 +29,22 @@
     },
     computed: {
       GetUserId () {
-        return getCookie('UserId')
+        return this.$cookie.get('UserId')
       },
-      GetAPI () {
-        return this.$store.state.API
+      GetIndexToken () {
+        return this.$cookie.get('IndexToken')
+      },
+      GetUserName () {
+        return this.$cookie.get('UserName')
+      },
+      GetIndexAuthenticated () {
+        return this.$cookie.get('IndexAuthenticated')
+      },
+      /**
+       * @return {string}
+       */
+      GetApi () {
+        return this.$store.state.Api
       }
     },
     methods: {},

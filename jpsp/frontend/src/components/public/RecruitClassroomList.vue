@@ -88,14 +88,23 @@
       }
     },
     computed: {
-      Authenticate () {
-        return this.$store.state.Authenticated
+      GetUserId () {
+        return this.$cookie.get('UserId')
+      },
+      GetIndexToken () {
+        return this.$cookie.get('IndexToken')
       },
       GetUserName () {
-        return this.$store.state.UserName
+        return this.$cookie.get('UserName')
       },
-      GetToken () {
-        return this.$store.state.Token
+      GetIndexAuthenticated () {
+        return this.$cookie.get('IndexAuthenticated')
+      },
+      /**
+       * @return {string}
+       */
+      GetApi () {
+        return this.$store.state.Api
       }
     },
     mounted: function () {

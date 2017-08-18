@@ -49,13 +49,16 @@
         </div>
 
         <div class="navbar-end">
-          <div class="navbar-item has-dropdown is-hoverable">
-            <router-link class="navbar-link  is-active" to="/login">
+          <router-link class="navbar-item" to="/profile" v-if="GetIndexAuthenticated === 'true'">
+            欢迎你，{{ GetUserName }} <i class="fa fa-user"></i>
+          </router-link>
+          <div class="navbar-item has-dropdown is-hoverable" v-else>
+            <router-link class="navbar-link " to="/login">
               登录
             </router-link>
             <div class="navbar-dropdown">
               <router-link class="navbar-item" to="/login">
-                登录
+                学生登录
               </router-link>
               <router-link class="navbar-item " to="http://119.23.49.42/admin_club/">
                 社长登录
@@ -80,16 +83,42 @@
     },
     methods: {
       Logout () {
-        // TODO: 注销
-        console.log('谁点谁傻逼')
+        try {
+          this.$cookie.delete('UserId')
+          this.$cookie.delete('IndexToken')
+          this.$cookie.delete('UserName')
+          this.$cookie.delete('IndexAuthenticated')
+          this.$notify.success({
+            title: '成功',
+            message: '注销成功'
+          })
+        } catch (e) {
+          this.$notify.error({
+            title: '错误',
+            message: '注销失败'
+          })
+          alert(e.message)
+        }
       }
     },
     computed: {
-      GetAuthenticated () {
-        return this.$cookie.get('IndexAuthenticated')
+      GetUserId () {
+        return this.$cookie.get('UserId')
+      },
+      GetIndexToken () {
+        return this.$cookie.get('IndexToken')
       },
       GetUserName () {
-        return this.$cookie.get('IndexUserName')
+        return this.$cookie.get('UserName')
+      },
+      GetIndexAuthenticated () {
+        return this.$cookie.get('IndexAuthenticated')
+      },
+      /**
+       * @return {string}
+       */
+      GetApi () {
+        return this.$store.state.Api
       }
     }
   }
