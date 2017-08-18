@@ -1,24 +1,33 @@
 <template>
-  <el-row>
-    <el-col :span="4">
-      <el-menu mode="vertical" class="el-menu-vertical-demo" :default-active=activeIndex @select="handleSelect">
-        <el-menu-item-group title="个人中心">
-          <el-menu-item index="1">用户信息</el-menu-item>
-          <el-menu-item index="2">更改密码</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="活动">
-          <el-menu-item index="3">已加入活动</el-menu-item>
-          <el-menu-item index="4">参加过的活动</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="社团">
-          <el-menu-item index="5">已加入社团</el-menu-item>
-        </el-menu-item-group>
-      </el-menu>
-    </el-col>
-    <el-col :span="20">
-      <!-- 用户信息 -->
-      <div v-if="activeIndex==='1'">
-        <el-col :span="8" :offset="2">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-one-quarter">
+        <aside class="menu">
+          <p class="menu-label">
+            个人中心
+          </p>
+          <ul class="menu-list">
+            <li><a>用户信息</a></li>
+            <li><a>更改密码</a></li>
+          </ul>
+          <p class="menu-label">
+            活动
+          </p>
+          <ul class="menu-list">
+            <li><a>已加入活动</a></li>
+            <li><a>参加过的活动</a></li>
+          </ul>
+          <p class="menu-label">
+            社团
+          </p>
+          <ul class="menu-list">
+            <li><a>已加入社团</a></li>
+          </ul>
+        </aside>
+      </div>
+      <div class="column">
+        <!-- 用户信息 -->
+        <div v-if="activeIndex==='1'">
           <el-form ref="ProfileForm" :model="ProfileForm">
             <el-form-item prop="UserName" label="用户名" :required="true">
               <el-input v-model="ProfileForm.UserName"></el-input>
@@ -64,40 +73,41 @@
               <el-button>取消</el-button>
             </el-form-item>
           </el-form>
-        </el-col>
-      </div>
+        </div>
 
-      <!-- 更改密码 -->
-      <div v-else-if="activeIndex==='2'">
-        <h1 class="select-title">不准改</h1>
-      </div>
+        <!-- 更改密码 -->
+        <div v-else-if="activeIndex==='2'">
+          <h1 class="select-title">不准改</h1>
+        </div>
 
-      <!-- 已加入活动 -->
-      <div v-else-if="activeIndex==='3'">
-        <h1 class="select-title">已加入活动</h1>
-      </div>
+        <!-- 已加入活动 -->
+        <div v-else-if="activeIndex==='3'">
+          <h1 class="select-title">已加入活动</h1>
+        </div>
 
-      <!-- 参加过的活动 -->
-      <div v-else-if="activeIndex==='4'">
-        <h1 class="select-title">参加过的活动</h1>
-      </div>
+        <!-- 参加过的活动 -->
+        <div v-else-if="activeIndex==='4'">
+          <h1 class="select-title">参加过的活动</h1>
+        </div>
 
-      <!-- 已加入社团 -->
-      <div v-else-if="activeIndex==='5'">
-        <h1 class="select-title">已加入社团</h1>
-        <div class="container">
-          <div class="col-sm-6 col-md-4" v-for="club in ProfileForm.Club" :key="club">
-            <div class="thumbnail">
-              <div class="caption">
-                <h3 class="name">{{ club }}</h3>
-                <button class="btn btn-danger" type="button" @click="quitClub(club.id)">我要退出</button>
+        <!-- 已加入社团 -->
+        <div v-else-if="activeIndex==='5'">
+          <h1 class="select-title">已加入社团</h1>
+          <div class="container">
+            <div class="col-sm-6 col-md-4" v-for="club in ProfileForm.Club" :key="club">
+              <div class="thumbnail">
+                <div class="caption">
+                  <h3 class="name">{{ club }}</h3>
+                  <button class="btn btn-danger" type="button" @click="quitClub(club.id)">我要退出</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </el-col>
-  </el-row>
+    </div>
+  </div>
+
 </template>
 <script>
   import axios from 'axios'
@@ -131,9 +141,6 @@
       GetUserName () {
         return this.$cookie.get('UserName')
       },
-      GetIndexAuthenticated () {
-        return this.$cookie.get('IndexAuthenticated')
-      },
       /**
        * @return {string}
        */
@@ -157,16 +164,17 @@
             'Phone': this.ProfileForm.Phone,
             'Club': this.ProfileForm.Club
           })
-        }).then(function (response) {
-          if (response.data.message === 'success') {
-            this.ProfileForm = JSON.parse(response.data.data)
-          } else {
-            this.$notify.error({
-              title: '错误',
-              message: '无法获得数据'
-            })
-          }
-        }.bind(this))
+        })
+          .then(function (response) {
+            if (response.data.message === 'success') {
+              this.ProfileForm = JSON.parse(response.data.data)
+            } else {
+              this.$notify.error({
+                title: '错误',
+                message: '无法获得数据'
+              })
+            }
+          }.bind(this))
       },
       handleSelect (key) {
         this.activeIndex = key
@@ -198,7 +206,7 @@
           }.bind(this))
       },
       checkLogin () {
-        if (this.$cookie.get('IndexAuthenticated') !== 'true') {
+        if (this.$cookie.get('IndexAuthenticated') === 'true') {
           this.$router.push('/login')
         }
       }
