@@ -110,7 +110,6 @@
             if_recruit: this.ProfileForm.IfRecruit,
             enroll_group_qq: this.ProfileForm.QQGroup,
             email: this.ProfileForm.Email,
-            label: this.ProfileForm.Label,
             introduction: this.ProfileForm.Introduction,
             achievements: this.ProfileForm.Achievements,
             Token: this.GetToken

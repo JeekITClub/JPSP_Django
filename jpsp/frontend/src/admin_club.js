@@ -4,7 +4,6 @@ import Vue from 'vue'
 import AdminClub from './AdminClub.vue'
 import router from './router/admin_club.js'
 import { Pagination, Table, TableColumn, DatePicker, TimePicker, Notification, Tabs, TabPane, FormItem, Form } from 'element-ui'
-// TODO； ele .css
 import './assets/index/css/bulma.css'
 import Vuex from 'vuex'
 import axios from 'axios'

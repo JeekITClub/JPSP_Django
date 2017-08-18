@@ -59,10 +59,10 @@
     },
     computed: {
       GetClubId () {
-        return getCookie('ClubId')
+        return this.$cookie.get('ClubId')
       },
       GetClubToken () {
-        return getCookie('ClubToken')
+        return this.$cookie.get('ClubToken')
       }
     }
   }

@@ -65,7 +65,6 @@
   </div>
 </template>
 <script>
-  import { getCookie } from 'tiny-cookie'
   import axios from 'axios'
   export default {
     data () {
@@ -145,13 +144,13 @@
     },
     computed: {
       GetClubName () {
-        return getCookie('ClubName')
+        return this.$cookie.get('ClubName')
       },
       GetClubId () {
-        return getCookie('ClubId')
+        return this.$cookie.get('ClubId')
       },
       GetToken () {
-        return getCookie('ClubToken')
+        return this.$cookie.get('ClubToken')
       }
     }
   }

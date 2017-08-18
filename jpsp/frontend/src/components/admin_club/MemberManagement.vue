@@ -40,7 +40,6 @@
 </template>
 <script>
   import axios from 'axios'
-  import { getCookie } from 'tiny-cookie'
   export default {
     data () {
       return {
@@ -71,13 +70,13 @@
     },
     computed: {
       GetClubName () {
-        return getCookie('ClubName')
+        return this.$cookie.get('ClubName')
       },
       GetClubId () {
-        return getCookie('ClubId')
+        return this.$cookie.get('ClubId')
       },
       GetToken () {
-        return getCookie('ClubToken')
+        return this.$cookie.get('ClubToken')
       },
       GetApi () {
         return this.$store.state.API

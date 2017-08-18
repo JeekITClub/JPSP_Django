@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import index from './index.vue'
 import router from './router/index.js'
-import ElementUI from 'element-ui'
+import {Pagination, Notification} from 'element-ui'
 import Vuex from 'vuex'
 import axios from 'axios'
 import './assets/index/css/bulma.css'
@@ -11,9 +11,10 @@ import './assets/index/css/bulma.css'
 var VueCookie = require('vue-cookie')
 Vue.config.productionTip = false
 Vue.prototype.$ajax = axios
-Vue.use(ElementUI)
+Vue.use(Pagination)
 Vue.use(Vuex)
 Vue.use(VueCookie)
+Vue.prototype.$notify = Notification
 /* eslint-disable no-new */
 
 const UserVuexStore = new Vuex.Store({

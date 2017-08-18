@@ -7,7 +7,7 @@
           <div class="columns">
             <div class="column">
               <h4>JPSP</h4>
-              <p>全称Jianping Student's Platform 。<br>是一个方便建平学生进行日常学校活动的平台，加强校内管理部门（如团委、学生会、自管会、社团部等）与学生的互动，利于发布和获取实时资讯。
+              <p>全称Jianping Students' Platform 。<br>是一个方便建平学生进行日常学校活动的平台，加强校内管理部门（如团委、学生会、自管会、社团部等）与学生的互动，利于发布和获取实时资讯。
               </p>
             </div>
             <div class="column">
