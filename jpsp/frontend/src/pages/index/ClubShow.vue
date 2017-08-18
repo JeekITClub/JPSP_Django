@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="container">
-      <div class="row">
-      <div class="col-sm-6 col-md-4" v-for="club in ClubList">
-        <club-show :Club=club></club-show>
+    <div>
+      <div class="columns is-mobile">
+        <div class="column" v-for="club in ClubList">
+          <club-show :Club=club></club-show>
+        </div>
       </div>
-      </div>
-      <div class="row">
+      <div class="column">
         <el-pagination
           @current-change="handleCurrentChange"
           :current-page.sync="currentPageData"

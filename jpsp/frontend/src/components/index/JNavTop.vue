@@ -3,7 +3,7 @@
   <div class="container">
     <nav class="navbar jpsp-nav">
       <div class="navbar-brand">
-        <a class="navbar-item" href="http://bulma.io">
+        <a class="navbar-item" href="">
           建平中学学生平台
         </a>
         <div class="navbar-burger" data-target="navMenu">
@@ -16,29 +16,29 @@
       <div id="navMenu" class="navbar-menu">
         <div class="navbar-start">
           <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link " href="/documentation/overview/start/">
+            <router-link class="navbar-link " to="/club">
               社团
-            </a>
+            </router-link>
             <div class="navbar-dropdown ">
-              <a class="navbar-item " href="/documentation/overview/start/">
+              <router-link class="navbar-item " to="/club">
                 社团列表
-              </a>
-              <a class="navbar-item " href="http://bulma.io/documentation/modifiers/syntax/">
+              </router-link>
+              <router-link class="navbar-item " to="/club/event">
                 社团动态
-              </a>
+              </router-link>
             </div>
           </div>
           <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link " href="http://bulma.io/blog/">
+            <router-link class="navbar-link " to="/activity">
               活动
-            </a>
+            </router-link>
             <div id="blogDropdown" class="navbar-dropdown " data-style="width: 18rem;">
-              <a class="navbar-item " href="/documentation/overview/start/">
+              <router-link class="navbar-item " to="/activity/list">
                 活动报名
-              </a>
-              <a class="navbar-item " href="http://bulma.io/documentation/modifiers/syntax/">
+              </router-link>
+              <router-link class="navbar-item " to="/activity/">
                 活动动态
-              </a>
+              </router-link>
 
 
             </div>
@@ -50,24 +50,24 @@
 
         <div class="navbar-end">
           <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link  is-active" href="/documentation/overview/start/">
+            <router-link class="navbar-link  is-active" to="/login">
               登录
-            </a>
+            </router-link>
             <div class="navbar-dropdown">
-              <a class="navbar-item " href="/documentation/overview/start/">
-                学生登录
-              </a>
-              <a class="navbar-item " href="http://bulma.io/documentation/modifiers/syntax/">
+              <router-link class="navbar-item" to="/login">
+                登录
+              </router-link>
+              <router-link class="navbar-item " to="http://119.23.49.42/admin_club/">
                 社长登录
-              </a>
-              <a class="navbar-item " href="http://bulma.io/documentation/columns/basics/">
+              </router-link>
+              <router-link class="navbar-item " to="http://119.23.49.42/admin_cd/">
                 社团部登录
-              </a>
+              </router-link>
             </div>
           </div>
-          <a class="navbar-item" href="#">
+          <router-link class="navbar-item" to="/about">
             关于
-          </a>
+          </router-link>
         </div>
       </div>
     </nav>

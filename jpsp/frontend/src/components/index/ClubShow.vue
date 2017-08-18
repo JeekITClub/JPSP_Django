@@ -1,15 +1,20 @@
 <template>
-  <div class="thumbnail">
-    <img src="../../assets/1.jpg" class="logo">
-    <div class="caption">
-      <h3 class="name" v-if="Club.IfRecruit === 'True'">{{ Club.ClubName }}</h3>
-      <h3 class="name" v-if="Club.IfRecruit === 'False'">{{ Club.ClubName }}(不招新)</h3>
-      <p>
-        <router-link :to="{ name: 'ClubIndex', params: { ClubId:Club.ClubId, Club:Club }}">
-          <button class="btn btn-primary" type="button" v-if="Club.IfRecruit === 'True'">我想加入</button>
-          <button class="btn btn-warning" type="button" v-else-if="Club.IfRecruit === 'False'">查看该社团</button>
+  <div class="card">
+    <div class="card-image">
+      <img src="../../assets/dp.jpg" class="image">
+    </div>
+
+    <div class="card-content">
+      <div class="content">
+        <h3 class="name" v-if="Club.IfRecruit === 'True'">{{ Club.ClubName }}</h3>
+        <h3 class="name" v-if="Club.IfRecruit === 'False'">{{ Club.ClubName }}(不招新)</h3>
+      </div>
+      <footer class="card-footer">
+        <router-link :to="{ name: 'ClubIndex', params: { ClubId:Club.ClubId, Club:Club }}" class="attend-club">
+          <div class="button is-primary" v-if="Club.IfRecruit === 'True'">我想加入</div>
+          <div class="button is-primary" v-else-if="Club.IfRecruit === 'False'">查看该社团</div>
         </router-link>
-      </p>
+      </footer>
     </div>
   </div>
 </template>
@@ -32,7 +37,7 @@
   }
 </script>
 <style scoped>
-  .name {
-    padding-top: 10px;
+  .attend-club {
+    margin-top: 5px;
   }
 </style>
