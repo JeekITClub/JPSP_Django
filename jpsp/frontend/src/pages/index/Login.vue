@@ -74,7 +74,16 @@
       }
     },
     computed: {
-      Authenticated () {
+      GetUserId () {
+        return this.$cookie.get('UserId')
+      },
+      GetIndexToken () {
+        return this.$cookie.get('IndexToken')
+      },
+      GetUserName () {
+        return this.$cookie.get('UserName')
+      },
+      GetIndexAuthenticated () {
         return this.$cookie.get('IndexAuthenticated')
       },
       /**

@@ -100,7 +100,6 @@
   </el-row>
 </template>
 <script>
-  import { getCookie } from 'tiny-cookie'
   import axios from 'axios'
   export default {
     data () {
@@ -134,6 +133,9 @@
       },
       GetUserName () {
         return this.$cookie.get('UserName')
+      },
+      GetIndexAuthenticated () {
+        return this.$cookie.get('IndexAuthenticated')
       },
       /**
        * @return {string}
@@ -199,7 +201,7 @@
           }.bind(this))
       },
       checkLogin () {
-        if (getCookie('IndexAuthenticated') !== 'true') {
+        if (this.$cookie.get('IndexAuthenticated') !== 'true') {
           this.$router.push('/login')
         }
       }

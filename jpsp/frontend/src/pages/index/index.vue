@@ -13,7 +13,6 @@
 </section>
 </template>
 <script>
-  import { getCookie } from 'tiny-cookie'
   export default {
     data () {
       return {}
@@ -21,16 +20,16 @@
     methods: {},
     computed: {
       GetUserId () {
-        return getCookie('UserId')
+        return this.$cookie.get('UserId')
       },
       GetIndexToken () {
-        return getCookie('IndexToken')
+        return this.$cookie.get('IndexToken')
       },
       GetUserName () {
-        return getCookie('UserName')
+        return this.$cookie.get('UserName')
       },
       GetIndexAuthenticated () {
-        return getCookie('IndexAuthenticated')
+        return this.$cookie.get('IndexAuthenticated')
       },
       /**
        * @return {string}

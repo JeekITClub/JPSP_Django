@@ -42,7 +42,7 @@
           {
             ClubName: 'jeek',
             ClubId: '233',
-            IfRecruit: 'True'
+            IfRecruit: 'False'
           },
           {
             ClubName: 'jeek',
