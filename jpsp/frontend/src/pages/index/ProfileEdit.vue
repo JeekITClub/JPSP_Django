@@ -138,11 +138,11 @@
       GetIndexToken () {
         return this.$cookie.get('IndexToken')
       },
-      GetIndexAuthenticated () {
-        return this.$cookie.get('IndexAuthenticated')
-      },
       GetUserName () {
         return this.$cookie.get('UserName')
+      },
+      GetIndexAuthenticated () {
+        return this.$cookie.get('IndexAuthenticated')
       },
       /**
        * @return {string}
@@ -209,7 +209,7 @@
           }.bind(this))
       },
       checkLogin () {
-        if (this.$cookie.get('IndexAuthenticated') === 'true') {
+        if (this.$cookie.get('IndexAuthenticated') !== 'true') {
           this.$router.push('/login')
         }
       }
