@@ -141,9 +141,6 @@
       GetUserName () {
         return this.$cookie.get('UserName')
       },
-      GetIndexAuthenticated () {
-        return this.$cookie.get('IndexAuthenticated')
-      },
       /**
        * @return {string}
        */
