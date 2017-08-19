@@ -169,14 +169,15 @@ class Event(models.Model):
     def __str__(self):
         return self.Name
 
+def file_directory_path(instance, filename):
+    return 'user_{0}/%Y/%m/%d/{1}'.format(instance, filename)
+
 
 class File(models.Model):
     Name = models.CharField(max_length=30,default="文件名",unique=True)
     UserObject = models.ForeignKey(User,default=None)
     Datetime = models.DateTimeField(auto_now_add=True)
-    File = models.FileField(upload_to='../upload/')
-
-    # TODO: FILE path!
+    FilePath = models.CharField(max_length=100,unique=True,default=None)
 
     def __str__(self):
         return self.Name + 'uploaded by' + self.UserObject.username

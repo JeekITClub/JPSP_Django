@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Club, Activity, Classroom, Token, Post, UserProfile,ClubMemberShip,ActivityParticipantShip
+from .models import Club, Activity, Classroom, Token, Post, UserProfile,ClubMemberShip,ActivityParticipantShip,File
 
 
 # Register your models here.
@@ -27,3 +27,4 @@ admin.site.register(Post, PostAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(ClubMemberShip)
 admin.site.register(ActivityParticipantShip)
+admin.site.register(File)
