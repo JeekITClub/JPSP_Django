@@ -78,11 +78,6 @@
             ClubName: 'jeek',
             ClubId: '233',
             IfRecruit: 'True'
-          },
-          {
-            ClubName: 'jeek',
-            ClubId: '233',
-            IfRecruit: 'True'
           }
         ],
         currentPageData: 1
