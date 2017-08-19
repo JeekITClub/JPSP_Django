@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div>
-      <div class="columns is-mobile">
-        <div class="column" v-for="club in ClubList">
+    <div class="container club-show">
+      <div class="columns is-multiline">
+        <div class="column is-one-quarter" v-for="club in ClubList">
           <club-show :Club=club></club-show>
         </div>
       </div>
@@ -43,6 +43,11 @@
             ClubName: 'jeek',
             ClubId: '233',
             IfRecruit: 'False'
+          },
+          {
+            ClubName: 'jeek',
+            ClubId: '233',
+            IfRecruit: 'True'
           },
           {
             ClubName: 'jeek',
@@ -136,5 +141,8 @@
     }
   }
 </script>
-<style>
+<style scoped>
+  .club-show {
+    padding-top: 3%;
+  }
 </style>

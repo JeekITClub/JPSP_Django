@@ -1,7 +1,7 @@
 <!---component nav-top-->
 <template>
-  <div class="container">
-    <nav class="navbar jpsp-nav">
+  <div>
+    <nav class="navbar">
       <div class="navbar-brand">
         <a class="navbar-item" href="">
           建平中学学生平台
@@ -124,4 +124,12 @@
   }
 </script>
 <style scoped>
+  .jpsp {
+    width:100%;
+    height:30px;
+    background: transparent;
+    position:fixed;
+    top:0;
+    left:0;
+  }
 </style>
