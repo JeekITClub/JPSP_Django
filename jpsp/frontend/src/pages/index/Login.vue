@@ -1,23 +1,42 @@
 <template>
   <div>
-    <div class="LoginForm">
-      <h1 class="login-title">学生登录</h1>
-      <el-form ref="LoginForm" :model="LoginForm" :rules="Rules">
-        <el-form-item label="用户名" prop="UserName">
-          <input v-model="LoginForm.UserName" placeholder="用户名" autofocus="" class="input">
-        </el-form-item>
-        <el-form-item label="密码" prop="Password">
-          <input type="password" v-model="LoginForm.Password" placeholder="密码" class="input">
-        </el-form-item>
-        <br>
-        <el-form-item>
-          <a class="is-info button" @click="onSubmit">登录</a>
-        </el-form-item>
-        <p style="text-align: right;">
-          <router-link to="/contact">忘记密码？</router-link>
-        </p>
-      </el-form>
-    </div>
+    <section class="container stu-login">
+      <h2 class="title is-2" style="text-align: center">学生登录</h2>
+      <div class="columns is-mobile">
+        <div class="column is-half is-offset-one-quarter">
+      <div class="field">
+        <label class="label">用户名</label>
+        <div class="control">
+          <input class="input" type="text" placeholder="e.g 20151333" v-model="LoginForm.UserName">
+        </div>
+      </div>
+        </div>
+      </div>
+
+      <div class="columns is-mobile">
+        <div class="column is-half is-offset-one-quarter">
+      <div class="field">
+        <label class="label">密码</label>
+        <div class="control">
+          <input class="input" type="password" v-model="LoginForm.Password">
+        </div>
+      </div>
+        </div>
+      </div>
+
+      <div class="columns is-mobile">
+        <div class="column is-half is-offset-one-quarter">
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-primary">登录</button>
+        </div>
+        <div class="control">
+          <button class="button is-link"><router-link to="/contact">忘记密码？</router-link></button>
+        </div>
+      </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -29,14 +48,6 @@
         LoginForm: {
           UserName: '',
           Password: ''
-        },
-        Rules: {
-          UserName: [
-            {required: true, message: '请输入用户名', trigger: 'blur'}
-          ],
-          Password: [
-            {required: true, message: '请输入密码', trigger: 'blur'}
-          ]
         }
       }
     },
@@ -102,12 +113,8 @@
 </script>
 
 <style scoped>
-  .LoginForm {
-    margin-top: 5%;
-    margin-bottom: 5%;
-  }
-
-  .login-title {
-    text-align: center;
+  .stu-login {
+    padding-top: 3%;
+    padding-bottom: 3%;
   }
 </style>
