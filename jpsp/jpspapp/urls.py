@@ -31,7 +31,6 @@ urlpatterns = [
     url(r'^post/list', views.post_list),
     url(r'^club/list', views.club_list),
     url(r'^club/show', views.club_show),
-    url(r'^club/file/upload', views.club_file_upload),
     #url(r'^club/file/download', views.club_list),
     #url(r'^cd/file/upload', views.cd_file_upload),
     url(r'^cd/file/download', views.club_list),

@@ -36,10 +36,8 @@ RUN apt-get update && \
 	pip install -U pip setuptools && \
    rm -rf /var/lib/apt/lists/*
 
-# install uwsgi now because it takes a little while
-RUN pip install uwsgi
+RUN pip install gunicorn
 RUN pip install itchat
-RUN apt-get install uwsgi-plugin-python3
 # setup all the configfiles
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 COPY nginx-app.conf /etc/nginx/sites-available/default

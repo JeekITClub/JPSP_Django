@@ -43,7 +43,7 @@ export default new Router({
       component: resolve => require(['@/pages/index/EstablishClub.vue'], resolve)
     },
     {
-      path: '/club',
+      path: '/club/',
       name: 'ClubShow',
       component: resolve => require(['@/pages/index/ClubShow.vue'], resolve)
     },

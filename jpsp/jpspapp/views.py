@@ -4,14 +4,12 @@ import json
 from django.contrib.auth.models import User
 from jpspapp.models import Club, Post, Token, Activity, Classroom, LostAndFound, UserProfile, CDUser, \
     ActivityParticipantShip, ClubMemberShip
-from django.core import serializers
 from django.views.decorators.http import require_http_methods
 import datetime
 from django.contrib.auth import authenticate
 import itchat
 import random
 from django.core.paginator import Paginator
-
 alphabet = "abcdefghijklmnopqrstuvwxyz0123456789"
 
 
@@ -1199,7 +1197,7 @@ def club_page_setting(request):
 @require_http_methods(['POST'])
 def cd_file_upload(request):
     try:
-        file = request.FILES
+        file = request.FILES['file']
         body = json.loads(request.body)
         token = body['CDToken']
 
@@ -1214,22 +1212,6 @@ def cd_file_upload(request):
         })
 
 
-@require_http_methods(['POST'])
-def club_file_upload(request):
-    try:
-        file = request.FILES
-        body = json.loads(request.body)
-        token = body['CDToken']
-
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
-    except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
 
 
 @require_http_methods(['POST'])
