@@ -104,7 +104,7 @@
   </el-row>
   </div>
   <div class="column is-9">
-    hello!
+    <router-view name="IndexProfile"></router-view>
   </div>
   </div>
   </div>

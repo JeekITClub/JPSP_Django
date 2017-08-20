@@ -1,27 +1,6 @@
 <template>
 <div>
-<aside class="menu">
-  <p class="menu-label">
-    用户设置
-  </p>
-  <ul class="menu-list">
-    <li><router-link to="/basic" class="jpsp-menu-item">基本信息</router-link></li>
-    <li><a class="jpsp-menu-item">更改密码</a></li>
-  </ul>
-  <p class="menu-label">
-    社团
-  </p>
-  <ul class="menu-list">
-    <li><a class="jpsp-menu-item">已加入社团</a></li>
-  </ul>
-  <p class="menu-label">
-    活动
-  </p>
-  <ul class="menu-list">
-    <li><a class="jpsp-menu-item">已加入活动</a></li>
-    <li><a class="jpsp-menu-item">参加过的活动</a></li>
-  </ul>
-</aside>
+
   </div>
 </template>
 <script>
@@ -64,11 +43,4 @@
   }
 </script>
 <style scoped>
-  .select-title {
-    padding-left: 20px;
-  }
-
-  .jpsp-profile {
-    padding-top: 2%;
-  }
 </style>
