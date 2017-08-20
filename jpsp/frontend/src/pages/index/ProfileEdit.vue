@@ -1,4 +1,8 @@
 <template>
+<div>
+  <div class="columns jpsp-profile">
+    <div class="column is-3">
+    <j-aside></j-aside>
   <el-row>
     <el-col :span="4">
       <el-menu mode="vertical" class="el-menu-vertical-demo" :default-active=activeIndex @select="handleSelect">
@@ -98,9 +102,16 @@
       </div>
     </el-col>
   </el-row>
+  </div>
+  <div class="column is-9">
+    hello!
+  </div>
+  </div>
+  </div>
 </template>
 <script>
   import axios from 'axios'
+  import JAside from '../../components/index/JAside.vue'
   export default {
     data () {
       return {
@@ -223,13 +234,21 @@
           }
         }.bind(this))
     },
-    created () {
-      this.checkLogin()
+    components: {
+      'j-aside': JAside
     }
+    // ,
+    // created () {
+    //   this.checkLogin()
+    // }
   }
 </script>
 <style scoped>
   .select-title {
     padding-left: 20px;
+  }
+
+  .jpsp-profile {
+    padding-top: 2%;
   }
 </style>
