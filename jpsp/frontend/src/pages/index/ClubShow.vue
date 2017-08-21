@@ -142,11 +142,12 @@
   }
 </script>
 <style scoped>
+  @charset "UTF-8";
+
   .club-show {
     padding-top: 3%;
   }
-<style>
-  @charset "UTF-8";
+
   .el-input__inner, .el-textarea__inner {
     background-image: none;
     box-sizing: border-box
