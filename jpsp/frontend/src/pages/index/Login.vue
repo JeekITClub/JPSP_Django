@@ -1,5 +1,6 @@
 <template>
   <div>
+    <form>
     <section class="container stu-login">
       <h2 class="title is-2" style="text-align: center">学生登录</h2>
       <div class="columns is-mobile">
@@ -37,6 +38,7 @@
         </div>
       </div>
     </section>
+    </form>
   </div>
 </template>
 

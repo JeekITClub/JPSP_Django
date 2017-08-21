@@ -1,25 +1,28 @@
 <template>
 <div>
-<aside class="menu">
+<aside class="menu jpsp-menu">
+  <ul class="menu-list">
+    <li><router-link to="/profile" class="jpsp-menu-item">控制台</router-link></li>
+  </ul>
   <p class="menu-label">
     用户设置
   </p>
   <ul class="menu-list">
     <li><router-link to="/basic" class="jpsp-menu-item">基本信息</router-link></li>
-    <li><a class="jpsp-menu-item">更改密码</a></li>
+    <li><router-link to="/changepw" class="jpsp-menu-item">更改密码</router-link></li>
   </ul>
   <p class="menu-label">
     社团
   </p>
   <ul class="menu-list">
-    <li><a class="jpsp-menu-item">已加入社团</a></li>
+    <li><router-link to="/clubattended" class="jpsp-menu-item">已加入社团</router-link></li>
   </ul>
   <p class="menu-label">
     活动
   </p>
   <ul class="menu-list">
-    <li><a class="jpsp-menu-item">已加入活动</a></li>
-    <li><a class="jpsp-menu-item">参加过的活动</a></li>
+    <li><router-link to="/activityenrolled" class="jpsp-menu-item">已加入活动</router-link></li>
+    <li><router-link tp="/activityattended" class="jpsp-menu-item">参加过的活动</router-link></li>
   </ul>
 </aside>
   </div>
@@ -68,7 +71,8 @@
     padding-left: 20px;
   }
 
-  .jpsp-profile {
-    padding-top: 2%;
+  .jpsp-menu {
+    padding-left: 10px;
+    padding-top: 10px;
   }
 </style>

@@ -2,7 +2,7 @@
   <div id="app_club">
     <JNavTop></JNavTop>
     <div class="columns" v-if="Authenticated !== true">
-      <div class="column is-1 club-aside">
+      <div class="column is-2 club-aside">
         <club-aside></club-aside>
       </div>
       <div class="column">

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 Vue.use(Router)
-import ActivityList from '../pages/index/ActiviytList.vue'
+// import ActivityList from '../pages/index/ActiviytList.vue'
 // import EventList from '../pages/index/EventList.vue'
 // import LostAndFound from '../pages/index/LostAndFound.vue'
 export default new Router({
@@ -69,10 +69,28 @@ export default new Router({
     },
     {
       path: '/basic',
-      name: 'UserProfile',
-      components: {
-        IndexProfile: ActivityList
-      }
+      name: 'Basic',
+      component: resolve => require(['@/components/index/UserProfile.vue'], resolve)
+    },
+    {
+      path: '/changepw',
+      name: 'ChangePw',
+      component: resolve => require(['@/components/public/Future.vue'], resolve)
+    },
+    {
+      path: '/clubattended',
+      name: 'ClubAttended',
+      component: resolve => require(['@/components/index/ClubAttended.vue'], resolve)
+    },
+    {
+      path: '/activityenrolled',
+      name: 'ActivityEnrolled',
+      component: resolve => require(['@/components/public/Future.vue'], resolve)
+    },
+    {
+      path: '/activityattended',
+      name: 'ActivityAttended',
+      component: resolve => require(['@/components/public/Future.vue'], resolve)
     }
   ]
 })
