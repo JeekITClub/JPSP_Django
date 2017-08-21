@@ -95,34 +95,44 @@
         }
       }
     },
+    computed: {
+      /**
+       * @return {string}
+       */
+      GetApi () {
+        return 'http://52.80.91.31:32700'
+      }
+    },
     methods: {
       submitForm () {
         axios({
           method: 'POST',
-          url: 'api/club/profile/EditSubmit',
+          url: this.GetApi + '/clubs/profile',
           data: {
-            clubname: this.ProfileForm.ClubName,
-            clubid: this.GetClubId,
-            shezhang_name: this.ProfileForm.ShezhangName,
-            shezhang_qq: this.ProfileForm.ShezhangQQ,
-            shezhang_grade: this.ProfileForm.ShezhangGrade,
-            shezhang_class: this.ProfileForm.ShezhangClass,
-            if_recruit: this.ProfileForm.IfRecruit,
-            enroll_group_qq: this.ProfileForm.QQGroup,
-            email: this.ProfileForm.Email,
-            introduction: this.ProfileForm.Introduction,
-            achievements: this.ProfileForm.Achievements,
-            Token: this.GetToken
+            ClubName: this.ProfileForm.ClubName,
+            ClubId: this.GetClubId,
+            ShezhangName: this.ProfileForm.ShezhangName,
+            ShezhangQQ: this.ProfileForm.ShezhangQQ,
+            ShezhangGrade: this.ProfileForm.ShezhangGrade,
+            ShezhangClass: this.ProfileForm.ShezhangClass,
+            IfRecruit: this.ProfileForm.IfRecruit,
+            QQGroup: this.ProfileForm.QQGroup,
+            Email: this.ProfileForm.Email,
+            Introduction: this.ProfileForm.Introduction,
+            Achievements: this.ProfileForm.Achievements,
+            Token: 123
           }
-        }).then(function (response) {
-          if (response.data.message === 'error') {
-            this.error = true
-          } else {
-            alert('success')
-          }
-        }.bind(this)).catch(function () {
-          alert('error: ProfileEdit')
         })
+          .then(function (response) {
+            if (response.message === 'error') {
+              this.$notify.error({
+                'message': 'error',
+                'title': 'error'
+              })
+            } else {
+              alert('success')
+            }
+          }.bind(this))
       },
       handleAvatarSuccess (res, file) {
         this.imageUrl = URL.createObjectURL(file.raw)
