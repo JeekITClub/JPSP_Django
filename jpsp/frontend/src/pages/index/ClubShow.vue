@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="container club-show">
-      <div class="columns is-multiline">
+    <div class="club-show">
+      <div class="columns is-multiline is-mobile">
         <div class="column is-one-quarter" v-for="club in ClubList">
           <club-show :Club=club></club-show>
         </div>
@@ -146,6 +146,7 @@
 
   .club-show {
     padding-top: 3%;
+    padding-right: 3%;
   }
 
   .el-input__inner, .el-textarea__inner {

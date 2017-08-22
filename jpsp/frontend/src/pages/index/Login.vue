@@ -1,5 +1,6 @@
 <template>
   <div>
+    <form>
     <section class="container stu-login">
       <h2 class="title is-2" style="text-align: center">学生登录</h2>
       <div class="columns is-mobile">
@@ -28,7 +29,7 @@
         <div class="column is-half is-offset-one-quarter">
       <div class="field is-grouped">
         <div class="control">
-          <button class="button is-primary">登录</button>
+          <button class="button is-primary" @click="onSubmit">登录</button>
         </div>
         <div class="control">
           <button class="button is-link"><router-link to="/contact">忘记密码？</router-link></button>
@@ -37,6 +38,7 @@
         </div>
       </div>
     </section>
+    </form>
   </div>
 </template>
 
@@ -53,35 +55,29 @@
     },
     methods: {
       onSubmit () {
-        this.$refs['LoginForm'].validate((valid) => {
-          if (valid) {
-            axios({
-              method: 'POST',
-              url: this.GetApi + 'login',
-              data: JSON.stringify({
-                UserName: this.LoginForm.UserName,
-                Password: this.LoginForm.Password,
-                UserType: 'Student'
-              })
-            })
-              .then(function (response) {
-                if (response.data.message === 'User Authenticated') {
-                  this.$cookie.set('UserId', this.LoginForm.UserName, 1)
-                  this.$cookie.set('UserName', response.data.UserName, 1)
-                  this.$cookie.set('IndexToken', response.data.Token, 1)
-                  this.$cookie.set('IndexAuthenticated', true, 1)
-                  this.$router.push('/')
-                } else if (response.data.message === 'User Not Authenticated') {
-                  this.$notify.error({
-                    title: '错误',
-                    message: '登陆失败'
-                  })
-                }
-              }.bind(this))
-          } else {
-            alert('error')
-          }
+        axios({
+          method: 'POST',
+          url: this.GetApi + 'login',
+          data: JSON.stringify({
+            UserName: this.LoginForm.UserName,
+            Password: this.LoginForm.Password,
+            UserType: 'Student'
+          })
         })
+          .then(function (response) {
+            if (response.data.message === 'User Authenticated') {
+              this.$cookie.set('UserId', this.LoginForm.UserName, 1)
+              this.$cookie.set('UserName', response.data.UserName, 1)
+              this.$cookie.set('IndexToken', response.data.Token, 1)
+              this.$cookie.set('IndexAuthenticated', true, 1)
+              this.$router.push('/')
+            } else if (response.data.message === 'User Not Authenticated') {
+              this.$notify.error({
+                title: '错误',
+                message: '登陆失败'
+              })
+            }
+          }.bind(this))
       }
     },
     computed: {

@@ -8,8 +8,8 @@
 
     <div class="card-content">
       <div class="content">
-        <h3 class="" v-if="Club.IfRecruit === 'True'">{{ Club.ClubName }}</h3>
-        <h3 class="" v-if="Club.IfRecruit === 'False'">{{ Club.ClubName }}(不招新)</h3>
+        <p class="title is-4" v-if="Club.IfRecruit === 'True'">{{ Club.ClubName }}</p>
+        <p class="title is-4" v-if="Club.IfRecruit === 'False'">{{ Club.ClubName }}(不招新)</p>
       </div>
     </div>
       <footer class="card-footer">

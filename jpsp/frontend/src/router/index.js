@@ -66,6 +66,31 @@ export default new Router({
       path: '/lost',
       name: 'LostAndFound',
       component: resolve => require(['@/components/public/Future.vue'], resolve)
+    },
+    {
+      path: '/basic',
+      name: 'Basic',
+      component: resolve => require(['@/components/index/UserProfile.vue'], resolve)
+    },
+    {
+      path: '/changepw',
+      name: 'ChangePw',
+      component: resolve => require(['@/components/public/Future.vue'], resolve)
+    },
+    {
+      path: '/clubattended',
+      name: 'ClubAttended',
+      component: resolve => require(['@/components/index/ClubAttended.vue'], resolve)
+    },
+    {
+      path: '/activityenrolled',
+      name: 'ActivityEnrolled',
+      component: resolve => require(['@/components/public/Future.vue'], resolve)
+    },
+    {
+      path: '/activityattended',
+      name: 'ActivityAttended',
+      component: resolve => require(['@/components/public/Future.vue'], resolve)
     }
   ]
 })
