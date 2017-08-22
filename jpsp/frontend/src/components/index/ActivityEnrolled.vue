@@ -35,11 +35,10 @@
           this.$router.push('/login')
         }
       }
-    }
-    // ,
-    // created () {
-    //   this.checkLogin()
-    // }
+    },
+     created () {
+       this.checkLogin()
+     }
   }
 </script>
 <style scoped>
