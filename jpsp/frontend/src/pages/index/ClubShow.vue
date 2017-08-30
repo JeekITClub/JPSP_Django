@@ -3,7 +3,7 @@
     <div class="club-show">
       <div class="columns is-mobile" align="right">
         <div class="column">
-          <router-link class="button is-primary is-large" to="/establish" align="right">创建社团</router-link>
+          <router-link class="button is-primary is-large" to="/Establish" align="right">创建社团</router-link>
         </div>
       </div>
       <div class="columns is-multiline is-mobile">
@@ -58,7 +58,7 @@
       })
         .then(function (response) {
           if (response.data.message === 'success') {
-            this.ClubList = response.data.ClubList
+            this.ClubList = response.data.data
           } else {
             this.$notify.error({
               'message': '无法获得社团列表',

@@ -97,12 +97,12 @@ export default new Router({
       component: resolve => require(['@/pages/admin_club/ChangePassword.vue'], resolve)
     },
     {
-      path: '/file/upload',
+      path: '/File/Upload',
       name: 'FileUpload',
       component: resolve => require(['@/pages/admin_club/FileUpload.vue'], resolve)
     },
     {
-      path: '/file/download',
+      path: '/File/Download',
       name: 'FileDownload',
       component: resolve => require(['@/components/public/Future.vue'], resolve)
     }

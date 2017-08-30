@@ -13,7 +13,7 @@
       </div>
     </div>
       <footer class="card-footer">
-        <router-link :to="{ name: 'ClubIndex', params: { ClubId:Club.ClubId, Club:Club }}" class="card-footer-item">
+        <router-link :to="{ name: 'ClubPage', params: { ClubId:Club.ClubId }}" class="card-footer-item">
           <p v-if="Club.IfRecruit === 1">我想加入</p>
           <p v-else-if="Club.IfRecruit === 0">查看该社团</p>
         </router-link>

@@ -16,54 +16,52 @@
       <div id="navMenu" class="navbar-menu">
         <div class="navbar-start">
           <div class="navbar-item has-dropdown is-hoverable">
-            <router-link class="navbar-link " to="/club">
+            <router-link class="navbar-link " to="/Club">
               社团
             </router-link>
             <div class="navbar-dropdown ">
-              <router-link class="navbar-item " to="/club">
+              <router-link class="navbar-item " to="/Club">
                 社团列表
               </router-link>
-              <router-link class="navbar-item " to="/club/event">
+              <router-link class="navbar-item " to="/Club/Event">
                 社团动态
               </router-link>
             </div>
           </div>
-          <div class="navbar-item has-dropdown is-hoverable">
-            <router-link class="navbar-link " to="/activity">
-              活动
-            </router-link>
-            <div id="blogDropdown" class="navbar-dropdown " data-style="width: 18rem;">
-              <router-link class="navbar-item " to="/activity/list">
-                活动报名
-              </router-link>
-              <router-link class="navbar-item " to="/activity/">
-                活动动态
-              </router-link>
-
-
-            </div>
-          </div>
-          <a class="navbar-item" href="#">
-            失物招领
-          </a>
+          <!--<div class="navbar-item has-dropdown is-hoverable">-->
+            <!--<router-link class="navbar-link " to="/Activity">-->
+              <!--活动-->
+            <!--</router-link>-->
+            <!--<div id="blogDropdown" class="navbar-dropdown " data-style="width: 18rem;">-->
+              <!--<router-link class="navbar-item " to="/Activity/list">-->
+                <!--活动报名-->
+              <!--</router-link>-->
+              <!--<router-link class="navbar-item " to="/Activity/">-->
+                <!--活动动态-->
+              <!--</router-link>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<a class="navbar-item" href="#">-->
+            <!--失物招领-->
+          <!--</a>-->
         </div>
 
         <div class="navbar-end">
           <div class="navbar-item has-dropdown is-hoverable" v-if="GetIndexAuthenticated === 'true'">
-            <router-link class="navbar-link " to="/profile">
+            <router-link class="navbar-link " to="/User/Dashboard">
               欢迎你，{{ GetUserName }}
             </router-link>
             <div class="navbar-dropdown" data-style="width: 18rem;">
-              <router-link to="/profile" class="navbar-item ">个人中心</router-link>
+              <router-link to="/User/Dashboard" class="navbar-item ">个人中心</router-link>
               <a @click="Logout" class="navbar-item ">注销</a>
             </div>
           </div>
           <div class="navbar-item has-dropdown is-hoverable" v-else>
-            <router-link class="navbar-link " to="/login">
+            <router-link class="navbar-link " to="/Login">
               登录
             </router-link>
             <div class="navbar-dropdown">
-              <router-link class="navbar-item" to="/login">
+              <router-link class="navbar-item" to="/Login">
                 学生登录
               </router-link>
               <!--TODO: Link to admin_club & admin_cd-->
@@ -75,7 +73,7 @@
               </router-link>
             </div>
           </div>
-          <router-link class="navbar-item" to="/about">
+          <router-link class="navbar-item" to="/About">
             关于
           </router-link>
         </div>

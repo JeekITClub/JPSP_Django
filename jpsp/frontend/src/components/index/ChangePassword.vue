@@ -1,40 +1,41 @@
 <template>
-<div class="container">
-  <h2 class="title is-2" align="center">更改密码</h2>
-  <div class="ch">
-  <div class="field">
-  <label class="label">原密码</label>
-  <div class="control">
-    <input class="input" type="password" v-model="OriginalPassword">
-  </div>
-</div>
+  <div class="container">
+    <h3 class="title is-3" align="center">更改密码</h3>
+    <div class="ch">
+      <div class="field">
+        <label class="label">原密码</label>
+        <div class="control">
+          <input class="input" type="password" v-model="OriginalPassword">
+        </div>
+      </div>
 
-    <div class="field">
-  <label class="label">新密码</label>
-  <div class="control">
-    <input class="input" type="password" v-model="NewPassword">
-  </div>
-</div>
+      <div class="field">
+        <label class="label">新密码</label>
+        <div class="control">
+          <input class="input" type="password" v-model="NewPassword">
+        </div>
+      </div>
 
-    <div class="field">
-  <label class="label">确认新密码</label>
-  <div class="control">
-    <input class="input" type="password" v-model="ConfirmNewPassword">
-  </div>
-</div>
+      <div class="field">
+        <label class="label">确认新密码</label>
+        <div class="control">
+          <input class="input" type="password" v-model="ConfirmNewPassword">
+        </div>
+      </div>
 
-    <div class="field">
-  <div class="control">
-    <button class="button is-primary is-medium" @click="submitForm">提交</button>
-  </div>
-</div>
+      <div class="field">
+        <div class="control">
+          <button class="button is-primary is-medium" @click="submitForm">提交</button>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
 
 </template>
 <script>
   import axios from 'axios'
   import Qs from 'qs'
+
   export default {
     data () {
       return {

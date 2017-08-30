@@ -1,15 +1,15 @@
 <template>
-  <profile-edit></profile-edit>
+  <user></user>
 </template>
 <script>
-  import ProfileEdit from '@/components/index/ProfileEdit'
+  import User from '@/components/admin_cd/User'
 
   export default {
     data () {
       return {}
     },
     components: {
-      'ProfileEdit': ProfileEdit
+      'User': User
     }
   }
 </script>

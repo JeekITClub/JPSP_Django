@@ -46,7 +46,6 @@
     },
     methods: {
       logout () {
-        // TODO: axios
         this.$cookie.delete('ClubAuthenticated')
         this.$cookie.delete('ClubName')
         this.$cookie.delete('ClubId')

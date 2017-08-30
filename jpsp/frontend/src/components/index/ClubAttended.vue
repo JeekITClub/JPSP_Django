@@ -16,8 +16,11 @@
           </div>
         </div>
         <footer class="card-footer">
-          <a class="card-footer-item" @click="quitClub(Club.ClubId)">
+          <a class="card-footer-item" @click="quitClub(Club.ClubId)" v-if="Club.State === '1'">
             <p>我想退出</p>
+          </a>
+          <a class="card-footer-item" @click="quitClub(Club.ClubId)" v-else>
+            <p>我想退出（审核中）</p>
           </a>
         </footer>
       </div>
@@ -36,14 +39,11 @@
       }
     },
     computed: {
-      GetUserId () {
-        return this.$cookie.get('UserId')
+      GetUserIndexId () {
+        return this.$cookie.get('UserIndexId')
       },
       GetIndexToken () {
         return this.$cookie.get('IndexToken')
-      },
-      GetUserName () {
-        return this.$cookie.get('UserName')
       },
       GetIndexAuthenticated () {
         return this.$cookie.get('IndexAuthenticated')
@@ -59,9 +59,9 @@
       quitClub (ClubId) {
         axios({
           method: 'DELETE',
-          url: this.GetApi + '',
+          url: this.GetApi + 'clubships/user',
           data: Qs.stringify({
-            UserId: this.GetUserId,
+            UserIndexId: this.GetUserIndexId,
             Token: this.GetIndexToken,
             ClubId: ClubId
           }),
@@ -96,9 +96,9 @@
     mounted: function () {
       axios({
         method: 'GET',
-        url: this.GetApi + '',
+        url: this.GetApi + 'clubships/user',
         params: {
-          UserId: this.GetUserId
+          UserId: this.GetUserIndexId
         },
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
@@ -106,8 +106,7 @@
       })
         .then(function (response) {
           if (response.data.message === 'success') {
-            this.Clubs = response.data.ClubLsit
-            // TODO: API / getClubshipByUserId
+            this.Clubs = response.data.data
           } else {
             this.$notify.error({
               title: '错误',

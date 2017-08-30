@@ -2,93 +2,90 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 Vue.use(Router)
-// import ActivityList from '../pages/index/ActiviytList.vue'
-// import EventList from '../pages/index/EventList.vue'
-// import LostAndFound from '../pages/index/LostAndFound.vue'
 export default new Router({
   routes: [
     {
       path: '/',
       name: 'Index',
-      component: resolve => require(['@/pages/index/index.vue'], resolve)
+      component: resolve => require(['@/pages/index/Index.vue'], resolve)
     },
     {
-      path: '/login',
+      path: '/Login',
       name: 'login',
       component: resolve => require(['@/pages/index/Login.vue'], resolve)
     },
     {
-      path: '/club/:ClubId',
-      name: 'ClubIndex',
-      component: resolve => require(['@/pages/index/ClubIndex.vue'], resolve)
+      path: '/Club/:ClubId',
+      name: 'ClubPage',
+      component: resolve => require(['@/pages/index/ClubPage.vue'], resolve)
+    },
+    // {
+    //   path: '/activity/list',
+    //   name: 'ActivityList',
+    //   component: resolve => require(['@/components/public/Future.vue'], resolve)
+    // },
+    // {
+    //   path: '/Activity/news',
+    //   name: 'ActivityNews',
+    //   component: resolve => require(['@/components/public/Future.vue'], resolve)
+    // },
+    {
+      path: '/User/Dashboard',
+      name: 'Dashboard',
+      component: resolve => require(['@/pages/index/Dashboard.vue'], resolve)
     },
     {
-      path: '/activity/list',
-      name: 'ActivityList',
-      component: resolve => require(['@/components/public/Future.vue'], resolve)
-    },
-    {
-      path: '/activity/news',
-      name: 'ActivityNews',
-      component: resolve => require(['@/components/public/Future.vue'], resolve)
-    },
-    {
-      path: '/profile',
-      name: 'ProfileEdit',
-      component: resolve => require(['@/pages/index/ProfileEdit.vue'], resolve)
-    },
-    {
-      path: '/club',
+      path: '/Club',
       name: 'ClubShow',
       component: resolve => require(['@/pages/index/ClubShow.vue'], resolve)
     },
+    // {
+    //   path: '/event/list',
+    //   name: 'EventList',
+    //   component: resolve => require(['@/components/public/Future.vue'], resolve)
+    // },
     {
-      path: '/event/list',
-      name: 'EventList',
-      component: resolve => require(['@/components/public/Future.vue'], resolve)
-    },
-    {
-      path: '/contact',
+      path: '/Contact',
       name: 'Contact',
       component: resolve => require(['@/components/public/Contact.vue'], resolve)
     },
     {
-      path: '/about',
+      path: '/About',
       name: 'About',
       component: resolve => require(['@/components/public/About.vue'], resolve)
     },
     {
-      path: '/lost',
+      path: '/LAF',
       name: 'LostAndFound',
       component: resolve => require(['@/components/public/Future.vue'], resolve)
     },
     {
-      path: '/basic',
-      name: 'Basic',
-      component: resolve => require(['@/components/index/UserProfile.vue'], resolve)
+      path: '/User/Profile',
+      name: 'ProfileEdit',
+      component: resolve => require(['@/pages/index/ProfileEdit.vue'], resolve)
     },
     {
-      path: '/changepw',
-      name: 'ChangePw',
+      path: '/User/Password',
+      name: 'Password',
       component: resolve => require(['@/components/index/ChangePassword.vue'], resolve)
     },
     {
-      path: '/clubattended',
+      path: '/User/Club',
       name: 'ClubAttended',
       component: resolve => require(['@/components/index/ClubAttended.vue'], resolve)
     },
+    // {
+    //   path: '/User/Activity',
+    //   name: 'ActivityEnrolled',
+    //   component: resolve => require(['@/components/public/Future.vue'], resolve)
+    // },
+    // {
+    //   path: '/User/Activity',
+    //   name: 'ActivityAttended',
+    //   component: resolve => require(['@/components/public/Future.vue'], resolve)
+    // },
     {
-      path: '/activityenrolled',
-      name: 'ActivityEnrolled',
-      component: resolve => require(['@/components/public/Future.vue'], resolve)
-    },
-    {
-      path: '/activityattended',
-      name: 'ActivityAttended',
-      component: resolve => require(['@/components/public/Future.vue'], resolve)
-    },
-    {
-      path: '/establish',
+      path: '/Establish',
       name: 'EstablishClub',
       component: resolve => require(['@/components/index/Establish.vue'], resolve)
     }

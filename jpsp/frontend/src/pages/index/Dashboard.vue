@@ -1,15 +1,15 @@
 <template>
-  <profile-edit></profile-edit>
+  <dashboard></dashboard>
 </template>
 <script>
-  import ProfileEdit from '@/components/index/ProfileEdit'
+  import Dashboard from '@/components/index/Dashboard.vue'
 
   export default {
     data () {
       return {}
     },
     components: {
-      'ProfileEdit': ProfileEdit
+      'dashboard': Dashboard
     }
   }
 </script>

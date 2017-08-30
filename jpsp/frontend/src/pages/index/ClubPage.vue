@@ -88,8 +88,9 @@
             method: 'POST',
             url: this.GetApi + 'clubships',
             data: Qs.stringify({
-              ClubId: this.$route.params.ClubId,
-              UserId: this.GetUserId,
+              ClubName: this.Club.ClubName,
+              ClubId: this.ClubId,
+              UserId: this.GetUserIndexId,
               Token: this.GetIndexToken
             }),
             headers: {
@@ -113,8 +114,8 @@
       }
     },
     computed: {
-      GetUserId () {
-        return this.$cookie.get('UserId')
+      GetUserIndexId () {
+        return this.$cookie.get('UserIndexId')
       },
       GetIndexToken () {
         return this.$cookie.get('IndexToken')

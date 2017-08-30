@@ -3,7 +3,7 @@
     <div class="LoginForm">
       <el-form ref="LoginForm" :model="LoginForm">
         <el-form-item :required=true>
-          <label class="label">用户名</label>
+          <label class="label">社团ID</label>
           <input class="input" v-model="LoginForm.ClubId" placeholder="社团ID" autofocus="">
         </el-form-item>
         <el-form-item :required=true>
@@ -34,7 +34,7 @@
       onSubmit () {
         axios({
           method: 'POST',
-          url: this.GetApi + 'login',
+          url: this.GetApi + 'auth/login',
           data: Qs.stringify({
             UserId: this.LoginForm.ClubId,
             Password: this.LoginForm.Password,
@@ -45,12 +45,13 @@
           }
         })
           .then(function (response) {
-            if (response.data.message === 'User Authenticated') {
+            console.log(response)
+            if (response.data.message === 'success') {
               this.$cookie.set('ClubId', this.LoginForm.ClubId, 1)
               this.$cookie.set('ClubName', response.data.ClubName, 1)
               this.$cookie.set('ClubToken', response.data.Token, 1)
               this.$cookie.set('ClubAuthenticated', true, 1)
-              this.$router.push('/dashboard')
+              this.$router.push('/Dashboard')
               location.reload(true)
             } else {
               this.$notify.error({

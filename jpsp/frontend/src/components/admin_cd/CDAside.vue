@@ -13,10 +13,10 @@
     </p>
     <ul class="menu-list">
       <li>
-        <router-link to="/club">所有社团</router-link>
+        <router-link to="/Club">所有社团</router-link>
       </li>
       <li>
-        <router-link to="/post">动态</router-link>
+        <router-link to="/Post">动态</router-link>
       </li>
     </ul>
     <p class="menu-label">
@@ -32,7 +32,7 @@
     </p>
     <ul class="menu-list">
       <li>
-        <router-link to="/activity">列表</router-link>
+        <router-link to="/Activity">列表</router-link>
       </li>
     </ul>
     <p class="menu-label">
@@ -40,10 +40,10 @@
     </p>
     <ul class="menu-list">
       <li>
-        <router-link to="/file/upload">上传</router-link>
+        <router-link to="/File/Upload">上传</router-link>
       </li>
       <li>
-        <router-link to="/file/download">下载</router-link>
+        <router-link to="/File/Download">下载</router-link>
       </li>
     </ul>
     <p class="menu-label">
@@ -51,8 +51,8 @@
     </p>
     <ul class="menu-list">
       <li>
-        <router-link to="/user">批量创建用户</router-link>
-        <router-link to="/user/one">创建单一用户</router-link>
+        <router-link to="/User">批量创建用户</router-link>
+        <router-link to="/User/One">创建单一用户</router-link>
       </li>
     </ul>
   </aside>

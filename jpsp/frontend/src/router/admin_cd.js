@@ -13,49 +13,54 @@ export default new Router({
       component: resolve => require(['../pages/admin_cd/Dashboard.vue'], resolve)
     },
     {
-      path: '/login',
+      path: '/Login',
       name: 'Login',
       component: resolve => require(['@/pages/admin_cd/Login'], resolve)
     },
     {
-      path: '/activity',
+      path: '/Activity',
       name: 'Activity',
-      component: resolve => require(['@/pages/admin_cd/ActivityList'], resolve)
+      component: resolve => require(['@/components/public/Future'], resolve)
     },
     {
-      path: '/post',
+      path: '/Post',
       name: 'Post',
       component: resolve => require(['../pages/admin_cd/PostList.vue'], resolve)
     },
     {
-      path: '/contact',
+      path: '/Contact',
       name: 'Contact',
       component: resolve => require(['../pages/public/Contact.vue'], resolve)
     },
     {
-      path: '/about',
+      path: '/About',
       name: 'About',
       component: resolve => require(['../pages/public/About.vue'], resolve)
     },
     {
-      path: '/club',
+      path: '/Club',
       name: 'ClubList',
       component: resolve => require(['../pages/admin_cd/ClubList.vue'], resolve)
     },
     {
-      path: '/file/upload',
+      path: '/File/Upload',
       name: 'FileUpload',
-      component: resolve => require(['../pages/admin_cd/FileUpload.vue'], resolve)
+      component: resolve => require(['../components/public/Future.vue'], resolve)
     },
     {
-      path: '/user/one',
+      path: '/File/Download',
+      name: 'FileDownload',
+      component: resolve => require(['../components/public/Future.vue'], resolve)
+    },
+    {
+      path: '/User/One',
       name: 'UserOne',
-      component: resolve => require(['../components/admin_cd/UserOne.vue'], resolve)
+      component: resolve => require(['../pages/admin_cd/UserOne.vue'], resolve)
     },
     {
-      path: '/user',
+      path: '/User',
       name: 'User',
-      component: resolve => require(['../components/admin_cd/User.vue'], resolve)
+      component: resolve => require(['../pages/admin_cd/User.vue'], resolve)
     }
   ]
 })
