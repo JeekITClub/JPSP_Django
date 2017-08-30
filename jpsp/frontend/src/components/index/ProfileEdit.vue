@@ -176,12 +176,12 @@
           method: 'PUT',
           url: this.GetApi + 'users/profile',
           data: Qs.stringify({
-            'UserId': this.GetUserId,
-            'Token': this.GetIndexToken,
-            'UserName': this.ProfileForm.UserName,
-            'Grade': this.ProfileForm.Grade,
-            'Class': this.ProfileForm.Class,
-            'QQ': this.ProfileForm.QQ
+            UserId: this.GetUserId,
+            Token: this.GetIndexToken,
+            UserName: this.ProfileForm.UserName,
+            Grade: this.ProfileForm.Grade,
+            Class: this.ProfileForm.Class,
+            QQ: this.ProfileForm.QQ
           }),
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'

@@ -13,7 +13,7 @@
         </el-form>
       </template>
     </el-table-column>
-    <el-table-column prop="Name" label="姓名" width="">
+    <el-table-column prop="UserName" label="姓名" width="">
     </el-table-column>
     <el-table-column prop="Grade" label="年级" width="">
     </el-table-column>
@@ -21,12 +21,12 @@
     </el-table-column>
     <el-table-column label="操作" v-if="this.Type === 'Confirmed'">
       <template scope="scope">
-        <button class="button is-primary" @click="deleteMember(scope.row.UserId)">删除成员</button>
+        <button class="button is-primary" @click="deleteMember(scope.row._id)">删除成员</button>
       </template>
     </el-table-column>
     <el-table-column label="操作" v-if="this.Type === 'Unconfirmed'">
       <template scope="scope">
-        <button class="button is-primary" @click="confirmMember(scope.row.UserId)">添加成员</button>
+        <button class="button is-primary" @click="confirmMember(scope.row._id)">添加成员</button>
       </template>
     </el-table-column>
   </el-table>
@@ -47,12 +47,12 @@
       }
     },
     methods: {
-      deleteMember (member) {
+      deleteMember (IndexId) {
         axios({
           method: 'DELETE',
           url: this.GetApi + 'clubships',
           data: Qs.stringify({
-            UserId: null,
+            UserIndexId: IndexId,
             ClubId: this.GetClubId,
             Token: this.GetToken
           })
@@ -112,16 +112,17 @@
       axios({
         method: 'PATCH',
         url: this.GetApi + 'clubships/' + this.$props.Type,
-        data: JSON.stringify({
+        data: Qs.stringify({
           ClubId: this.GetClubId,
-          Token: this.GetClubId
+          Token: this.GetToken,
+          Page: 1
         }),
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
       }).then(function (response) {
         if (response.data.message === 'success') {
-          this.Members = JSON.parse(response.data.data)
+          this.Members = response.data.data
         } else {
           this.$notify.error({
             'title': '失败',
