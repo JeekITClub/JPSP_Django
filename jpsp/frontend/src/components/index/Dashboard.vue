@@ -93,7 +93,7 @@
         method: 'GET',
         url: this.GetApi + 'users/profile',
         params: {
-          UserID: this.GetUserId
+          UserId: this.GetUserId
         }
       })
         .then(function (response) {
