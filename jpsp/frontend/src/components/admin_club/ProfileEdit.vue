@@ -62,9 +62,9 @@
       <el-form-item label="招新QQ群" v-if="ProfileForm.IfRecruit">
         <input v-if="ProfileForm.IfRecruit" v-model="ProfileForm.QQGroup" class="input">
       </el-form-item>
-      <el-form-item label="社团邮箱" :required="true">
-        <input type="email" v-model="ProfileForm.Email" class="input">
-      </el-form-item>
+      <!--<el-form-item label="社团邮箱" :required="true">-->
+      <!--<input type="email" v-model="ProfileForm.Email" class="input">-->
+      <!--</el-form-item>-->
       <el-form-item label="社团介绍" :required="true">
         <textarea class="textarea" v-model="ProfileForm.Introduction"></textarea>
       </el-form-item>
@@ -88,7 +88,7 @@
           IfRecruit: true,
           QQGroup: '',
           Achievements: '',
-          Email: '',
+//          Email: '',
           ShezhangName: '',
           ShezhangQQ: '',
           ShezhangGrade: '',
@@ -138,20 +138,42 @@
     mounted: function () {
       axios({
         method: 'GET',
-        url: this.GetApi + '/clubs/profile',
+        url: this.GetApi + 'clubs/profile',
         params: {
           ClubId: this.GetClubId
         }
       })
         .then(function (response) {
           if (response.data.message === 'success') {
-            var profile = JSON.parse(response.data.data)
-            console.log('success')
-            this.PostForm.ClubName = profile
+            this.ProfileForm = response.data.data
           } else {
-            console.log('error')
+            this.$notify.error({
+              'title': 'error',
+              'message': 'error'
+            })
           }
         }.bind(this))
+        .catch(function (err) {
+          console.log(err)
+          this.$notify.error({
+            'title': 'error',
+            'message': 'error'
+          })
+        })
+    },
+    computed: {
+      GetClubId () {
+        return this.$cookie.get('ClubId')
+      },
+      GetToken () {
+        return this.$cookie.get('ClubToken')
+      },
+      /**
+       * @return {string}
+       */
+      GetApi () {
+        return this.$store.state.Api
+      }
     }
   }
 </script>

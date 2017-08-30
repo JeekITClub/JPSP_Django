@@ -38,7 +38,7 @@
   export default {
     data () {
       return {
-        Members: [{}]
+        Members: []
       }
     },
     props: {
@@ -114,8 +114,7 @@
         url: this.GetApi + 'clubships/' + this.$props.Type,
         data: JSON.stringify({
           ClubId: this.GetClubId,
-          Token: this.GetClubId,
-          Type: this.Type
+          Token: this.GetClubId
         }),
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
