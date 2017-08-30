@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-form :model="PostForm" :rules="rules" class="" labelPosition="right">
-      <el-form-item label="活动联系人" :required=true>
+      <el-form-item label="联系人年级" :required=true>
         <div class="select">
           <select v-model="PostForm.LinkmanGrade">
             <option label="高一" value="1"></option>

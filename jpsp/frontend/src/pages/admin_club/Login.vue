@@ -10,6 +10,7 @@
           <label class="label">密码</label>
           <input class="input" type="password" v-model="LoginForm.Password" placeholder="密码">
         </el-form-item>
+        <br>
         <el-form-item>
           <a class="button is-primary" @click="onSubmit">登陆</a>
         </el-form-item>
@@ -72,7 +73,7 @@
       GetUserName () {
         return this.$cookie.get('ClubName')
       },
-      GetIndexAuthenticated () {
+      GetClubAuthenticated () {
         return this.$cookie.get('ClubAuthenticated')
       },
       /**
@@ -80,6 +81,11 @@
        */
       GetApi () {
         return this.$store.state.Api
+      }
+    },
+    created: function () {
+      if (this.GetClubAuthenticated === 'true') {
+        this.$router.replace('/Dashboard')
       }
     }
   }

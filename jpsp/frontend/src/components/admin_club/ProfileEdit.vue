@@ -76,8 +76,9 @@
   </div>
 </template>
 <script>
-  var qs = require('qs')
+  import Qs from 'qs'
   import axios from 'axios'
+
   export default {
     data () {
       return {
@@ -99,9 +100,9 @@
     methods: {
       submitForm () {
         axios({
-          method: 'POST',
-          url: 'http://127.0.0.1:3000/clubs/profile',
-          data: qs.stringify({
+          method: 'PUT',
+          url: this.GetApi + 'clubs/profile',
+          data: Qs.stringify({
             ClubName: this.ProfileForm.ClubName,
             ClubId: this.GetClubId,
             ShezhangName: this.ProfileForm.ShezhangName,
@@ -113,7 +114,8 @@
             Email: this.ProfileForm.Email,
             Introduction: this.ProfileForm.Introduction,
             Achievements: this.ProfileForm.Achievements,
-            Token: 123}),
+            Token: this.GetClubToken
+          }),
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
           }
@@ -124,37 +126,21 @@
                 'message': 'error',
                 'title': 'error'
               })
-            } else {
-              alert('success')
+            } else if (response.message === 'success') {
+              this.$notify.success({
+                'message': 'success',
+                'title': 'success'
+              })
             }
           }.bind(this))
-      },
-      handleAvatarSuccess (res, file) {
-        this.imageUrl = URL.createObjectURL(file.raw)
-      },
-      beforeAvatarUpload (file) {
-        const isJPG = file.type === 'image/jpeg'
-        const isLt2M = file.size / 1024 / 1024 < 2
-
-        if (!isJPG) {
-          this.$message.error('上传头像图片只能是 JPG 格式!')
-        }
-        if (!isLt2M) {
-          this.$message.error('上传头像图片大小不能超过 2MB!')
-        }
-        return isJPG && isLt2M
       }
     },
     mounted: function () {
       axios({
-        method: 'POST',
-        url: 'http://127.0.0.1:8000/api/club/profile/get',
-        data: JSON.stringify({
-          ClubId: this.GetClubId,
-          Token: this.GetToken
-        }),
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+        method: 'GET',
+        url: this.GetApi + '/clubs/profile',
+        params: {
+          ClubId: this.GetClubId
         }
       })
         .then(function (response) {

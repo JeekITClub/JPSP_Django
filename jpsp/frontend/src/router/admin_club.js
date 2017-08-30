@@ -17,89 +17,84 @@ export default new Router({
       component: resolve => require(['@/pages/admin_club/Login'], resolve)
     },
     {
-      path: '/dashboard',
+      path: '/Dashboard',
       name: 'Dashboard',
       component: resolve => require(['@/pages/admin_club/DashBoard.vue'], resolve)
     },
     {
-      path: '/login',
-      name: 'Login',
-      component: resolve => require(['@/pages/admin_club/Login'], resolve)
-    },
-    {
-      path: '/post/form',
+      path: '/Post/Form',
       name: 'PostForm',
       component: resolve => require(['@/pages/admin_club/PostForm.vue'], resolve)
     },
     {
-      path: '/post/list',
+      path: '/Post/List',
       name: 'PostList',
       component: resolve => require(['@/pages/admin_club/PostList.vue'], resolve)
     },
     {
-      path: '/profile',
+      path: '/Profile',
       name: 'Profile',
       component: resolve => require(['@/pages/admin_club/ProfileEdit'], resolve)
     },
+    // {
+    //   path: '/page',
+    //   name: 'ClubPageSettings',
+    //   component: resolve => require(['@/pages/admin_club/ClubPageSettings'], resolve)
+    // },
+    // {
+    //   path: '/activity/form',
+    //   name: 'ActivityForm',
+    //   component: resolve => require(['@/components/public/Future.vue'], resolve)
+    // },
+    // {
+    //   path: '/activity/list',
+    //   name: 'ActivityList',
+    //   component: resolve => require(['@/components/public/Future.vue'], resolve)
+    // },
+    // {
+    //   path: '/recruit/classroom/apply',
+    //   name: 'RecruitClassroom',
+    //   component: resolve => require(['@/components/public/Future.vue'], resolve)
+    // },
+    // {
+    //   path: '/recruit/classroom/list',
+    //   name: 'RecruitClassroomList',
+    //   component: resolve => require(['@/components/public/Future.vue'], resolve)
+    // },
     {
-      path: '/page',
-      name: 'ClubPageSettings',
-      component: resolve => require(['@/pages/admin_club/ClubPageSettings'], resolve)
-    },
-    {
-      path: '/activity/form',
-      name: 'ActivityForm',
-      component: resolve => require(['@/components/public/Future.vue'], resolve)
-    },
-    {
-      path: '/activity/list',
-      name: 'ActivityList',
-      component: resolve => require(['@/components/public/Future.vue'], resolve)
-    },
-    {
-      path: '/recruit/classroom/apply',
-      name: 'RecruitClassroom',
-      component: resolve => require(['@/components/public/Future.vue'], resolve)
-    },
-    {
-      path: '/recruit/classroom/list',
-      name: 'RecruitClassroomList',
-      component: resolve => require(['@/components/public/Future.vue'], resolve)
-    },
-    {
-      path: '/member',
+      path: '/Member',
       name: 'Member',
       component: resolve => require(['@/pages/admin_club/MemberManagement'], resolve)
     },
     {
-      path: '/about',
+      path: '/About',
       name: 'About',
       component: resolve => require(['@/components/public/About.vue'], resolve)
     },
     {
-      path: '/contact',
+      path: '/Contact',
       name: 'Contact',
       component: resolve => require(['@/components/public/Contact.vue'], resolve)
     },
+    // {
+    //   path: '/Activity/Record',
+    //   name: 'ActivityRecord',
+    //   component: resolve => require(['@/components/public/Future.vue'], resolve)
+    // },
+    // {
+    //   path: '/event/list',
+    //   name: 'EventList',
+    //   component: resolve => require(['@/components/public/Future.vue'], resolve)
+    // },
     {
-      path: '/activity/record',
-      name: 'ActivityRecord',
-      component: resolve => require(['@/components/public/Future.vue'], resolve)
-    },
-    {
-      path: '/event/list',
-      name: 'EventList',
-      component: resolve => require(['@/components/public/Future.vue'], resolve)
-    },
-    {
-      path: '/password',
+      path: '/Password',
       name: 'ChangePassword',
       component: resolve => require(['@/pages/admin_club/ChangePassword.vue'], resolve)
     },
     {
       path: '/File/Upload',
       name: 'FileUpload',
-      component: resolve => require(['@/pages/admin_club/FileUpload.vue'], resolve)
+      component: resolve => require(['@/components/public/Future.vue'], resolve)
     },
     {
       path: '/File/Download',
