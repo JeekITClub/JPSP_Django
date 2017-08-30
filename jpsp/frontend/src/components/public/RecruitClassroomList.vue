@@ -63,7 +63,10 @@
             Id: pk,
             Classroom: classroom,
             Type: 'Arrange'
-          })
+          }),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
         })
       },
       DenyRequest (pk) {
@@ -73,7 +76,10 @@
           data: JSON.stringify({
             Id: pk,
             Type: 'Deny'
-          })
+          }),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
         })
       },
       UndoDenyRequest (pk) {
@@ -83,7 +89,10 @@
           data: JSON.stringify({
             Id: pk,
             Type: 'UndoDeny'
-          })
+          }),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
         })
       }
     },
@@ -110,7 +119,10 @@
     mounted: function () {
       axios({
         method: 'POST',
-        url: 'http://127.0.0.1:8000/api/recruit/classroom/list'
+        url: 'http://127.0.0.1:8000/api/recruit/classroom/list',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
       }).then(function (response) {
         if (response.data.message === 'error') {
           this.$notify.error({

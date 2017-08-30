@@ -13,7 +13,6 @@
   </el-form>
 </template>
 <script>
-  import { getCookie } from 'tiny-cookie'
   import axios from 'axios'
   export default {
     data () {
@@ -32,7 +31,10 @@
           data: JSON.stringify({
             ClubId: this.GetClubId,
             Token: this.GetToken
-          })
+          }),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
         }).then(function (response) {
           if (response.data.message === 'success') {
             console.log('success')

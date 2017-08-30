@@ -1,62 +1,105 @@
 <template>
-  <div>
-    <el-form ref="EstablishClubForm" :model="EstablishClubForm">
-      <el-form-item label="社团名称" required>
-        <el-input v-model="EstablishClubForm.ClubName"></el-input>
-      </el-form-item>
-      <el-form-item label="社长姓名" required>
-        <el-input v-model="EstablishClubForm.ShezhangName"></el-input>
-      </el-form-item>
-      <el-form-item label="社长年级" required>
-        <el-select v-model="EstablishClubForm.ShezhangGrade" value="">
-          <el-option label="高一" value="1"></el-option>
-          <el-option label="高二" value="2"></el-option>
-          <el-option label="高三" value="3"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="社长班级" required>
-        <el-select v-model="EstablishClubForm.ShezhangClassroom" value="">
-          <el-option label="1" value="1"></el-option>
-          <el-option label="2" value="2"></el-option>
-          <el-option label="3" value="3"></el-option>
-          <el-option label="4" value="4"></el-option>
-          <el-option label="5" value="5"></el-option>
-          <el-option label="6" value="6"></el-option>
-          <el-option label="7" value="7"></el-option>
-          <el-option label="8" value="8"></el-option>
-          <el-option label="9" value="9"></el-option>
-          <el-option label="10" value="10"></el-option>
-          <el-option label="11" value="11"></el-option>
-          <el-option label="12" value="12"></el-option>
-          <el-option label="13" value="13"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="社长QQ号" required>
-        <el-input v-model="EstablishClubForm.ShezhangQQ"></el-input>
-      </el-form-item>
-      <el-form-item label="是否进行招新" required>
-        <el-radio-group v-model="EstablishClubForm.IfRecruit">
-          <el-radio :label=true>招新</el-radio>
-          <el-radio :label=false>不招新</el-radio>
-        </el-radio-group>
-      </el-form-item>
-      <el-form-item label="招新QQ群" required>
-        <el-input v-if="EstablishClubForm.IfRecruit" v-model="EstablishClubForm.QQGroup"></el-input>
-      </el-form-item>
-      <el-form-item label="社团邮箱">
-        <el-input v-model="EstablishClubForm.Email"></el-input>
-      </el-form-item>
-      <el-form-item label="社团介绍" required>
-        <el-input type="textarea" v-model="EstablishClubForm.Introduction"></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="submitForm('EstablishForm')">立即创建</el-button>
-      </el-form-item>
-    </el-form>
+  <div class="container establish">
+    <h2 class="title is-2" align="center">创建属于自己的新社团</h2>
+    <div class="field">
+      <label class="label">社团名称</label>
+      <div class="control">
+        <input class="input" type="text" v-model="EstablishClubForm.ClubName">
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">社长姓名</label>
+      <div class="control">
+        <input class="input" type="text" v-model="EstablishClubForm.ShezhangName">
+      </div>
+    </div>
+
+    <div class="field">
+  <label class="label">社长年级</label>
+  <div class="control">
+    <div class="select">
+      <select v-model="EstablishClubForm.ShezhangGrade">
+        <option value="1">高一</option>
+        <option value="2">高二</option>
+        <option value="3">高三</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+    <div class="field">
+  <label class="label">社长班级</label>
+  <div class="control">
+    <div class="select">
+      <select v-model="EstablishClubForm.ShezhangClassroom">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+    <div class="field">
+      <label class="label">社长QQ号</label>
+      <div class="control">
+        <input class="input" type="text" v-model="EstablishClubForm.ShezhangQQ">
+      </div>
+    </div>
+
+    <div class="field">
+  <div class="control">
+    <label class="checkbox">
+      <input type="checkbox" v-model="EstablishClubForm.IfRecruit">
+      是否招新
+    </label>
+  </div>
+</div>
+
+    <div class="field" v-if="EstablishClubForm.IfRecruit">
+      <label class="label">招新QQ群</label>
+      <div class="control">
+        <input class="input" type="text" v-model="EstablishClubForm.QQGroup">
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">社团邮箱</label>
+      <div class="control">
+        <input class="input" type="text" v-model="EstablishClubForm.Email">
+      </div>
+    </div>
+
+    <div class="field">
+  <label class="label">社团简介</label>
+  <div class="control">
+    <textarea class="textarea" placeholder="e.g. Jeek信息社是一个以兴趣为宗旨的。。。" v-model="EstablishClubForm.Introduction"></textarea>
+  </div>
+</div>
+
+    <div class="field">
+  <div class="control">
+    <button class="button is-primary" @click="submitForm">提交审核</button>
+    <p>提交审核后需要社团部批准方可开始招新</p>
+  </div>
+</div>
+
   </div>
 </template>
 <script>
   import axios from 'axios'
+  import Qs from 'qs'
   export default {
     data () {
       return {
@@ -77,8 +120,8 @@
       submitForm () {
         axios({
           method: 'POST',
-          url: 'api/club/establish',
-          data: JSON.stringify({
+          url: this.GetApi + 'club',
+          data: Qs.stringify({
             Clubname: this.EstablishClubForm.ClubName,
             Shezhang_Name: this.EstablishClubForm.ShezhangName,
             Shezhang_QQ: this.EstablishClubForm.ShezhangQQ,
@@ -88,9 +131,13 @@
             IfRecruit: this.EstablishClubForm.IfRecruit,
             QQGroup: this.EstablishClubForm.QQGroup,
             Email: this.EstablishClubForm.Email
-          })
+          }),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
         }).then(function (response) {
           if (response.data.message === 'success') {
+            this.$router.push('/')
             this.$notify({
               title: '成功',
               message: '成功创建社团',
@@ -109,6 +156,11 @@
             message: '无法创建社团'
           })
         })
+      },
+      checkLogin () {
+        if (this.$cookie.get('IndexAuthenticated') !== 'true') {
+          this.$router.push('/login')
+        }
       }
     },
     computed: {
@@ -130,8 +182,17 @@
       GetApi () {
         return this.$store.state.Api
       }
+    },
+    created () {
+      this.checkLogin()
     }
   }
 </script>
-<style>
+<style scoped>
+  .establish {
+    padding-top: 50px;
+    padding-left: 150px;
+    padding-right: 150px;
+    padding-bottom: 50px;
+  }
 </style>

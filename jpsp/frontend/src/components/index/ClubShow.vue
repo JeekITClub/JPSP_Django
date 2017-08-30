@@ -8,14 +8,14 @@
 
     <div class="card-content">
       <div class="content">
-        <p class="title is-4" v-if="Club.IfRecruit === 'True'">{{ Club.ClubName }}</p>
-        <p class="title is-4" v-if="Club.IfRecruit === 'False'">{{ Club.ClubName }}(不招新)</p>
+        <p class="title is-4" v-if="Club.IfRecruit === 1">{{ Club.ClubName }}</p>
+        <p class="title is-4" v-if="Club.IfRecruit === 0">{{ Club.ClubName }}(不招新)</p>
       </div>
     </div>
       <footer class="card-footer">
         <router-link :to="{ name: 'ClubIndex', params: { ClubId:Club.ClubId, Club:Club }}" class="card-footer-item">
-          <p v-if="Club.IfRecruit === 'True'">我想加入</p>
-          <p v-else-if="Club.IfRecruit === 'False'">查看该社团</p>
+          <p v-if="Club.IfRecruit === 1">我想加入</p>
+          <p v-else-if="Club.IfRecruit === 0">查看该社团</p>
         </router-link>
       </footer>
   </div>

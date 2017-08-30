@@ -37,6 +37,26 @@
       return {
         TabsValue: 'All'
       }
+    },
+    computed: {
+      GetUserId () {
+        return this.$cookie.get('UserId')
+      },
+      GetCDToken () {
+        return this.$cookie.get('CDToken')
+      },
+      GetUserName () {
+        return this.$cookie.get('UserName')
+      },
+      GetCDAuthenticated () {
+        return this.$cookie.get('CDAuthenticated')
+      },
+      /**
+       * @return {string}
+       */
+      GetApi () {
+        return this.$store.state.Api
+      }
     }
   }
 </script>

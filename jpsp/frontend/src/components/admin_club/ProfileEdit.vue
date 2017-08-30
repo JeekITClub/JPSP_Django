@@ -76,6 +76,7 @@
   </div>
 </template>
 <script>
+  var qs = require('qs')
   import axios from 'axios'
   export default {
     data () {
@@ -95,20 +96,12 @@
         }
       }
     },
-    computed: {
-      /**
-       * @return {string}
-       */
-      GetApi () {
-        return 'http://52.80.91.31:32700'
-      }
-    },
     methods: {
       submitForm () {
         axios({
           method: 'POST',
-          url: this.GetApi + '/clubs/profile',
-          data: {
+          url: 'http://127.0.0.1:3000/clubs/profile',
+          data: qs.stringify({
             ClubName: this.ProfileForm.ClubName,
             ClubId: this.GetClubId,
             ShezhangName: this.ProfileForm.ShezhangName,
@@ -120,7 +113,9 @@
             Email: this.ProfileForm.Email,
             Introduction: this.ProfileForm.Introduction,
             Achievements: this.ProfileForm.Achievements,
-            Token: 123
+            Token: 123}),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
           }
         })
           .then(function (response) {
@@ -157,7 +152,10 @@
         data: JSON.stringify({
           ClubId: this.GetClubId,
           Token: this.GetToken
-        })
+        }),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
       })
         .then(function (response) {
           if (response.data.message === 'success') {

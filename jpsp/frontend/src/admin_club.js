@@ -27,7 +27,7 @@ Vue.prototype.$notify = Notification
 /* eslint-disable no-new */
 const AdminClubVuexStore = new Vuex.Store({
   state: {
-    API: 'http://127.0.0.1:8080/api/'
+    Api: 'http://127.0.0.1:8080/api/'
   }
   // mutations: {
   //   Authenticated (state, If) {

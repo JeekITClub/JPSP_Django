@@ -79,7 +79,7 @@
         return this.$cookie.get('ClubToken')
       },
       GetApi () {
-        return this.$store.state.API
+        return this.$store.state.Api
       }
     },
     mounted: function () {
@@ -90,7 +90,10 @@
           ClubId: this.GetClubId,
           Token: this.GetClubId,
           Type: this.Type
-        })
+        }),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
       }).then(function (response) {
         if (response.data.message === 'success') {
           this.Members = JSON.parse(response.data.data)

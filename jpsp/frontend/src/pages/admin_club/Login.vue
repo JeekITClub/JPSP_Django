@@ -18,11 +18,10 @@
   </div>
 </template>
 <script>
-  import { setCookie } from 'tiny-cookie'
   import axios from 'axios'
-  import ElForm from '../../../node_modules/element-ui/packages/form/src/form'
+  import Qs from 'qs'
+
   export default {
-    components: {ElForm},
     data () {
       return {
         LoginForm: {
@@ -35,28 +34,51 @@
       onSubmit () {
         axios({
           method: 'POST',
-          url: 'http://127.0.0.1:8000/api/login',
-          data: JSON.stringify({
-            UserName: this.LoginForm.ClubId,
+          url: this.GetApi + 'login',
+          data: Qs.stringify({
+            UserId: this.LoginForm.ClubId,
             Password: this.LoginForm.Password,
             UserType: 'Club'
-          })
-        }).then(function (response) {
-          if (response.data.message === 'User Authenticated') {
-            let expireDays = 1000 * 60 * 60 * 24 * 3
-            // this.$store.commit('ApplyUserName', response.data.UserName)
-            setCookie('ClubId', this.LoginForm.ClubId, expireDays)
-            setCookie('Clubname', response.data.Clubname, expireDays)
-            // this.$store.commit('ApplyToken', response.data.Token)
-            setCookie('Token', response.data.Token, expireDays)
-            // expireDays 为有效时间
-            setCookie('ClubAuthenticated', true, expireDays)
-            // 第一个值为key，第二个为value，第三个为有限时间
-            this.$router.push('/dashboard')
-          } else {
-            console.log('error')
+          }),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
           }
-        }.bind(this))
+        })
+          .then(function (response) {
+            if (response.data.message === 'User Authenticated') {
+              this.$cookie.set('ClubId', this.LoginForm.ClubId, 1)
+              this.$cookie.set('ClubName', response.data.ClubName, 1)
+              this.$cookie.set('ClubToken', response.data.Token, 1)
+              this.$cookie.set('ClubAuthenticated', true, 1)
+              this.$router.push('/dashboard')
+              location.reload(true)
+            } else {
+              this.$notify.error({
+                title: '错误',
+                message: '登陆失败'
+              })
+            }
+          }.bind(this))
+      }
+    },
+    computed: {
+      GetClubId () {
+        return this.$cookie.get('ClubId')
+      },
+      GetIndexToken () {
+        return this.$cookie.get('ClubToken')
+      },
+      GetUserName () {
+        return this.$cookie.get('ClubName')
+      },
+      GetIndexAuthenticated () {
+        return this.$cookie.get('ClubAuthenticated')
+      },
+      /**
+       * @return {string}
+       */
+      GetApi () {
+        return this.$store.state.Api
       }
     }
   }

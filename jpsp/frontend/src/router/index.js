@@ -38,12 +38,7 @@ export default new Router({
       component: resolve => require(['@/pages/index/ProfileEdit.vue'], resolve)
     },
     {
-      path: '/club/establish',
-      name: 'EstablishClub',
-      component: resolve => require(['@/pages/index/EstablishClub.vue'], resolve)
-    },
-    {
-      path: '/club/',
+      path: '/club',
       name: 'ClubShow',
       component: resolve => require(['@/pages/index/ClubShow.vue'], resolve)
     },
@@ -75,7 +70,7 @@ export default new Router({
     {
       path: '/changepw',
       name: 'ChangePw',
-      component: resolve => require(['@/components/public/Future.vue'], resolve)
+      component: resolve => require(['@/components/index/ChangePassword.vue'], resolve)
     },
     {
       path: '/clubattended',
@@ -91,6 +86,11 @@ export default new Router({
       path: '/activityattended',
       name: 'ActivityAttended',
       component: resolve => require(['@/components/public/Future.vue'], resolve)
+    },
+    {
+      path: '/establish',
+      name: 'EstablishClub',
+      component: resolve => require(['@/components/index/Establish.vue'], resolve)
     }
   ]
 })

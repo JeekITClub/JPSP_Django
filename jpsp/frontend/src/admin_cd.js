@@ -3,8 +3,18 @@
 import Vue from 'vue'
 import AdminCD from './AdminCD.vue'
 import router from './router/admin_cd'
-import { Pagination, Table, TableColumn, DatePicker, TimePicker, Notification, Tabs, TabPane, FormItem, Form } from 'element-ui'
-// TODO； ele .css
+import {
+  Pagination,
+  Table,
+  TableColumn,
+  DatePicker,
+  TimePicker,
+  Notification,
+  Tabs,
+  TabPane,
+  FormItem,
+  Form
+} from 'element-ui'
 import './assets/index/css/bulma.css'
 import Vuex from 'vuex'
 import axios from 'axios'
@@ -26,7 +36,10 @@ Vue.prototype.$notify = Notification
 // Vue.use(Vuex)
 /* eslint-disable no-new */
 
-// const AdminCDVuexStore = new Vuex.Store({
+const AdminCDVuexStore = new Vuex.Store({
+  state: {
+    Api: 'http://127.0.0.1:8000/api/'
+  }
 //   state: {
 //     UserName: '用户名',
 //     UserId: '',
@@ -47,28 +60,26 @@ Vue.prototype.$notify = Notification
 //       state.UserId = UserId
 //     }
 //   }
-// })
+})
 
 new Vue({
   el: '#app_cd',
   router,
-  // store: AdminCDVuexStore,
+  store: AdminCDVuexStore,
   template: '<App/>',
   components: {AdminCD},
-  render: h => h(AdminCD),
-  created () {
-    this.checkLogin()
-  },
-  watch: {
-    '$route': 'checkLogin'
-  },
-  methods: {
-    checkLogin () {
-      if (this.$cookie.get('CDAuthentiacated') !== true) {
-        this.$router.push('/')
-      } else {
-        this.$router.push('/login')
-      }
-    }
-  }
+  render: h => h(AdminCD)
+  // created () {
+  //   this.checkLogin()
+  // },
+  // watch: {
+  //   '$route': 'checkLogin'
+  // },
+  // methods: {
+  //   checkLogin () {
+  //     if (this.$cookie.get('CDAuthentiacated') !== true) {
+  //       this.$router.push('/login')
+  //     }
+  //   }
+  // }
 })

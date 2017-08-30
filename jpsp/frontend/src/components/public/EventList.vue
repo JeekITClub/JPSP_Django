@@ -55,7 +55,10 @@
         data: JSON.stringify({
           ClubId: this.ClubId,
           Token: this.Token
-        })
+        }),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
       }).then(function (response) {
         if (response.data.message === 'success') {
           this.EventListTable = JSON.parse(response.data.data)

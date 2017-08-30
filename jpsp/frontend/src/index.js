@@ -7,6 +7,8 @@ import {Pagination, Notification, Icon} from 'element-ui'
 import Vuex from 'vuex'
 import axios from 'axios'
 import './assets/index/css/bulma.css'
+import '../static/icon.css'
+import '../static/notification.css'
 var VueCookie = require('vue-cookie')
 Vue.config.productionTip = false
 Vue.prototype.$ajax = axios
@@ -16,10 +18,9 @@ Vue.use(Icon)
 Vue.use(VueCookie)
 Vue.prototype.$notify = Notification
 /* eslint-disable no-new */
-
 const UserVuexStore = new Vuex.Store({
   state: {
-    Api: 'http://127.0.0.1:8000/api/'
+    Api: 'http://127.0.0.1:3000/'
   }
 //     UserId: '用户名',
 //     UserName: '',

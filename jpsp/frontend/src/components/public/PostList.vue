@@ -3,33 +3,29 @@
     <el-table :data=PostListTable>
       <el-table-column type="expand">
         <template scope="props">
-          <el-form inline class="demo-table-expand">
-            <el-row class="tac">
-              <el-col :span="24">
-                <el-form-item label="活动内容">
-                  <span>{{ props.row.Content }}</span>
-                </el-form-item>
-              </el-col>
-              <el-col :span="24">
-                <el-form-item label="活动过程">
-                  <span>{{ props.row.Process }}</span>
-                </el-form-item>
-              </el-col>
-              <el-col :span="24">
-                <el-form-item label="活动评价">
-                  <span>{{ props.row.Assessment }}</span>
-                </el-form-item>
-              </el-col>
-              <el-col :span="24">
-                <el-form-item label="感悟分析">
-                  <span>{{ props.row.Feeling }}</span>
-                </el-form-item>
-              </el-col>
-            </el-row>
-          </el-form>
+          <div class="columns is-multiline">
+            <div class="column">
+              <el-form-item label="活动内容">
+                <span>{{ props.row.Content }}</span>
+              </el-form-item>
+            </div>
+            <div class="column">
+              <el-form-item label="活动过程">
+                <span>{{ props.row.Process }}</span>
+              </el-form-item>
+            </div>
+            <div class="column">
+              <el-form-item label="活动评价">
+                <span>{{ props.row.Assessment }}</span>
+              </el-form-item>
+            </div>
+            <div class="column">
+              <el-form-item label="感悟分析">
+                <span>{{ props.row.Feeling }}</span>
+              </el-form-item>
+            </div>
+          </div>
         </template>
-      </el-table-column>
-      <el-table-column prop="pk" label="序号">
       </el-table-column>
       <el-table-column prop="ClubName" label="社团名称">
       </el-table-column>
@@ -63,12 +59,12 @@
         </template>
       </el-table-column>
     </el-table>
-    <div class="block">
+    <div class="column">
+    <!--TODO: pagination-->
       <el-pagination
-        @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page.sync="currentPage1"
-        :page-size="100"
+        :page-size="10"
         layout="total, prev, pager, next"
         :total="1000">
       </el-pagination>
@@ -77,8 +73,9 @@
 </template>
 
 <script>
-  import { getCookie } from 'tiny-cookie'
   import axios from 'axios'
+  import Qs from 'qs'
+
   export default {
     data () {
       return {
@@ -97,36 +94,43 @@
       StarSubmit (postid, star) {
         axios({
           method: 'POST',
-          url: 'http://127.0.0.1:8000/api/post/star',
-          data: JSON.stringify({
+          url: this.GetApi + 'post/star',
+          data: Qs.stringify({
             Stars: star,
             PostId: postid,
             Token: this.GetToken
-          }.bind(this))
-        }).then(function (response) {
-          if (response.data.message === 'success') {
-            this.$notify({
-              title: '成功',
-              message: '成功评价社团活动 Id:' + postid,
-              type: 'success'
-            })
-          } else {
-            this.$notify.error({
-              title: '错误',
-              message: '无法评价社团活动'
-            })
+          }),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
           }
-        }.bind(this))
+        })
+          .then(function (response) {
+            if (response.data.message === 'success') {
+              this.$notify({
+                title: '成功',
+                message: '成功评价社团活动 Id:' + postid,
+                type: 'success'
+              })
+            } else {
+              this.$notify.error({
+                title: '错误',
+                message: '无法评价社团活动'
+              })
+            }
+          }.bind(this))
       },
       DenySubmit (postid) {
         axios({
           method: 'POST',
-          url: 'http://127.0.0.1:8000/api/post/operate',
-          data: JSON.stringify({
+          url: this.GetApi + '/post/operate',
+          data: Qs.stringify({
             PostId: postid,
             Token: this.GetToken,
             Operation: 'Deny'
-          })
+          }),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
         }).then(function (response) {
           if (response.data.message === 'success') {
             this.$notify({
@@ -145,81 +149,97 @@
       UndoDenySubmit (postid) {
         axios({
           method: 'POST',
-          url: 'http://127.0.0.1:8000/api/post/operate',
-          data: JSON.stringify({
+          url: this.GetApi + 'post/operate',
+          data: Qs.stringify({
             PostId: postid,
             Token: this.GetToken,
             Operation: 'UndoDeny'
-          })
-        }).then(function (response) {
-          if (response.data.message === 'success') {
-            this.$notify({
-              title: '成功',
-              message: '成功撤销拒绝社团活动 Id:' + postid,
-              type: 'success'
-            })
-          } else {
-            this.$notify.error({
-              title: '错误',
-              message: '无法撤销拒绝社团活动'
-            })
+          }),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
           }
-        }.bind(this))
+        })
+          .then(function (response) {
+            if (response.data.message === 'success') {
+              this.$notify({
+                title: '成功',
+                message: '成功撤销拒绝社团活动 Id:' + postid,
+                type: 'success'
+              })
+            } else {
+              this.$notify.error({
+                title: '错误',
+                message: '无法撤销拒绝社团活动'
+              })
+            }
+          }.bind(this))
       }
     },
     computed: {
-      GetClubToken () {
-        return getCookie('ClubToken')
+      GetUserId () {
+        return this.$cookie.get('CDUserId')
       },
       GetCDToken () {
-        return getCookie('CDToken')
+        return this.$cookie.get('CDToken')
       },
-      GetClubId () {
-        return getCookie('ClubId')
+      /**
+       * @return {string}
+       */
+      GetApi () {
+        return this.$store.state.Api
       }
     },
     mounted: function () {
       if (this.user === 'CD') {
         axios({
           method: 'POST',
-          url: 'http://127.0.0.1:8000/api/post/list',
-          data: JSON.stringify({
+          url: this.GetApi() + 'post/list',
+          data: Qs.stringify({
             Type: this.type,
             Token: this.GetCDToken
-          })
-        }).then(function (response) {
-          if (response.data.message === 'success') {
-            this.PostListTable = JSON.parse(response.data.data)
-          } else {
-            this.$notify.error({
-              title: '错误',
-              message: '无法获得数据'
-            })
+          }),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
           }
-        }.bind(this))
-      } else if (this.user === 'Club') {
-        axios({
-          method: 'POST',
-          url: 'http://127.0.0.1:8000/api/post/list',
-          data: JSON.stringify({
-            Type: this.type,
-            Token: this.GetClubToken,
-            ClubId: this.GetClubId
-          })
-        }).then(function (response) {
-          if (response.data.message === 'success') {
-            this.PostListTable = JSON.parse(response.data.data)
-          } else {
-            this.$notify.error({
-              title: '错误',
-              message: '无法获得数据'
-            })
-          }
-        }.bind(this))
+        })
+          .then(function (response) {
+            if (response.data.message === 'success') {
+              this.PostListTable = JSON.parse(response.data.data)
+            } else {
+              this.$notify.error({
+                title: '错误',
+                message: '无法获得数据'
+              })
+            }
+          }.bind(this))
       }
     }
   }
+//      } else if (this.user === 'Club') {
+//        axios({
+//          method: 'POST',
+//          url: this.GetApi + 'post/list',
+//          data: Qs.stringify({
+//            Type: this.type,
+//            Token: this.GetClubToken,
+//            ClubId: this.GetClubId
+//          }),
+//          headers: {
+//            'Content-Type': 'application/x-www-form-urlencoded'
+//          }
+//        })
+//          .then(function (response) {
+//            if (response.data.message === 'success') {
+//              this.PostListTable = JSON.parse(response.data.data)
+//            } else {
+//              this.$notify.error({
+//                title: '错误',
+//                message: '无法获得数据'
+//              })
+//            }
+//          }.bind(this))
+
 </script>
 <style scoped>
-
+  @import '../../assets/el-page.css';
 </style>

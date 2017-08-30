@@ -16,7 +16,6 @@
 </template>
 <script>
   // TODO: 公共教室两个时间的验证 后一个时间不能比前一个早 而且不能超过一天的周期
-  import { getCookie } from 'tiny-cookie'
   import axios from 'axios'
   export default {
     name: 'RecruitClassroomApply',
@@ -38,7 +37,10 @@
             Date1: this.RecruitClassroomApplyForm.Date1,
             Date2: this.RecruitClassroomApplyForm.Date2,
             Token: this.GetClubToken
-          })
+          }),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
         }).then(function (response) {
           if (response.data.message === 'success') {
             this.$notify({

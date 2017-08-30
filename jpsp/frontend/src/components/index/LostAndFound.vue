@@ -119,7 +119,10 @@
             Importance: this.Importance,
             Desc: this.desc,
             Token: this.GetToken
-          })
+          }),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
         }).then(function (response) {
           if (response.data.message === 'Error') {
             console.log('error')

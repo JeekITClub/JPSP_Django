@@ -48,11 +48,15 @@
       logout () {
         this.$cookie.delete('CDAuthenticated')
         this.$cookie.delete('CDToken')
+        this.$cookie.delete('CDUserName')
+        this.$cookie.delete('CDUserId')
+        this.$router.push('/')
+        location.reload(true)
       }
     },
     computed: {
       Authenticated () {
-        return this.$cookie.get('CDAuthentiacated')
+        return this.$cookie.get('CDAuthenticated')
       },
       UserName () {
         return this.$cookie.get('CDUserName')

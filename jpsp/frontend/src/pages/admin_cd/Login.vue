@@ -4,7 +4,7 @@
       <el-form ref="LoginForm" :model="LoginForm">
         <el-form-item :required=true>
           <label class="label">用户名</label>
-          <input class="input" v-model="LoginForm.ClubId" placeholder="社团ID" autofocus="">
+          <input class="input" v-model="LoginForm.UserId" placeholder="社团ID" autofocus="">
         </el-form-item>
         <el-form-item :required=true>
           <label class="label">密码</label>
@@ -19,11 +19,12 @@
 </template>
 <script>
   import axios from 'axios'
+  import Qs from 'qs'
   export default {
     data () {
       return {
         LoginForm: {
-          UserName: '',
+          UserId: '',
           Password: ''
         }
       }
@@ -32,23 +33,52 @@
       onSubmit () {
         axios({
           method: 'POST',
-          url: 'http://127.0.0.1:8000/api/login',
-          data: JSON.stringify({
-            UserName: this.LoginForm.UserName,
-            Password: this.LoginForm.Password
-          })
+          url: this.GetApi + 'login',
+          data: Qs.stringify({
+            UserId: this.LoginForm.UserId,
+            Password: this.LoginForm.Password,
+            UserType: 'CD'
+          }),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
         }).then(function (response) {
-          if (response.data.message === 'User Authenticated') {
-            this.$store.commit('Authenticate', true)
-            this.$store.commit('ApplyUserName', this.UserName)
-            this.$store.commit('ApplyToken', response.data.Token)
-          } else if (response.data.message === 'User Not Authenticated') {
-            this.$store.commit('Authenticate', false)
+          if (response.data.message === 'success') {
+            this.$cookie.set('CDAuthenticated', true, 1)
+            this.$cookie.set('CDUserId', this.LoginForm.UserId, 1)
+            this.$cookie.set('CDUserName', response.data.UserName, 1)
+            this.$cookie.set('CDToken', response.data.Token, 1)
+            location.reload(true)
+          } else {
+            this.$notify.error({
+              title: '错误',
+              message: '登陆失败'
+            })
           }
         }.bind(this))
           .catch(function (error) {
             console.log(error)
           })
+      }
+    },
+    computed: {
+      GetUserId () {
+        return this.$cookie.get('CDUserId')
+      },
+      GetCDToken () {
+        return this.$cookie.get('CDToken')
+      },
+      GetUserName () {
+        return this.$cookie.get('CDUserName')
+      },
+      GetCDAuthenticated () {
+        return this.$cookie.get('CDAuthenticated')
+      },
+      /**
+       * @return {string}
+       */
+      GetApi () {
+        return this.$store.state.Api
       }
     }
   }

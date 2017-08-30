@@ -104,7 +104,10 @@
             ActivityId: ActivityId,
             Token: this.GetToken,
             Operation: 'Deny'
-          })
+          }),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
         }).then(function (response) {
           if (response.data.message === 'success') {
             this.$notify({

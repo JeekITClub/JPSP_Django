@@ -31,7 +31,10 @@
         url: this.GetApi + 'activity/detail/',
         data: JSON.stringify({
           ActivityId: this.$props.ActivityId
-        })
+        }),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
       })
     },
     computed: {

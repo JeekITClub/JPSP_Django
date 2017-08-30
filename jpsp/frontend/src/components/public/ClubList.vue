@@ -1,43 +1,36 @@
 <template>
-  <el-table :data="ClubListTable" stripe style="width: 100%">
+  <div>
+  <el-table :data="ClubList" stripe style="width: 100%">
     <el-table-column type="expand">
       <template scope="props">
-        <el-form inline class="demo-table-expand">
-          <el-row class="tac">
-            <el-col :span="24">
-              <el-form-item label="招新QQ群">
-                <span>{{ props.row.EnrollGroupQQ }}</span>
-              </el-form-item>
-            </el-col>
-            <el-col :span="24">
-              <el-form-item label="社团邮箱">
-                <span>{{ props.row.Email }}</span>
-              </el-form-item>
-            </el-col>
-            <el-col :span="24">
-              <el-form-item label="社团介绍">
-                <span>{{ props.row.Introduction }}</span>
-              </el-form-item>
-            </el-col>
-            <el-col :span="24">
-              <el-form-item label="成就">
-                <span>{{ props.row.Achievements }}</span>
-              </el-form-item>
-            </el-col>
-          </el-row>
+        <el-form>
+        <div class="columns is-multiline">
+          <div class="column">
+            <el-form-item label="招新QQ群">
+              <span>{{ props.row.EnrollGroupQQ }}</span>
+            </el-form-item>
+          </div>
+          <!--<div class="column">-->
+            <!--<el-form-item label="社团邮箱">-->
+              <!--<span>{{ props.row.Email }}</span>-->
+            <!--</el-form-item>-->
+          <!--</div>-->
+          <div class="column">
+            <el-form-item label="社团介绍">
+              <span>{{ props.row.Introduction }}</span>
+            </el-form-item>
+          </div>
+          <!--<div class="column">-->
+            <!--<el-form-item label="成就">-->
+              <!--<span>{{ props.row.Achievements }}</span>-->
+            <!--</el-form-item>-->
+          <!--</div>-->
+        </div>
         </el-form>
       </template>
     </el-table-column>
     <el-table-column prop="ClubId" label="社团Id"></el-table-column>
-    <el-table-column
-      prop="ClubName"
-      label="社团名称">
-      <template scope="scope">
-        <router-link :to="{ name: 'ClubIndex', params: { ClubId:scope.row.ClubId }}">
-          {{ scope.row.ClubName }}
-        </router-link>
-      </template>
-    </el-table-column>
+    <el-table-column prop="ClubName" label="社团名称"></el-table-column>
     <el-table-column prop="ShezhangName" label="社长姓名"></el-table-column>
     <el-table-column prop="ShezhangGrade" label="社长年级"></el-table-column>
     <el-table-column prop="ShezhangClass" label="社长班级"></el-table-column>
@@ -46,56 +39,103 @@
     <el-table-column prop="State" label="是否已通过"></el-table-column>
     <el-table-column prop="Stars" label="评分"></el-table-column>
   </el-table>
+    <div class="column">
+        <el-pagination
+          @current-change="handleCurrentChange"
+          :current-page.sync="Page"
+          :page-size="12"
+          layout="total, prev, pager, next"
+          :total="50" align="center">
+        </el-pagination>
+      </div>
+    </div>
 </template>
 
 <script>
-  import {getCookie} from 'tiny-cookie'
   import axios from 'axios'
+  import Qs from 'qs'
+
   export default {
     data () {
       return {
-        ClubListTable: [
-          {
-            'ClubId': '12',
-            'ClubName': '233'
+        Page: 1,
+        ClubList: []
+      }
+    },
+    methods: {
+      handleCurrentChange (val) {
+        axios({
+          method: 'POST',
+          url: this.GetApi + 'clubs/list/' + this.$props.type,
+          data: Qs.stringify({
+            Token: this.GetToken,
+            UserId: this.GetUserId,
+            Page: val
+          }),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
           }
-        ]
+        })
+          .then(function (response) {
+            if (response.data.message === 'success') {
+              this.ClubList = response.data.ClubList
+            } else {
+              this.$notify.error({
+                'message': '无法获得社团列表',
+                'title': 'Error'
+              })
+            }
+          }.bind(this))
       }
     },
     props: {
       user: {
-        'default': 'Student'
+        'default': 'CD'
       },
       type: {
-        'default': 'Established'
+        'default': 'unconfirmed'
       }
     },
     mounted: function () {
       axios({
         method: 'POST',
-        url: 'http://127.0.0.1:8000/api/public/club/list',
-        data: JSON.stringify({
+        url: this.GetApi + 'clubs/list/' + this.$props.type,
+        data: Qs.stringify({
           Token: this.GetToken,
-          Type: 'Established'
-        })
-      }).then(function (response) {
-        if (response.data.message === 'success') {
-          this.ClubListTable = JSON.parse(response.data.data)
-          console.log('success')
-        } else {
-          console.log('error')
+          UserId: this.GetUserId,
+          Page: this.Page
+        }),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
         }
-      }.bind(this))
+      })
+        .then(function (response) {
+          if (response.data.message === 'success') {
+            this.ClubList = response.data.ClubList
+            console.log('success')
+          } else {
+            console.log('error')
+          }
+        }.bind(this))
     },
     computed: {
-      GetUserName () {
-        return getCookie('UserName')
-      },
-      GetIndexToken () {
-        return getCookie('IndexToken')
+      GetUserId () {
+        return this.$cookie.get('CDUserId')
       },
       GetCDToken () {
-        return getCookie('CDToken')
+        return this.$cookie.get('CDToken')
+      },
+      GetUserName () {
+        return this.$cookie.get('CDUserName')
+      },
+      GetCDAuthenticated () {
+        return this.$cookie.get('CDAuthenticated')
+      },
+      /**
+       * @return {string}
+       */
+      GetApi () {
+        return this.$store.state.Api
       }
     }
   }
