@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <JNavTop></JNavTop>
-    <div class="columns" v-if="GetIndexAuthenticated === 'true' && this.$route.name === 'ProfileEdit' || this.$route.name ==='Basic' || this.$route.name === 'ClubAttended' ">
+    <div class="columns" v-if="GetIndexAuthenticated === 'true' && this.$route.name === 'ProfileEdit'">
       <div class="column is-2">
         <JAside></JAside>
       </div>
