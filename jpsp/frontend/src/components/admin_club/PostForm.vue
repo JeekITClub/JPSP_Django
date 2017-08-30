@@ -114,7 +114,7 @@
       submitForm () {
         axios({
           method: 'POST',
-          url: '/api/club/post/EditSubmit',
+          url: this.GetApi + 'post/',
           data: JSON.stringify({
             ClubId: this.GetClubId,
             ClubName: this.GetClubName,
@@ -151,6 +151,12 @@
       },
       GetToken () {
         return this.$cookie.get('ClubToken')
+      },
+      /**
+       * @return {string}
+       */
+      GetApi () {
+        return this.$store.state.Api
       }
     }
   }

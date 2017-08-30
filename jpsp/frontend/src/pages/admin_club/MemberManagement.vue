@@ -1,9 +1,9 @@
 <template>
   <div>
     <el-tabs v-model="TabsValue" type="card">
-      <el-tab-pane name="All" label="所有">
-        <member-management Type="All"></member-management>
-      </el-tab-pane>
+      <!--<el-tab-pane name="All" label="所有">-->
+        <!--<member-management Type="All"></member-management>-->
+      <!--</el-tab-pane>-->
       <el-tab-pane name="Confirmed" label="已加入社员">
         <member-management Type="Confirmed"></member-management>
       </el-tab-pane>
@@ -21,7 +21,7 @@
     },
     data () {
       return {
-        TabsValue: 'All'
+        TabsValue: 'Confirmed'
       }
     }
   }

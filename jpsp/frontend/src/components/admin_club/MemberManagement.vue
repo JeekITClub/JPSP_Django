@@ -3,19 +3,13 @@
     <el-table-column type="expand">
       <template scope="props">
         <el-form inline class="demo-table-expand">
-          <el-row class="tac">
-            <el-col :span="24">
+          <div class="columns">
+            <div class="column">
               <el-form-item label="QQ号">
                 <span>{{ props.row.QQ }}</span>
               </el-form-item>
-            </el-col>
-            <el-col :span="24" v-if="this.Type == 'Unconfirmed'">
-              <el-form-item label="加入理由">
-                <!--加入社团的理由-->
-                <span>{{ props.row.Reason }}</span>
-              </el-form-item>
-            </el-col>
-          </el-row>
+            </div>
+          </div>
         </el-form>
       </template>
     </el-table-column>
@@ -27,32 +21,24 @@
     </el-table-column>
     <el-table-column label="操作" v-if="this.Type === 'Confirmed'">
       <template scope="scope">
-        <el-button @click="deleteMember(scope.row.UserId)" type="primary">删除成员</el-button>
+        <button class="button is-primary" @click="deleteMember(scope.row.UserId)">删除成员</button>
       </template>
     </el-table-column>
     <el-table-column label="操作" v-if="this.Type === 'Unconfirmed'">
       <template scope="scope">
-        <el-button @click="addMember(scope.row.UserId)" type="primary">添加成员
-        </el-button>
+        <button class="button is-primary" @click="confirmMember(scope.row.UserId)">添加成员</button>
       </template>
     </el-table-column>
   </el-table>
 </template>
 <script>
   import axios from 'axios'
+  import Qs from 'qs'
+
   export default {
     data () {
       return {
-        Members: [
-          {
-            UserId: '1',
-            Name: 'NCJ',
-            Grade: '1',
-            Class: '1',
-            State: 'Confirmed',
-            Reason: 'a'
-          }
-        ]
+        Members: [{}]
       }
     },
     props: {
@@ -61,11 +47,48 @@
       }
     },
     methods: {
-      addMember () {
-        // TODO: addMember method
-      },
       deleteMember (member) {
-        console.log('success')
+        axios({
+          method: 'DELETE',
+          url: this.GetApi + 'clubships',
+          data: Qs.stringify({
+            UserId: null,
+            ClubId: this.GetClubId,
+            Token: this.GetToken
+          })
+        })
+          .then(function (response) {
+            if (response.data.message === 'success') {
+              this.$notify.success({
+                'title': 'success',
+                'message': 'success'
+              })
+            } else if (response.data.message === 'error') {
+              this.$notify.error({
+                'title': 'error',
+                'message': 'error'
+              })
+            }
+          }.bind(this))
+      },
+      confirmMember (member) {
+        axios({
+          method: 'PUT',
+          url: this.GetApi + 'clubships',
+          data: Qs.stringfy({
+            UserId: null,
+            ClubId: this.GetClubId,
+            Token: this.GetToken
+          })
+        })
+          .then(function (response) {
+            if (response.data.message === 'success') {
+              this.$notify.success({
+                'title': 'success',
+                'message': 'success'
+              })
+            }
+          }.bind(this))
       }
     },
     computed: {
@@ -78,14 +101,17 @@
       GetToken () {
         return this.$cookie.get('ClubToken')
       },
+      /**
+       * @return {string}
+       */
       GetApi () {
         return this.$store.state.Api
       }
     },
     mounted: function () {
       axios({
-        method: 'POST',
-        url: this.GetApi + 'member',
+        method: 'PATCH',
+        url: this.GetApi + 'clubships/' + this.$props.Type,
         data: JSON.stringify({
           ClubId: this.GetClubId,
           Token: this.GetClubId,
@@ -103,7 +129,7 @@
             'message': '获取数据失败'
           })
         }
-      })
+      }.bind(this))
     }
   }
 </script>
