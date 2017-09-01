@@ -23,9 +23,9 @@
               <router-link class="navbar-item " to="/Club">
                 社团列表
               </router-link>
-              <router-link class="navbar-item " to="/Club/Event">
-                社团动态
-              </router-link>
+              <!--<router-link class="navbar-item " to="/Club/Event">-->
+                <!--社团动态-->
+              <!--</router-link>-->
             </div>
           </div>
           <!--<div class="navbar-item has-dropdown is-hoverable">-->

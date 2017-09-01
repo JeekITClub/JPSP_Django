@@ -93,6 +93,7 @@
 </template>
 <script>
   import axios from 'axios'
+  import Qs from 'qs'
   export default {
     data () {
       return {
@@ -109,7 +110,7 @@
         Eleven: '',
         Twelve: '',
         Thirteen: '',
-        Grade: ''
+        Year: ''
       }
     },
     computed: {
@@ -138,31 +139,30 @@
           method: 'POST',
           url: this.GetApi + 'profile',
           // TODO: API
-          data: JSON.stringify({
-            Token: this.GetCDToken,
-            // todo: format
+          data: Qs.stringify({
+//            Token: this.GetCDToken,
             ClassMember: [this.One, this.Two, this.Three, this.Four, this.Five, this.Six, this.Seven, this.Eight, this.Nine, this.Ten, this.Eleven, this.Twelve, this.Thirteen],
-            Grade: this.Grade
+            Grade: this.Year
           }),
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
-              .then(function (response) {
-                if (response.data.message === 'success') {
-                  this.$notify.success({
-                    title: '成功',
-                    message: '创建成功'
-                  })
-                  console.log('success')
-                } else {
-                  this.$notify.error({
-                    title: '错误',
-                    message: '创建失败'
-                  })
-                  console.log('error')
-                }
-              }.bind(this))
           }
         })
+          .then(function (response) {
+            if (response.data.message === 'success') {
+              this.$notify.success({
+                title: '成功',
+                message: '创建成功'
+              })
+              console.log('success')
+            } else {
+              this.$notify.error({
+                title: '错误',
+                message: '创建失败'
+              })
+              console.log('error')
+            }
+          }.bind(this))
       }
     }
   }
