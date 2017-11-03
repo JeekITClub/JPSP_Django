@@ -175,38 +175,22 @@ def club_list(request):
                 club_object = Club.objects.all()
             paginator = Paginator(club_object, 12)
             club_object_page = paginator.page(page)
-            for data in club_object_page:
-                if not data.IfRecruit:
-                    response.append({'ClubId': data.ClubId,
-                                     'ClubName': data.ClubName,
-                                     'ShezhangName': data.ShezhangName,
-                                     'ShezhangQQ': data.ShezhangQq,
-                                     'ShezhangGrade': data.ShezhangGrade,
-                                     'ShezhangClassroom': data.ShezhangClass,
-                                     'IfRecruit': 'False',
-                                     'EnrollGroupQQ': data.EnrollGroupQq,
-                                     'Email': data.Email,
-                                     'State': data.State,
-                                     'Stars': data.Stars,
-                                     'Introduction': data.Introduction,
-                                     'Achievements': data.Achievements,
+            for club in club_object_page:
+                    response.append({'ClubId': club.ClubId,
+                                     'ClubName': club.ClubName,
+                                     'ShezhangName': club.ShezhangName,
+                                     'ShezhangQQ': club.ShezhangQq,
+                                     'ShezhangGrade': club.ShezhangGrade,
+                                     'ShezhangClassroom': club.ShezhangClass,
+                                     'IfRecruit': ('True' if club.IfRecruit else 'False'),
+                                     'EnrollGroupQQ': club.EnrollGroupQq,
+                                     'Email': club.Email,
+                                     'State': club.State,
+                                     'Stars': club.Stars,
+                                     'Introduction': club.Introduction,
+                                     'Achievements': club.Achievements,
                                      })
-                else:
-                    response.append({'ClubId': data.ClubId,
-                                     'ClubName': data.ClubName,
-                                     'ShezhangName': data.ShezhangName,
-                                     'ShezhangQQ': data.ShezhangQq,
-                                     'ShezhangGrade': data.ShezhangGrade,
-                                     'ShezhangClassroom': data.ShezhangClass,
-                                     'IfRecruit': 'False',
-                                     'EnrollGroupQQ': data.EnrollGroupQq,
-                                     'Email': data.Email,
-                                     'State': data.State,
-                                     'Stars': data.Stars,
-                                     'Introduction': data.Introduction,
-                                     'Achievements': data.Achievements,
-                                     })
-            return JsonResponse({'message': 'success', 'Access-Control-Allow-Origin': '*', data: json.dumps(response)},
+            return JsonResponse({'message': 'success', 'Access-Control-Allow-Origin': '*', club: json.dumps(response)},
                                 safe=False)
         else:
             return JsonResponse({
@@ -228,18 +212,11 @@ def club_show(request):
         paginator = Paginator(club_object, 12)
         page = request.GET.get('Page')
         club_object_page = paginator.page(page)
-        for data in club_object_page:
-            if not data.IfRecruit:
-                response.append({'ClubId': data.ClubId,
-                                 'ClubName': data.ClubName,
-                                 'Type': data.Type,
-                                 'IfRecruit': 'False',
-                                 })
-            elif data.IfRecruit:
-                response.append({'ClubId': str(data.ClubId),
-                                 'ClubName': str(data.ClubName),
-                                 'Type': data.Type,
-                                 'IfRecruit': 'True',
+        for club in club_object_page:
+                response.append({'ClubId': str(club.ClubId),
+                                 'ClubName': str(club.ClubName),
+                                 'Type': club.Type,
+                                 'IfRecruit': ('True' if club.IfRecruit else 'False'),
                                  })
         return JsonResponse({'message': 'success', 'Access-Control-Allow-Origin': '*', 'data': json.dumps(response)},
                             safe=False)
