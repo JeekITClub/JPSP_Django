@@ -17,9 +17,6 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.views.generic import TemplateView
 urlpatterns = [
-    url(r'^admin_club', TemplateView.as_view(template_name="admin_club.html")),
-    url(r'^admin_cd', TemplateView.as_view(template_name="admin_cd.html")),
     url(r'^admin/', admin.site.urls),
-    url(r'^api/', include('jpspapp.urls')),
-    url(r'^$', TemplateView.as_view(template_name="index.html")),
+    url('^', include('jpspapp.urls'))
 ]

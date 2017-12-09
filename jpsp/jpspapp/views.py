@@ -1,8 +1,9 @@
 # coding=utf-8
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse, HttpResponseServerError
 import json
+from django.template import loader
 from django.contrib.auth.models import User
-from jpspapp.models import Club, Post, Token, Activity, Classroom, LostAndFound, UserProfile, CDUser, \
+from jpspapp.models import Club, Post, Activity, Classroom, LostAndFound, UserProfile, CDUser, \
     ActivityParticipantShip, ClubMemberShip
 from django.views.decorators.http import require_http_methods
 import datetime
@@ -10,6 +11,7 @@ from django.contrib.auth import authenticate
 import itchat
 import random
 from django.core.paginator import Paginator
+
 alphabet = "abcdefghijklmnopqrstuvwxyz0123456789"
 
 
@@ -50,6 +52,16 @@ def token_remove(user_id):
 
 
 # Create your views here.
+
+
+@require_http_methods(['GET'])
+def index(request):
+    try:
+        template = loader.get_template('index.html')
+        content = {}
+        return HttpResponse(template.render(content,request))
+    except:
+        return HttpResponseServerError
 
 @require_http_methods(['POST'])
 def login(request):
@@ -176,22 +188,21 @@ def club_list(request):
             paginator = Paginator(club_object, 12)
             club_object_page = paginator.page(page)
             for club in club_object_page:
-                    response.append({'ClubId': club.ClubId,
-                                     'ClubName': club.ClubName,
-                                     'ShezhangName': club.ShezhangName,
-                                     'ShezhangQQ': club.ShezhangQq,
-                                     'ShezhangGrade': club.ShezhangGrade,
-                                     'ShezhangClassroom': club.ShezhangClass,
-                                     'IfRecruit': ('True' if club.IfRecruit else 'False'),
-                                     'EnrollGroupQQ': club.EnrollGroupQq,
-                                     'Email': club.Email,
-                                     'State': club.State,
-                                     'Stars': club.Stars,
-                                     'Introduction': club.Introduction,
-                                     'Achievements': club.Achievements,
-                                     })
-            return JsonResponse({'message': 'success', 'Access-Control-Allow-Origin': '*', club: json.dumps(response)},
-                                safe=False)
+                response.append({'ClubId': club.ClubId,
+                                 'ClubName': club.ClubName,
+                                 'ShezhangName': club.ShezhangName,
+                                 'ShezhangQQ': club.ShezhangQq,
+                                 'ShezhangGrade': club.ShezhangGrade,
+                                 'ShezhangClassroom': club.ShezhangClass,
+                                 'IfRecruit': ('True' if club.IfRecruit else 'False'),
+                                 'EnrollGroupQQ': club.EnrollGroupQq,
+                                 'Email': club.Email,
+                                 'State': club.State,
+                                 'Stars': club.Stars,
+                                 'Introduction': club.Introduction,
+                                 'Achievements': club.Achievements,
+                                 })
+            # todo: page
         else:
             return JsonResponse({
                 'message': 'error',
@@ -204,27 +215,19 @@ def club_list(request):
         })
 
 
+# 学生 社团列表
 @require_http_methods(['GET'])
 def club_show(request):
     try:
-        response = []
         club_object = Club.objects.filter(State=True)
         paginator = Paginator(club_object, 12)
         page = request.GET.get('Page')
-        club_object_page = paginator.page(page)
-        for club in club_object_page:
-                response.append({'ClubId': str(club.ClubId),
-                                 'ClubName': str(club.ClubName),
-                                 'Type': club.Type,
-                                 'IfRecruit': ('True' if club.IfRecruit else 'False'),
-                                 })
-        return JsonResponse({'message': 'success', 'Access-Control-Allow-Origin': '*', 'data': json.dumps(response)},
-                            safe=False)
+        club = paginator.page(page)
+        context = {'club': club}
+        template = loader.get_template('clubs.html')
+        return HttpResponse(template.render(context, request))
     except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
+        return HttpResponseServerError
 
 
 @require_http_methods(['POST'])
@@ -246,10 +249,7 @@ def club_attend(request):
                 'Access-Control-Allow-Origin': '*'
             })
     except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
+        return HttpResponseServerError()
 
 
 @require_http_methods(['POST'])
@@ -308,7 +308,7 @@ def club_confirmed_member_list(request):
         if (token_authenticate(user_id=club_id, token=token)):
             membership_set = ClubMemberShip.objects.filter(Club=Club.objects.get(ClubId=club_id)).filter(State=1)
             response = []
-            paginator = Paginator(membership_set,10)
+            paginator = Paginator(membership_set, 10)
             membership_set_page = paginator.page(page)
             for membership in membership_set_page:
                 response.append({
@@ -772,7 +772,7 @@ def post_submit(request):
         feeling = body['Feeling']
         token = body['Token']
         try:
-            if token_authenticate(user_id=clubid,token=token):
+            if token_authenticate(user_id=clubid, token=token):
                 Post.objects.create(
                     ClubName=clubname,
                     ClubId=Club.objects.filter(clubid=clubid),
@@ -852,7 +852,7 @@ def post_list(request):
             post_object = Post.objects.filter(Pass='1')
         elif type == "All":
             post_object = Post.objects.all()
-        paginator = Paginator(post_object,10)
+        paginator = Paginator(post_object, 10)
         post_object_page = paginator.page(page)
         for data in post_object_page:
             response.append({'pk': data.pk,
@@ -1185,8 +1185,6 @@ def cd_file_upload(request):
             'message': 'error',
             'Access-Control-Allow-Origin': '*'
         })
-
-
 
 
 @require_http_methods(['POST'])

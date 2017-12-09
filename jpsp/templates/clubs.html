@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>社团名称</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for club in clubs %}
+                <tr>
+                    <th>{{ club.ClubName }}</th>
+                    <th><button>加入</button></th>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

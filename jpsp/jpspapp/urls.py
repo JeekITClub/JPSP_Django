@@ -34,4 +34,5 @@ urlpatterns = [
     #url(r'^club/file/download', views.club_list),
     #url(r'^cd/file/upload', views.cd_file_upload),
     url(r'^cd/file/download', views.club_list),
+    url(r'^',views.index)
 ]

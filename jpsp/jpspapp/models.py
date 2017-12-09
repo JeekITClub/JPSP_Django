@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class UserProfile(models.Model):
-    UserObject = models.ForeignKey(User, default=None)
+    UserObject = models.ForeignKey(User, default=None,on_delete=False)
     UserName = models.CharField(max_length=12, default=None)
     Class = models.IntegerField()
     Grade = models.IntegerField()
@@ -20,13 +20,13 @@ class UserProfile(models.Model):
 
 
 class CDUser(models.Model):
-    UserObject = models.OneToOneField(User,default=None)
+    UserObject = models.OneToOneField(User,default=None,on_delete=False)
     UserName = models.CharField(max_length=30, default=None)
 
 
 class Club(models.Model):
     ClubName = models.CharField(max_length=30, default=None)
-    ClubObject = models.OneToOneField(User, default=None)
+    ClubObject = models.OneToOneField(User, default=None,on_delete=False)
     ClubId = models.IntegerField(default=None)
     ShezhangName = models.CharField(max_length=8, default=None)
     ShezhangQq = models.CharField(max_length=20, default=None)
@@ -68,7 +68,7 @@ class ClubMemberShip(models.Model):
 
 class Post(models.Model):
     ClubName = models.CharField(max_length=30, default="社团")
-    CludId = models.ForeignKey(Club, default=None)
+    CludId = models.ForeignKey(Club, default=None,on_delete=False)
     LinkmanGrade = models.CharField(max_length=1, default="1")
     LinkmanClass = models.CharField(max_length=2, default="1")
     LinkmanName = models.CharField(max_length=8, default="联系人")
@@ -91,18 +91,11 @@ class Post(models.Model):
         return self.ClubName + str(self.Date1)
 
 
-class Token(models.Model):
-    Token = models.CharField(max_length=30, default=None)
-    UserObject = models.OneToOneField(User,default=None)
-
-    def __str__(self):
-        return self.UserObject.username
-
 
 class Activity(models.Model):
     Name = models.CharField(max_length=30, default="活动名称")
     Region = models.CharField(max_length=30, default="活动地点")
-    ClubObject = models.ForeignKey(Club,default=None)
+    ClubObject = models.ForeignKey(Club,default=None,on_delete=False)
     Content = models.TextField(default="活动内容")
     Date1 = models.DateTimeField()
     # Date1 is start datetime
@@ -134,7 +127,7 @@ class ActivityParticipantShip(models.Model):
 
 class Classroom(models.Model):
     ClassroomId = models.IntegerField()
-    ClubObject = models.ForeignKey(Club)
+    ClubObject = models.ForeignKey(Club,on_delete=False)
     Date1 = models.DateTimeField()
     Date2 = models.DateTimeField()
 
@@ -164,20 +157,10 @@ class Event(models.Model):
     DateTime = models.DateTimeField()
     Region = models.CharField(max_length=30, default=None)
     Content = models.TextField(default=None)
-    ClubObject = models.ForeignKey(Club)
+    ClubObject = models.ForeignKey(Club,on_delete=False)
 
     def __str__(self):
         return self.Name
 
 def file_directory_path(instance, filename):
     return 'user_{0}/%Y/%m/%d/{1}'.format(instance, filename)
-
-
-class File(models.Model):
-    Name = models.CharField(max_length=30,default="文件名",unique=True)
-    UserObject = models.ForeignKey(User,default=None)
-    Datetime = models.DateTimeField(auto_now_add=True)
-    FilePath = models.CharField(max_length=100,unique=True,default=None)
-
-    def __str__(self):
-        return self.Name + 'uploaded by' + self.UserObject.username
