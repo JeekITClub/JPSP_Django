@@ -1,15 +1,12 @@
 # coding=utf-8
-from django.http import JsonResponse, HttpResponse, HttpResponseServerError
+from django.http import HttpResponse, HttpResponseServerError
 import json
 from django.template import loader
 from django.contrib.auth.models import User
-from jpspapp.models import Club, Post, Activity, Classroom, LostAndFound, UserProfile, CDUser, \
-    ActivityParticipantShip, ClubMemberShip
+from jpspapp.models import Club, Post, Activity, Classroom, LostAndFound, UserProfile, CDUser, ActivityParticipantShip, ClubMemberShip
 from django.views.decorators.http import require_http_methods
 import datetime
 from django.contrib.auth import authenticate
-import itchat
-import random
 from django.core.paginator import Paginator
 
 
@@ -22,14 +19,14 @@ def index(request):
         try:
             template = loader.get_template('index.html')
             content = {}
-            return HttpResponse(template.render(content,request))
+            return HttpResponse(template.render(content, request))
         except:
             return HttpResponseServerError
     else:
         try:
             template = loader.get_template('index.html')
             content = {}
-            return HttpResponse(template.render(content,request))
+            return HttpResponse(template.render(content, request))
         except:
             return HttpResponseServerError
 
@@ -39,22 +36,21 @@ def login_page(request):
     try:
         template = loader.get_template('index/login.html')
         content = {}
-        return HttpResponse(template.render(content,request))
+        return HttpResponse(template.render(content, request))
     except:
         return HttpResponseServerError
 
 
-
-
 @require_http_methods(['POST'])
 def login(request):
-    global token_object
     try:
         user_id = request.POST['UserName']
         password = request.POST['Password']
         user = authenticate(username=user_id, password=password)
+        return HttpRedirect()
     except:
         return HttpResponse("Login Error")
+
 
 @require_http_methods(['POST'])
 def logout(request):
@@ -80,91 +76,53 @@ def logout(request):
 
 @require_http_methods(['POST'])
 def club_establish(request):
-    try:
-        body = json.loads(request.body)
-        clubname = body['Clubname']
-        shezhang_name = body['Shezhang_Name']
-        shezhang_qq = body['Shezhang_QQ']
-        shezhang_grade = body['Shezhang_Grade']
-        shezhang_classroom = body['Shezhang_Classroom']
-        introduction = body['Introduction']
-        if_recruit = body['IfRecruit']
-        qq_group = body['QQGroup']
-        email = body['Email']
-        Club.objects.create(
-            Clubname=clubname,
-            # TODO: ClubId
-            ShezhangName=shezhang_name,
-            SheZhangQq=shezhang_qq,
-            ShezhangGrade=shezhang_grade,
-            ShezhangClassroom=shezhang_classroom,
-            IfRecruit=if_recruit,
-            Introduction=introduction,
-            Email=email,
-            # TODO: label!
-            State=False,
-            Achievements="",
-            Stars=0,
-            EnrollGroupQq=qq_group,
-        )
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
-    except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
-
+    if request.user.is_authenticated:
+        try:
+            clubname = request.POST['Clubname']
+            shezhang_name = request.POST['Shezhang_Name']
+            shezhang_qq = request.POST['Shezhang_QQ']
+            shezhang_grade = request.POST['Shezhang_Grade']
+            shezhang_classroom = request.POST['Shezhang_Classroom']
+            introduction = request.POST['Introduction']
+            if_recruit = request.POST['IfRecruit']
+            qq_group = request.POST['QQGroup']
+            email = request.POST['Email']
+            Club.objects.create(
+                Clubname=clubname,
+                # TODO: ClubId
+                ShezhangName=shezhang_name,
+                SheZhangQq=shezhang_qq,
+                ShezhangGrade=shezhang_grade,
+                ShezhangClassroom=shezhang_classroom,
+                IfRecruit=if_recruit,
+                Introduction=introduction,
+                Email=email,
+                # TODO: label!
+                State=False,
+                Achievements="",
+                Stars=0,
+                EnrollGroupQq=qq_group,
+            )
+            return HttpResponse("Success")
+        except:
+            return HttpResponseServerError
+    else:
+        return HttpResponse("没登陆呢")
 
 # 社团部访问接口
 @require_http_methods(['POST'])
 def club_list(request):
-    try:
-        body = json.loads(request.body)
-        user_id = body['UserId']
-        type = body['Type']
-        token = body['Token']
-        if (token_authenticate(user_id=user_id, token=token)):
-            page = body['Page']
-            response = []
-            club_object = None
-            if type == 'Established':
-                club_object = Club.objects.filter(State=True)
-            elif type == 'Unestablished':
-                club_object = Club.objects.filter(State=False)
-            elif type == 'All':
-                club_object = Club.objects.all()
-            paginator = Paginator(club_object, 12)
-            club_object_page = paginator.page(page)
-            for club in club_object_page:
-                response.append({'ClubId': club.ClubId,
-                                 'ClubName': club.ClubName,
-                                 'ShezhangName': club.ShezhangName,
-                                 'ShezhangQQ': club.ShezhangQq,
-                                 'ShezhangGrade': club.ShezhangGrade,
-                                 'ShezhangClassroom': club.ShezhangClass,
-                                 'IfRecruit': ('True' if club.IfRecruit else 'False'),
-                                 'EnrollGroupQQ': club.EnrollGroupQq,
-                                 'Email': club.Email,
-                                 'State': club.State,
-                                 'Stars': club.Stars,
-                                 'Introduction': club.Introduction,
-                                 'Achievements': club.Achievements,
-                                 })
-            # todo: page
-        else:
-            return JsonResponse({
-                'message': 'error',
-                'Access-Control-Allow-Origin': '*'
-            })
-    except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
+    if request.user.is_authenticated:
 
+        try:
+            body = json.loads(request.body)
+            user_id = body['UserId']
+            type = body['Type']
+
+        except:
+            return HttpResponseServerError
+    else:
+        return HttpResponse("没登陆呢")
 
 # 学生 社团列表
 @require_http_methods(['GET'])
@@ -175,7 +133,7 @@ def club_show(request):
         page = request.GET.get('Page')
         club = paginator.page(page)
         context = {'club': club}
-        template = loader.get_template('clubs.html')
+        template = loader.get_template('index/club/list.html')
         return HttpResponse(template.render(context, request))
     except:
         return HttpResponseServerError
@@ -183,69 +141,58 @@ def club_show(request):
 
 @require_http_methods(['POST'])
 def club_attend(request):
-    try:
-        body = json.loads(request.body)
-        token = body['IndexToken']
-        club_id = body['ClubId']
-        user_id = body['UserId']
-        # TODO: !!!
-        if (token_authenticate(user_id=user_id, token=token)):
-            return JsonResponse({
-                'message': 'success',
-                'Access-Control-Allow-Origin': '*'
-            })
-        else:
-            return JsonResponse({
-                'message': 'error',
-                'Access-Control-Allow-Origin': '*'
-            })
-    except:
-        return HttpResponseServerError()
+    if request.user.is_authenticated:
+        try:
+            user_id = request.POST['UserId']
+            club_id = request.POST['ClubId']
+        except:
+            return False
+    else:
+        return HttpResponse("Attend the club Error")
 
 
 @require_http_methods(['POST'])
 def club_quit(request):
-    try:
-        body = json.loads(request.body)
-        token = body['IndexToken']
-        user_id = body['UserId']
-        club_id = body['ClubId']
-        if (token_authenticate(user_id=user_id, token=token)):
-            ClubMemberShip.objects.get(Member=UserProfile.objects.get(UserObject=User.objects.get(username=user_id)),
-                                       Club=Club.objects.get(ClubId=club_id)).delete()
-        return True
-    except:
-        return False
+    if request.user.is_authenticated:
+        try:
+            user_id = request.POST['UserId']
+            club_id = request.POST['ClubId']
+        except:
+            return False
+    else:
+        return HttpResponse("Quit the club Error")
 
+
+@require_http_methods(['GET'])
+def club_member(request):
+    if request.user.is_authenticated:
+        try:
+            template = loader.get_template('club/member/list.html')
+            content = {}
+            return HttpResponse(template.render(content,request))
+        except:
+            return HttpResponseServerError
+    else:
+        return HttpResponse("未登陆")
 
 @require_http_methods(['POST'])
 def club_member_add(request):
-    try:
-        body = json.loads(request.body)
-        # club_id -> example: '303'
-        club_id = body['ClubId']
-        token = body['Token']
-        # username -> example: 'S320150181'
-        username = body['UserName']
-        if (token_authenticate(user_id=club_id, token=token)):
+    if request.user.is_authenticated:
+        try:
+            body = json.loads(request.body)
+            # club_id -> example: '303'
+            club_id = request.POST['ClubId']
+            # username -> example: 'S320150181'
+            username = request.body['UserName']
+
             ClubMemberShip.objects.create(
                 Member=UserProfile.objects.get(UserObject=User.objects.get(username=username)),
                 Club=Club.objects.get(ClubId=club_id))
-            return JsonResponse({
-                'message': 'success',
-                'Access-Control-Allow-Origin': '*'
-            })
-        else:
-            return JsonResponse({
-                'message': 'error',
-                'Access-Control-Allow-Origin': '*'
-            })
-    except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
 
+        except:
+            return HttpResponseServerError
+    else:
+        return HttpResponse("未登陆")
 
 @require_http_methods(['POST'])
 def club_confirmed_member_list(request):
