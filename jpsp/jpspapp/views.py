@@ -12,98 +12,49 @@ import itchat
 import random
 from django.core.paginator import Paginator
 
-alphabet = "abcdefghijklmnopqrstuvwxyz0123456789"
-
-
-def token_generate(user_id):
-    token = ""
-    for i in range(30):
-        token += alphabet[random.randint(0, len(alphabet) - 1)]
-    try:
-        Token.objects.create(
-            Token=token,
-            UserObject=User.objects.get(username=user_id)
-        )
-    except:
-        token_object = Token.objects.get(UserObject=User.objects.get(username=user_id))
-        token_object.Token = token
-        token_object.save()
-    finally:
-        return token
-
-
-def token_authenticate(user_id, token):
-    try:
-        token_objects = Token.objects.get(UserObject=User.objects.get(username=user_id))
-        if token_objects.Token == token:
-            return True
-        else:
-            return False
-    except:
-        return False
-
-
-def token_remove(user_id):
-    try:
-        Token.objects.get(UserObject=User.objects.get(username=user_id)).delete()
-        return True
-    except:
-        return False
-
 
 # Create your views here.
 
 
 @require_http_methods(['GET'])
 def index(request):
+    if request.user.is_authenticated:
+        try:
+            template = loader.get_template('index.html')
+            content = {}
+            return HttpResponse(template.render(content,request))
+        except:
+            return HttpResponseServerError
+    else:
+        try:
+            template = loader.get_template('index.html')
+            content = {}
+            return HttpResponse(template.render(content,request))
+        except:
+            return HttpResponseServerError
+
+
+@require_http_methods(['GET'])
+def login_page(request):
     try:
-        template = loader.get_template('index.html')
+        template = loader.get_template('index/login.html')
         content = {}
         return HttpResponse(template.render(content,request))
     except:
         return HttpResponseServerError
 
+
+
+
 @require_http_methods(['POST'])
 def login(request):
     global token_object
     try:
-        body = json.loads(request.body)
-        user_id = body['UserName']
-        password = body['Password']
-        usertype = body['UserType']
+        user_id = request.POST['UserName']
+        password = request.POST['Password']
         user = authenticate(username=user_id, password=password)
-        if user is not None:
-            if usertype == "Student":
-                object = UserProfile.objects.get(UserObject=User.objects.get(username=user_id))
-                return JsonResponse({
-                    "UserName": object.UserName,
-                    "message": "User Authenticated",
-                    "Token": token_generate(user_id=user_id),
-                    "Access-Control-Allow-Origin": '*'
-                })
-            elif usertype == "Club":
-                object = Club.objects.get(ClubObject=User.objects.get(username=user_id))
-                return JsonResponse({
-                    "UserName": object.ClubName,
-                    "message": "User Authenticated",
-                    "Token": token_generate(user_id=user_id),
-                    "Access-Control-Allow-Origin": '*'
-                })
-            elif usertype == "CD":
-                # TODO: CDUser
-                object = CDUser.objects.get()
-                return JsonResponse({
-                    "UserName": CDUser(User.objects.get(username=user_id)).UserName,
-                    "message": "User Authenticated",
-                    "Token": token_generate(user_id=user_id),
-                    "Access-Control-Allow-Origin": '*'
-                })
     except:
-        return JsonResponse({
-            "message": "User Not Authenticated",
-            "Access-Control-Allow-Origin": '*',
-        })
-
+        return HttpResponse("Login Error")
 
 @require_http_methods(['POST'])
 def logout(request):
