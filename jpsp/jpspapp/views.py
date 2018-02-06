@@ -1018,40 +1018,29 @@ def event_list(request):
     return HttpResponse(template.render(content, request))
 
 
-@require_http_methods(["POST"])
-def club_page_setting(request):
-    pass
+def admin_file_upload_list(request):
+    template = loader.get_template('admin/file/upload_list.html')
+    content = {}
+    return HttpResponse(template.render(content, request))
+
+
+def admin_file_download_list(request):
+    template = loader.get_template('admin/file/download_list.html')
+    content = {}
+    return HttpResponse(template.render(content, request))
+
+
+def club_file_upload(request):
+    template = loader.get_template('club/file/upload.html')
+    content = {}
+    return HttpResponse(template.render(content, request))
 
 
 @require_http_methods(['POST'])
-def cd_file_upload(request):
-    try:
-        file = request.FILES['file']
-        body = json.loads(request.body)
-        token = body['CDToken']
-
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
-    except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
-
-
-@require_http_methods(['POST'])
-def club_file_download(request):
-    try:
-        pass
-    except:
-        pass
-
-
-@require_http_methods(['POST'])
-def cd_file_download(request):
-    pass
+def club_file_download_list(request):
+    template = loader.get_template('club/file/download_list.html')
+    content = {}
+    return HttpResponse(template.render(content, request))
 
 
 def student_dashboard_index(request):
