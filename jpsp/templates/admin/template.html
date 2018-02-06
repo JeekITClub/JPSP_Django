@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>建平学生平台</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "/css/bulma.css" %}">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
+</head>
+<body>
+
+<nav class="navbar ">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="">
+            建平中学学生平台
+        </a>
+    </div>
+
+    <div class="navbar-menu">
+        <div class="navbar-start">
+            <router-link class="navbar-item " to="/about">
+                关于
+            </router-link>
+            <router-link class="navbar-item " to="/contact">
+                联系我们
+            </router-link>
+        </div>
+        <div class="navbar-end">
+
+            {% if a %}
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link" href="">欢迎,{{ UserName }}</a>
+                <div class="navbar-dropdown">
+                    <router-link class="navbar-item" to="/profile">
+                        修改信息
+                    </router-link>
+                    <a class="navbar-item" @click="logout">
+                        注销
+                    </a>
+                </div>
+
+            </div>
+
+            {% else %}
+            <div class="navbar-item">
+                <div class="field">
+                    <p class="control">
+                        <router-link to="/login">登陆</router-link>
+                    </p>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+{% block content %}
+
+{% endblock %}
+</body>
+</html>

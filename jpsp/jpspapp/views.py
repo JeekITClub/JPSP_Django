@@ -42,6 +42,13 @@ def login_page(request):
         return HttpResponseServerError
 
 
+@require_http_methods(['GET'])
+def admin_login_page(request):
+    template = loader.get_template('admin/login.html')
+    content = {}
+    return HttpResponse(template.render(content, request))
+
+
 @require_http_methods(['POST'])
 def login(request):
     try:
@@ -939,12 +946,9 @@ def userprofile_submit(request):
 @require_http_methods(['GET'])
 def student_club_detail(request, club_id):
     profile = Club.objects.get(ClubId=club_id)
-    try:
-        template = loader.get_template('index/club/detail.html')
-        content = {}
-        return HttpResponse(template.render(content, request))
-    except:
-        return HttpResponseServerError
+    template = loader.get_template('index/club/detail.html')
+    content = {}
+    return HttpResponse(template.render(content, request))
 
 
 @require_http_methods(["POST"])
@@ -1053,7 +1057,6 @@ def cd_file_download(request):
     pass
 
 
-
 def student_dashboard_index(request):
     if request.user.is_authenticated:
         try:
@@ -1066,14 +1069,12 @@ def student_dashboard_index(request):
         # todo: redirect to the login page
         return HttpResponse("0")
 
+
 def student_dashboard_clubs(request):
     if request.user.is_authenticated:
-        try:
-            template = loader.get_template('index/dashboard/clubs.html')
-            content = {}
-            return HttpResponse(template.render(content, request))
-        except:
-            return HttpResponseServerError
+        template = loader.get_template('index/dashboard/clubs.html')
+        content = {}
+        return HttpResponse(template.render(content, request))
     else:
         # todo: redirect to the login page
         return HttpResponse("0")
@@ -1081,12 +1082,9 @@ def student_dashboard_clubs(request):
 
 def student_dashboard_activities(request):
     if request.user.is_authenticated:
-        try:
-            template = loader.get_template('index/dashboard/activities.html')
-            content = {}
-            return HttpResponse(template.render(content, request))
-        except:
-            return HttpResponseServerError
+        template = loader.get_template('index/dashboard/activities.html')
+        content = {}
+        return HttpResponse(template.render(content, request))
     else:
         # todo: redirect to the login page
         return HttpResponse("0")
@@ -1103,3 +1101,20 @@ def student_dashboard_password(request):
     else:
         # todo: redirect to the login page
         return HttpResponse("0")
+
+
+# todo: write a decorator for admin
+def admin_student_list(request):
+    if request.user.is_authenticated:
+        template = loader.get_template('admin/student/list.html')
+        content = {}
+        return HttpResponse(template.render(content, request))
+    else:
+        # todo: redirect to the login page
+        return HttpResponse("0")
+
+
+def admin_student_detail(request):
+    template = loader.get_template('admin/student/detail.html')
+    content = {}
+    return HttpResponse(template.render(content, request))
