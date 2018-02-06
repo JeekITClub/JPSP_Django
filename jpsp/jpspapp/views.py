@@ -3,7 +3,8 @@ from django.http import HttpResponse, HttpResponseServerError
 import json
 from django.template import loader
 from django.contrib.auth.models import User
-from jpspapp.models import Club, Post, Activity, Classroom, LostAndFound, UserProfile, CDUser, ActivityParticipantShip, ClubMemberShip
+from jpspapp.models import Club, Post, Activity, Classroom, LostAndFound, UserProfile, CDUser, ActivityParticipantShip, \
+    ClubMemberShip
 from django.views.decorators.http import require_http_methods
 import datetime
 from django.contrib.auth import authenticate
@@ -109,6 +110,7 @@ def club_establish(request):
     else:
         return HttpResponse("没登陆呢")
 
+
 # 社团部访问接口
 @require_http_methods(['POST'])
 def club_list(request):
@@ -124,14 +126,14 @@ def club_list(request):
     else:
         return HttpResponse("没登陆呢")
 
+
 # 学生 社团列表
-@require_http_methods(['GET'])
-def student_club_show(request):
+# todo : fix the unordered problem
+def student_club_list(request, page):
     try:
         club_object = Club.objects.filter(State=True)
         paginator = Paginator(club_object, 12)
-        page = request.GET.get('Page')
-        club = paginator.page(page)
+        club = paginator.page(page).object_list
         context = {'club': club}
         template = loader.get_template('index/club/list.html')
         return HttpResponse(template.render(context, request))
@@ -169,11 +171,12 @@ def club_member(request):
         try:
             template = loader.get_template('club/member/list.html')
             content = {}
-            return HttpResponse(template.render(content,request))
+            return HttpResponse(template.render(content, request))
         except:
             return HttpResponseServerError
     else:
         return HttpResponse("未登陆")
+
 
 # @require_http_methods(['POST'])
 # def club_member_add(request):
@@ -934,7 +937,7 @@ def userprofile_submit(request):
 
 
 @require_http_methods(['GET'])
-def club_detail_page(request,club_id):
+def student_club_detail(request, club_id):
     profile = Club.objects.get(ClubId=club_id)
     try:
         template = loader.get_template('index/club/detail.html')
@@ -942,6 +945,7 @@ def club_detail_page(request,club_id):
         return HttpResponse(template.render(content, request))
     except:
         return HttpResponseServerError
+
 
 @require_http_methods(["POST"])
 def club_profile_submit(request):
@@ -1047,3 +1051,55 @@ def club_file_download(request):
 @require_http_methods(['POST'])
 def cd_file_download(request):
     pass
+
+
+
+def student_dashboard_index(request):
+    if request.user.is_authenticated:
+        try:
+            template = loader.get_template('index/dashboard/index.html')
+            content = {}
+            return HttpResponse(template.render(content, request))
+        except:
+            return HttpResponseServerError
+    else:
+        # todo: redirect to the login page
+        return HttpResponse("0")
+
+def student_dashboard_clubs(request):
+    if request.user.is_authenticated:
+        try:
+            template = loader.get_template('index/dashboard/clubs.html')
+            content = {}
+            return HttpResponse(template.render(content, request))
+        except:
+            return HttpResponseServerError
+    else:
+        # todo: redirect to the login page
+        return HttpResponse("0")
+
+
+def student_dashboard_activities(request):
+    if request.user.is_authenticated:
+        try:
+            template = loader.get_template('index/dashboard/activities.html')
+            content = {}
+            return HttpResponse(template.render(content, request))
+        except:
+            return HttpResponseServerError
+    else:
+        # todo: redirect to the login page
+        return HttpResponse("0")
+
+
+def student_dashboard_password(request):
+    if request.user.is_authenticated:
+        try:
+            template = loader.get_template('index/dashboard/password.html')
+            content = {}
+            return HttpResponse(template.render(content, request))
+        except:
+            return HttpResponseServerError
+    else:
+        # todo: redirect to the login page
+        return HttpResponse("0")

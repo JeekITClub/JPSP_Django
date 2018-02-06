@@ -1,0 +1,56 @@
+{% extends "index/template.html" %}
+
+{% block content %}
+    <div>
+        <div class="columns">
+            <div class="column">
+                <div class="tile is-ancestor">
+                    <div class="tile is-vertical is-8">
+                        <div class="tile">
+                            <div class="tile is-parent is-vertical">
+                                <article class="tile is-child notification is-primary">
+                                    <p class="title">学号</p>
+                                    <p class="subtitle">{{ userid }}</p>
+                                </article>
+                                <article class="tile is-child notification is-warning">
+                                    <p class="title">用户名</p>
+                                    <p class="subtitle">{{ username }}</p>
+                                </article>
+                            </div>
+                            <div class="tile is-parent">
+                                <article class="tile is-child notification is-info">
+                                    <p class="title">头像</p>
+                                    <p class="subtitle">功能暂未开放</p>
+                                    <figure class="image is-4by3">
+                                        <img src="http://bulma.io/images/placeholders/640x480.png">
+                                    </figure>
+                                </article>
+                            </div>
+                        </div>
+                        <div class="tile is-parent">
+                            <article class="tile is-child notification is-danger">
+                                <p class="title">个人介绍</p>
+                                <p class="subtitle">建平的一个普通学生</p>
+                                <div class="content">
+                                    <!-- Content -->
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                    <div class="tile is-parent">
+                        <article class="tile is-child notification is-success">
+                            <div class="content">
+                                <p class="title">最近通知</p>
+                                <p class="subtitle">我的社团最近干了些什么？</p>
+                                <div class="content">
+                                    <!-- Content -->
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
