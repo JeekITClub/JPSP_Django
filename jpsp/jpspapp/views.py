@@ -1013,12 +1013,9 @@ def event_submit(request):
 
 @require_http_methods(["POST"])
 def event_list(request):
-    pass
-
-
-@require_http_methods(["POST"])
-def club_page(request):
-    pass
+    template = loader.get_template('admin/event/list.html')
+    content = {}
+    return HttpResponse(template.render(content, request))
 
 
 @require_http_methods(["POST"])
