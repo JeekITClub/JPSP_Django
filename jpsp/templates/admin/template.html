@@ -29,34 +29,99 @@
         <div class="navbar-end">
 
             {% if a %}
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link" href="">欢迎,{{ UserName }}</a>
-                <div class="navbar-dropdown">
-                    <router-link class="navbar-item" to="/profile">
-                        修改信息
-                    </router-link>
-                    <a class="navbar-item" @click="logout">
-                        注销
-                    </a>
-                </div>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" href="">欢迎,{{ UserName }}</a>
+                    <div class="navbar-dropdown">
+                        <router-link class="navbar-item" to="/profile">
+                            修改信息
+                        </router-link>
+                        <a class="navbar-item" @click="logout">
+                            注销
+                        </a>
+                    </div>
 
-            </div>
+                </div>
 
             {% else %}
-            <div class="navbar-item">
-                <div class="field">
-                    <p class="control">
-                        <router-link to="/login">登陆</router-link>
-                    </p>
+                <div class="navbar-item">
+                    <div class="field">
+                        <p class="control">
+                            <router-link to="/login">登陆</router-link>
+                        </p>
+                    </div>
                 </div>
-            </div>
             {% endif %}
         </div>
     </div>
 </nav>
 
-{% block content %}
+<div class="columns">
+    <div class="column">
+        <aside class="menu">
+            <p class="menu-label">
+                总览
+            </p>
+            <ul class="menu-list">
+                <li>
+                    <router-link to="/">仪表盘</router-link>
+                </li>
+            </ul>
+            <p class="menu-label">
+                社团
+            </p>
+            <ul class="menu-list">
+                <li>
+                    <router-link to="/Club">所有社团</router-link>
+                </li>
+                <li>
+                    <router-link to="/Post">动态</router-link>
+                </li>
+            </ul>
+            <p class="menu-label">
+                招新
+            </p>
+            <ul class="menu-list">
+                <li>
+                    <router-link to="/recruit/classroom/list">公共教室列表</router-link>
+                </li>
+            </ul>
+            <p class="menu-label">
+                活动
+            </p>
+            <ul class="menu-list">
+                <li>
+                    <router-link to="/Activity">列表</router-link>
+                </li>
+            </ul>
+            <p class="menu-label">
+                文件
+            </p>
+            <ul class="menu-list">
+                <li>
+                    <router-link to="/File/Upload">上传</router-link>
+                </li>
+                <li>
+                    <router-link to="/File/Download">下载</router-link>
+                </li>
+            </ul>
+            <p class="menu-label">
+                用户
+            </p>
+            <ul class="menu-list">
+                <li>
+                    <router-link to="/User">批量创建用户</router-link>
+                    <router-link to="/User/One">创建单一用户</router-link>
+                </li>
+            </ul>
+        </aside>
+    </div>
+    <div class="column">
+        {% block content %}
 
-{% endblock %}
+        {% endblock %}
+    </div>
+</div>
+
+
 </body>
 </html>

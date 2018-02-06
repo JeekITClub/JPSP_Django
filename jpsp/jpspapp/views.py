@@ -952,58 +952,33 @@ def student_club_detail(request, club_id):
 
 
 @require_http_methods(["POST"])
-def club_profile_submit(request):
-    try:
-        body = json.loads(request.body)
-        token = body['Token']
-        clubid = body['clubid']
-        if (token_authenticate(user_id=clubid, token=token)):
-            clubname = body['clubname']
-            shezhang_name = body['shezhang_name']
-            shezhang_qq = body['shezhang_qq']
-            shezhang_grade = body['shezhang_grade']
-            shezhang_class = body['shezhang_class']
-            if_recruit = body['if_recruit']
-            enroll_group_qq = body['enroll_group_qq']
-            email = body['email']
-            label = body['label']
-            state = body['state']
-            introduction = body['introduction']
-            achievements = body['achievements']
-            try:
-                club_object = Club.objects.get(ClubId=clubid)
-                club_object.ClubName = clubname
-                club_object.ShezhangName = shezhang_name
-                club_object.ShezhangGrade = shezhang_grade
-                club_object.ShezhangClassroom = shezhang_class
-                club_object.ShezhangQq = shezhang_qq
-                club_object.IfRecruit = if_recruit
-                club_object.EnrollGroupQq = enroll_group_qq
-                club_object.Email = email
-                club_object.Label = label
-                club_object.State = state
-                club_object.Introduction = introduction
-                club_object.Achievements = achievements
-                club_object.save()
-                return JsonResponse({
-                    'message': 'success',
-                    'Access-Control-Allow-Origin': '*'
-                })
-            except:
-                return JsonResponse({
-                    'message': 'error',
-                    'Access-Control-Allow-Origin': '*'
-                })
-        else:
-            return JsonResponse({
-                'message': 'error',
-                'Access-Control-Allow-Origin': '*'
-            })
-    except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
+def club_profile_update(request):
+    body = request.POST
+    shezhang_name = body['shezhang_name']
+    shezhang_qq = body['shezhang_qq']
+    shezhang_grade = body['shezhang_grade']
+    shezhang_class = body['shezhang_class']
+    if_recruit = body['if_recruit']
+    enroll_group_qq = body['enroll_group_qq']
+    email = body['email']
+    label = body['label']
+    state = body['state']
+    introduction = body['introduction']
+    achievements = body['achievements']
+    club_object = Club.objects.get(ClubId=body['clubid'])
+    club_object.ClubName = body['clubname']
+    club_object.ShezhangName = shezhang_name
+    club_object.ShezhangGrade = shezhang_grade
+    club_object.ShezhangClassroom = shezhang_class
+    club_object.ShezhangQq = shezhang_qq
+    club_object.IfRecruit = if_recruit
+    club_object.EnrollGroupQq = enroll_group_qq
+    club_object.Email = email
+    club_object.Label = label
+    club_object.State = state
+    club_object.Introduction = introduction
+    club_object.Achievements = achievements
+    club_object.save()
 
 
 @require_http_methods(["POST"])
@@ -1014,6 +989,12 @@ def event_submit(request):
 @require_http_methods(["POST"])
 def event_list(request):
     template = loader.get_template('admin/event/list.html')
+    content = {}
+    return HttpResponse(template.render(content, request))
+
+
+def admin_file_upload(request):
+    template = loader.get_template('admin/file/upload.html')
     content = {}
     return HttpResponse(template.render(content, request))
 
@@ -1032,6 +1013,12 @@ def admin_file_download_list(request):
 
 def club_file_upload(request):
     template = loader.get_template('club/file/upload.html')
+    content = {}
+    return HttpResponse(template.render(content, request))
+
+
+def club_file_upload_list(request):
+    template = loader.get_template('club/file/upload_list.html')
     content = {}
     return HttpResponse(template.render(content, request))
 
