@@ -1,10 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ club.name }}详细界面</title>
-</head>
-<body>
+{% extends "index/template.html" %}
 
-</body>
-</html>
+{% block content %}
+
+    <div>
+        <!-- 这绝对不是彩蛋 -->
+        <div>
+            <div class="hero is-primary">
+                <div class="hero-body">
+                    <div class="container">
+                        <div class="colmuns">
+                            <div class="column">
+                                <p class="title">{{ Club.ClubName }}</p>
+                                <div class="content">
+                                    <p>社团QQ群: {{ Club.QQGroup }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-foot">
+                    <div class="container">
+                        <nav class="tabs is-boxed">
+                            <ul>
+                                <li>
+                                    <a href="/">活动</a>
+                                </li>
+                                <li>
+                                    <a href="">杰出成员</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <div class="container">
+                    <div class="columns">
+                        <div class="column is-three-quarters">
+                            <section class="section">
+                                <div class="container">
+                                    <h1 class="title">社团介绍</h1>
+                                    <div class="content">
+                                        <p>{{ Club.Introduction }}</p>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="column">
+                            <section class="section">
+                                <a class="button is-danger is-large" v-if="GetIndexAuthenticated !== 'true'">未登陆</a>
+                                <a class="button is-warning is-large" v-else-if="Club.IfRecruit !== 1">社团未招新</a>
+                                <a class="button is-info is-large" @click="AttendClub" v-else>加入该社团</a>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

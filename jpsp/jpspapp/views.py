@@ -17,14 +17,14 @@ from django.core.paginator import Paginator
 def index(request):
     if request.user.is_authenticated:
         try:
-            template = loader.get_template('index.html')
+            template = loader.get_template('index/index.html')
             content = {}
             return HttpResponse(template.render(content, request))
         except:
             return HttpResponseServerError
     else:
         try:
-            template = loader.get_template('index.html')
+            template = loader.get_template('index/index.html')
             content = {}
             return HttpResponse(template.render(content, request))
         except:
@@ -126,7 +126,7 @@ def club_list(request):
 
 # 学生 社团列表
 @require_http_methods(['GET'])
-def club_show(request):
+def student_club_show(request):
     try:
         club_object = Club.objects.filter(State=True)
         paginator = Paginator(club_object, 12)
@@ -175,213 +175,203 @@ def club_member(request):
     else:
         return HttpResponse("未登陆")
 
-@require_http_methods(['POST'])
-def club_member_add(request):
-    if request.user.is_authenticated:
-        try:
-            body = json.loads(request.body)
-            # club_id -> example: '303'
-            club_id = request.POST['ClubId']
-            # username -> example: 'S320150181'
-            username = request.body['UserName']
+# @require_http_methods(['POST'])
+# def club_member_add(request):
+#     if request.user.is_authenticated:
+#         try:
+#             body = json.loads(request.body)
+#             # club_id -> example: '303'
+#             club_id = request.POST['ClubId']
+#             # username -> example: 'S320150181'
+#             username = request.body['UserName']
+#
+#             ClubMemberShip.objects.create(
+#                 Member=UserProfile.objects.get(UserObject=User.objects.get(username=username)),
+#                 Club=Club.objects.get(ClubId=club_id))
+#
+#         except:
+#             return HttpResponseServerError
+#     else:
+#         return HttpResponse("未登陆")
 
-            ClubMemberShip.objects.create(
-                Member=UserProfile.objects.get(UserObject=User.objects.get(username=username)),
-                Club=Club.objects.get(ClubId=club_id))
-
-        except:
-            return HttpResponseServerError
-    else:
-        return HttpResponse("未登陆")
-
-@require_http_methods(['POST'])
-def club_confirmed_member_list(request):
-    try:
-        # TODO: how to identify confirmed and unconfirmed
-        body = json.loads(request.body)
-        token = body['Token']
-        page = body['Page']
-        # club_id -> example: '303'
-        club_id = body['ClubId']
-        if (token_authenticate(user_id=club_id, token=token)):
-            membership_set = ClubMemberShip.objects.filter(Club=Club.objects.get(ClubId=club_id)).filter(State=1)
-            response = []
-            paginator = Paginator(membership_set, 10)
-            membership_set_page = paginator.page(page)
-            for membership in membership_set_page:
-                response.append({
-                    'UserName': membership.Member.UserName,
-                    'Class': membership.Member.Class,
-                    'Grade': membership.Member.Grade,
-                    'AttendYear': membership.Member.AttendYear,
-                    'Phone': membership.Member.Phone,
-                    'QQ': membership.Member.QQ
-                })
-            response_json = json.dumps(response)
-            return JsonResponse({
-                'message': 'success',
-                'Access-Control-Allow-Origin': '*',
-                'data': response_json
-            }, safe=False)
-        else:
-            return JsonResponse({
-                'message': 'error',
-                'Access-Control-Allow-Origin': '*'
-            })
-    except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
-
-
-@require_http_methods(['POST'])
-def club_unconfirmed_member_list(request):
-    try:
-        body = json.loads(request.body)
-        token = body['Token']
-        # club_id -> example: '303'
-        page = body['Page']
-        club_id = body['ClubId']
-        if (token_authenticate(user_id=club_id, token=token)):
-            membership_set = ClubMemberShip.objects.filter(Club=Club.objects.get(ClubId=club_id)).filter(State=0)
-            response = []
-            paginator = Paginator(membership_set, 10)
-            membership_set_page = paginator.page(page)
-            for membership in membership_set_page:
-                response.append({
-                    'UserName': membership.Member.UserName,
-                    'Class': membership.Member.Class,
-                    'Grade': membership.Member.Grade,
-                    'AttendYear': membership.Member.AttendYear,
-                    'Phone': membership.Member.Phone,
-                    'QQ': membership.Member.QQ
-                })
-            response_json = json.dumps(response)
-            return JsonResponse({
-                'message': 'success',
-                'Access-Control-Allow-Origin': '*',
-                'data': response_json
-            }, safe=False)
-        else:
-            return JsonResponse({
-                'message': 'error',
-                'Access-Control-Allow-Origin': '*'
-            })
-
-    except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
+# @require_http_methods(['POST'])
+# def club_confirmed_member_list(request):
+#     try:
+#         # TODO: how to identify confirmed and unconfirmed
+#         body = json.loads(request.body)
+#         token = body['Token']
+#         page = body['Page']
+#         # club_id -> example: '303'
+#         club_id = body['ClubId']
+#         if (token_authenticate(user_id=club_id, token=token)):
+#             membership_set = ClubMemberShip.objects.filter(Club=Club.objects.get(ClubId=club_id)).filter(State=1)
+#             response = []
+#             paginator = Paginator(membership_set, 10)
+#             membership_set_page = paginator.page(page)
+#             for membership in membership_set_page:
+#                 response.append({
+#                     'UserName': membership.Member.UserName,
+#                     'Class': membership.Member.Class,
+#                     'Grade': membership.Member.Grade,
+#                     'AttendYear': membership.Member.AttendYear,
+#                     'Phone': membership.Member.Phone,
+#                     'QQ': membership.Member.QQ
+#                 })
+#             response_json = json.dumps(response)
+#             return JsonResponse({
+#                 'message': 'success',
+#                 'Access-Control-Allow-Origin': '*',
+#                 'data': response_json
+#             }, safe=False)
+#         else:
+#             return JsonResponse({
+#                 'message': 'error',
+#                 'Access-Control-Allow-Origin': '*'
+#             })
+#     except:
+#         return JsonResponse({
+#             'message': 'error',
+#             'Access-Control-Allow-Origin': '*'
+#         })
 
 
-@require_http_methods(['POST'])
-def recruit_classroom_apply(request):
-    try:
-        body = json.loads(request.body)
-        token = body['Token']
-        club_id = body['ClubId']
-        club_name = body['ClubName']
-        date1 = body['Date1']
-        date2 = body['Date2']
-        # TODO: deal with date
-        Classroom.objects.create(
-            ClassroomId=0,
-            ClubId=Club.objects.get(User.objects.get(username=club_id)),
-            ClubName=club_name,
-            Date1=date1,
-            Date2=date2
-        )
-        return JsonResponse({
-            'message': 'success',
-            'Access-Control-Allow-Origin': '*'
-        })
-    except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
+# @require_http_methods(['POST'])
+# def club_unconfirmed_member_list(request):
+#     try:
+#         body = json.loads(request.body)
+#         token = body['Token']
+#         # club_id -> example: '303'
+#         page = body['Page']
+#         club_id = body['ClubId']
+#         if (token_authenticate(user_id=club_id, token=token)):
+#             membership_set = ClubMemberShip.objects.filter(Club=Club.objects.get(ClubId=club_id)).filter(State=0)
+#             response = []
+#             paginator = Paginator(membership_set, 10)
+#             membership_set_page = paginator.page(page)
+#             for membership in membership_set_page:
+#                 response.append({
+#                     'UserName': membership.Member.UserName,
+#                     'Class': membership.Member.Class,
+#                     'Grade': membership.Member.Grade,
+#                     'AttendYear': membership.Member.AttendYear,
+#                     'Phone': membership.Member.Phone,
+#                     'QQ': membership.Member.QQ
+#                 })
+#             response_json = json.dumps(response)
+#             return JsonResponse({
+#                 'message': 'success',
+#                 'Access-Control-Allow-Origin': '*',
+#                 'data': response_json
+#             }, safe=False)
+#         else:
+#             return JsonResponse({
+#                 'message': 'error',
+#                 'Access-Control-Allow-Origin': '*'
+#             })
+#
+#     except:
+#         return JsonResponse({
+#             'message': 'error',
+#             'Access-Control-Allow-Origin': '*'
+#         })
 
 
-@require_http_methods(['POST'])
-def recruit_classroom_operate(request):
-    try:
-        body = json.loads(request.body)
-        token = body['Token']
-        classroom = body['Classroom']
-        clubid = body['ClubId']
-        # date
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
-    except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
+# @require_http_methods(['POST'])
+# def recruit_classroom_apply(request):
+#     try:
+#         body = json.loads(request.body)
+#         token = body['Token']
+#         club_id = body['ClubId']
+#         club_name = body['ClubName']
+#         date1 = body['Date1']
+#         date2 = body['Date2']
+#         # TODO: deal with date
+#         Classroom.objects.create(
+#             ClassroomId=0,
+#             ClubId=Club.objects.get(User.objects.get(username=club_id)),
+#             ClubName=club_name,
+#             Date1=date1,
+#             Date2=date2
+#         )
+#         return JsonResponse({
+#             'message': 'success',
+#             'Access-Control-Allow-Origin': '*'
+#         })
+#     except:
+#         return JsonResponse({
+#             'message': 'error',
+#             'Access-Control-Allow-Origin': '*'
+#         })
 
 
-@require_http_methods(['POST'])
-def recruit_classroom_list(request):
-    try:
-        body = json.loads(request.body)
-        token = body['Token']
-        type = body['Type']
-        response = []
-        if type == 'Confirmed':
-            pass
-        elif type == 'Denied':
-            pass
-        elif type == 'Unconfirmed':
-            pass
-        elif type == 'All':
-            classroom_objects_set = Classroom.objects.all()
-            # TODO: !!!!!!!
-            for classroom in classroom_objects_set:
-                response.append({})
-        response_json = json.dumps(response)
-        return JsonResponse({
-            'message': 'success',
-            'Access-Control-Allow-Origin': '*',
-            'data': response_json
-        }, safe=False)
-
-    except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
+# @require_http_methods(['POST'])
+# def recruit_classroom_operate(request):
+#     try:
+#         body = json.loads(request.body)
+#         token = body['Token']
+#         classroom = body['Classroom']
+#         clubid = body['ClubId']
+#         # date
+#         return JsonResponse({
+#             'message': 'error',
+#             'Access-Control-Allow-Origin': '*'
+#         })
+#     except:
+#         return JsonResponse({
+#             'message': 'error',
+#             'Access-Control-Allow-Origin': '*'
+#         })
 
 
-@require_http_methods(['POST'])
-def club_member_remove(request):
-    try:
-        body = json.loads(request.body)
-        token = body['token']
-        # club_id -> example: '303'
-        club_id = body['ClubId']
-        # username -> example: 'S320150181'
-        user_id = body['UserId']
-        if (token_authenticate(user_id=club_id, token=token)):
-            ClubMemberShip.objects.get(Club=Club.objects.get(ClubId=club_id), Member=UserProfile.objects.get(
-                UserObject=User.objects.get(username=user_id))).delete()
-            return JsonResponse({
-                'message': 'success',
-                'Access-Control-Allow-Origin': '*'
-            })
-        else:
-            return JsonResponse({
-                'message': 'error',
-                'Access-Control-Allow-Origin': '*'
-            })
+# @require_http_methods(['POST'])
+# def recruit_classroom_list(request):
+#     try:
+#         body = json.loads(request.body)
+#         token = body['Token']
+#         type = body['Type']
+#         response = []
+#         if type == 'Confirmed':
+#             pass
+#         elif type == 'Denied':
+#             pass
+#         elif type == 'Unconfirmed':
+#             pass
+#         elif type == 'All':
+#             classroom_objects_set = Classroom.objects.all()
+#             # TODO: !!!!!!!
+#             for classroom in classroom_objects_set:
+#                 response.append({})
+#         response_json = json.dumps(response)
+#     except:
+#         return 0
 
-    except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
+# @require_http_methods(['POST'])
+# def club_member_remove(request):
+#     try:
+#         body = json.loads(request.body)
+#         token = body['token']
+#         # club_id -> example: '303'
+#         club_id = body['ClubId']
+#         # username -> example: 'S320150181'
+#         user_id = body['UserId']
+#         if (token_authenticate(user_id=club_id, token=token)):
+#             ClubMemberShip.objects.get(Club=Club.objects.get(ClubId=club_id), Member=UserProfile.objects.get(
+#                 UserObject=User.objects.get(username=user_id))).delete()
+#             return JsonResponse({
+#                 'message': 'success',
+#                 'Access-Control-Allow-Origin': '*'
+#             })
+#         else:
+#             return JsonResponse({
+#                 'message': 'error',
+#                 'Access-Control-Allow-Origin': '*'
+#             })
+#
+#     except:
+#         return JsonResponse({
+#             'message': 'error',
+#             'Access-Control-Allow-Origin': '*'
+#         })
 
 
 # @require_http_methods(['POST'])
@@ -944,53 +934,14 @@ def userprofile_submit(request):
 
 
 @require_http_methods(['GET'])
-def club_profile_get(request):
+def club_detail_page(request,club_id):
+    profile = Club.objects.get(ClubId=club_id)
     try:
-        body = json.loads(request.body)
-        clubid = body['ClubId']
-        profile = Club.objects.get(ClubId=clubid)
-        response = None
-        if profile.IfRecruit:
-            response = {
-                'ClubName': profile.ClubName,
-                'ShezhangName': profile.ShezhangName,
-                'ShezhangQq': profile.ShezhangQq,
-                'ShezhangGrade': profile.ShezhangGrade,
-                'ShezhangClass': profile.ShezhangClass,
-                'IfRecruit': 'False',
-                'EnrollGroupQq': profile.EnrollGroupQq,
-                'Email': profile.Email,
-                'Label': profile.Label,
-                'State': profile.State,
-                'Stars': profile.Stars,
-                'Introduction': profile.Introduction,
-                'Achievements': profile.Achievements,
-            }
-        elif not profile.IfRecruit:
-            response = {
-                'ClubName': profile.ClubName,
-                'ShezhangName': profile.ShezhangName,
-                'ShezhangQq': profile.ShezhangQq,
-                'ShezhangGrade': profile.ShezhangGrade,
-                'ShezhangClass': profile.ShezhangClass,
-                'IfRecruit': 'False',
-                'EnrollGroupQq': profile.EnrollGroupQq,
-                'Email': profile.Email,
-                'Label': profile.Label,
-                'State': profile.State,
-                'Stars': profile.Stars,
-                'Introduction': profile.Introduction,
-                'Achievements': profile.Achievements,
-            }
-        response_json = json.dumps(response)
-        return JsonResponse({'message': 'success', 'Access-Control-Allow-Origin': '*', 'data': response_json},
-                            safe=False)
+        template = loader.get_template('index/club/detail.html')
+        content = {}
+        return HttpResponse(template.render(content, request))
     except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
-
+        return HttpResponseServerError
 
 @require_http_methods(["POST"])
 def club_profile_submit(request):

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>建平学生平台</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "/css/bulma.css" %}">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
+</head>
+<body>
+<section class="hero is-info is-fullheight">
+    <div class="hero-head">
+        <nav class="navbar">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="">
+                    建平中学学生平台
+                </a>
+                <div class="navbar-burger" data-target="navMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+            </div>
+            <div id="navMenu" class="navbar-menu">
+                <div class="navbar-start">
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <router-link class="navbar-link " to="/Club">
+                            社团
+                        </router-link>
+                        <div class="navbar-dropdown ">
+                            <router-link class="navbar-item " to="/Club">
+                                社团列表
+                            </router-link>
+                            <!--<router-link class="navbar-item " to="/Club/Event">-->
+                            <!--社团动态-->
+                            <!--</router-link>-->
+                        </div>
+                    </div>
+                    <!--<div class="navbar-item has-dropdown is-hoverable">-->
+                    <!--<router-link class="navbar-link " to="/Activity">-->
+                    <!--活动-->
+                    <!--</router-link>-->
+                    <!--<div id="blogDropdown" class="navbar-dropdown " data-style="width: 18rem;">-->
+                    <!--<router-link class="navbar-item " to="/Activity/list">-->
+                    <!--活动报名-->
+                    <!--</router-link>-->
+                    <!--<router-link class="navbar-item " to="/Activity/">-->
+                    <!--活动动态-->
+                    <!--</router-link>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--<a class="navbar-item" href="#">-->
+                    <!--失物招领-->
+                    <!--</a>-->
+                </div>
+
+                <div class="navbar-end">
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <router-link class="navbar-link " to="/User/Dashboard">
+                            欢迎你，{{ GetUserName }}
+                        </router-link>
+                        <div class="navbar-dropdown" data-style="width: 18rem;">
+                            <router-link to="/User/Dashboard" class="navbar-item ">个人中心</router-link>
+                            <a class="navbar-item ">注销</a>
+                        </div>
+                    </div>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <router-link class="navbar-link " to="/Login">
+                            登录
+                        </router-link>
+                        <div class="navbar-dropdown">
+                            <router-link class="navbar-item" to="/Login">
+                                学生登录
+                            </router-link>
+                            <!--TODO: Link to admin_club & admin_cd-->
+                            <router-link class="navbar-item " to="http://119.23.49.42/admin_club/">
+                                社长登录
+                            </router-link>
+                            <router-link class="navbar-item " to="http://119.23.49.42/admin_cd/">
+                                社团部登录
+                            </router-link>
+                        </div>
+                    </div>
+                    <router-link class="navbar-item" to="/About">
+                        关于
+                    </router-link>
+                </div>
+            </div>
+        </nav>
+    </div>
+    {% block content %}
+
+    {% endblock %}
+</section>
+
+</body>
+</html>

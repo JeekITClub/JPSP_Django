@@ -1,10 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>社团列表</title>
-</head>
-<body>
+{% extends "index/template.html" %}
 
-</body>
-</html>
+{% block content %}\
+
+    <div class="columns is-mobile" align="right">
+        <div class="column">
+            <router-link class="button is-primary is-large" to="/Establish" align="right">创建社团</router-link>
+        </div>
+    </div>
+
+    <div class="columns is-multiline is-mobile">
+        {% for club in club_list %}
+        <div class="column is-one-quarter">
+            <div class="card">
+                <div class="card-image">
+                    <figure class="image is-1by1">
+                        <img src="../../assets/dp.jpg">
+                    </figure>
+                </div>
+
+                <div class="card-content">
+                    <div class="content">
+                        {% if club.IfRecruit == 1 %}
+                            <p class="title is-4">{{ Club.ClubName }}</p>
+                        {% else %}
+                            <p class="title is-4">{{ Club.ClubName }}(不招新)</p>
+                        {% endif %}
+
+
+                    </div>
+                </div>
+
+                <footer class="card-footer">
+                {#                            todo: the link to club#}
+                    <a class="card-footer-item">
+                        {% if club.IfRecruit == 1 %}
+                        <p>我想加入</p>
+                        {% else %}
+                        <p>查看该社团</p>
+                        {% endif %}
+                    </a>
+                </footer>
+
+            </div>
+
+
+        </div>
+    </div>
+
+{% endblock %}
