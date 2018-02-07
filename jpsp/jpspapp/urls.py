@@ -13,6 +13,6 @@ urlpatterns = [
     path(r's/dashboard/password', views.student_dashboard_password),
     path(r's/dashboard/clubs', views.student_dashboard_clubs),
     path(r's/dashboard/activities', views.student_dashboard_activities),
-    path(r'a/login', views.admin_login_page),
+    path('asd', views.admin_login_page),
     path('', views.index)
 ]
