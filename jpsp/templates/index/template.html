@@ -9,7 +9,7 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
 </head>
 <body>
-<section class="hero is-info is-fullheight">
+<section class="hero is-fullheight">
     <div class="hero-head">
         <nav class="navbar">
             <div class="navbar-brand">
@@ -21,71 +21,72 @@
                     <span></span>
                     <span></span>
                 </div>
+{#                todo: fill the navbar-burger above#}
 
             </div>
             <div id="navMenu" class="navbar-menu">
                 <div class="navbar-start">
                     <div class="navbar-item has-dropdown is-hoverable">
-                        <router-link class="navbar-link " to="/Club">
+                        <a class="navbar-link ">
                             社团
-                        </router-link>
+                        </a>
                         <div class="navbar-dropdown ">
-                            <router-link class="navbar-item " to="/Club">
+                            <a class="navbar-item " href="/s/club/list/1">
                                 社团列表
-                            </router-link>
-                            <!--<router-link class="navbar-item " to="/Club/Event">-->
-                            <!--社团动态-->
-                            <!--</router-link>-->
+                            </a>
+                            <a class="navbar-item ">
+                                社团动态
+                            </a>
                         </div>
                     </div>
-                    <!--<div class="navbar-item has-dropdown is-hoverable">-->
-                    <!--<router-link class="navbar-link " to="/Activity">-->
-                    <!--活动-->
-                    <!--</router-link>-->
-                    <!--<div id="blogDropdown" class="navbar-dropdown " data-style="width: 18rem;">-->
-                    <!--<router-link class="navbar-item " to="/Activity/list">-->
-                    <!--活动报名-->
-                    <!--</router-link>-->
-                    <!--<router-link class="navbar-item " to="/Activity/">-->
-                    <!--活动动态-->
-                    <!--</router-link>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--<a class="navbar-item" href="#">-->
-                    <!--失物招领-->
-                    <!--</a>-->
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link ">
+                            活动
+                        </a>
+                        <div class="navbar-dropdown ">
+                            <a class="navbar-item ">
+                                活动报名
+                            </a>
+                            <a class="navbar-item ">
+                                活动动态
+                            </a>
+                        </div>
+                    </div>
+                    <a class="navbar-item" href="#">
+                        失物招领
+                    </a>
                 </div>
 
                 <div class="navbar-end">
                     <div class="navbar-item has-dropdown is-hoverable">
-                        <router-link class="navbar-link " to="/User/Dashboard">
-                            欢迎你，{{ GetUserName }}
-                        </router-link>
-                        <div class="navbar-dropdown" data-style="width: 18rem;">
-                            <router-link to="/User/Dashboard" class="navbar-item ">个人中心</router-link>
+                        <a class="navbar-link ">
+                            欢迎你，{{ username }}
+                        </a>
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item ">个人中心</a>
                             <a class="navbar-item ">注销</a>
                         </div>
                     </div>
                     <div class="navbar-item has-dropdown is-hoverable">
-                        <router-link class="navbar-link " to="/Login">
+                        <a class="navbar-link ">
                             登录
-                        </router-link>
+                        </a>
                         <div class="navbar-dropdown">
-                            <router-link class="navbar-item" to="/Login">
+                            <a class="navbar-item ">
                                 学生登录
-                            </router-link>
-                            <!--TODO: Link to admin_club & admin_cd-->
-                            <router-link class="navbar-item " to="http://119.23.49.42/admin_club/">
+                            </a>
+{#                            TODO: Link to admin_club & admin_cd#}
+                            <a class="navbar-item ">
                                 社长登录
-                            </router-link>
-                            <router-link class="navbar-item " to="http://119.23.49.42/admin_cd/">
+                            </a>
+                            <a class="navbar-item ">
                                 社团部登录
-                            </router-link>
+                            </a>
                         </div>
                     </div>
-                    <router-link class="navbar-item" to="/About">
+                    <a class="navbar-item" to="/About">
                         关于
-                    </router-link>
+                    </a>
                 </div>
             </div>
         </nav>

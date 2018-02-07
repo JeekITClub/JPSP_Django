@@ -137,16 +137,18 @@ def club_list(request):
 # 学生 社团列表
 # todo : fix the unordered problem
 def student_club_list(request, page):
-    try:
-        club_object = Club.objects.filter(State=True)
-        paginator = Paginator(club_object, 12)
-        club = paginator.page(page).object_list
-        context = {'club': club}
-        template = loader.get_template('index/club/list.html')
-        return HttpResponse(template.render(context, request))
-    except:
-        return HttpResponseServerError
+    club_object = Club.objects.filter(State=True)
+    paginator = Paginator(club_object, 12)
+    club = paginator.page(page).object_list
+    context = {'club': club}
+    template = loader.get_template('index/club/list.html')
+    return HttpResponse(template.render(context, request))
 
+
+def student_club_establish(request):
+    context = {}
+    template = loader.get_template('index/club/establish.html')
+    return HttpResponse(template.render(context, request))
 
 @require_http_methods(['POST'])
 def club_attend(request):
@@ -651,9 +653,15 @@ def club_member(request):
 #         })
 
 
-
-@require_http_methods(['GET'])
 def student_club_detail(request, club_id):
+    profile = Club.objects.get(ClubId=club_id)
+    template = loader.get_template('index/club/detail.html')
+    content = {}
+    return HttpResponse(template.render(content, request))
+
+
+def student_club_news(request, club_id):
+    # todo: finish the function
     profile = Club.objects.get(ClubId=club_id)
     template = loader.get_template('index/club/detail.html')
     content = {}
