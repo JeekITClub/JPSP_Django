@@ -6,5 +6,5 @@ from django.contrib import admin
 
 urlpatterns = [
     path('admin', admin.site.urls),
-    path('jpsp', include('jpspapp.urls'))
+    path('', include('jpspapp.urls'))
 ]

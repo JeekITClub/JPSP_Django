@@ -1,13 +1,11 @@
 {% extends "index/template.html" %}
 
-{% block content %}\
-
+{% block content %}
     <div class="columns is-mobile" align="right">
         <div class="column">
-            <a class="button is-primary is-large" href="{% url 'StudentClubEstablish' %}">创建社团</a>
+            <a class="button is-primary" href="{% url 'StudentClubEstablish' %}">创建社团</a>
         </div>
     </div>
-
     <div class="columns is-multiline is-mobile">
         {% for club in club_list %}
             <div class="column is-one-quarter">
@@ -21,9 +19,9 @@
                     <div class="card-content">
                         <div class="content">
                             {% if club.IfRecruit == 1 %}
-                                <p class="title is-4">{{ Club.ClubName }}</p>
+                                <p class="title is-4 has-text-centered">{{ club.ClubName }}</p>
                             {% else %}
-                                <p class="title is-4">{{ Club.ClubName }}(不招新)</p>
+                                <p class="title is-4 has-text-centered">{{ club.ClubName }}(不招新)</p>
                             {% endif %}
 
 
@@ -32,11 +30,11 @@
 
                     <footer class="card-footer">
                         {#                            todo: the link to club#}
-                        <a class="card-footer-item">
+                        <a class="card-footer-item" href="{% url 'StudentClubDetail' club.ClubId %}">
                             {% if club.IfRecruit == 1 %}
-                                <p>我想加入</p>
+                                我想加入
                             {% else %}
-                                <p>查看该社团</p>
+                                查看该社团
                             {% endif %}
                         </a>
                     </footer>
@@ -47,5 +45,50 @@
             </div>
         {% endfor %}
     </div>
-
+    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+        <ul class="pagination-list">
+            {% if club_list.has_previous == True and club_list.previous_page_number != 1 %}
+                <li><a class="pagination-link" href="{% url 'StudentClubList' 1 %}">
+                    1
+                </a>
+                </li>
+                <li>
+                    <span class="pagination-ellipsis">&hellip;</span>
+                </li>
+                <li>
+                    <a class="pagination-link" href="{% url 'StudentClubList' club_list.previous_page_number %}">
+                        {{ club_list.previous_page_number }}
+                    </a>
+                </li>
+            {% elif club_list.has_previous == True and club_list.previous_page_number == 1 %}
+                <li><a class="pagination-link" href="{% url 'StudentClubList' 1 %}">
+                1
+            </a>
+            {% endif %}
+            <li>
+                <a class="pagination-link is-current" aria-current="page">
+                    {{ club_list.number }}
+                </a>
+            </li>
+            {% if club_list.has_next == True and club_list.next_page_number == club_list.paginator.num_pages %}
+                <li>
+                    <a class="pagination-link" href="{% url 'StudentClubList' club_list.paginator.num_pages %}">
+                        {{ club_list.paginator.num_pages }}
+                    </a>
+                </li>
+            {% elif club_list.has_next == True and club_list.next_page_number != club_list.paginator.num_pages %}
+                <li>
+                    <a class="pagination-link" href="{% url 'StudentClubList' club_list.next_page_number %}">
+                        {{ club_list.next_page_number }}
+                    </a>
+                </li>
+                <li><span class="pagination-ellipsis">&hellip;</span></li>
+                <li>
+                    <a class="pagination-link" href="{% url 'StudentClubList' club_list.paginator.num_pages %}">
+                        {{ club_list.paginator.num_pages }}
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
 {% endblock %}

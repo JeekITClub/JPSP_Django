@@ -58,6 +58,9 @@ class Club(models.Model):
     def __str__(self):
         return self.ClubName
 
+    class Meta:
+        ordering = ["ClubId"]
+
 class ClubMemberShip(models.Model):
     Club = models.ForeignKey(Club,on_delete = models.CASCADE)
     Member = models.ForeignKey(UserProfile,on_delete = models.CASCADE)

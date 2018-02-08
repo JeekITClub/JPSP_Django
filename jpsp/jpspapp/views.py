@@ -34,17 +34,13 @@ def index(request):
 
 @require_http_methods(['GET'])
 def login_page(request):
-    try:
-        template = loader.get_template('index/login.html')
-        content = {}
-        return HttpResponse(template.render(content, request))
-    except:
-        return HttpResponseServerError
+    template = loader.get_template('index/login.html')
+    content = {}
+    return HttpResponse(template.render(content, request))
 
 
-@require_http_methods(['GET'])
 def admin_login_page(request):
-    template = loader.get_template('admin/login.html')
+    template = loader.get_template('manage/login.html')
     content = {}
     return HttpResponse(template.render(content, request))
 
@@ -62,25 +58,7 @@ def login(request):
 
 @require_http_methods(['POST'])
 def logout(request):
-    try:
-        body = json.loads(request)
-        user_id = body['UserId']
-        if token_remove(user_id):
-            return JsonResponse({
-                'message': 'success',
-                'Access-Control-Allow-Origin': '*'
-            })
-        else:
-            return JsonResponse({
-                'message': 'error',
-                'Access-Control-Allow-Origin': '*'
-            })
-    except:
-        return JsonResponse({
-            'message': 'error',
-            'Access-Control-Allow-Origin': '*'
-        })
-
+    pass
 
 @require_http_methods(['POST'])
 def club_establish(request):
@@ -135,20 +113,21 @@ def club_list(request):
 
 
 # 学生 社团列表
-# todo : fix the unordered problem
+# Fix the unordered problem
+# Fixed by add class Meta to the model Club 2018-02-08 2:26PM by Harvey Qiu
 def student_club_list(request, page):
     club_object = Club.objects.filter(State=True)
-    paginator = Paginator(club_object, 12)
-    club = paginator.page(page).object_list
-    context = {'club': club}
+    paginator = Paginator(club_object, 1)
+    # paginator is a new Paginator
     template = loader.get_template('index/club/list.html')
-    return HttpResponse(template.render(context, request))
+    return HttpResponse(template.render({'club_list':paginator.get_page(page)}, request))
 
 
 def student_club_establish(request):
     context = {}
     template = loader.get_template('index/club/establish.html')
     return HttpResponse(template.render(context, request))
+
 
 @require_http_methods(['POST'])
 def club_attend(request):
