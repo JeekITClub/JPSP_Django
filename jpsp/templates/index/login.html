@@ -4,8 +4,8 @@
 
     <div class="hero-body">
         <div class="container">
-{#            todo: add action #}
-            <form action="">
+            <form action="{% url 'StudentCheckLogin' %}" method="post">
+                {% csrf_token %}
                 <section class="container">
                     <h2 class="title is-2" style="text-align: center">学生登录</h2>
                     <div class="columns is-mobile">
@@ -19,7 +19,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="columns is-mobile">
                         <div class="column is-half is-offset-one-quarter">
                             <div class="field">
@@ -38,9 +37,9 @@
                                     <button class="button is-primary" type="submit">登录</button>
                                 </div>
                                 <div class="control">
-                                    <button class="button is-link">
-{#                                        todo : fix router-link#}
-                                        <router-link to="/contact">忘记密码？</router-link>
+                                    <button class="button is-warning">
+{#                                        todo : add the link to reset password#}
+                                        <a href="">忘记密码？</a>
                                     </button>
                                 </div>
                             </div>

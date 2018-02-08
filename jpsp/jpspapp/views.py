@@ -1,35 +1,22 @@
 # coding=utf-8
-from django.http import HttpResponse, HttpResponseServerError
-import json
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.contrib.auth.models import User
 from jpspapp.models import Club, Post, Activity, Classroom, LostAndFound, UserProfile, CDUser, ActivityParticipantShip, \
     ClubMemberShip
 from django.views.decorators.http import require_http_methods
-import datetime
-from django.contrib.auth import authenticate
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator
 
 
 # Create your views here.
 
-
 @require_http_methods(['GET'])
 def index(request):
-    if request.user.is_authenticated:
-        try:
-            template = loader.get_template('index/index.html')
-            content = {}
-            return HttpResponse(template.render(content, request))
-        except:
-            return HttpResponseServerError
-    else:
-        try:
-            template = loader.get_template('index/index.html')
-            content = {}
-            return HttpResponse(template.render(content, request))
-        except:
-            return HttpResponseServerError
+    template = loader.get_template('index/index.html')
+    content = {'user': request.user}
+    return HttpResponse(template.render(content, request))
 
 
 @require_http_methods(['GET'])
@@ -46,19 +33,21 @@ def admin_login_page(request):
 
 
 @require_http_methods(['POST'])
-def login(request):
-    try:
-        user_id = request.POST['UserName']
-        password = request.POST['Password']
-        user = authenticate(username=user_id, password=password)
-        return HttpRedirect()
-    except:
-        return HttpResponse("Login Error")
+def student_check_login(request):
+    user_id = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(username=user_id, password=password)
+    if user is not None:
+        login(request, user)
+        return HttpResponseRedirect('/')
+    else:
+        # todo: make a login error page
+        return HttpResponse("登陆失败啦")
 
+def student_logout(request):
+    logout(request)
+    return HttpResponseRedirect("/")
 
-@require_http_methods(['POST'])
-def logout(request):
-    pass
 
 @require_http_methods(['POST'])
 def club_establish(request):
@@ -100,14 +89,8 @@ def club_establish(request):
 @require_http_methods(['POST'])
 def club_list(request):
     if request.user.is_authenticated:
-
-        try:
-            body = json.loads(request.body)
-            user_id = body['UserId']
-            type = body['Type']
-
-        except:
-            return HttpResponseServerError
+        user_id = request.POST['UserId']
+        type = request.POST['Type']
     else:
         return HttpResponse("没登陆呢")
 
@@ -117,10 +100,10 @@ def club_list(request):
 # Fixed by add class Meta to the model Club 2018-02-08 2:26PM by Harvey Qiu
 def student_club_list(request, page):
     club_object = Club.objects.filter(State=True)
-    paginator = Paginator(club_object, 1)
+    paginator = Paginator(club_object, 12)
     # paginator is a new Paginator
     template = loader.get_template('index/club/list.html')
-    return HttpResponse(template.render({'club_list':paginator.get_page(page)}, request))
+    return HttpResponse(template.render({'club_list': paginator.get_page(page)}, request))
 
 
 def student_club_establish(request):
@@ -156,12 +139,9 @@ def club_quit(request):
 @require_http_methods(['GET'])
 def club_member(request):
     if request.user.is_authenticated:
-        try:
-            template = loader.get_template('club/member/list.html')
-            content = {}
-            return HttpResponse(template.render(content, request))
-        except:
-            return HttpResponseServerError
+        template = loader.get_template('club/member/list.html')
+        content = {}
+        return HttpResponse(template.render(content, request))
     else:
         return HttpResponse("未登陆")
 
@@ -725,18 +705,11 @@ def club_file_download_list(request):
     content = {}
     return HttpResponse(template.render(content, request))
 
-
+@login_required(login_url='/s/login')
 def student_dashboard_index(request):
-    if request.user.is_authenticated:
-        try:
-            template = loader.get_template('index/dashboard/index.html')
-            content = {}
-            return HttpResponse(template.render(content, request))
-        except:
-            return HttpResponseServerError
-    else:
-        # todo: redirect to the login page
-        return HttpResponse("0")
+    template = loader.get_template('index/dashboard/index.html')
+    content = {}
+    return HttpResponse(template.render(content, request))
 
 
 def student_dashboard_clubs(request):
