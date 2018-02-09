@@ -44,6 +44,7 @@ def student_check_login(request):
         # todo: make a login error page
         return HttpResponse("登陆失败啦")
 
+
 def student_logout(request):
     logout(request)
     return HttpResponseRedirect("/")
@@ -52,7 +53,6 @@ def student_logout(request):
 @require_http_methods(['POST'])
 def club_establish(request):
     if request.user.is_authenticated:
-        try:
             clubname = request.POST['Clubname']
             shezhang_name = request.POST['Shezhang_Name']
             shezhang_qq = request.POST['Shezhang_QQ']
@@ -79,8 +79,7 @@ def club_establish(request):
                 EnrollGroupQq=qq_group,
             )
             return HttpResponse("Success")
-        except:
-            return HttpResponseServerError
+
     else:
         return HttpResponse("没登陆呢")
 
@@ -627,11 +626,11 @@ def student_club_news(request, club_id):
     return HttpResponse(template.render(content, request))
 
 
-
 def club_login_page(request):
-    template=loader.get_template('club/login.html')
+    template = loader.get_template('club/login.html')
     content = {}
-    return HttpResponse(template.render(content,request))
+    return HttpResponse(template.render(content, request))
+
 
 @require_http_methods(["POST"])
 def club_profile_update(request):
@@ -668,29 +667,29 @@ def event_submit(request):
     pass
 
 
-@require_http_methods(["POST"])
-def event_list(request):
-    template = loader.get_template('admin/event/list.html')
-    content = {}
-    return HttpResponse(template.render(content, request))
-
-
-def admin_file_upload(request):
-    template = loader.get_template('admin/file/upload.html')
-    content = {}
-    return HttpResponse(template.render(content, request))
-
-
-def admin_file_upload_list(request):
-    template = loader.get_template('admin/file/upload_list.html')
-    content = {}
-    return HttpResponse(template.render(content, request))
-
-
-def admin_file_download_list(request):
-    template = loader.get_template('admin/file/download_list.html')
-    content = {}
-    return HttpResponse(template.render(content, request))
+# @require_http_methods(["POST"])
+# def event_list(request):
+#     template = loader.get_template('admin/event/list.html')
+#     content = {}
+#     return HttpResponse(template.render(content, request))
+#
+#
+# def admin_file_upload(request):
+#     template = loader.get_template('admin/file/upload.html')
+#     content = {}
+#     return HttpResponse(template.render(content, request))
+#
+#
+# def admin_file_upload_list(request):
+#     template = loader.get_template('admin/file/upload_list.html')
+#     content = {}
+#     return HttpResponse(template.render(content, request))
+#
+#
+# def admin_file_download_list(request):
+#     template = loader.get_template('admin/file/download_list.html')
+#     content = {}
+#     return HttpResponse(template.render(content, request))
 
 
 def club_file_upload(request):
@@ -710,6 +709,7 @@ def club_file_download_list(request):
     template = loader.get_template('club/file/download_list.html')
     content = {}
     return HttpResponse(template.render(content, request))
+
 
 @login_required(login_url='/s/login')
 def student_dashboard_index(request):
@@ -740,29 +740,25 @@ def student_dashboard_activities(request):
 
 def student_dashboard_password(request):
     if request.user.is_authenticated:
-        try:
             template = loader.get_template('index/dashboard/password.html')
             content = {}
             return HttpResponse(template.render(content, request))
-        except:
-            return HttpResponseServerError
     else:
         # todo: redirect to the login page
         return HttpResponse("0")
 
 
-# todo: write a decorator for admin
-def admin_student_list(request):
-    if request.user.is_authenticated:
-        template = loader.get_template('admin/student/list.html')
-        content = {}
-        return HttpResponse(template.render(content, request))
-    else:
-        # todo: redirect to the login page
-        return HttpResponse("0")
-
-
-def admin_student_detail(request):
-    template = loader.get_template('admin/student/detail.html')
-    content = {}
-    return HttpResponse(template.render(content, request))
+# def admin_student_list(request):
+#     if request.user.is_authenticated:
+#         template = loader.get_template('admin/student/list.html')
+#         content = {}
+#         return HttpResponse(template.render(content, request))
+#     else:
+#         # todo: redirect to the login page
+#         return HttpResponse("0")
+#
+#
+# def admin_student_detail(request):
+#     template = loader.get_template('admin/student/detail.html')
+#     content = {}
+#     return HttpResponse(template.render(content, request))

@@ -13,7 +13,7 @@
     <div class="hero-head">
         <nav class="navbar">
             <div class="navbar-brand">
-                <a class="navbar-item" href="">
+                <a class="navbar-item" href="{% url 'Index' %}">
                     建平中学学生平台
                 </a>
                 <div class="navbar-burger" data-target="navMenu">
@@ -31,7 +31,7 @@
                             社团
                         </a>
                         <div class="navbar-dropdown ">
-                            <a class="navbar-item " href="/s/club/list/1">
+                            <a class="navbar-item " href="{% url 'StudentClubList' page=1 %}">
                                 社团列表
                             </a>
                             <a class="navbar-item ">

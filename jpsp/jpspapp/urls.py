@@ -16,5 +16,5 @@ urlpatterns = [
     path(r's/dashboard/activities', views.student_dashboard_activities),
     path(r'cd/login',views.admin_login_page,name="CDLogin"),
     path(r'c/login',views.club_login_page,name="ClubLogin"),
-    path('', views.index)
+    path('', views.index,name="Index")
 ]
