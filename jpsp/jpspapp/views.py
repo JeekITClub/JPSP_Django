@@ -20,7 +20,7 @@ def index(request):
 
 
 @require_http_methods(['GET'])
-def login_page(request):
+def student_login_page(request):
     template = loader.get_template('index/login.html')
     content = {}
     return HttpResponse(template.render(content, request))
@@ -626,6 +626,12 @@ def student_club_news(request, club_id):
     content = {}
     return HttpResponse(template.render(content, request))
 
+
+
+def club_login_page(request):
+    template=loader.get_template('club/login.html')
+    content = {}
+    return HttpResponse(template.render(content,request))
 
 @require_http_methods(["POST"])
 def club_profile_update(request):

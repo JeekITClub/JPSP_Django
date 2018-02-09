@@ -58,6 +58,7 @@
                 </div>
 
                 <div class="navbar-end">
+                    {% if user.is_authenticated %}
                     <div class="navbar-item has-dropdown is-hoverable">
                         <a class="navbar-link ">
                             欢迎你，{{ user.username }}
@@ -67,24 +68,27 @@
                             <a class="navbar-item " href="{% url 'StudentLogout' %}">注销</a>
                         </div>
                     </div>
+                    {% else %}
                     <div class="navbar-item has-dropdown is-hoverable">
-                        <a class="navbar-link ">
+                        <a class="navbar-link " href="{% url 'StudentLogin' %}">
                             登录
                         </a>
                         <div class="navbar-dropdown">
-                            <a class="navbar-item ">
+                            <a class="navbar-item " href="{% url 'StudentLogin' %}">
                                 学生登录
                             </a>
                             {#                            TODO: Link to admin_club & admin_cd#}
-                            <a class="navbar-item ">
+                            <a class="navbar-item " href="{% url 'ClubLogin' %}">
                                 社长登录
                             </a>
-                            <a class="navbar-item ">
+                            <a class="navbar-item " href="{% url 'CDLogin' %}">
                                 社团部登录
                             </a>
                         </div>
                     </div>
-                    <a class="navbar-item" to="/About">
+{#                    todo: Add about page#}
+                    {% endif %}
+                    <a class="navbar-item">
                         关于
                     </a>
                 </div>
