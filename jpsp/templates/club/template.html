@@ -9,10 +9,104 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
 </head>
 <body>
+<div>
+    <nav class="navbar ">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="">
+                建平中学学生平台
+            </a>
+        </div>
 
-{% block content %}
+        <div id="navMenubd-example" class="navbar-menu">
+            <div class="navbar-start">
+                <router-link class="navbar-item " to="/about">
+                    关于
+                </router-link>
+                <router-link class="navbar-item " to="/contact">
+                    联系我们
+                </router-link>
+            </div>
+            <div class="navbar-end">
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" href="">欢迎,{{ ClubName }}</a>
+                    <div class="navbar-dropdown">
+                        <router-link class="navbar-item" to="/profile">
+                            修改信息
+                        </router-link>
+                        <a class="navbar-item">
+                            注销
+                        </a>
+                    </div>
+
+                </div>
+                <div class="navbar-item">
+                    <div class="field">
+                        <p class="control">
+                            <router-link to="/login">登陆</router-link>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<div class="columns">
+    <div class="column">
+        <aside class="menu">
+            <p class="menu-label">
+                总览
+            </p>
+            <ul class="menu-list">
+                <li>
+                    <router-link to="/Dashboard">仪表盘</router-link>
+                </li>
+                <li>
+                    <router-link to="/Profile">社团资料修改</router-link>
+                </li>
+            </ul>
+            <p class="menu-label">
+                社团活动记录
+            </p>
+            <ul class="menu-list">
+                <li>
+                    <router-link to="/Post/Form">添加</router-link>
+                </li>
+            </ul>
+            <p class="menu-label">
+                成员/招新
+            </p>
+            <ul class="menu-list">
+                <li>
+                    <router-link to="/Member">成员管理</router-link>
+                </li>
+                <li>
+                    <router-link to="/recruit/classroom/apply">公共教室申请</router-link>
+                </li>
+                <li>
+                    <router-link to="/recruit/classroom/list">公共教室列表</router-link>
+                </li>
+            </ul>
+            <p class="menu-label">
+                文件
+            </p>
+            <ul class="menu-list">
+                <li>
+                    <router-link to="/file/upload">上传</router-link>
+                </li>
+                <li>
+                    <router-link to="/file/download">下载</router-link>
+                </li>
+            </ul>
+        </aside>
+    </div>
+    <div class="column">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+</div>
 
 
-{% endblock %}
 </body>
 </html>
