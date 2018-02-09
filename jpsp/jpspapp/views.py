@@ -32,6 +32,25 @@ def admin_login_page(request):
     return HttpResponse(template.render(content, request))
 
 
+def admin_check_login(request):
+    user_id = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(username=user_id, password=password)
+    # todo: finish the admin check login
+    if user is not None:
+        login(request, user)
+        return HttpResponseRedirect('/cd/')
+    else:
+        # todo: make a login error page
+        return HttpResponse("登陆失败啦")
+
+def admin_dashboard(request):
+    # todo: finish the dashboard
+    template = loader.get_template('manage/dashboard.html')
+    content = {}
+    return HttpResponse(template.render(content,request))
+
+
 @require_http_methods(['POST'])
 def student_check_login(request):
     user_id = request.POST['username']

@@ -19,33 +19,36 @@
 
         <div id="navMenubd-example" class="navbar-menu">
             <div class="navbar-start">
-                <router-link class="navbar-item " to="/about">
+                <a class="navbar-item " href="/about">
                     关于
-                </router-link>
-                <router-link class="navbar-item " to="/contact">
+                </a>
+                <a class="navbar-item " href="/contact">
                     联系我们
-                </router-link>
+                </a>
             </div>
             <div class="navbar-end">
+                {% if user.is_authenticated %}
                 <div class="navbar-item has-dropdown is-hoverable">
+
                     <a class="navbar-link" href="">欢迎,{{ ClubName }}</a>
                     <div class="navbar-dropdown">
-                        <router-link class="navbar-item" to="/profile">
-                            修改信息
-                        </router-link>
+                        <a class="navbar-item" href="/profile">
+                            社团信息
+                        </a>
                         <a class="navbar-item">
                             注销
                         </a>
                     </div>
-
                 </div>
+                {% else %}
                 <div class="navbar-item">
                     <div class="field">
                         <p class="control">
-                            <router-link to="/login">登陆</router-link>
+                            <a href="/login">登陆</a>
                         </p>
                     </div>
                 </div>
+                {% endif %}
             </div>
         </div>
     </nav>
@@ -59,10 +62,10 @@
             </p>
             <ul class="menu-list">
                 <li>
-                    <router-link to="/Dashboard">仪表盘</router-link>
+                    <a href="/Dashboard">仪表盘</a>
                 </li>
                 <li>
-                    <router-link to="/Profile">社团资料修改</router-link>
+                    <a href="/Profile">社团资料修改</a>
                 </li>
             </ul>
             <p class="menu-label">
@@ -70,7 +73,7 @@
             </p>
             <ul class="menu-list">
                 <li>
-                    <router-link to="/Post/Form">添加</router-link>
+                    <a href="/Post/Form">添加</a>
                 </li>
             </ul>
             <p class="menu-label">
@@ -78,13 +81,13 @@
             </p>
             <ul class="menu-list">
                 <li>
-                    <router-link to="/Member">成员管理</router-link>
+                    <a href="/Member">成员管理</a>
                 </li>
                 <li>
-                    <router-link to="/recruit/classroom/apply">公共教室申请</router-link>
+                    <a href="/recruit/classroom/apply">公共教室申请</a>
                 </li>
                 <li>
-                    <router-link to="/recruit/classroom/list">公共教室列表</router-link>
+                    <a href="/recruit/classroom/list">公共教室列表</a>
                 </li>
             </ul>
             <p class="menu-label">
@@ -92,10 +95,10 @@
             </p>
             <ul class="menu-list">
                 <li>
-                    <router-link to="/file/upload">上传</router-link>
+                    <a href="/file/upload">上传</a>
                 </li>
                 <li>
-                    <router-link to="/file/download">下载</router-link>
+                    <a href="/file/download">下载</a>
                 </li>
             </ul>
         </aside>

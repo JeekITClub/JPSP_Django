@@ -15,6 +15,8 @@ urlpatterns = [
     path(r's/dashboard/clubs', views.student_dashboard_clubs),
     path(r's/dashboard/activities', views.student_dashboard_activities),
     path(r'cd/login',views.admin_login_page,name="CDLogin"),
-    path(r'c/login',views.club_login_page,name="ClubLogin"),
+    path('c/login',views.club_login_page,name="ClubLogin"),
+    path('cd/check_login',views.admin_check_login,name="CDCheckLogin"),
+    path('cd/dashboard',views.admin_dashboard,name="CDDashboard"),
     path('', views.index,name="Index")
 ]
