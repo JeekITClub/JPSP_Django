@@ -15,40 +15,15 @@ from django.core.paginator import Paginator
 @require_http_methods(['GET'])
 def index(request):
     template = loader.get_template('index/index.html')
-    content = {'user': request.user}
-    return HttpResponse(template.render(content, request))
+    context = {'user': request.user}
+    return HttpResponse(template.render(context, request))
 
 
 @require_http_methods(['GET'])
 def student_login_page(request):
     template = loader.get_template('index/login.html')
-    content = {}
-    return HttpResponse(template.render(content, request))
-
-
-def admin_login_page(request):
-    template = loader.get_template('manage/login.html')
-    content = {}
-    return HttpResponse(template.render(content, request))
-
-
-def admin_check_login(request):
-    user_id = request.POST['username']
-    password = request.POST['password']
-    user = authenticate(username=user_id, password=password)
-    # todo: finish the admin check login
-    if user is not None:
-        login(request, user)
-        return HttpResponseRedirect('/cd/')
-    else:
-        # todo: make a login error page
-        return HttpResponse("登陆失败啦")
-
-def admin_dashboard(request):
-    # todo: finish the dashboard
-    template = loader.get_template('manage/dashboard.html')
-    content = {}
-    return HttpResponse(template.render(content,request))
+    context = {}
+    return HttpResponse(template.render(context, request))
 
 
 @require_http_methods(['POST'])
@@ -64,6 +39,37 @@ def student_check_login(request):
         return HttpResponse("登陆失败啦")
 
 
+def admin_login_page(request):
+    template = loader.get_template('manage/login.html')
+    context = {}
+    return HttpResponse(template.render(context, request))
+
+
+def admin_check_login(request):
+    # user_id is str
+    user_id = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(username=user_id, password=password)
+    # todo: finish the admin check login
+    if user is not None:
+        try:
+            if CDUser.objects.get(UserName=user_id):
+                login(request, user)
+                return HttpResponseRedirect('/cd/')
+        except:
+            return HttpResponse("登陆失败啦")
+    else:
+        # todo: make a login error page
+        return HttpResponse("登陆失败啦")
+
+
+def admin_dashboard(request):
+    # todo: finish the dashboard
+    template = loader.get_template('manage/dashboard.html')
+    content = {}
+    return HttpResponse(template.render(content, request))
+
+
 def student_logout(request):
     logout(request)
     return HttpResponseRedirect("/")
@@ -72,32 +78,32 @@ def student_logout(request):
 @require_http_methods(['POST'])
 def club_establish(request):
     if request.user.is_authenticated:
-            clubname = request.POST['Clubname']
-            shezhang_name = request.POST['Shezhang_Name']
-            shezhang_qq = request.POST['Shezhang_QQ']
-            shezhang_grade = request.POST['Shezhang_Grade']
-            shezhang_classroom = request.POST['Shezhang_Classroom']
-            introduction = request.POST['Introduction']
-            if_recruit = request.POST['IfRecruit']
-            qq_group = request.POST['QQGroup']
-            email = request.POST['Email']
-            Club.objects.create(
-                Clubname=clubname,
-                # TODO: ClubId
-                ShezhangName=shezhang_name,
-                SheZhangQq=shezhang_qq,
-                ShezhangGrade=shezhang_grade,
-                ShezhangClassroom=shezhang_classroom,
-                IfRecruit=if_recruit,
-                Introduction=introduction,
-                Email=email,
-                # TODO: label!
-                State=False,
-                Achievements="",
-                Stars=0,
-                EnrollGroupQq=qq_group,
-            )
-            return HttpResponse("Success")
+        clubname = request.POST['Clubname']
+        shezhang_name = request.POST['Shezhang_Name']
+        shezhang_qq = request.POST['Shezhang_QQ']
+        shezhang_grade = request.POST['Shezhang_Grade']
+        shezhang_classroom = request.POST['Shezhang_Classroom']
+        introduction = request.POST['Introduction']
+        if_recruit = request.POST['IfRecruit']
+        qq_group = request.POST['QQGroup']
+        email = request.POST['Email']
+        Club.objects.create(
+            Clubname=clubname,
+            # TODO: ClubId
+            ShezhangName=shezhang_name,
+            SheZhangQq=shezhang_qq,
+            ShezhangGrade=shezhang_grade,
+            ShezhangClassroom=shezhang_classroom,
+            IfRecruit=if_recruit,
+            Introduction=introduction,
+            Email=email,
+            # TODO: label!
+            State=False,
+            Achievements="",
+            Stars=0,
+            EnrollGroupQq=qq_group,
+        )
+        return HttpResponse("Success")
 
     else:
         return HttpResponse("没登陆呢")
@@ -651,6 +657,23 @@ def club_login_page(request):
     return HttpResponse(template.render(content, request))
 
 
+@require_http_methods(['POST'])
+def club_check_login(request):
+    user_id = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(username=user_id, password=password)
+    if user is not None:
+        try:
+            if Club.objects.get(ClubId=user_id):
+                login(request, user)
+                return HttpResponseRedirect('/')
+        except:
+            return HttpResponse("登陆失败啦")
+    else:
+        # todo: make a login error page
+        return HttpResponse("登陆失败啦")
+
+
 @require_http_methods(["POST"])
 def club_profile_update(request):
     body = request.POST
@@ -686,29 +709,28 @@ def event_submit(request):
     pass
 
 
-# @require_http_methods(["POST"])
-# def event_list(request):
-#     template = loader.get_template('admin/event/list.html')
-#     content = {}
-#     return HttpResponse(template.render(content, request))
+def admin_event_list(request,page):
+    template = loader.get_template('manage/event/list.html')
+    content = {}
+    return HttpResponse(template.render(content, request))
+
+
+def admin_file_upload(request):
+    template = loader.get_template('manage/file/upload.html')
+    content = {}
+    return HttpResponse(template.render(content, request))
+
+
+def admin_file_upload_list(request):
+    template = loader.get_template('manage/file/upload_list.html')
+    context = {}
+    return HttpResponse(template.render(context, request))
+
 #
-#
-# def admin_file_upload(request):
-#     template = loader.get_template('admin/file/upload.html')
-#     content = {}
-#     return HttpResponse(template.render(content, request))
-#
-#
-# def admin_file_upload_list(request):
-#     template = loader.get_template('admin/file/upload_list.html')
-#     content = {}
-#     return HttpResponse(template.render(content, request))
-#
-#
-# def admin_file_download_list(request):
-#     template = loader.get_template('admin/file/download_list.html')
-#     content = {}
-#     return HttpResponse(template.render(content, request))
+def admin_file_download_list(request):
+    template = loader.get_template('manage/file/download_list.html')
+    context = {}
+    return HttpResponse(template.render(context, request))
 
 
 def club_file_upload(request):
@@ -759,13 +781,12 @@ def student_dashboard_activities(request):
 
 def student_dashboard_password(request):
     if request.user.is_authenticated:
-            template = loader.get_template('index/dashboard/password.html')
-            content = {}
-            return HttpResponse(template.render(content, request))
+        template = loader.get_template('index/dashboard/password.html')
+        content = {}
+        return HttpResponse(template.render(content, request))
     else:
         # todo: redirect to the login page
         return HttpResponse("0")
-
 
 # def admin_student_list(request):
 #     if request.user.is_authenticated:
@@ -781,3 +802,9 @@ def student_dashboard_password(request):
 #     template = loader.get_template('admin/student/detail.html')
 #     content = {}
 #     return HttpResponse(template.render(content, request))
+
+@login_required(login_url='/cd/login')
+def admin_post_list(request):
+    template = loader.get_template('manage/post/list.html')
+    context = {}
+    return HttpResponse(template.render(context,request))

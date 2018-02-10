@@ -4,7 +4,8 @@
 <div class="hero-body">
         <div class="container">
 {#            todo: add action #}
-            <form action="">
+            <form action="{% url 'CDCheckLogin' %}" method="post">
+                {% csrf_token %}
                 <section class="container">
                     <h2 class="title is-2" style="text-align: center">管理员登录</h2>
                     <div class="columns is-mobile">
