@@ -14,7 +14,7 @@ urlpatterns = [
     path(r's/dashboard/password', views.student_dashboard_password),
     path(r's/dashboard/clubs', views.student_dashboard_clubs),
     path(r's/dashboard/activities', views.student_dashboard_activities),
-    path(r'cd/login',views.admin_login_page,name="CDLogin"),
+    path('cd/login',views.admin_login_page,name="CDLogin"),
     path('c/login',views.club_login_page,name="ClubLogin"),
     path('c/check_login',views.club_check_login,name="ClubCheckLogin"),
     path('c/file/upload/list/<int:page>',views.club_file_upload_list,name="ClubFileUploadList"),
@@ -27,5 +27,7 @@ urlpatterns = [
     path('cd/file/upload/list/<int:page>',views.admin_file_upload_list,name="CDFileUploadList"),
     path('cd/file/download/list/<int:page>',views.admin_file_download_list,name="CDFileDownloadList"),
     path('cd/file/upload',views.admin_file_upload,name="CDFileUpload"),
+    path('s/about',views.about,name="About"),
+    path('contact',views.contact,name="Contact"),
     path('', views.index,name="Index")
 ]

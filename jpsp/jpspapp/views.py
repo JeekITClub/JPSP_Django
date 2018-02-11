@@ -782,8 +782,8 @@ def student_dashboard_activities(request):
 def student_dashboard_password(request):
     if request.user.is_authenticated:
         template = loader.get_template('index/dashboard/password.html')
-        content = {}
-        return HttpResponse(template.render(content, request))
+        context = {}
+        return HttpResponse(template.render(context, request))
     else:
         # todo: redirect to the login page
         return HttpResponse("0")
@@ -807,4 +807,14 @@ def student_dashboard_password(request):
 def admin_post_list(request):
     template = loader.get_template('manage/post/list.html')
     context = {}
+    return HttpResponse(template.render(context,request))
+
+def about(request):
+    template = loader.get_template('index/about.html')
+    context = {}
+    return HttpResponse(template.render(context,request))
+
+def contact(request):
+    template = loader.get_template('index/contact.html')
+    context= {}
     return HttpResponse(template.render(context,request))
