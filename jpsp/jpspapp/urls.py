@@ -27,6 +27,7 @@ urlpatterns = [
     path('cd/file/upload/list/<int:page>',views.admin_file_upload_list,name="CDFileUploadList"),
     path('cd/file/download/list/<int:page>',views.admin_file_download_list,name="CDFileDownloadList"),
     path('cd/file/upload',views.admin_file_upload,name="CDFileUpload"),
+    path('cd/student/list',views.admin_student_list,name="CDStudentList"),
     path('s/about',views.about,name="About"),
     path('contact',views.contact,name="Contact"),
     path('', views.index,name="Index")

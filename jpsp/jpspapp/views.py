@@ -75,9 +75,11 @@ def student_logout(request):
     return HttpResponseRedirect("/")
 
 
+
+
 @require_http_methods(['POST'])
-def club_establish(request):
-    if request.user.is_authenticated:
+def student_check_club_establish(request):
+    try:
         clubname = request.POST['Clubname']
         shezhang_name = request.POST['Shezhang_Name']
         shezhang_qq = request.POST['Shezhang_QQ']
@@ -104,19 +106,8 @@ def club_establish(request):
             EnrollGroupQq=qq_group,
         )
         return HttpResponse("Success")
-
-    else:
-        return HttpResponse("没登陆呢")
-
-
-# 社团部访问接口
-@require_http_methods(['POST'])
-def club_list(request):
-    if request.user.is_authenticated:
-        user_id = request.POST['UserId']
-        type = request.POST['Type']
-    else:
-        return HttpResponse("没登陆呢")
+    except:
+        return HttpResponse("Error")
 
 
 # 学生 社团列表
@@ -130,145 +121,37 @@ def student_club_list(request, page):
     return HttpResponse(template.render({'club_list': paginator.get_page(page)}, request))
 
 
+@login_required(login_url='s/login')
 def student_club_establish(request):
     context = {}
     template = loader.get_template('index/club/establish.html')
     return HttpResponse(template.render(context, request))
 
-
+@login_required(login_url='s/login')
 @require_http_methods(['POST'])
-def club_attend(request):
-    if request.user.is_authenticated:
-        try:
-            user_id = request.POST['UserId']
-            club_id = request.POST['ClubId']
-        except:
-            return False
-    else:
-        return HttpResponse("Attend the club Error")
+def admin_club_attend(request):
+    try:
+        user_id = request.POST['UserId']
+        club_id = request.POST['ClubId']
+    except:
+        return HttpResponse("Error")
 
 
+@login_required(login_url='s/login')
 @require_http_methods(['POST'])
-def club_quit(request):
-    if request.user.is_authenticated:
-        try:
-            user_id = request.POST['UserId']
-            club_id = request.POST['ClubId']
-        except:
-            return False
-    else:
-        return HttpResponse("Quit the club Error")
+def student_club_quit(request):
+    try:
+        user_id = request.POST['UserId']
+        club_id = request.POST['ClubId']
+    except:
+        return HttpResponse("Error")
 
 
-@require_http_methods(['GET'])
+@login_required(login_url='c/login')
 def club_member(request):
-    if request.user.is_authenticated:
-        template = loader.get_template('club/member/list.html')
-        content = {}
-        return HttpResponse(template.render(content, request))
-    else:
-        return HttpResponse("未登陆")
-
-
-# @require_http_methods(['POST'])
-# def club_member_add(request):
-#     if request.user.is_authenticated:
-#         try:
-#             body = json.loads(request.body)
-#             # club_id -> example: '303'
-#             club_id = request.POST['ClubId']
-#             # username -> example: 'S320150181'
-#             username = request.body['UserName']
-#
-#             ClubMemberShip.objects.create(
-#                 Member=UserProfile.objects.get(UserObject=User.objects.get(username=username)),
-#                 Club=Club.objects.get(ClubId=club_id))
-#
-#         except:
-#             return HttpResponseServerError
-#     else:
-#         return HttpResponse("未登陆")
-
-# @require_http_methods(['POST'])
-# def club_confirmed_member_list(request):
-#     try:
-#         # TODO: how to identify confirmed and unconfirmed
-#         body = json.loads(request.body)
-#         token = body['Token']
-#         page = body['Page']
-#         # club_id -> example: '303'
-#         club_id = body['ClubId']
-#         if (token_authenticate(user_id=club_id, token=token)):
-#             membership_set = ClubMemberShip.objects.filter(Club=Club.objects.get(ClubId=club_id)).filter(State=1)
-#             response = []
-#             paginator = Paginator(membership_set, 10)
-#             membership_set_page = paginator.page(page)
-#             for membership in membership_set_page:
-#                 response.append({
-#                     'UserName': membership.Member.UserName,
-#                     'Class': membership.Member.Class,
-#                     'Grade': membership.Member.Grade,
-#                     'AttendYear': membership.Member.AttendYear,
-#                     'Phone': membership.Member.Phone,
-#                     'QQ': membership.Member.QQ
-#                 })
-#             response_json = json.dumps(response)
-#             return JsonResponse({
-#                 'message': 'success',
-#                 'Access-Control-Allow-Origin': '*',
-#                 'data': response_json
-#             }, safe=False)
-#         else:
-#             return JsonResponse({
-#                 'message': 'error',
-#                 'Access-Control-Allow-Origin': '*'
-#             })
-#     except:
-#         return JsonResponse({
-#             'message': 'error',
-#             'Access-Control-Allow-Origin': '*'
-#         })
-
-
-# @require_http_methods(['POST'])
-# def club_unconfirmed_member_list(request):
-#     try:
-#         body = json.loads(request.body)
-#         token = body['Token']
-#         # club_id -> example: '303'
-#         page = body['Page']
-#         club_id = body['ClubId']
-#         if (token_authenticate(user_id=club_id, token=token)):
-#             membership_set = ClubMemberShip.objects.filter(Club=Club.objects.get(ClubId=club_id)).filter(State=0)
-#             response = []
-#             paginator = Paginator(membership_set, 10)
-#             membership_set_page = paginator.page(page)
-#             for membership in membership_set_page:
-#                 response.append({
-#                     'UserName': membership.Member.UserName,
-#                     'Class': membership.Member.Class,
-#                     'Grade': membership.Member.Grade,
-#                     'AttendYear': membership.Member.AttendYear,
-#                     'Phone': membership.Member.Phone,
-#                     'QQ': membership.Member.QQ
-#                 })
-#             response_json = json.dumps(response)
-#             return JsonResponse({
-#                 'message': 'success',
-#                 'Access-Control-Allow-Origin': '*',
-#                 'data': response_json
-#             }, safe=False)
-#         else:
-#             return JsonResponse({
-#                 'message': 'error',
-#                 'Access-Control-Allow-Origin': '*'
-#             })
-#
-#     except:
-#         return JsonResponse({
-#             'message': 'error',
-#             'Access-Control-Allow-Origin': '*'
-#         })
+    template = loader.get_template('club/member/list.html')
+    content = {}
+    return HttpResponse(template.render(content, request))
 
 
 # @require_http_methods(['POST'])
@@ -709,7 +592,7 @@ def event_submit(request):
     pass
 
 
-def admin_event_list(request,page):
+def admin_event_list(request, page):
     template = loader.get_template('manage/event/list.html')
     content = {}
     return HttpResponse(template.render(content, request))
@@ -725,6 +608,7 @@ def admin_file_upload_list(request):
     template = loader.get_template('manage/file/upload_list.html')
     context = {}
     return HttpResponse(template.render(context, request))
+
 
 #
 def admin_file_download_list(request):
@@ -788,33 +672,35 @@ def student_dashboard_password(request):
         # todo: redirect to the login page
         return HttpResponse("0")
 
-# def admin_student_list(request):
-#     if request.user.is_authenticated:
-#         template = loader.get_template('admin/student/list.html')
-#         content = {}
-#         return HttpResponse(template.render(content, request))
-#     else:
-#         # todo: redirect to the login page
-#         return HttpResponse("0")
-#
-#
-# def admin_student_detail(request):
-#     template = loader.get_template('admin/student/detail.html')
-#     content = {}
-#     return HttpResponse(template.render(content, request))
+
+@login_required(login_url='cd/login')
+def admin_student_list(request):
+    template = loader.get_template('manage/student/list.html')
+    content = {}
+    return HttpResponse(template.render(content, request))
+
+
+@login_required(login_url='cd/login')
+def admin_student_detail(request):
+    template = loader.get_template('manage/student/detail.html')
+    content = {}
+    return HttpResponse(template.render(content, request))
+
 
 @login_required(login_url='/cd/login')
 def admin_post_list(request):
     template = loader.get_template('manage/post/list.html')
     context = {}
-    return HttpResponse(template.render(context,request))
+    return HttpResponse(template.render(context, request))
+
 
 def about(request):
     template = loader.get_template('index/about.html')
     context = {}
-    return HttpResponse(template.render(context,request))
+    return HttpResponse(template.render(context, request))
+
 
 def contact(request):
     template = loader.get_template('index/contact.html')
-    context= {}
-    return HttpResponse(template.render(context,request))
+    context = {}
+    return HttpResponse(template.render(context, request))
