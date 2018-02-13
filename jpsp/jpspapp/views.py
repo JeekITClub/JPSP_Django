@@ -696,11 +696,9 @@ def admin_post_list(request):
 
 def about(request):
     template = loader.get_template('index/about.html')
-    context = {}
-    return HttpResponse(template.render(context, request))
+    return HttpResponse(template.render({}, request))
 
 
 def contact(request):
     template = loader.get_template('index/contact.html')
-    context = {}
-    return HttpResponse(template.render(context, request))
+    return HttpResponse(template.render({}, request))
