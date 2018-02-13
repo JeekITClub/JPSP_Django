@@ -48,9 +48,18 @@
                         </div>
                         <div class="column">
                             <section class="section">
-                                <a class="button is-danger is-large" v-if="GetIndexAuthenticated !== 'true'">未登陆</a>
-                                <a class="button is-warning is-large" v-else-if="Club.IfRecruit !== 1">社团未招新</a>
-                                <a class="button is-info is-large" @click="AttendClub" v-else>加入该社团</a>
+                                {% if Club.IfRecruit != 1 %}
+                                    <a class="button is-warning is-large">社团未招新</a>
+                                {% elif Club.IfRecruit == 1 %}
+                                    <form action="{% url 'StudentClubAttend' %}" method="post">
+                                        {% csrf_token %}
+                                        <input hidden name="ClubId" value="{{ Club.ClubId }}" />
+                                        <button class="button is-info is-large">
+                                            加入该社团
+                                        </button>
+                                    </form>
+
+                                {% endif %}
                             </section>
                         </div>
                     </div>

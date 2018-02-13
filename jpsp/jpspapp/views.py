@@ -75,8 +75,6 @@ def student_logout(request):
     return HttpResponseRedirect("/")
 
 
-
-
 @require_http_methods(['POST'])
 def student_check_club_establish(request):
     try:
@@ -127,14 +125,15 @@ def student_club_establish(request):
     template = loader.get_template('index/club/establish.html')
     return HttpResponse(template.render(context, request))
 
+
 @login_required(login_url='s/login')
 @require_http_methods(['POST'])
-def admin_club_attend(request):
-    try:
-        user_id = request.POST['UserId']
-        club_id = request.POST['ClubId']
-    except:
-        return HttpResponse("Error")
+def student_club_attend(request):
+    club_id = request.POST['ClubId']
+    user_id = request.user.username
+    userprofile = UserProfile.objects.get(UserObject__username=user_id)
+    ClubMemberShip.objects.create(Club=Club.objects.get(ClubId=club_id), Member=userprofile)
+    return HttpResponse("Success")
 
 
 @login_required(login_url='s/login')
@@ -520,9 +519,9 @@ def club_member(request):
 
 
 def student_club_detail(request, club_id):
-    profile = Club.objects.get(ClubId=club_id)
+    club = Club.objects.get(ClubId=club_id)
     template = loader.get_template('index/club/detail.html')
-    content = {}
+    content = {'Club': club}
     return HttpResponse(template.render(content, request))
 
 
