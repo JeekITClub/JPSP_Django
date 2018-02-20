@@ -18,11 +18,17 @@
         </tr>
         </tfoot>
         <tbody>
-        {% for club in club_list %}
+        {% for membership in list %}
             <tr>
-                <th>{{ club.ClubId  }}</th>
-                <td>{{ club.ClubName }}</td>
-                <td>状态</td>
+                <th>{{ membership.Club.ClubId  }}</th>
+                <td>{{ membership.Club.ClubName }}</td>
+                <td>
+                    {% if membership.State == 0 %}
+                        未通过
+                    {% elif membership.State == 1 %}
+                        已加入
+                    {% endif %}
+                </td>
             </tr>
         {% endfor %}
         </tbody>

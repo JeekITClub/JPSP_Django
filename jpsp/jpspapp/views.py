@@ -642,14 +642,12 @@ def student_dashboard_index(request):
     return HttpResponse(template.render(content, request))
 
 
+@login_required(login_url='s/login')
 def student_dashboard_clubs(request):
-    if request.user.is_authenticated:
-        template = loader.get_template('index/dashboard/clubs.html')
-        content = {}
-        return HttpResponse(template.render(content, request))
-    else:
-        # todo: redirect to the login page
-        return HttpResponse("0")
+    membership_list = ClubMemberShip.objects.filter(Member__UserObject__username=request.user.username)
+    template = loader.get_template('index/dashboard/clubs.html')
+    content = {'list':membership_list}
+    return HttpResponse(template.render(content, request))
 
 
 def student_dashboard_activities(request):
