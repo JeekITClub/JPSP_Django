@@ -638,7 +638,8 @@ def club_file_download_list(request):
 @login_required(login_url='/s/login')
 def student_dashboard_index(request):
     template = loader.get_template('index/dashboard/index.html')
-    content = {}
+    user_profile = UserProfile.objects.get(UserObject__username=request.user.username)
+    content = {'user':user_profile}
     return HttpResponse(template.render(content, request))
 
 

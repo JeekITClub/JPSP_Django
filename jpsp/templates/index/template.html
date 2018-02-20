@@ -65,6 +65,7 @@
 
                 <div class="navbar-end">
                     {% if user.is_authenticated %}
+{#                        todo: fix the problem that login state is suddenly lost#}
                     <div class="navbar-item has-dropdown is-hoverable">
                         <a class="navbar-link ">
                             欢迎你，{{ user.username }}

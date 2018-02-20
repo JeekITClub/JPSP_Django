@@ -20,13 +20,15 @@
         <tbody>
         {% for membership in list %}
             <tr>
-                <th>{{ membership.Club.ClubId  }}</th>
+                <th>{{ membership.Club.ClubId }}</th>
                 <td>{{ membership.Club.ClubName }}</td>
                 <td>
                     {% if membership.State == 0 %}
                         未通过
                     {% elif membership.State == 1 %}
                         已加入
+                    {% elif membership.State == 2 %}
+                        被拒绝
                     {% endif %}
                 </td>
             </tr>
