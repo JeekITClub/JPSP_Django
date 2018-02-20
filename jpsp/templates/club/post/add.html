@@ -1,0 +1,64 @@
+{% extends 'club/template.html' %}
+
+{% block content %}
+
+     <form action="" method="post">
+        <div class="select">
+          <select title="联系人班级">
+            <option label="高一" value="1"></option>
+            <option label="高二" value="2"></option>
+            <option label="高三" value="3"></option>
+          </select>
+        </div>
+          <div class="select">
+            <select title="联系人班级">
+              <option label="1" value="1"></option>
+              <option label="2" value="2"></option>
+              <option label="3" value="3"></option>
+              <option label="4" value="4"></option>
+              <option label="5" value="5"></option>
+              <option label="6" value="6"></option>
+              <option label="7" value="7"></option>
+              <option label="8" value="8"></option>
+              <option label="9" value="9"></option>
+              <option label="10" value="10"></option>
+              <option label="11" value="11"></option>
+              <option label="12" value="12"></option>
+              <option label="13" value="13"></option>
+            </select>
+          </div>
+      <el-form-item label="联系人姓名" :required=true>
+            <input class="input" v-model="PostForm.LinkmanName" placeholder="">
+          </el-form-item>
+      <el-form-item :required=true label="联系电话">
+            <input v-model="PostForm.LinkmanPhoneNumber" class="input">
+          </el-form-item>
+      <el-form-item :required=true label="QQ">
+            <input v-model="PostForm.LinkmanQq" class="input">
+          </el-form-item>
+      <el-form-item label="活动地点" :required=true>
+        <textarea v-model="PostForm.Region" class="textarea" placeholder="请输入活动地点"></textarea>
+      </el-form-item>
+      <el-form-item label="活动时间" :required=true>
+        <el-form-item>
+          <el-date-picker v-model="PostForm.Date1" placeholder="请选择日期时间"></el-date-picker>
+        </el-form-item>
+      </el-form-item>
+      <el-form-item label="活动内容" :required=true>
+        <textarea v-model="PostForm.Content" class="textarea" placeholder=""></textarea>
+      </el-form-item>
+      <el-form-item label="学习过程" :required=true>
+        <textarea v-model="PostForm.Process" class="textarea" placeholder=""></textarea>
+      </el-form-item>
+      <el-form-item label="分析评估" :required=true>
+        <textarea v-model="PostForm.Assessment" class="textarea" placeholder=""></textarea>
+      </el-form-item>
+      <el-form-item label="活动感悟" :required=true>
+        <textarea v-model="PostForm.Feeling" class="textarea" placeholder=""></textarea>
+      </el-form-item>
+      <el-form-item>
+        <a class="button is-info" @click="submitForm">立即提交</a>
+      </el-form-item>
+    </form>
+
+{% endblock %}

@@ -8,7 +8,7 @@ from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator
-
+from django.core.exceptions import ObjectDoesNotExist
 
 # Create your views here.
 
@@ -535,8 +535,8 @@ def student_club_news(request, club_id):
 
 def club_login_page(request):
     template = loader.get_template('club/login.html')
-    content = {}
-    return HttpResponse(template.render(content, request))
+    context = {}
+    return HttpResponse(template.render(context, request))
 
 
 @require_http_methods(['POST'])
@@ -546,15 +546,21 @@ def club_check_login(request):
     user = authenticate(username=user_id, password=password)
     if user is not None:
         try:
-            if Club.objects.get(ClubId=user_id):
+            if Club.objects.get(ClubId=user_id,State=True):
                 login(request, user)
-                return HttpResponseRedirect('/')
-        except:
+                return HttpResponseRedirect('/c/dashboard')
+        except ObjectDoesNotExist:
             return HttpResponse("登陆失败啦")
     else:
         # todo: make a login error page
         return HttpResponse("登陆失败啦")
 
+
+@login_required(login_url='c/login')
+def club_dashboard_index(request):
+    template = loader.get_template('club/dashboard/index.html')
+    context = {}
+    return HttpResponse(template.render(context,request))
 
 @require_http_methods(["POST"])
 def club_profile_update(request):
