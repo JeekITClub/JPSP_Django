@@ -2,6 +2,30 @@
 
 {% block content %}
 
-    
+    <table class="table">
+        <thead>
+        <tr>
+            <th>社团ID</th>
+            <th>社团名称</th>
+            <th>状态</th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <th>社团ID</th>
+            <th>社团名称</th>
+            <th>状态</th>
+        </tr>
+        </tfoot>
+        <tbody>
+        {% for club in club_list %}
+            <tr>
+                <th>{{ club.ClubId  }}</th>
+                <td>{{ club.ClubName }}</td>
+                <td>状态</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
 {% endblock %}
