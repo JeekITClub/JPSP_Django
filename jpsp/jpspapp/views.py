@@ -562,6 +562,13 @@ def club_dashboard_index(request):
     context = {}
     return HttpResponse(template.render(context,request))
 
+
+@login_required(login_url='c/login')
+def club_post_add(request):
+    template = loader.get_template('club/post/add.html')
+    context = {'ClubId':request.user.username}
+    return HttpResponse(template.render(context,request))
+
 @require_http_methods(["POST"])
 def club_profile_update(request):
     body = request.POST

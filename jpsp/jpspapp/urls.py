@@ -19,6 +19,7 @@ urlpatterns = [
     path('c/login', views.club_login_page, name="ClubLogin"),
     path('c/check_login', views.club_check_login, name="ClubCheckLogin"),
     path('c/dashboard', views.club_dashboard_index, name="ClubDashboardIndex"),
+    path('c/post/add',views.club_post_add,name="ClubPostAdd"),
     path('c/file/upload/list/<int:page>', views.club_file_upload_list, name="ClubFileUploadList"),
     path('c/file/download/list/<int:page>', views.club_file_download_list, name="ClubFileDownloadList"),
     path('c/file/upload', views.club_file_upload, name="ClubFileUpload"),
