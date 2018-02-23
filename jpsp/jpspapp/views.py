@@ -9,6 +9,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator
 from django.core.exceptions import ObjectDoesNotExist
+from datetime import datetime
+import time
 
 # Create your views here.
 
@@ -546,7 +548,7 @@ def club_check_login(request):
     user = authenticate(username=user_id, password=password)
     if user is not None:
         try:
-            if Club.objects.get(ClubId=user_id,State=True):
+            if Club.objects.get(ClubId=user_id, State=True):
                 login(request, user)
                 return HttpResponseRedirect('/c/dashboard')
         except ObjectDoesNotExist:
@@ -560,14 +562,28 @@ def club_check_login(request):
 def club_dashboard_index(request):
     template = loader.get_template('club/dashboard/index.html')
     context = {}
-    return HttpResponse(template.render(context,request))
+    return HttpResponse(template.render(context, request))
 
 
 @login_required(login_url='c/login')
 def club_post_add(request):
     template = loader.get_template('club/post/add.html')
-    context = {'ClubId':request.user.username}
-    return HttpResponse(template.render(context,request))
+    context = {'ClubId': request.user.username}
+    return HttpResponse(template.render(context, request))
+
+
+@require_http_methods(['POST'])
+@login_required(login_url='c/login')
+def club_post_add_check(r):
+    # Post.objects.create(LinkmanGrade=r.POST['LinkmanGrade'], LinkmanClass=r.POST['LinkmanClass'],
+    #                     LinkmanName=r.POST['LinkmanName'], LinkmanPhoneNumber=r.POST['LinkmanPhone'],
+    #                     LinkmanQq=r.POST['LinkmanQQ'], Region=r.POST['Region'], Process=r.POST['Process'],
+    #                     Content=r.POST['Content'], Assessment=r.POST['Assessment'], Feeling=r.POST['Feeling'],
+    #                     ClubObject=Club.objects.get(ClubId=r.user.username))
+    date_object = datetime.strptime(r.POST['Date'],"%Y-%m-%d")
+    time_object = time.strptime(r.POST['Time'],"%H:%M")
+    return HttpResponse(r.POST['Date'])
+
 
 @require_http_methods(["POST"])
 def club_profile_update(request):
@@ -652,7 +668,7 @@ def club_file_download_list(request):
 def student_dashboard_index(request):
     template = loader.get_template('index/dashboard/index.html')
     user_profile = UserProfile.objects.get(UserObject__username=request.user.username)
-    content = {'user':user_profile}
+    content = {'user': user_profile}
     return HttpResponse(template.render(content, request))
 
 
@@ -660,7 +676,7 @@ def student_dashboard_index(request):
 def student_dashboard_clubs(request):
     membership_list = ClubMemberShip.objects.filter(Member__UserObject__username=request.user.username)
     template = loader.get_template('index/dashboard/clubs.html')
-    content = {'list':membership_list}
+    content = {'list': membership_list}
     return HttpResponse(template.render(content, request))
 
 
