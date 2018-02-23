@@ -79,20 +79,15 @@ class Post(models.Model):
     LinkmanPhoneNumber = models.CharField(max_length=11, default="00000000000")
     LinkmanQq = models.CharField(max_length=20, default="00000000")
     Region = models.CharField(max_length=30, default="00000")
-    Date1 = models.DateField(default=None)
-    Date2 = models.TimeField(default=None)
+    Date = models.DateField(default=None)
+    Time = models.TimeField(default=None)
     Process = models.TextField(default="")
     Content = models.TextField(default="")
     Assessment = models.TextField(default="")
     Feeling = models.TextField(default="")
     Stars = models.FloatField(default=0.0)
-    StarTime = models.DateTimeField(default=None)
-    Pass = models.CharField(max_length=1, default='1')
-
+    Pass = models.CharField(max_length=1, default='0')
     # Pass中有3个选项，未审核为0，被拒绝为1，通过为2
-
-    def __str__(self):
-        return self.ClubName + str(self.Date1)
 
 
 class Activity(models.Model):

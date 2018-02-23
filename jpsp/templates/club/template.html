@@ -7,13 +7,12 @@
     {% load static %}
     <link rel="stylesheet" href="{% static "/css/bulma.css" %}">
     <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
-
 </head>
 <body>
 <div>
     <nav class="navbar ">
         <div class="navbar-brand">
-            <a class="navbar-item" href="">
+            <a class="navbar-item" href="{% url 'Index' %}">
                 建平中学学生平台
             </a>
         </div>
@@ -74,7 +73,7 @@
             </p>
             <ul class="menu-list">
                 <li>
-                    <a href="/Post/Form">添加</a>
+                    <a href="{% url 'ClubPostAdd' %}">添加</a>
                 </li>
             </ul>
             <p class="menu-label">

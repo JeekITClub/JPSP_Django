@@ -12,6 +12,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from datetime import datetime
 import time
 
+
 # Create your views here.
 
 @require_http_methods(['GET'])
@@ -575,14 +576,13 @@ def club_post_add(request):
 @require_http_methods(['POST'])
 @login_required(login_url='c/login')
 def club_post_add_check(r):
-    # Post.objects.create(LinkmanGrade=r.POST['LinkmanGrade'], LinkmanClass=r.POST['LinkmanClass'],
-    #                     LinkmanName=r.POST['LinkmanName'], LinkmanPhoneNumber=r.POST['LinkmanPhone'],
-    #                     LinkmanQq=r.POST['LinkmanQQ'], Region=r.POST['Region'], Process=r.POST['Process'],
-    #                     Content=r.POST['Content'], Assessment=r.POST['Assessment'], Feeling=r.POST['Feeling'],
-    #                     ClubObject=Club.objects.get(ClubId=r.user.username))
-    date_object = datetime.strptime(r.POST['Date'],"%Y-%m-%d")
-    time_object = time.strptime(r.POST['Time'],"%H:%M")
-    return HttpResponse(r.POST['Date'])
+    Post.objects.create(LinkmanGrade=r.POST['LinkmanGrade'], LinkmanClass=r.POST['LinkmanClass'],
+                        LinkmanName=r.POST['LinkmanName'], LinkmanPhoneNumber=r.POST['LinkmanPhone'],
+                        LinkmanQq=r.POST['LinkmanQQ'], Region=r.POST['Region'], Process=r.POST['Process'],
+                        Content=r.POST['Content'], Assessment=r.POST['Assessment'], Feeling=r.POST['Feeling'],
+                        ClubObject=Club.objects.get(ClubId=r.user.username),
+                        Date=r.POST['Date'], Time=r.POST['Time'])
+    return HttpResponse("成功提交社团记录")
 
 
 @require_http_methods(["POST"])
@@ -715,9 +715,10 @@ def admin_student_detail(request):
 
 
 @login_required(login_url='/cd/login')
-def admin_post_list(request):
+def admin_post_list(request,page):
     template = loader.get_template('manage/post/list.html')
-    context = {}
+    paginator = Paginator(Post.objects.get(id=-1),20)
+    context = {'posts':paginator.get_page(page)}
     return HttpResponse(template.render(context, request))
 
 
