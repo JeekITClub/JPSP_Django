@@ -122,14 +122,14 @@ def student_club_list(request, page):
     return HttpResponse(template.render({'club_list': paginator.get_page(page)}, request))
 
 
-@login_required(login_url='s/login')
+@login_required(login_url='/s/login')
 def student_club_establish(request):
     context = {}
     template = loader.get_template('index/club/establish.html')
     return HttpResponse(template.render(context, request))
 
 
-@login_required(login_url='s/login')
+@login_required(login_url='/s/login')
 @require_http_methods(['POST'])
 def student_club_attend(request):
     club_id = request.POST['ClubId']
@@ -139,7 +139,7 @@ def student_club_attend(request):
     return HttpResponse("Success")
 
 
-@login_required(login_url='s/login')
+@login_required(login_url='/s/login')
 @require_http_methods(['POST'])
 def student_club_quit(request):
     try:
@@ -149,7 +149,7 @@ def student_club_quit(request):
         return HttpResponse("Error")
 
 
-@login_required(login_url='c/login')
+@login_required(login_url='/c/login')
 def club_member(request):
     template = loader.get_template('club/member/list.html')
     content = {}
@@ -672,7 +672,7 @@ def student_dashboard_index(request):
     return HttpResponse(template.render(content, request))
 
 
-@login_required(login_url='s/login')
+@login_required(login_url='/s/login')
 def student_dashboard_clubs(request):
     membership_list = ClubMemberShip.objects.filter(Member__UserObject__username=request.user.username)
     template = loader.get_template('index/dashboard/clubs.html')
@@ -680,34 +680,28 @@ def student_dashboard_clubs(request):
     return HttpResponse(template.render(content, request))
 
 
+@login_required(login_url='/s/login')
 def student_dashboard_activities(request):
-    if request.user.is_authenticated:
-        template = loader.get_template('index/dashboard/activities.html')
-        content = {}
-        return HttpResponse(template.render(content, request))
-    else:
-        # todo: redirect to the login page
-        return HttpResponse("0")
+    template = loader.get_template('index/dashboard/activities.html')
+    content = {}
+    return HttpResponse(template.render(content, request))
 
 
+@login_required(login_url='/s/login')
 def student_dashboard_password(request):
-    if request.user.is_authenticated:
-        template = loader.get_template('index/dashboard/password.html')
-        context = {}
-        return HttpResponse(template.render(context, request))
-    else:
-        # todo: redirect to the login page
-        return HttpResponse("0")
+    template = loader.get_template('index/dashboard/password.html')
+    context = {}
+    return HttpResponse(template.render(context, request))
 
 
-@login_required(login_url='cd/login')
+@login_required(login_url='/cd/login')
 def admin_student_list(request):
     template = loader.get_template('manage/student/list.html')
     content = {}
     return HttpResponse(template.render(content, request))
 
 
-@login_required(login_url='cd/login')
+@login_required(login_url='/cd/login')
 def admin_student_detail(request):
     template = loader.get_template('manage/student/detail.html')
     content = {}
@@ -723,10 +717,21 @@ def admin_post_list(request, page):
 
 
 @login_required(login_url='/cd/login')
-def admin_post_detail(request,post_id):
+def admin_post_detail(request, post_id):
     template = loader.get_template('manage/post/detail.html')
-    context = {'post':Post.objects.get(id=post_id)}
-    return HttpResponse(template.render(context,request))
+    context = {'post': Post.objects.get(id=post_id)}
+    return HttpResponse(template.render(context, request))
+
+
+@login_required(login_url='/cd/login')
+def admin_post_star(request):
+    post_id = request.POST['PostId']
+    stars = request.POST['Stars']
+    post_object = Post.objects.get(id=post_id)
+    post_object.stars = float(stars)
+    post_object.save()
+    return HttpResponse("打分成功")
+
 
 def about(request):
     template = loader.get_template('index/about.html')

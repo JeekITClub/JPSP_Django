@@ -28,6 +28,7 @@ urlpatterns = [
     path('cd/dashboard', views.admin_dashboard, name="CDDashboard"),
     path('cd/post/list/<int:page>', views.admin_post_list, name="CDPostList"),
     path('cd/post/detail/<int:post_id>',views.admin_post_detail,name="CDPostDetail"),
+    path('cd/post/star',views.admin_post_star,name="CDPostStar"),
     path('cd/event/list/<int:page>', views.admin_event_list, name="CDEventList"),
     path('cd/file/upload/list/<int:page>', views.admin_file_upload_list, name="CDFileUploadList"),
     path('cd/file/download/list/<int:page>', views.admin_file_download_list, name="CDFileDownloadList"),

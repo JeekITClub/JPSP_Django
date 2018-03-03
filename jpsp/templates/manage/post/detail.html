@@ -23,6 +23,62 @@
         <p>{{ post.Assessment }}</p>
         <h2>感悟</h2>
         <p>{{ post.Feeling }}</p>
+        <div class="">
+            <form method="post" action="{% url 'CDPostStar' %}">
+                <div class="field" hidden>
+                    <label class="label">PostId</label>
+                    <div class="control">
+                        <input value="{{ post.id }}" name="PostId">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label is-large">打分</label>
+                    <div class="control">
+                        <div class="select is-large">
+                            <select name="Stars">
+                                <option>
+                                    1.0
+                                </option>
+                                <option>
+                                    1.5
+                                </option>
+                                <option>
+                                    2.0
+                                </option>
+                                <option>
+                                    2.5
+                                </option>
+                                <option>
+                                    3.0
+                                </option>
+                                <option>
+                                    3.5
+                                </option>
+                                <option>
+                                    4.0
+                                </option>
+                                <option>
+                                    4.5
+                                </option>
+                                <option>
+                                    5.0
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <button class="button is-primary" type="submit">提交分数</button>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <button class="button is-danger">删除</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 
 {% endblock %}
