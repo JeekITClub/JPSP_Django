@@ -31,6 +31,12 @@
                         <input value="{{ post.id }}" name="PostId">
                     </div>
                 </div>
+                <div class="field" hidden>
+                    <label class="label">PostId</label>
+                    <div class="control">
+                        {% csrf_token %}
+                    </div>
+                </div>
                 <div class="field">
                     <label class="label is-large">打分</label>
                     <div class="control">

@@ -727,9 +727,11 @@ def admin_post_detail(request, post_id):
 def admin_post_star(request):
     post_id = request.POST['PostId']
     stars = request.POST['Stars']
-    post_object = Post.objects.get(id=post_id)
-    post_object.stars = float(stars)
+    post_object = Post.objects.get(id=int(post_id))
+    post_object.Stars = float(stars)
+    print(type(stars))
     post_object.save()
+    # todo: prettify the star success page
     return HttpResponse("打分成功")
 
 
