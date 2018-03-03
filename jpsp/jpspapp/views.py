@@ -715,12 +715,18 @@ def admin_student_detail(request):
 
 
 @login_required(login_url='/cd/login')
-def admin_post_list(request,page):
+def admin_post_list(request, page):
     template = loader.get_template('manage/post/list.html')
-    paginator = Paginator(Post.objects.get(id=-1),20)
-    context = {'posts':paginator.get_page(page)}
+    paginator = Paginator(Post.objects.all().order_by('-id'), 20)
+    context = {'posts': paginator.get_page(page)}
     return HttpResponse(template.render(context, request))
 
+
+@login_required(login_url='/cd/login')
+def admin_post_detail(request,post_id):
+    template = loader.get_template('manage/post/detail.html')
+    context = {'post':Post.objects.get(id=post_id)}
+    return HttpResponse(template.render(context,request))
 
 def about(request):
     template = loader.get_template('index/about.html')

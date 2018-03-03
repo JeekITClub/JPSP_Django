@@ -51,11 +51,11 @@
         {% for post in posts %}
         <tr>
             <th>{{  post.ClubObject.ClubName }}</th>
-            <th>{{ post.ClubObject.Club.username }}</th>
+            <th>{{ post.ClubObject.ClubObject.username }}</th>
             <th>{{ post.LinkmanName }}</th>
             <th>{{ post.Date }} {{ post.Time }}</th>
             <th>{{ post.Stars }}</th>
-            <th><a href="">详情</a></th>
+            <th><a href="{% url 'CDPostDetail' post.id %}">详情</a></th>
         </tr>
         {% endfor %}
         </tbody>

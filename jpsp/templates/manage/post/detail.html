@@ -1,0 +1,28 @@
+{% extends 'manage/template.html' %}
+
+{% block content %}
+
+    <div class="content">
+        <h2>活动记录ID</h2>
+        <p>{{ post.id }}</p>
+        <h2>社团名称</h2>
+        <p>{{ post.ClubObject.ClubName }}</p>
+        <h2>社团ID</h2>
+        <p>{{ post.ClubObject.ClubObject.username }}</p>
+        <h2>联系人</h2>
+        <p>{{ post.LinkmanName }}</p>
+        <h2>活动时间</h2>
+        <p>{{ post.Date }} {{ post.Time }}</p>
+        <h2>活动地点</h2>
+        <p>{{ post.Region }}</p>
+        <h2>活动过程</h2>
+        <p>{{ post.Process }}</p>
+        <h2>活动内容</h2>
+        <p>{{ post.Content }}</p>
+        <h2>评价</h2>
+        <p>{{ post.Assessment }}</p>
+        <h2>感悟</h2>
+        <p>{{ post.Feeling }}</p>
+    </div>
+
+{% endblock %}
