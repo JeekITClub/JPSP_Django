@@ -5,15 +5,26 @@ from django.contrib.auth.models import User
 from jpspapp.models import Club, Post, Activity, Classroom, LostAndFound, UserProfile, CDUser, ActivityParticipantShip, \
     ClubMemberShip
 from django.views.decorators.http import require_http_methods
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.admin.views.decorators import staff_member_required
 from datetime import datetime
 import time
 
 
 # Create your views here.
+
+def student_check(user):
+    try:
+        if UserProfile.objects.get(UserObject__username=user.username):
+            return True
+        else:
+            return False
+    except ObjectDoesNotExist:
+        return False
+
 
 @require_http_methods(['GET'])
 def index(request):
@@ -129,8 +140,8 @@ def student_club_establish(request):
     return HttpResponse(template.render(context, request))
 
 
-@login_required(login_url='/s/login')
 @require_http_methods(['POST'])
+@login_required(login_url='/s/login')
 def student_club_attend(request):
     club_id = request.POST['ClubId']
     user_id = request.user.username
@@ -673,6 +684,7 @@ def student_dashboard_index(request):
 
 
 @login_required(login_url='/s/login')
+@user_passes_test(student_check)
 def student_dashboard_clubs(request):
     membership_list = ClubMemberShip.objects.filter(Member__UserObject__username=request.user.username)
     template = loader.get_template('index/dashboard/clubs.html')
@@ -723,7 +735,7 @@ def admin_post_detail(request, post_id):
     return HttpResponse(template.render(context, request))
 
 
-@login_required(login_url='/cd/login')
+@staff_member_required(login_url='/cd/login')
 def admin_post_star(request):
     post_id = request.POST['PostId']
     stars = request.POST['Stars']

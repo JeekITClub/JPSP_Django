@@ -6,7 +6,8 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class UserProfile(models.Model):
-    UserObject = models.ForeignKey(User, default=None, on_delete=False)
+    # Student Profile
+    UserObject = models.OneToOneField(User, default=None, on_delete=False)
     UserName = models.CharField(max_length=12, default=None)
     Class = models.IntegerField()
     Grade = models.IntegerField()
@@ -72,7 +73,7 @@ class ClubMemberShip(models.Model):
 
 
 class Post(models.Model):
-    ClubObject = models.ForeignKey(Club, default=None, on_delete=False)
+    ClubObject = models.OneToOneField(Club, default=None, on_delete=False)
     LinkmanGrade = models.CharField(max_length=1, default="1")
     LinkmanClass = models.CharField(max_length=2, default="1")
     LinkmanName = models.CharField(max_length=8, default="联系人")
@@ -81,7 +82,7 @@ class Post(models.Model):
     Region = models.CharField(max_length=30, default="00000")
     Date = models.DateField(default=None)
     Time = models.TimeField(default=None)
-    Process = models.TextField(default="")
+    Process = models.TextField(default="活动过程")
     Content = models.TextField(default="")
     Assessment = models.TextField(default="")
     Feeling = models.TextField(default="")
