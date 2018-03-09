@@ -624,7 +624,7 @@ def club_profile_update(request):
     club_object.Introduction = introduction
     club_object.Achievements = achievements
     club_object.save()
-
+    return HttpResponse()
 
 @require_http_methods(["POST"])
 def event_submit(request):
@@ -676,6 +676,7 @@ def club_file_download_list(request):
 
 
 @login_required(login_url='/s/login')
+@user_passes_test(student_check)
 def student_dashboard_index(request):
     template = loader.get_template('index/dashboard/index.html')
     user_profile = UserProfile.objects.get(UserObject__username=request.user.username)
@@ -693,6 +694,7 @@ def student_dashboard_clubs(request):
 
 
 @login_required(login_url='/s/login')
+@user_passes_test(student_check)
 def student_dashboard_activities(request):
     template = loader.get_template('index/dashboard/activities.html')
     content = {}
@@ -700,6 +702,7 @@ def student_dashboard_activities(request):
 
 
 @login_required(login_url='/s/login')
+@user_passes_test(student_check)
 def student_dashboard_password(request):
     template = loader.get_template('index/dashboard/password.html')
     context = {}

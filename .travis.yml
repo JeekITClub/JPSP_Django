@@ -6,12 +6,10 @@ python:
   - "3.7-dev" # 3.7 development branch
   - "nightly" # currently points to 3.7-dev
 env:
-  - DJANGO_VERSION=1.10.7
-  - DJANGO_VERSION=1.11.1
+  - DJANGO_VERSION=2.0
 install:
   - pip install -q Django==$DJANGO_VERSION
-  - pip install django-cors-headers
-  - pip install itchat
+  - pip install whitenoise
 # command to run tests
 script:
   - cd jpsp

@@ -1,5 +1,5 @@
 from django.test import TestCase, Client
-from jpspapp.models import Token, Club, Activity,UserProfile
+from jpspapp.models import Club, Activity,UserProfile
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 import datetime
@@ -87,16 +87,3 @@ class PostModelTest(TestCase):
     def delete(self):
         pass
 
-
-class FileModelTest(TestCase):
-    def setUp(self):
-        pass
-
-    def test_upload(self):
-        pass
-
-    def test_download(self):
-        pass
-
-    def test_delete(self):
-        pass
