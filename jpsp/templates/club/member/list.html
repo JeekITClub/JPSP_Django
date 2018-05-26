@@ -1,10 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'club/template.html' %}
 
-</body>
-</html>
+{% block content %}
+
+
+
+        <table class="table is-bordered is-striped">
+            <thead>
+            <tr>
+                <th>成员姓名</th>
+                <th>年级</th>
+                <th>班级</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                {% for member in club_member_list %}
+                    <th>
+                        {{ member.UserName }}
+                    </th>
+                    <th>
+                        {{ member.Grade }}
+                    </th>
+                    <th>
+                        {{ member.Class }}
+                    </th>
+                    <th>
+                        状态
+                    </th>
+                    <th>
+                        操作
+                    </th>
+                {% endfor %}
+            </tr>
+
+            </tbody>
+        </table>
+
+
+{% endblock %}

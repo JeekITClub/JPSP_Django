@@ -2,7 +2,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.contrib.auth.models import User
-from jpspapp.models import Club, Post, Activity, Classroom, LostAndFound, UserProfile, CDUser, ActivityParticipantShip, \
+from .models import Club, Post, Activity, Classroom, LostAndFound, UserProfile, CDUser, ActivityParticipantShip, \
     ClubMemberShip
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
@@ -16,9 +16,19 @@ import time
 
 # Create your views here.
 
-def student_check(user):
+def student_check(username):
     try:
-        if UserProfile.objects.get(UserObject__username=user.username):
+        if UserProfile.objects.get(UserObject__username=username):
+            return True
+        else:
+            return False
+    except ObjectDoesNotExist:
+        return False
+
+
+def admin_check(username):
+    try:
+        if CDUser.objects.get(UserObject__username=username):
             return True
         else:
             return False
@@ -46,8 +56,11 @@ def student_check_login(request):
     password = request.POST['password']
     user = authenticate(username=user_id, password=password)
     if user is not None:
-        login(request, user)
-        return HttpResponseRedirect('/')
+        if(student_check(user_id)):
+            login(request, user)
+            return HttpResponseRedirect('/')
+        else:
+            return HttpResponse("登陆失败啦")
     else:
         # todo: make a login error page
         return HttpResponse("登陆失败啦")
@@ -130,7 +143,13 @@ def student_club_list(request, page):
     paginator = Paginator(club_object, 12)
     # paginator is a new Paginator
     template = loader.get_template('index/club/list.html')
-    return HttpResponse(template.render({'club_list': paginator.get_page(page)}, request))
+    context = {
+        'club_list': paginator.get_page(page), 'is_authenticated': False
+    }
+    if request.user.is_authenticated:
+        context['is_authenticated'] = True
+        context['user_id'] = request.user.username
+    return HttpResponse(template.render(context, request))
 
 
 @login_required(login_url='/s/login')
@@ -161,9 +180,12 @@ def student_club_quit(request):
 
 
 @login_required(login_url='/c/login')
-def club_member(request):
+def club_member_list(request):
     template = loader.get_template('club/member/list.html')
-    content = {}
+    club_member_list = ClubMemberShip.objects.filter(Club__ClubObject__username=request.user.username)
+    content = {
+        'club_member_list': club_member_list
+    }
     return HttpResponse(template.render(content, request))
 
 
@@ -680,7 +702,11 @@ def club_file_download_list(request):
 def student_dashboard_index(request):
     template = loader.get_template('index/dashboard/index.html')
     user_profile = UserProfile.objects.get(UserObject__username=request.user.username)
-    content = {'user': user_profile}
+    content = {
+        'user_id':request.user.username,
+        'realname':user_profile.UserName,
+        'is_authenticated': True
+    }
     return HttpResponse(template.render(content, request))
 
 
@@ -689,7 +715,11 @@ def student_dashboard_index(request):
 def student_dashboard_clubs(request):
     membership_list = ClubMemberShip.objects.filter(Member__UserObject__username=request.user.username)
     template = loader.get_template('index/dashboard/clubs.html')
-    content = {'list': membership_list}
+    content = {
+        'list': membership_list,
+        'is_authenticated': True,
+        'user_id':request.user.username
+    }
     return HttpResponse(template.render(content, request))
 
 
@@ -697,7 +727,10 @@ def student_dashboard_clubs(request):
 @user_passes_test(student_check)
 def student_dashboard_activities(request):
     template = loader.get_template('index/dashboard/activities.html')
-    content = {}
+    content = {
+        'is_authenticated': True,
+        'user_id': request.user.username
+    }
     return HttpResponse(template.render(content, request))
 
 
@@ -705,14 +738,19 @@ def student_dashboard_activities(request):
 @user_passes_test(student_check)
 def student_dashboard_password(request):
     template = loader.get_template('index/dashboard/password.html')
-    context = {}
+    context = {
+        'is_authenticated': True,
+        'user_id': request.user.username
+    }
     return HttpResponse(template.render(context, request))
 
 
 @login_required(login_url='/cd/login')
 def admin_student_list(request):
     template = loader.get_template('manage/student/list.html')
-    content = {}
+    content = {
+        'is_authenticated': True,
+    }
     return HttpResponse(template.render(content, request))
 
 
@@ -727,7 +765,9 @@ def admin_student_detail(request):
 def admin_post_list(request, page):
     template = loader.get_template('manage/post/list.html')
     paginator = Paginator(Post.objects.all().order_by('-id'), 20)
-    context = {'posts': paginator.get_page(page)}
+    context = {
+        'posts': paginator.get_page(page)
+    }
     return HttpResponse(template.render(context, request))
 
 
@@ -749,6 +789,12 @@ def admin_post_star(request):
     # todo: prettify the star success page
     return HttpResponse("打分成功")
 
+
+@staff_member_required(login_url='/cd/login')
+def admin_club_list(request):
+    template = loader.get_template('manage/club/list.html')
+    context = {}
+    return HttpResponse(template.render(context,request))
 
 def about(request):
     template = loader.get_template('index/about.html')

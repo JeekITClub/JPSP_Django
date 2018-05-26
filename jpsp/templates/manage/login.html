@@ -1,6 +1,14 @@
-{% extends "manage/template.html" %}
-
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>建平学生平台</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "/css/bulma.css" %}">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
+</head>
+<body>
 <div class="hero-body">
         <div class="container">
 {#            todo: add action #}
@@ -50,4 +58,6 @@
             </form>
         </div>
     </div>
-{% endblock %}
+
+</body>
+</html>
