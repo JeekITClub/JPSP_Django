@@ -182,9 +182,9 @@ def student_club_quit(request):
 @login_required(login_url='/c/login')
 def club_member_list(request):
     template = loader.get_template('club/member/list.html')
-    club_member_list = ClubMemberShip.objects.filter(Club__ClubObject__username=request.user.username)
+    club_member_ship_list = ClubMemberShip.objects.filter(Club__ClubObject__username=request.user.username)
     content = {
-        'club_member_list': club_member_list
+        'club_member_list': club_member_ship_list
     }
     return HttpResponse(template.render(content, request))
 
