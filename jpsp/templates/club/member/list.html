@@ -1,9 +1,6 @@
 {% extends 'club/template.html' %}
 
 {% block content %}
-
-
-
     <table class="table is-bordered is-striped">
         <thead>
         <tr>
@@ -15,32 +12,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            {% for club_member_ship in club_member_ship_list %}
-                <th>
-                    {{ club_member_ship.Member.UserName }}
-                </th>
-                <th>
-                    {{ club_member_ship.Member.Grade }}
-                </th>
-                <th>
-                    {{ club_member_ship.Member.Class }}
-                </th>
-                <th>
-                    {% if club_member_ship.State == 0 %}
-                        <p style="color: red;">未通过</p>
-                    {% elif club_member_ship.State == 1 %}
-                        <p>通过</p>
-                    {% endif %}
-                </th>
-                <th>
-                    操作
-                </th>
-            {% endfor %}
+        <tr id="member-list" v-for="membership in memberships">
+
         </tr>
 
         </tbody>
     </table>
-
 
 {% endblock %}

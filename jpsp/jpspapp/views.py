@@ -184,7 +184,7 @@ def club_member_list(request):
     template = loader.get_template('club/member/list.html')
     club_member_ship_list = ClubMemberShip.objects.filter(Club__ClubObject__username=request.user.username)
     content = {
-        'club_member_list': club_member_ship_list
+        'club_member_ship_list': club_member_ship_list
     }
     return HttpResponse(template.render(content, request))
 
@@ -605,6 +605,10 @@ def club_post_add(request):
     context = {'ClubId': request.user.username}
     return HttpResponse(template.render(context, request))
 
+
+def club_logout(request):
+    logout(request)
+    return HttpResponseRedirect("/c/login")
 
 @require_http_methods(['POST'])
 @login_required(login_url='c/login')
